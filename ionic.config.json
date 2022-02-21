@@ -1,0 +1,7 @@
+{
+  "name": "upmeup",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
