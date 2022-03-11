@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Seleccion de valores por puntos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <ion-label> Ecología </ion-label> 
+          <ion-range min="0" max="100" pin [pinFormatter]="customFormatter" color="success" [(ngModel)]="ecoVal"> </ion-range>   
+        </ion-col> 
+        <ion-col> 
+          <ion-badge color="success" class="badge badge-md"> {{ecoVal}} </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <ion-label> Igualdad </ion-label> 
+          <ion-range min="0" max="100" pin [pinFormatter]="customFormatter" color="danger" [(ngModel)]="igualdadVal"> </ion-range>   
+        </ion-col> 
+        <ion-col> 
+          <ion-badge color="danger" class="badge badge-md"> {{igualdadVal}} </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <ion-label> Transparencia </ion-label> 
+          <ion-range min="0" max="100" pin [pinFormatter]="customFormatter" color="secondary" [(ngModel)]="transparenciaVal"> </ion-range>   
+        </ion-col> 
+        <ion-col> 
+          <ion-badge color="secondary" class="badge badge-md"> {{transparenciaVal}} </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <ion-label> Proactividad </ion-label> 
+          <ion-range min="0" max="100" pin [pinFormatter]="customFormatter" color="tertiary" [(ngModel)]="proactividadVal"> </ion-range>   
+        </ion-col> 
+        <ion-col> 
+          <ion-badge color="tertiary" class="badge badge-md"> {{proactividadVal}} </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <ion-label> Impacto Social </ion-label> 
+          <ion-range min="0" max="100" pin [pinFormatter]="customFormatter" color="warning" [(ngModel)]="iSocialVal"> </ion-range>   
+        </ion-col> 
+        <ion-col> 
+          <ion-badge color="warning" class="badge badge-md"> {{iSocialVal}} </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <ion-label> Organización Participativa </ion-label> 
+          <ion-range min="0" max="100" pin [pinFormatter]="customFormatter" color="primary" [(ngModel)]="oParticipativaVal"> </ion-range>   
+        </ion-col> 
+        <ion-col> 
+          <ion-badge color="primary" class="badge badge-md"> {{oParticipativaVal}} </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-content>

@@ -1,0 +1,81 @@
+<ion-header translucent={true}>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Entity List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen={true}>
+
+  <!--<ion-list>
+    <ion-item *ngFor="let entity of entityList">
+      <ion-thumbnail slot="start">
+        <img src="https://source.unsplash.com/random/200x200?sig={{entity.id}}" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <ion-text color="custom">
+          <h2> {{ entity.entityName }}</h2>
+          <div>
+            <ion-text color="medium">
+              <h3> {{ entity.sector }} </h3>
+            </ion-text>
+          </div>
+        </ion-text>  
+      </ion-label>
+      <ion-label>
+        <ion-text>
+          <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon>{{ entity.city }}</p></ion-text>
+          <div> {{ entity.valores }} </div>
+        </ion-text>  
+      </ion-label>
+        
+    </ion-item>
+
+  </ion-list> -->
+  
+  <ion-card class="container" *ngFor="let entity of entityList">
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>          
+          <ion-thumbnail slot="start">
+            <img src="https://source.unsplash.com/random/200x200?sig={{entity.id}}" />
+          </ion-thumbnail>
+          
+          <ion-label>
+            <ion-text color="custom">
+              <h2> {{ entity.entityName }}</h2>    
+            </ion-text>            
+            <ion-text color="medium">
+              <h3> {{ entity.sector }} </h3>
+            </ion-text>   
+            <ion-text color="medium">
+              <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon>{{ entity.city }}</p></ion-text>
+            </ion-text>           
+          </ion-label>          
+        </ion-item>
+        <ion-item>
+          <ion-text>
+          <h3> Valores: </h3>
+          <ion-text color="medium"><p> {{ entity.valores }} </p></ion-text>
+          </ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+ </ion-card>
+
+ <ion-card class="container">
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  </ion-card>
+
+</ion-content>
+

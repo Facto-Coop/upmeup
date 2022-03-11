@@ -1,0 +1,50 @@
+<ion-header translucent={true}>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!--<ion-back-button defaultHref="/home"></ion-back-button> -->
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Offer Jobs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen={true}>
+
+  <ion-list>
+    <ion-item *ngFor="let offer of dataList" (click)="goOfferDetail(offer)">
+      <ion-thumbnail slot="start">
+        <img src="https://source.unsplash.com/random/200x200?sig={{offer.id}}" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <ion-text color="custom">
+          <h2> {{ offer.jobTitle }}</h2>
+          <div>
+            <ion-text color="medium">
+              <h3> {{ offer.companyName }} </h3>
+            </ion-text>
+            <ion-text color="dark"><p> {{ offer.salary }} </p></ion-text>
+          </div>
+        </ion-text>  
+      </ion-label>
+      <ion-label>
+        <ion-text>
+          <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon>{{ offer.city }}</p></ion-text>
+          <p> {{ offer.valuesType }} </p>
+        </ion-text>  
+      </ion-label>
+        
+    </ion-item>
+
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

@@ -1,0 +1,10 @@
+
+ion-content { 
+    --ion-background-color: #464646;
+
+    .container { 
+        --ion-background-color: #ffffff; 
+    
+        .custom-line { white-space: normal !important; }
+    }
+}

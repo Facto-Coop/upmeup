@@ -1,0 +1,232 @@
+<ion-header>
+  <ion-toolbar>
+    <!--<ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>-->
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <div class="center-class">         
+          <ion-thumbnail class="avatar-center">
+            <img src="https://randomuser.me/api/portraits/lego/0.jpg" />
+          </ion-thumbnail>
+          <ion-label>
+            <h1>Kit Bishop</h1>
+            <p>Co-worker</p>
+          </ion-label>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Kit bishop</h2>
+              <p>Nombre Completo</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="at" slot="start"></ion-icon>
+            <ion-label>
+              <h2>kbishop@workmail.com</h2>
+              <p>Email</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="school" slot="start"></ion-icon>
+            <ion-label>
+              <h2> T.Sup. Administración </h2>
+              <p>Formación Académica</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Values card -->
+  <div class="container">
+    <ion-card>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <div> Valores </div>
+            <ion-button color="danger" fill="outline" size="small" shape="round" slot="end" (click)="openAlert()"> Editar </ion-button>
+          </ion-item>
+
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="eye" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label>                      
+                      <h2> Curiosidad </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="bulb" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label> 
+                      <h2> Creatividad </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item> 
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="male-female" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label>
+                      <h2> Igualdad </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="leaf" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label>
+                      <h2> Ecologia </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>          
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="beer" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label>
+                      <h2> Social </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="custom-values"></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Exp. Card -->
+  <div class="container">
+    <ion-card>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <div> Experiencia Laboral </div>
+            <ion-button color="danger" fill="outline" size="small" shape="round" slot="end"> 
+              <ion-icon slot="icon-only" size="small" name="add"></ion-icon> Añadir
+            </ion-button>
+          </ion-item>
+          
+          <ion-item>
+            <ion-icon name="business" slot="icon-only" size="small" slot="start"></ion-icon>
+            <ion-label>
+              <h2> Jefe Equipo </h2>
+              <p> System, SA </p>
+              <h3> 2021 - actualm. </h3>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="business" slot="icon-only" size="small" slot="start"></ion-icon>
+            <ion-label>
+              <h2> Administrativo </h2>
+              <p> Burton INT. </p>
+              <h3> 2017 - 2021 </h3>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="business" slot="icon-only" size="small" slot="start"></ion-icon>
+            <ion-label>
+              <h2> Auxiliar Administrativo </h2>
+              <p> IMAN Corp. </p>
+              <h3> 2013 - 2017 </h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Language Card -->
+  <div class="container">
+    <ion-card>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <div> Idiomas </div>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="language" slot="start"></ion-icon>
+            <ion-label>
+              <h2> Castellano</h2>
+              <app-progress-bar [progressValue]="loadProg_Sup"></app-progress-bar>
+              <h2> Català </h2>
+              <app-progress-bar [progressValue]="loadProg_High"></app-progress-bar>
+              <h2> Inglés </h2>
+              <app-progress-bar [progressValue]="loadProg_Intermed"></app-progress-bar>
+              <h2> Frances </h2>
+              <app-progress-bar [progressValue]="loadProg_Low"></app-progress-bar>
+            </ion-label>
+          </ion-item>          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Activismo Card -->
+  <div class="container">
+    <ion-card>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <div> Activismo </div>
+            <ion-button color="danger" fill="outline" size="small" shape="round" slot="end"> 
+              <ion-icon slot="icon-only" size="small" name="add"></ion-icon> Añadir
+            </ion-button>
+          </ion-item>
+          
+          <ion-item>
+            <ion-button color="medium" fill="clear" size="small" href="https://increiblesostenible.org/projectes/can-pipirimosca" class="ico-margin">
+              <ion-icon slot="icon-only" name="earth" size="small" slot="start"></ion-icon>
+            </ion-button>
+            <ion-label>
+              <h2> Can Pipirimosca </h2>
+              <p> Taller sobre educación y valores </p> 
+              <h3> 2020 - actualm. </h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
