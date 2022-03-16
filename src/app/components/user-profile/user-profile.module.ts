@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserProfilePageRoutingModule } from './user-profile-routing.module';
 
 import { UserProfilePage } from './user-profile.page';
-import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
+import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.component';
 
 @NgModule({
   imports: [

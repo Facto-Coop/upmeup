@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <div class="center-class">         
+          <ion-thumbnail class="avatar-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/288/288744.png" />
+          </ion-thumbnail>
+          <ion-label>
+            <h1>Name Company, SCCL</h1>
+            <p>Industry</p>
+          </ion-label>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Kit bishop</h2>
+              <p>Nombre Completo</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="call" slot="start"></ion-icon>
+            <ion-label>
+              <h2>93 666 66 66</h2>
+              <p>Teléfono</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="at" slot="start"></ion-icon>
+            <ion-label>
+              <h2>info@workmail.com</h2>
+              <p>Email</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="map" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Carrer de Comerç, 33, entl. 1.</h2>
+              <h2>08003, Barcelona</h2>
+              <p>Oficina</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="earth" slot="start"></ion-icon>
+            <ion-label>
+              <h3>https://facto.cat/</h3>
+              <p>Web</p>
+            </ion-label>
+          </ion-item>
+
+          <!-- 
+          <ion-item>
+            <ion-button color="medium" fill="clear" size="small" href="https://facto.cat/" class="ico-margin">
+              <ion-icon slot="icon-only" name="earth" size="small" slot="start"></ion-icon>
+            </ion-button>
+            <ion-label>
+              <a href="https://facto.cat/"> https://facto.cat/ </a>
+              <p>Web</p>
+            </ion-label>
+          </ion-item>
+          -->
+
+        </ion-list>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Values card -->
+  <div class="container">
+    <ion-card>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <div> Valores </div>
+            <ion-button color="danger" fill="outline" size="small" shape="round" slot="end" (click)="openAlert()"> Editar </ion-button>
+          </ion-item>
+
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="color-filter" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label>                      
+                      <h2> Transparencia </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="thumbs-up" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label> 
+                      <h2> Impacto social </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item> 
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="male-female" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label>
+                      <h2> Igualdad </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="custom-values">
+                    <ion-icon class="values-ico-style" name="leaf" slot="icon-only" size="small" slot="start"></ion-icon>
+                    <ion-label>
+                      <h2> Ecologia </h2>
+                    </ion-label>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>    
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+</ion-content>
+

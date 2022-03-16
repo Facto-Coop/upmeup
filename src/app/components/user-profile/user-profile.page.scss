@@ -1,0 +1,41 @@
+/* Custom Styles */
+
+ion-content { 
+    --ion-background-color: #464646;
+    // #5e9ec3; #ffabb1;
+    
+    .container { 
+        --ion-background-color: #ffffff; 
+
+        ion-card-header {
+            .center-class { text-align: center; font-size: 18px; }  
+            .avatar-center { margin:0 auto; width: 100px; height: 100px; margin-bottom: 15px; }
+        }
+
+        // Values scss
+        ion-grid {
+            padding: 0 !important;
+
+            ion-col {
+                padding: 0 !important;
+
+                .custom-values {
+                    display: inline-flex;
+
+                    .values-ico-style {
+                        color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.54); 
+                        fill: currentcolor; 
+                        margin-right: 32px; 
+                    }
+                }
+            }
+        }
+
+        // .custom-title { font-size: 14px; }
+        .custom-button { font-size: 18px; border-radius: 50% !important; }
+
+        // hr { background: #ccc; margin: 20px 10px 20px 10px; }
+
+        .ico-margin { margin-right: unset; margin-inline-end: 14px; }
+    }
+}

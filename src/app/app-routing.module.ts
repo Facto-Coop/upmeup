@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'access',
-    loadChildren: () => import('./access/access.module').then( m => m.AccessPageModule)
+    loadChildren: () => import('./components/access/access.module').then( m => m.AccessPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./components/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'home',
@@ -21,23 +21,27 @@ const routes: Routes = [
   },
   {
     path: 'offer-list',
-    loadChildren: () => import('./offer-list/offer-list.module').then( m => m.OfferListPageModule)
+    loadChildren: () => import('./components/offer-list/offer-list.module').then( m => m.OfferListPageModule)
   },
   {
     path: 'offer-detail/:id',
-    loadChildren: () => import('./offer-detail/offer-detail.module').then( m => m.OfferDetailPageModule)
+    loadChildren: () => import('./components/offer-detail/offer-detail.module').then( m => m.OfferDetailPageModule)
   },
   {
     path: 'user-profile',
-    loadChildren: () => import('./user-profile/user-profile.module').then( m => m.UserProfilePageModule)
+    loadChildren: () => import('./components/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   },
   {
     path: 'entity-list',
-    loadChildren: () => import('./entity-list/entity-list.module').then( m => m.EntityListPageModule)
+    loadChildren: () => import('./components/entity-list/entity-list.module').then( m => m.EntityListPageModule)
   },
   {
     path: 'values-modal',
-    loadChildren: () => import('./modals/values-modal/values-modal/values-modal.module').then( m => m.ValuesModalPageModule)
+    loadChildren: () => import('./shared/modals/values-modal/values-modal.module').then( m => m.ValuesModalPageModule)
+  },
+  {
+    path: 'company-profile',
+    loadChildren: () => import('./components/company-profile/company-profile.module').then( m => m.CompanyProfilePageModule)
   },
 ];
 

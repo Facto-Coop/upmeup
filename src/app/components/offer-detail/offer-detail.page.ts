@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { OfferService } from '../services/offer.service';
-import { Offer } from '../models/offer';
+import { OfferService } from '../../services/offer.service';
+import { Offer } from '../../models/offer';
 import * as moment from 'moment';
 
 @Component({

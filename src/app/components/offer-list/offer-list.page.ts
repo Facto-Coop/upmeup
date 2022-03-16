@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { OfferService } from '../services/offer.service';
-import { Offer } from '../models/offer';
+import { OfferService } from '../../services/offer.service';
+import { Offer } from '../../models/offer';
 
 @Component({
   selector: 'app-offer-list',

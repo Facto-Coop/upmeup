@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ValuesModalPage } from '../modals/values-modal/values-modal/values-modal.page';
+import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.page';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +16,7 @@ export class UserProfilePage implements OnInit {
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
-    
+
   }
 
   async openAlert() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Entity } from '../models/entity';
-import { EntityService } from '../services/entity.service';
+import { Entity } from '../../models/entity';
+import { EntityService } from '../../services/entity.service';
 
 @Component({
   selector: 'app-entity-list',
