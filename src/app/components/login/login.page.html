@@ -1,11 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-     <!-- <ion-menu-toggle>
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle> -->
     </ion-buttons>
     <ion-title>UPMEUP</ion-title>
   </ion-toolbar>
@@ -24,27 +19,37 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-list>
-              <ion-item lines="full">
-                <ion-label position="floating">Email</ion-label>
-                <ion-input type="text" required></ion-input>
-              </ion-item>
-              <ion-item lines="full">
-                <ion-label position="floating">Password</ion-label>
-                <ion-input type="password" required></ion-input>
-              </ion-item>
-            </ion-list>
+            <form [formGroup]="initForm" (ngSubmit)="submitForm()" novalidate>
+              <ion-label color="danger" class="text-error" *ngIf="isSubmitted && !userExist">Usuario y/o contraseña no son correctos</ion-label>
+              
+              <ion-list>
+                <ion-item lines="full">
+                  <ion-label position="floating">Email</ion-label>
+                  <ion-input type="text" id="userEmail" formControlName="userEmail" required></ion-input>
+                </ion-item>
+                <!-- Email Error messages 
+                <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userEmail.errors?.required"> Email is mandatory </span>-->
+
+                <ion-item lines="full">
+                  <ion-label position="floating">Password</ion-label>
+                  <ion-input type="password" id="userPassword" formControlName="userPassword" required></ion-input>
+                </ion-item>
+                <!-- Passw Error messages 
+                <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userPassword.errors?.required"> Password is mandatory </span>-->
+              </ion-list>
+                      
+              <!-- (click)="goToPage(user)"-->              
+              <ion-button type="submit" fill="solid" expand="full" color="danger" [disabled]="!initForm.valid"> Sign In </ion-button>
+                
+            </form>
           </ion-col>
         </ion-row>
-
-        <ion-row><!-- NGIF: User <goto> offerlist | UserCmp <goto> company-profile -->
-          <ion-col> 
-            <ion-button type="submit" fill="solid" expand="full" color="danger" [routerLink]="['/company-profile']"> Sign In </ion-button>
-          </ion-col>
-        </ion-row> 
+        
         <ion-row>
           <ion-col>
-            <ion-button type="submit" fill="solid" expand="full" color="danger" [routerLink]="['/offer-list']"> Sign In </ion-button>
+            <div *ngIf="error">
+              Error :(
+            </div>
           </ion-col>
         </ion-row>
 
