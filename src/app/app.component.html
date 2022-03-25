@@ -5,15 +5,30 @@
         <ion-toolbar color="custom">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
+        <!--<ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="9">
+              <ion-toolbar color="custom">
+                <ion-title> Menu </ion-title>
+              </ion-toolbar>
+            </ion-col>
+            <ion-col>
+              <ion-button color="danger" size="small" (click)="logOut()"> <ion-icon slot="icon-only" name="power"></ion-icon> </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>-->
       </ion-header>
 
       <ion-content>
         <ion-list>
           <div class="center-class">
-            <ion-avatar class="avatar-center">
+            <ion-avatar *ngIf="userType === '1'" class="avatar-center">
               <img src="https://randomuser.me/api/portraits/lego/0.jpg" />            
             </ion-avatar>
-            <ion-label>Kit Bishop</ion-label>
+            <ion-avatar *ngIf="userType === '2'" class="avatar-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/288/288744.png" />
+            </ion-avatar>
+            <ion-label> <h1>{{ userName }}</h1> </ion-label>
           </div>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
@@ -25,7 +40,7 @@
         </ion-list>
       </ion-content>
     </ion-menu>
-
+    
     <ion-router-outlet id="main-content"></ion-router-outlet>
 
   </ion-split-pane>

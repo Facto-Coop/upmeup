@@ -43,6 +43,22 @@ const routes: Routes = [
     path: 'company-profile',
     loadChildren: () => import('./components/company-profile/company-profile.module').then( m => m.CompanyProfilePageModule)
   },
+  {
+    path: 'company-offer',
+    loadChildren: () => import('./components/company-offer/company-offer.module').then( m => m.CompanyOfferPageModule)
+  },
+  {
+    path: 'company-offer-detail/:id',
+    loadChildren: () => import('./components/company-offer-detail/company-offer-detail.module').then( m => m.CompanyOfferDetailPageModule)
+  },
+
+
+
+ /*{
+    path: 'menu',
+    loadChildren: () => import('./components/menu/menu.module').then( m => m.MenuPageModule)
+  },*/
+
 ];
 
 @NgModule({

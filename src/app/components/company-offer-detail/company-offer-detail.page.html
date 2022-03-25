@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>My Offer Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col size="8"> 
+          <img src="https://source.unsplash.com/random/200x200?sig=14" />
+        </ion-col>
+        <ion-col> </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Nivel de Match:</ion-label> 80%
+            <ion-progress-bar color="success" value="0.8"></ion-progress-bar> 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-card-subtitle> Barcelona </ion-card-subtitle>
+            <ion-card-title> FrontEnd Developer </ion-card-title>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-card-subtitle> 35 - 40000 € </ion-card-subtitle>
+              <ion-card-subtitle> Remoto 100% </ion-card-subtitle>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    <ion-card-content>
+    <!--  <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <div>
+              <p>{{ offer.address }}</p>
+              <p>{{ offer.phone }}</p>
+              <p>{{ offer.city }}</p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>{{ offer.valuesType }}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+-->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <div>
+              <p>Contrato: Indefinido </p>     
+              <p>Jornada: Jornada Completa </p>                    
+            </div>
+          </ion-col>
+          <ion-col>
+            <p>Feb 24, 2022</p>  
+            <div>Inscritos: 46 </div> 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
+         
+    </ion-card-content>
+  </ion-card>
+</ion-content>

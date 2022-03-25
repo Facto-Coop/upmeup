@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,7 @@ import { GraphQLModule } from './graphql.module';
     AppRoutingModule,
     HttpClientModule,
     GraphQLModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

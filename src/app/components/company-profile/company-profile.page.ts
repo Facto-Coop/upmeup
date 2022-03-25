@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ValuesModalPage } from 'src/app/shared/modals/values-modal/values-modal.page';
+import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.page';
 
 @Component({
   selector: 'app-company-profile',

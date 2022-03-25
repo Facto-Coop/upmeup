@@ -1,0 +1,32 @@
+<!--
+<ion-split-pane when="sm" contentId="main-content">
+  <ion-menu contentId="content">
+    <ion-header>
+      <ion-toolbar color="custom">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <div class="center-class">
+          <ion-avatar class="avatar-center">
+            <img src="https://randomuser.me/api/portraits/lego/0.jpg" />            
+          </ion-avatar>
+          <ion-label>Kit Bishop</ion-label>
+        </div>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label> {{ p.title }} </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="content"></ion-router-outlet>
+
+</ion-split-pane>
+-->
