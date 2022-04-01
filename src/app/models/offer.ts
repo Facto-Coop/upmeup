@@ -1,6 +1,17 @@
 export class Offer {
 
     constructor(
+        /*_id: string,
+        user_id: string,
+        title: string,
+        city: string,
+        jornada: string,
+        rangoSalarial: string,
+        remoto: string,
+        enrolled: string,
+        TipoContrato: string,
+        date: string*/
+
         public id: number,
         public companyName: string,
         public jobTitle: string,

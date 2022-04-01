@@ -73,12 +73,64 @@
           </ion-col>
           <ion-col>
             <p>Feb 24, 2022</p>  
-            <div>Inscritos: 46 </div> 
+            <div>Inscritos: 2 </div> 
           </ion-col>
         </ion-row>
       </ion-grid>
-    
-         
     </ion-card-content>
   </ion-card>
+
+  <ion-title color="light">Inscritos:</ion-title>
+
+  <ion-card class="container" *ngFor="let usoff of usersListData">
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>          
+                <ion-thumbnail slot="start">
+                  <img src="https://source.unsplash.com/random/200x200?sig=1" />
+                </ion-thumbnail>          
+                <ion-label>
+                  <ion-text color="custom">
+                    <h2> {{usoff.name}} </h2>    
+                  </ion-text>          
+                  <ion-text color="medium">
+                    <h3> Fake Fullstack </h3>
+                  </ion-text>   
+                  <ion-text color="medium">
+                    <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon> FakeCityBCN </p></ion-text>
+                  </ion-text>           
+                </ion-label>          
+              </ion-item>
+            </ion-col>
+            <ion-row class="ion-justify-content-end">
+              <ion-col>
+                <ion-item>
+                  <ion-button fill="solid" expand="small" color="success"> <ion-icon name="thumbs-up-outline"></ion-icon> </ion-button>
+                  <ion-button fill="solid" expand="small" color="danger"> <ion-icon name="thumbs-down-outline"></ion-icon> </ion-button>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-row>
+        </ion-grid>
+        
+        <ion-item>
+          <ion-label> 
+            <ion-text>
+              <h3> Contacto: <ion-text color="medium"> {{usoff.email}} </ion-text></h3>
+            </ion-text>
+            <ion-text>
+              <h3> Valores: </h3> 
+              <span *ngFor="let val of uSkills"> 
+                <ion-text class="custom-line" color="medium" *ngIf="val.userId === usoff._id"><h3> {{val.skill.name}}, </h3></ion-text>
+              </span>            
+            </ion-text>
+          </ion-label> 
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+ </ion-card>
+
 </ion-content>

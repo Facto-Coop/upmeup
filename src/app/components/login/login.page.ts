@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
           }
         }
       `,
-    }).valueChanges.subscribe((result: ApolloQueryResult<any> ) => {
+    }).valueChanges.subscribe((result: ApolloQueryResult<any>) => {
 
       this.users = result.data && result.data.getUsers;
       this.loading = result.loading;
