@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export class Offer {
 
     constructor(
-        /*_id: string,
-        user_id: string,
-        title: string,
-        city: string,
-        jornada: string,
-        rangoSalarial: string,
-        remoto: string,
-        enrolled: string,
-        TipoContrato: string,
-        date: string*/
+        public _id: string,
+        public userId: string,
+        public title: string,
+        public city: string,
+        public jornada: string,
+        public rangoSalarial: string,
+        public remoto: string,
+        public enrolled: number,
+        public tipoContrato: string,
+        public createdDate: string
 
-        public id: number,
+        /*public id: number,
         public companyName: string,
         public jobTitle: string,
         public city: string,
@@ -25,7 +26,7 @@ export class Offer {
         public contractType: string,
         public workingday: string,
         public workingType: string,
-        public createdDate: string,
+        public createdDate: string,*/
     ) { }
 
 }

@@ -15,31 +15,30 @@
 <ion-content fullscreen={true}>
 
   <ion-list>
-    <ion-item *ngFor="let offer of dataList" (click)="goOfferDetail(offer)">
+    <ion-item *ngFor="let offer of allOffers" (click)="goOfferDetail(offer)">
       <ion-thumbnail slot="start">
         <img src="https://source.unsplash.com/random/200x200?sig={{offer.id}}" />
       </ion-thumbnail>
 
       <ion-label>
         <ion-text color="custom">
-          <h2> {{ offer.jobTitle }}</h2>
-          <div>
-            <ion-text color="medium">
-              <h3> {{ offer.companyName }} </h3>
-            </ion-text>
-            <ion-text color="dark"><p> {{ offer.salary }} </p></ion-text>
-          </div>
+          <h2> {{ offer.title }}</h2>          
+          <ion-text color="medium">
+            <h3> FakeCompanyName </h3>
+          </ion-text>
+          <ion-text color="medium">
+            <p> {{ offer.jornada }} </p>
+          </ion-text>
         </ion-text>  
       </ion-label>
       <ion-label>
-        <ion-text>
-          <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon>{{ offer.city }}</p></ion-text>
-          <p> {{ offer.valuesType }} </p>
-        </ion-text>  
-      </ion-label>
-        
+        <div class="ion-text-end">
+          <ion-text><p><ion-icon name="location-outline"></ion-icon>{{ offer.city }}</p></ion-text>
+          <ion-text color="dark"><p> {{ offer.rangoSalarial }} </p></ion-text>
+          <ion-text color="dark"><p> {{ offer.remoto }} </p></ion-text>
+        </div>
+      </ion-label>  
     </ion-item>
-
   </ion-list>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">

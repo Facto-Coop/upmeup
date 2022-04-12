@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { gql, Apollo } from 'apollo-angular';
-
-import { OfferService } from '../../services/offer.service';
-import { Offer } from '../../models/offer';
 import { ApolloQueryResult } from 'apollo-client';
+import { Subscription } from 'rxjs';
+
+import { Offer } from '../../models/offer';
 
 const GET_OFFERS = gql`
 query {
-  Offers{
+  getCompanyOffers {
     _id
-    user_id
+    userId
     title
     city
     jornada
     rangoSalarial
     remoto
     enrolled
-    TipoContrato
-    date
+    tipoContrato
+    createdDate
   }
 }
 `;
@@ -28,45 +28,43 @@ query {
   templateUrl: './offer-list.page.html',
   styleUrls: ['./offer-list.page.scss'],
 })
-export class OfferListPage implements OnInit {
+export class OfferListPage implements OnInit, OnDestroy {
   offers: Offer[];
   img = 0;
+  allOffers: Offer[] = [];
+  error: any;
+  loading = true;
+
   private topLimit = 15;
   private dataList: any = [];
-  /* TODO: New Variables for query
-    allOffers: Offer[] = [];
-    error: any;
-    loading = true;
-  */
-  constructor(private router: Router, private offerService: OfferService, private apollo: Apollo) {
+  private querySubscription: Subscription;
+
+  constructor(private router: Router, private apollo: Apollo) {
   }
 
   ngOnInit() {
-    // this.getOffers();
-    this.offers = this.offerService.getOffers();
-    this.dataList = this.offers.slice(0, this.topLimit);
+    this.qGetOffers();
+    // this.offers = this.offerService.getOffers();
   }
 
   // Query to get data from Offers in DB:
-  /*getOffers(){
-    this.apollo.watchQuery<any>({
+  qGetOffers(){
+    this.querySubscription = this.apollo.watchQuery<any>({
       query: GET_OFFERS
-    })
-    .valueChanges.subscribe((result: ApolloQueryResult<any>) => {
-
-      this.allOffers = result.data && result.data.GET_OFFERS;
-      this.loading = result.loading;
-      this.error = result.errors;
+    }).valueChanges.subscribe(({ data, loading }) => {
+      this.allOffers = data.getCompanyOffers;
+      this.loading = loading;
+      this.error = data.errors;
     });
-  }*/
+  }
 
   doInfinite(e) {
     setTimeout(() => {
       this.topLimit += 10;
-      this.dataList = this.offers.slice(0, this.topLimit);
+      this.dataList = this.allOffers.slice(0, this.topLimit);
       e.target.complete();
 
-      if (this.dataList.length == this.offers.length){
+      if (this.dataList.length == this.allOffers.length){
         e.target.disabled = true;
       }
 
@@ -74,9 +72,13 @@ export class OfferListPage implements OnInit {
   }
 
   goOfferDetail(offer) {
+    const id = offer._id;
     console.log(offer);
     // this.router.navigate(['/offer-detail']);
-    this.router.navigate(['/offer-detail', offer.id]); // Passing with ID.
+    this.router.navigate(['/offer-detail', id]); // Passing with ID.
   }
 
+  ngOnDestroy() {
+    this.querySubscription.unsubscribe();
+  }
 }

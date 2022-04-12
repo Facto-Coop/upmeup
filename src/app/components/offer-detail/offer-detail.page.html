@@ -13,7 +13,7 @@
       <ion-row>
         <ion-col> </ion-col>
         <ion-col size="8"> 
-          <img src="https://source.unsplash.com/random/200x200?sig={{ offer.id }}" />
+          <img src="https://source.unsplash.com/random/200x200?sig=1" />
         </ion-col>
         <ion-col> </ion-col>
       </ion-row>
@@ -31,20 +31,21 @@
       <ion-grid>
         <ion-row>
           <ion-col size="8">
-            <ion-card-subtitle>Company: {{ offer.companyName }}</ion-card-subtitle>
-            <ion-card-title> {{ offer.jobTitle }} </ion-card-title>
+            <ion-card-subtitle>{{ offer.title }}</ion-card-subtitle>
+            <ion-card-title> {{ offer.city }} </ion-card-title>
           </ion-col>
           <ion-col>
             <div>
-              <ion-card-subtitle>{{ offer.salary }}</ion-card-subtitle>
-              <ion-card-subtitle>{{ offer.workingType }}</ion-card-subtitle>
+              <ion-card-subtitle>{{ offer.rangoSalarial }}</ion-card-subtitle>
+              <ion-card-subtitle>{{ offer.remoto }}</ion-card-subtitle>
             </div>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-header>
     <ion-card-content>
-      <ion-grid>
+
+     <!-- <ion-grid>
         <ion-row>
           <ion-col size="8">
             <div>
@@ -57,24 +58,25 @@
             <div>{{ offer.valuesType }}</div>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid>-->
 
       <ion-grid>
         <ion-row>
           <ion-col size="8">
             <div>
-              <p>Contrato: {{ offer.contractType }}</p>     
-              <p>Jornada: {{ offer.workingday }}</p>                    
+              <p>Contrato: {{ offer.tipoContrato }}</p>     
+              <p>Jornada: {{ offer.jornada }}</p>                    
             </div>
           </ion-col>
           <ion-col>
-            <p>{{ offer.createdDate }}</p>  
+            <p>{{ offer.createdDate | date: 'dd/MM/yyyy' }}</p>  
             <div>Inscritos: {{ offer.enrolled }}</div> 
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> 
       
-      <ion-button size="small" color="custom" expand="full">Inscribirme</ion-button>
+      <!-- TODO: Update Offer +1 enrolled -->
+      <ion-button size="small" color="custom" expand="full" (click)="addEnrroled(offer._id, offer.enrolled)" >Inscribirme</ion-button>
          
     </ion-card-content>
   </ion-card>

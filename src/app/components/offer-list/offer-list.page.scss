@@ -6,3 +6,13 @@
 	--ion-color-shade: var(--ion-color-custom-shade);
 	--ion-color-tint: var(--ion-color-custom-tint);
 }
+
+ion-content { 
+    --ion-background-color: #464646;
+
+    ion-item { 
+        --ion-background-color: #ffffff;    
+	}
+}
+
+.custom-text-space { white-space: normal; }

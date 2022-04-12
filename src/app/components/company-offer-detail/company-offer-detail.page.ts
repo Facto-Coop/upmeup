@@ -40,9 +40,7 @@ const GET_SKILLNAME = gql`
   styleUrls: ['./company-offer-detail.page.scss'],
 })
 export class CompanyOfferDetailPage implements OnInit {
-  offer: any;
   offerID: any;
-  sub;
   userOfferList: any[] = [];
   usersListData: any[] = [];
   error: any;
