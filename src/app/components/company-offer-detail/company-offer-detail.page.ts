@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloQueryResult } from 'apollo-client';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
+import { Offer } from '../../models/offer';
 
 const GET_USOFRS = gql`
   query {
@@ -34,13 +35,31 @@ const GET_SKILLNAME = gql`
   }
 `;
 
+const GET_OFFER = gql`
+query getDetailOffer($id: String!) {
+  getOffer(id: $id) {
+    _id
+    userId
+    title
+    city
+    jornada
+    rangoSalarial
+    remoto
+    enrolled
+    tipoContrato
+    createdDate
+  }
+}
+`;
+
 @Component({
   selector: 'app-company-offer-detail',
   templateUrl: './company-offer-detail.page.html',
   styleUrls: ['./company-offer-detail.page.scss'],
 })
-export class CompanyOfferDetailPage implements OnInit {
+export class CompanyOfferDetailPage implements OnInit, OnDestroy {
   offerID: any;
+  offer: Offer[] = [];
   userOfferList: any[] = [];
   usersListData: any[] = [];
   error: any;
@@ -48,12 +67,38 @@ export class CompanyOfferDetailPage implements OnInit {
   enrolledUser: any[] = [];
   uSkills: any[] = [];
 
+  feedQuery: QueryRef<any>;
+
   private querySubscription: Subscription;
+  private queryUsersByIDSubs: Subscription;
+  private querySkillSubscription: Subscription;
+  private queryOfferByIDSubs: Subscription;
 
   constructor(private aRoute: ActivatedRoute, private apollo: Apollo) { }
 
   ngOnInit() {
+    this.offerID = this.aRoute.snapshot.params.id;
     this.qUsersOffers();
+    this.qOfferById();
+  }
+
+  /**
+   * Call Query to Get info of selected offer (by ID).
+   *  */
+  qOfferById() {
+    this.feedQuery = this.apollo.watchQuery<any>({
+      query: GET_OFFER,
+      variables: {
+        id: this.offerID,
+      },
+      fetchPolicy: 'network-only',
+    });
+
+    this.queryOfferByIDSubs = this.feedQuery
+      .valueChanges.subscribe(({ data }) => {
+        this.offer = data.getOffer;
+      });
+
   }
 
   /**
@@ -98,7 +143,7 @@ export class CompanyOfferDetailPage implements OnInit {
    * Call Query to Get info of each user (by ID).
    *  */
   qUsersInfo(userId: string) {
-    this.querySubscription = this.apollo.watchQuery({
+    this.queryUsersByIDSubs = this.apollo.watchQuery({
       query: GET_UINFO,
       variables: {
         id: userId,
@@ -124,7 +169,7 @@ export class CompanyOfferDetailPage implements OnInit {
    * Call query to get name of each user-skill.
   * */
   qSkillName(userId, skillId: string) {
-    this.querySubscription = this.apollo.watchQuery({
+    this.querySkillSubscription = this.apollo.watchQuery({
       query: GET_SKILLNAME,
       variables: {
         id: skillId,
@@ -135,4 +180,12 @@ export class CompanyOfferDetailPage implements OnInit {
         this.uSkills.push(idBySkill);
     });
   }
+
+  ngOnDestroy() {
+    this.querySubscription.unsubscribe();
+    this.queryUsersByIDSubs.unsubscribe();
+    this.querySkillSubscription.unsubscribe();
+    this.queryOfferByIDSubs.unsubscribe();
+  }
+
 }

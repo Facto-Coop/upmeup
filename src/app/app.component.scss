@@ -123,3 +123,27 @@ ion-list {
   .center-class { text-align: center; font-size: 18px; margin-bottom: 35px; }  
   .avatar-center { margin:0 auto; margin-bottom: 15px; }
 }
+
+.ion-color-upmeup {
+  --ion-color-base: var(--ion-color-upmeup);
+  --ion-color-base-rgb: var(--ion-color-upmeup-rgb);
+  --ion-color-contrast: var(--ion-color-upmeup-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-upmeup-contrast-rgb);
+  --ion-color-shade: var(--ion-color-upmeup-shade);
+  --ion-color-tint: var(--ion-color-upmeup-tint);
+}
+
+.ion-color-dark-upmeup {
+  --ion-color-base: var(--ion-color-dark-upmeup);
+  --ion-color-base-rgb: var(--ion-color-dark-upmeup-rgb);
+  --ion-color-contrast: var(--ion-color-dark-upmeup-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-upmeup-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-upmeup-shade);
+  --ion-color-tint: var(--ion-color-dark-upmeup-tint);
+}
+
+// Avatar styles
+.avatar-custom {
+  border: 3px solid #49c5b9;
+  background: #eeeeee;
+}

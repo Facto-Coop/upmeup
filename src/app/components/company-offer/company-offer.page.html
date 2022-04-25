@@ -1,19 +1,19 @@
 <ion-header translucent={true}>
-  <ion-toolbar>
+  <ion-toolbar color="upmeup">
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
+          <ion-icon color="light" slot="icon-only" name="ellipsis-vertical"></ion-icon>
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col>
-          <ion-title>My Offers</ion-title>
+          <ion-title color="light">My Offers</ion-title>
         </ion-col>
         <ion-col>
-          <ion-button size="small" color="danger" expand="full">Crear Nueva</ion-button>
+          <ion-button size="small" color="danger" expand="full" shape="round">Crear Nueva</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -36,7 +36,7 @@
 
         <ion-item>          
           <ion-thumbnail slot="start">
-            <img src="https://source.unsplash.com/random/200x200?sig={{i}}" />
+            <img src="./../../../assets/thumbnail.svg" />
           </ion-thumbnail>
           
           <ion-label>
@@ -60,7 +60,7 @@
                 <h3> Inscritos: <ion-text color="medium"> {{ offer.item.enrolled }} </ion-text></h3>
               </ion-col>
               <ion-col>
-                <h3> Fecha: <ion-text color="medium">{{ offer.item.date | date: "mediumDate" }}</ion-text></h3>
+                <h3> Fecha: <ion-text color="medium">{{ offer.item.createdDate | date: 'dd/MM/yyyy' }}</ion-text></h3>
               </ion-col>
             </ion-row>
           </ion-grid>

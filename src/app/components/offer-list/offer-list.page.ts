@@ -23,6 +23,17 @@ query {
 }
 `;
 
+const GET_UINFO = gql`
+  query getUserInfo($id: String!){
+    getUser(id: $id) {
+      _id
+      name 
+      email
+      valors
+    }
+  }
+`;
+
 @Component({
   selector: 'app-offer-list',
   templateUrl: './offer-list.page.html',
@@ -34,10 +45,12 @@ export class OfferListPage implements OnInit, OnDestroy {
   allOffers: Offer[] = [];
   error: any;
   loading = true;
-
+  usersListData: any[] = [];
   private topLimit = 15;
   private dataList: any = [];
+
   private querySubscription: Subscription;
+  //private queryUsersByIDSubs: Subscription;
 
   constructor(private router: Router, private apollo: Apollo) {
   }
@@ -55,8 +68,16 @@ export class OfferListPage implements OnInit, OnDestroy {
       this.allOffers = data.getCompanyOffers;
       this.loading = loading;
       this.error = data.errors;
+
+      //this.getUsersById();
     });
   }
+
+ /* getUsersById() {
+    this.allOffers.forEach(element => {
+      this.qGetUserById(element.userId);
+    });
+  }*/
 
   doInfinite(e) {
     setTimeout(() => {
@@ -67,7 +88,6 @@ export class OfferListPage implements OnInit, OnDestroy {
       if (this.dataList.length == this.allOffers.length){
         e.target.disabled = true;
       }
-
     }, 500);
   }
 
@@ -78,7 +98,23 @@ export class OfferListPage implements OnInit, OnDestroy {
     this.router.navigate(['/offer-detail', id]); // Passing with ID.
   }
 
+  /**
+   * Query to get User by Id.
+   */
+  /*qGetUserById(userId: string) {
+    this.queryUsersByIDSubs = this.apollo.watchQuery({
+      query: GET_UINFO,
+      variables: {
+        id: userId,
+      },
+    }).valueChanges.subscribe((result: ApolloQueryResult<any>) => {
+        this.usersListData = result.data.getUser;
+        console.log('eyyy! Aquí tenim: ', this.usersListData);
+    });
+  }*/
+
   ngOnDestroy() {
     this.querySubscription.unsubscribe();
+    //this.queryUsersByIDSubs.unsubscribe();
   }
 }

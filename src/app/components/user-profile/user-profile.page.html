@@ -1,12 +1,12 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="upmeup">
     <!--<ion-buttons slot="start">
       <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>-->
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-toggle>
         <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
+          <ion-icon color="light" slot="icon-only" name="ellipsis-vertical"></ion-icon>
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
@@ -16,19 +16,165 @@
 <ion-content>
 
   <div class="container">
-    <ion-card>
+    <ion-card class="card-title">
       <ion-card-header>
-        <div class="center-class">         
-          <ion-thumbnail class="avatar-center">
-            <img src="https://randomuser.me/api/portraits/lego/0.jpg" />
-          </ion-thumbnail>
+        <div class="center-class">  
           <ion-label>
-            <h1>Kit Bishop</h1>
-            <p>Co-worker</p>
-          </ion-label>
+            <h1> {{ userName }} </h1>
+            <h3> Cognom Cognom </h3>
+          </ion-label> 
+          <ion-thumbnail class="avatar-center">
+            <img src="./../../../assets/avatar.svg" />
+          </ion-thumbnail>          
         </div>
       </ion-card-header>
+    </ion-card>
+    
+    <ion-card class="content-info">
+      <ion-card-content>
+        <div class="center-class">  
+          <ion-label>
+            <h2 class="custom-title"> Técnico/a de RRHH </h2>
+            <h3 class="custom-subtitle"> 3 años de experiencia </h3>
+          </ion-label> 
+          <ion-label>
+            <h4 class="margin">
+              Preparo ofertas de empleo, realizo entrevistas y me encargo de la selección de personal. 
+              También administro nominas y asesoro sobre legislación laboral. 
+            </h4>
+          </ion-label>        
+        </div>
 
+        <!-- Soft Skills -->
+        <div class="center-class">  
+          <ion-row>
+            <ion-col> </ion-col>
+            <ion-col size="8"> <h2 class="custom-title"> Soft Skills </h2> </ion-col>
+            <ion-col>
+              <ion-label>
+                <button class="edit-btn" color="danger" fill="outline" size="small" shape="round" slot="icon-only" (click)="openAlert()">
+                  <ion-icon name="create-outline"></ion-icon>
+                </button>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+
+          <!--<ion-label>
+            <h2 class="custom-title"> Soft Skills 
+              <ion-button class="ion-justify-content-end ion-align-items-center edit-btn" color="danger" fill="outline" size="small" shape="round" slot="icon-only" (click)="openAlert()">
+                <ion-icon name="pencil-outline"></ion-icon>
+              </ion-button>     
+            </h2>
+          </ion-label> -->
+
+          <ion-list lines="none">  
+            <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div class="custom-values">
+                      <ion-icon class="values-ico-style" name="eye" slot="icon-only" size="small" slot="start"></ion-icon>
+                      <ion-label>                      
+                        <h4> Curiosidad </h4>
+                      </ion-label>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="custom-values">
+                      <ion-icon class="values-ico-style" name="bulb" slot="icon-only" size="small" slot="start"></ion-icon>
+                      <ion-label> 
+                        <h4> Creatividad </h4>
+                      </ion-label>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+            <ion-item> 
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div class="custom-values">
+                      <ion-icon class="values-ico-style" name="male-female" slot="icon-only" size="small" slot="start"></ion-icon>
+                      <ion-label>
+                        <h4> Igualdad </h4>
+                      </ion-label>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="custom-values">
+                      <ion-icon class="values-ico-style" name="leaf" slot="icon-only" size="small" slot="start"></ion-icon>
+                      <ion-label>
+                        <h4> Ecologia </h4>
+                      </ion-label>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>          
+            <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div class="custom-values">
+                      <ion-icon class="values-ico-style" name="beer" slot="icon-only" size="small" slot="start"></ion-icon>
+                      <ion-label>
+                        <h4> Social </h4>
+                      </ion-label>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="custom-values"></div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>  
+          </ion-list>  
+         <!-- <ion-button type="submit" fill="solid" color="upmeup" expand="block" shape="round"> <span> Quieres hablar? </span> </ion-button> -->
+        </div>
+
+        <!-- Experience -->
+        <div class="center-class">  
+          <ion-label class="exp-title">
+            <h2 class="custom-title"> Titulación </h2>
+            <h3 class="bold"> Tec. Relaciones Laborales y Recursos Humanos </h3>
+            <h5> Universitat Autónoma Bcn </h5>
+          </ion-label> 
+        </div>
+
+        <div class="center-class">  
+            <ion-label class="cv-title">
+              <h2 class="custom-title"> Curriculum Vitae </h2>
+            </ion-label> 
+          <ion-label>
+            <h4 class="margin">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt
+              molestie pharetra. Cras non massa in diam gravida imperdiet. 
+            </h4>
+          </ion-label>
+         <!-- <ion-button type="submit" fill="solid" color="upmeup" expand="block" shape="round"> <span> Descargar </span> </ion-button> -->
+        </div>
+
+        <!-- Moviments/ Valors -->
+        <div class="center-class">  
+          <ion-label class="cv-title">
+            <h2 class="custom-title"> Moviments </h2>
+          </ion-label> 
+          <ion-label>
+            <h4 class="margin">
+              Feminismo, Ecología, Medio Ambiente, Igualdad, Consumo responsable
+            </h4>
+          </ion-label>        
+        </div>
+
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+
+  <!--  
       <ion-card-content>
         <ion-list lines="none">
           <ion-item>
@@ -55,11 +201,11 @@
         </ion-list>
 
       </ion-card-content>
-    </ion-card>
-  </div>
+    </ion-card> 
+  </div>-->
 
   <!-- Values card -->
-  <div class="container">
+  <!-- <div class="container">
     <ion-card>
       <ion-card-content>
         <ion-list lines="none">
@@ -133,10 +279,10 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
-  </div>
+  </div>-->
 
   <!-- Exp. Card -->
-  <div class="container">
+  <!--<div class="container">
     <ion-card>
       <ion-card-content>
         <ion-list lines="none">
@@ -174,10 +320,10 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
-  </div>
+  </div>-->
 
   <!-- Language Card -->
-  <div class="container">
+  <!--<div class="container">
     <ion-card>
       <ion-card-content>
         <ion-list lines="none">
@@ -200,10 +346,10 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
-  </div>
+  </div>-->
 
   <!-- Activismo Card -->
-  <div class="container">
+  <!--<div class="container">
     <ion-card>
       <ion-card-content>
         <ion-list lines="none">
@@ -227,6 +373,6 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
-  </div>
+  </div>-->
 
 </ion-content>

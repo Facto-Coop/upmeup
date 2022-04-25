@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <!--<ion-toolbar>
     <ion-buttons slot="start">
     </ion-buttons>
     <ion-title>UPMEUP</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
@@ -12,34 +12,45 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-thumbnail class="avatar-center">
-              <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y"/>
-            </ion-thumbnail>            
+            <div class="content-logo">
+              <img src="/assets/UpMeUp-logo.png" alt="UpMeUp logo">
+            </div>           
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <form [formGroup]="initForm" (ngSubmit)="submitForm()" novalidate>
-              <ion-label color="danger" class="text-error" *ngIf="isSubmitted && !userExist">Usuario y/o contraseña no son correctos</ion-label>
+              <div class="error-box" *ngIf="isSubmitted && !userExist">
+                <ion-label color="danger" class="text-error">Usuario y/o contraseña no son correctos</ion-label>
+              </div>
               
-              <ion-list>
-                <ion-item lines="full">
-                  <ion-label position="floating">Email</ion-label>
-                  <ion-input type="text" id="userEmail" formControlName="userEmail" required></ion-input>
-                </ion-item>
-                <!-- Email Error messages 
+              
+              <div class="list list-inset input-container">
+                <input class="native-input sc-ion-input-md" type="text" placeholder="Email" id="userEmail" formControlName="userEmail" required>
+              </div>
+
+              <div class="list list-inset input-container">
+                <label class="item item-input">
+                  <input class="native-input sc-ion-input-md" type="password" placeholder="Password" id="userPassword" formControlName="userPassword" required>
+                </label>
+              </div>
+
+              <!--<ion-list>
+                <label id="rounded" class="item item-input">
+                  <ion-input placeholder="Email" type="text" id="userEmail" formControlName="userEmail" required></ion-input>
+                </label>
+                // Email Error messages 
                 <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userEmail.errors?.required"> Email is mandatory </span>-->
 
-                <ion-item lines="full">
-                  <ion-label position="floating">Password</ion-label>
-                  <ion-input type="password" id="userPassword" formControlName="userPassword" required></ion-input>
+                <!--<ion-item lines="full">
+                  <ion-input placeholder="Password" type="password" id="userPassword" formControlName="userPassword" required></ion-input>
                 </ion-item>
-                <!-- Passw Error messages 
-                <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userPassword.errors?.required"> Password is mandatory </span>-->
-              </ion-list>
+                // Passw Error messages 
+                <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userPassword.errors?.required"> Password is mandatory </span>
+              </ion-list> -->
                       
               <!-- (click)="loginIn(user)"-->              
-              <ion-button type="submit" fill="solid" expand="full" color="danger" [disabled]="!initForm.valid"> Sign In </ion-button>
+              <ion-button type="submit" fill="solid" color="loginbtn" expand="block" [disabled]="!initForm.valid"> Sign In </ion-button>
                 
             </form>
           </ion-col>

@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-split-pane when="sm" contentId="main-content">
+  <ion-split-pane when="(min-width: 2040px)" contentId="main-content">
     <ion-menu contentId="main-content">
       <ion-header>
         <ion-toolbar color="custom">
@@ -23,10 +23,12 @@
         <ion-list>
           <div class="center-class">
             <ion-avatar *ngIf="userType === '1'" class="avatar-center">
-              <img src="https://randomuser.me/api/portraits/lego/0.jpg" />            
+              <img src="./../assets/user-avatar.png" alt="User avatar" class="avatar-custom"/>
+              <!-- <img src="https://randomuser.me/api/portraits/lego/0.jpg" /> -->          
             </ion-avatar>
             <ion-avatar *ngIf="userType === '2'" class="avatar-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/288/288744.png" />
+              <img src="./../assets/building-avatar.png" alt="Building avatar" class="avatar-custom"/>
+              <!-- <img src="https://cdn-icons-png.flaticon.com/512/288/288744.png" /> -->
             </ion-avatar>
             <ion-label> <h1>{{ userName }}</h1> </ion-label>
           </div>

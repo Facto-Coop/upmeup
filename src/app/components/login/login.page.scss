@@ -1,22 +1,46 @@
 
-ion-content { 
-    --ion-background-color: #464646;
-    // --ion-background-color: -moz-linear-gradient(45deg, rgb(51, 97, 197) 0%, rgba(231, 181, 73, 0.8) 100%);
-    // --ion-background-color: -webkit-linear-gradient(45deg, rgba(51, 97, 197) 0%, rgba(231, 181, 73, 0.8) 100%);
-    // --ion-background-color: linear-gradient(45deg, rgba(51, 97, 197) 0%, rgba(231, 181, 73, 0.8) 100%);
-        
-    .container-login { background-color: #ffffff; width: 375px; padding: 30px; }
-    .avatar-center { margin:0 auto; width: 100px; height: 100px; margin-bottom: 15px; }
-    .text-error { font-size: 15px; }
+ion-content {     
+    --ion-background-color: -moz-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-dark-upmeup) 100%);
+    --ion-background-color: -webkit-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-dark-upmeup) 100%);
+    --ion-background-color: linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-dark-upmeup) 100%);
+
+    .container-login { padding: 40px; }
+    .content-logo { margin-bottom: 50px; /*position: relative; object-fit: cover;*/ }
     
-    ion-grid { --ion-background-color: #ffffff; }
-    ion-icon { margin-right: 15px; }
-    ion-button { margin-top: 5px; margin-bottom: 15px; }
-
+    div .input-container { 
+        background: #FFF; 
+        border-radius: 40px; 
+        padding: 10px; 
+        margin: 15px; 
+    
+        input, input[type="text"], input[type="password"], 
+        input:focus, input:focus-visible { border: 0; text-align: center; outline: none; font-size: 15px; color: var(--ion-color-loginbtn); }    
+        ::placeholder { color: var(--ion-color-upmeup); }
+    }
+   
+    a { font-size: 15px; color: #FFF; }
+    ion-button { --border-radius: 25px !important; margin-left: 15px; margin-right: 15px; margin-top: 30px; font-weight: bold; height: 40px; }
+ 
+    .error-box { padding: 5px; border-radius: 5px; background: #2d2d2dbd; }
+    .text-error { font-size: 15px; }
     ion-list .error { font-size: 15px; color: #eb445a; }
-
-    a { font-size: 15px; }
+    
+    /* Login Button color */
+    .ion-color-loginbtn {
+        --ion-color-base: var(--ion-color-loginbtn);
+        --ion-color-base-rgb: var(--ion-color-loginbtn-rgb);
+        --ion-color-contrast: var(--ion-color-loginbtn-contrast);
+        --ion-color-contrast-rgb: var(--ion-color-loginbtn-contrast-rgb);
+        --ion-color-shade: var(--ion-color-loginbtn-shade);
+        --ion-color-tint: var(--ion-color-loginbtn-tint);
+    }
 }
 
+/**
+*** Web Responsive style
+**/
+@media (min-width: 1020px) {
+
+}
 
 

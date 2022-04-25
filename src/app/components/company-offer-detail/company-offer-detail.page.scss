@@ -1,9 +1,22 @@
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
 
 ion-content { 
-    --ion-background-color: #464646;
 
+    ion-header { box-shadow: none !important; }
+
+    .container { 
+        --ion-background-color: #f2f2f2;     
+
+        ion-card {
+            .avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
+        }
+    }
+    
+    
     ion-card { 
-        --ion-background-color: #ffffff; 
+        //--ion-background-color: #ffffff; 
     
         .custom-line { 
             white-space: normal !important; 
@@ -13,4 +26,15 @@ ion-content {
             display: -ms-flex;
         }
     }
+}
+
+/**
+*** Web Responsive style
+**/
+@media (min-width: 1020px) {
+    ion-card { width: 50%; margin: 10px auto; }
+    .container {
+        ion-title { width: 50%; margin: 30px auto !important; }
+    }
+    
 }

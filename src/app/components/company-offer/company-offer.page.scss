@@ -1,10 +1,20 @@
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
 
 ion-content { 
     --ion-background-color: #464646;
 
     .container { 
-        --ion-background-color: #ffffff; 
+        --ion-background-color: #f2f2f2; 
     
         .custom-line { white-space: normal !important; }
     }
+}
+
+/**
+*** Web Responsive style
+**/
+@media (min-width: 1020px) {
+    ion-card { width: 50%; margin: 10px auto; }    
 }

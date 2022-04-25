@@ -24,3 +24,60 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/*** Global Font ***/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+*:not(ion-icon) { font-family: 'Montserrat', sans-serif !important; }
+
+ // Global Autofill to inputs:
+ input:-webkit-autofill,
+ input:-webkit-autofill:hover,
+ input:-webkit-autofill:focus,
+ input:-webkit-autofill:active,
+ select:-webkit-autofill,
+ select:-webkit-autofill:hover,
+ select:-webkit-autofill:focus {
+     -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+     -moz-box-shadow: 0 0 0 100px #fff inset !important;
+     box-shadow: 0 0 0 100px #fff inset !important;
+ }
+
+ input:-webkit-autofill {
+    -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+/***************************************************************************/
+/************************** Global Custom Styles ***************************/
+/***************************************************************************/
+
+.margin-top { margin-top: 15px; }
+.margin-bottom { margin-bottom: 15px; }
+.margin-left { margin-left: 15px; }
+.margin-right { margin-right: 15px; }
+
+.padding-top { padding-top: 15px; }
+.padding-bottom { padding-bottom: 15px; }
+.padding-left { padding-left: 15px; }
+.padding-right { padding-right: 15px; }
+
+.ion-color-upmeup {
+    --ion-color-base: var(--ion-color-upmeup);
+    --ion-color-base-rgb: var(--ion-color-upmeup-rgb);
+    --ion-color-contrast: var(--ion-color-upmeup-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-upmeup-contrast-rgb);
+    --ion-color-shade: var(--ion-color-upmeup-shade);
+    --ion-color-tint: var(--ion-color-upmeup-tint);
+}
+
+.ion-color-dark-upmeup {
+    --ion-color-base: var(--ion-color-dark-upmeup);
+    --ion-color-base-rgb: var(--ion-color-dark-upmeup-rgb);
+    --ion-color-contrast: var(--ion-color-dark-upmeup-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-dark-upmeup-contrast-rgb);
+    --ion-color-shade: var(--ion-color-dark-upmeup-shade);
+    --ion-color-tint: var(--ion-color-dark-upmeup-tint);
+}
+

@@ -75,13 +75,28 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  /** custom **/
-  --ion-color-custom: #ff529d;
-  --ion-color-custom-rgb: 255,82,157;
-  --ion-color-custom-contrast: #f4f5f8;
-  --ion-color-custom-contrast-rgb: 0,0,0;
-  --ion-color-custom-shade: #e0488a;
-  --ion-color-custom-tint: #ff63a7;
+  /** custom upmeup **/
+  --ion-color-upmeup: #4acdba;
+	--ion-color-upmeup-rgb: 74,205,186;
+	--ion-color-upmeup-contrast: #000000;
+	--ion-color-upmeup-contrast-rgb: 0,0,0;
+	--ion-color-upmeup-shade: #41b4a4;
+	--ion-color-upmeup-tint: #5cd2c1;
+
+  --ion-color-dark-upmeup: #2088a8;
+  --ion-color-dark-upmeup-rgb: 32,136,168;
+  --ion-color-dark-upmeup-contrast: #ffffff;
+  --ion-color-dark-upmeup-contrast-rgb: 255,255,255;
+  --ion-color-dark-upmeup-shade: #1c7894;
+  --ion-color-dark-upmeup-tint: #3694b1;
+
+  /** Login button color **/
+  --ion-color-loginbtn: #15515f  ;
+	--ion-color-loginbtn-rgb: 21,81,95;
+	--ion-color-loginbtn-contrast: #ffffff;
+	--ion-color-loginbtn-contrast-rgb: 255,255,255;
+	--ion-color-loginbtn-shade: #124754;
+	--ion-color-loginbtn-tint: #2c626f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -154,12 +169,26 @@
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
 
-    --ion-color-custom: #ff529d;
-    --ion-color-custom-rgb: 255,82,157;
-    --ion-color-custom-contrast: #f4f5f8;
-    --ion-color-custom-contrast-rgb: 0,0,0;
-    --ion-color-custom-shade: #e0488a;
-    --ion-color-custom-tint: #ff63a7;
+    --ion-color-upmeup: #4acdba;
+    --ion-color-upmeup-rgb: 74,205,186;
+    --ion-color-upmeup-contrast: #000000;
+    --ion-color-upmeup-contrast-rgb: 0,0,0;
+    --ion-color-upmeup-shade: #41b4a4;
+    --ion-color-upmeup-tint: #5cd2c1;
+
+    --ion-color-dark-upmeup: #2088a8;
+    --ion-color-dark-upmeup-rgb: 32,136,168;
+    --ion-color-dark-upmeup-contrast: #ffffff;
+    --ion-color-dark-upmeup-contrast-rgb: 255,255,255;
+    --ion-color-dark-upmeup-shade: #1c7894;
+    --ion-color-dark-upmeup-tint: #3694b1;
+
+    --ion-color-loginbtn: #15515f  ;
+    --ion-color-loginbtn-rgb: 21,81,95;
+    --ion-color-loginbtn-contrast: #ffffff;
+    --ion-color-loginbtn-contrast-rgb: 255,255,255;
+    --ion-color-loginbtn-shade: #124754;
+    --ion-color-loginbtn-tint: #2c626f;
   }
 
   /*

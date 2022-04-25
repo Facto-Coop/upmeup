@@ -2,8 +2,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { gql, Apollo, QueryRef, Query } from 'apollo-angular';
-import { Observable, Subscription } from 'rxjs';
+import { gql, Apollo, QueryRef } from 'apollo-angular';
+import { Subscription } from 'rxjs';
 
 //import { OfferService } from '../../services/offer.service';
 import { Offer } from '../../models/offer';

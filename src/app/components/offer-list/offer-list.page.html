@@ -1,14 +1,14 @@
 <ion-header translucent={true}>
-  <ion-toolbar>
+  <ion-toolbar color="upmeup">
     <ion-buttons slot="start">
       <!--<ion-back-button defaultHref="/home"></ion-back-button> -->
       <ion-menu-toggle>
         <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
+          <ion-icon color="light" slot="icon-only" name="ellipsis-vertical"></ion-icon>
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title>Offer Jobs</ion-title>
+    <ion-title color="light">Offer Jobs</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,15 +17,16 @@
   <ion-list>
     <ion-item *ngFor="let offer of allOffers" (click)="goOfferDetail(offer)">
       <ion-thumbnail slot="start">
-        <img src="https://source.unsplash.com/random/200x200?sig={{offer.id}}" />
+        <img src="./../../../assets/thumbnail.svg" />
       </ion-thumbnail>
 
-      <ion-label>
+      <ion-label size="8">
         <ion-text color="custom">
           <h2> {{ offer.title }}</h2>          
-          <ion-text color="medium">
-            <h3> FakeCompanyName </h3>
-          </ion-text>
+          <!-- TODO: Add userName (future?)
+            <ion-text color="medium" *ngIf="offer.userId === usersListData._id">
+            <h3> {{ usersListData.name }} </h3>
+          </ion-text>-->
           <ion-text color="medium">
             <p> {{ offer.jornada }} </p>
           </ion-text>

@@ -8,6 +8,7 @@ import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.p
   styleUrls: ['./user-profile.page.scss'],
 })
 export class UserProfilePage implements OnInit {
+  userName = localStorage.getItem('user');
   loadProg_Low = 25;
   loadProg_Intermed = 50;
   loadProg_High = 75;

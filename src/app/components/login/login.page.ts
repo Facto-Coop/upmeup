@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { AppComponent } from 'src/app/app.component';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ export class LoginPage implements OnInit {
   userExist = false;
 
   constructor(private usService: UserService,
+              private menu: MenuController,
               private apollo: Apollo,
               public fBuilder: FormBuilder,
               private router: Router,
@@ -35,6 +37,7 @@ export class LoginPage implements OnInit {
               private appC: AppComponent) { }
 
   ngOnInit() {
+    this.menu.enable(false);
     this.validation();
     this.userQuery();
   }
@@ -110,6 +113,9 @@ export class LoginPage implements OnInit {
         } else if(this.userType === '2') {
           this.router.navigate(['/company-profile']);
         }
+
+        this.menu.enable(true);
+
         return;
       }
     }
