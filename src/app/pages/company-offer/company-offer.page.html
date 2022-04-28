@@ -13,7 +13,7 @@
           <ion-title color="light">My Offers</ion-title>
         </ion-col>
         <ion-col>
-          <ion-button size="small" color="danger" expand="full" shape="round">Crear Nueva</ion-button>
+          <ion-button size="small" color="danger" expand="full" shape="round" (click)="createModal()">Crear Nueva</ion-button>         
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -21,6 +21,11 @@
 </ion-header>
 
 <ion-content>
+  <div class="ion-padding" *ngIf="cOffers.length === 0">
+    <ion-label>
+      <ion-text color="light"> You haven't published any offer </ion-text>           
+    </ion-label> 
+  </div>
 
   <ion-card class="container" *ngFor="let offer of cOffers; let i = index" (click)="goOfferDetail(offer.item)">
     <ion-card-content>
@@ -67,6 +72,6 @@
         </ion-item>
       </ion-list>
     </ion-card-content>
- </ion-card>
+  </ion-card>
 
 </ion-content>

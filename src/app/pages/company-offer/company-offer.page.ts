@@ -4,6 +4,9 @@ import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
 import { Subscription } from 'rxjs';
+import { ModalController } from '@ionic/angular';
+
+import { CreateOfferPage } from '../create-offer/create-offer.page';
 
 const GET_ALLOFFERS = gql`
 query {
@@ -28,8 +31,6 @@ query {
   styleUrls: ['./company-offer.page.scss'],
 })
 export class CompanyOfferPage implements OnInit, OnDestroy {
-  //fakevar;
-
   offers: any[];
   error: any;
   loading = true;
@@ -38,7 +39,7 @@ export class CompanyOfferPage implements OnInit, OnDestroy {
   company = '';
   private querySubscription: Subscription;
 
-  constructor(private apollo: Apollo, private router: Router) { }
+  constructor(private apollo: Apollo, private router: Router, private mController: ModalController) { }
 
   ngOnInit() {
     this.company = localStorage.getItem('user');
@@ -70,9 +71,6 @@ export class CompanyOfferPage implements OnInit, OnDestroy {
     }
 
     goOfferDetail(offer) {
-      /*this.fakevar = offer;
-      console.log(this.fakevar);*/
-
       // eslint-disable-next-line no-underscore-dangle
       this.router.navigate(['/company-offer-detail', offer._id]);
     }
@@ -80,4 +78,19 @@ export class CompanyOfferPage implements OnInit, OnDestroy {
     ngOnDestroy() {
       this.querySubscription.unsubscribe();
     }
+
+    async createModal() {
+      /*const dismissEditModal = () => {
+        editModal.dismiss();
+      };*/
+
+      const editModal = await this.mController.create({
+        component: CreateOfferPage,
+        animated: true,
+        cssClass: 'modalCss'
+      });
+      await editModal.present();
+    }
+
+
 }

@@ -2,6 +2,7 @@
 /***************************** Custom Styles *******************************/
 /***************************************************************************/
 
+
 ion-content { 
     --ion-background-color: #464646;
 
@@ -16,5 +17,8 @@ ion-content {
 *** Web Responsive style
 **/
 @media (min-width: 1020px) {
-    ion-card { width: 50%; margin: 10px auto; }    
+    ion-card { width: 50%; margin: 10px auto; }
+    ion-toolbar {
+        ion-button { width: 80%; }
+    }
 }

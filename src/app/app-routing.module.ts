@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'access',
-    loadChildren: () => import('./components/access/access.module').then( m => m.AccessPageModule)
+    loadChildren: () => import('./pages/access/access.module').then( m => m.AccessPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./components/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'home',
@@ -21,19 +21,19 @@ const routes: Routes = [
   },
   {
     path: 'offer-list',
-    loadChildren: () => import('./components/offer-list/offer-list.module').then( m => m.OfferListPageModule)
+    loadChildren: () => import('./pages/offer-list/offer-list.module').then( m => m.OfferListPageModule)
   },
   {
     path: 'offer-detail/:id',
-    loadChildren: () => import('./components/offer-detail/offer-detail.module').then( m => m.OfferDetailPageModule)
+    loadChildren: () => import('./pages/offer-detail/offer-detail.module').then( m => m.OfferDetailPageModule)
   },
   {
     path: 'user-profile',
-    loadChildren: () => import('./components/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
+    loadChildren: () => import('./pages/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   },
   {
     path: 'entity-list',
-    loadChildren: () => import('./components/entity-list/entity-list.module').then( m => m.EntityListPageModule)
+    loadChildren: () => import('./pages/entity-list/entity-list.module').then( m => m.EntityListPageModule)
   },
   {
     path: 'values-modal',
@@ -41,22 +41,28 @@ const routes: Routes = [
   },
   {
     path: 'company-profile',
-    loadChildren: () => import('./components/company-profile/company-profile.module').then( m => m.CompanyProfilePageModule)
+    loadChildren: () => import('./pages/company-profile/company-profile.module').then( m => m.CompanyProfilePageModule)
   },
   {
     path: 'company-offer',
-    loadChildren: () => import('./components/company-offer/company-offer.module').then( m => m.CompanyOfferPageModule)
+    loadChildren: () => import('./pages/company-offer/company-offer.module').then( m => m.CompanyOfferPageModule)
   },
   {
     path: 'company-offer-detail/:id',
-    loadChildren: () => import('./components/company-offer-detail/company-offer-detail.module').then( m => m.CompanyOfferDetailPageModule)
+    loadChildren: () => import('./pages/company-offer-detail/company-offer-detail.module').then( m => m.CompanyOfferDetailPageModule)
   },
+  {
+    path: 'create-offer',
+    loadChildren: () => import('./pages/create-offer/create-offer.module').then( m => m.CreateOfferPageModule)
+  },
+
+
 
 
 
  /*{
     path: 'menu',
-    loadChildren: () => import('./components/menu/menu.module').then( m => m.MenuPageModule)
+    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   },*/
 
 ];

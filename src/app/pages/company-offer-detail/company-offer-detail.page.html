@@ -44,7 +44,7 @@
             <ion-col>
               <div>
                 <ion-card-subtitle> {{ offer.rangoSalarial }} € </ion-card-subtitle>
-                <ion-card-subtitle> {{ offer.remoto }} </ion-card-subtitle>
+                <ion-card-subtitle> Remoto: {{ offer.remoto }} </ion-card-subtitle>
               </div>
             </ion-col>
           </ion-row>
@@ -70,6 +70,11 @@
     </ion-card>
 
     <ion-title>Inscritos:</ion-title>
+    <div class="ion-padding" *ngIf="usersListData.length === 0">
+      <ion-label>
+        <ion-text color="upmeup"> There are no enrolled people yet... </ion-text>           
+      </ion-label> 
+    </div>
 
     <ion-card class="container" *ngFor="let usoff of usersListData">
       <ion-card-content>

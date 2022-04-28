@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="upmeup">
+    <ion-title color="light">Create Offer</ion-title>
+  </ion-toolbar>
+</ion-header>
+     
+
+<ion-content>
+  <div class="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col size="6"> 
+          <ion-thumbnail class="avatar-center" >
+            <img src="./../../../assets/thumbnail.svg" />
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col> </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()" novalidate>
+     <ion-item>
+        <ion-label>Título:</ion-label>
+        <ion-input id="iTitle" formControlName="iTitle" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iTitle.errors && (errorCtr.iTitle.invalid || errorCtr.iTitle.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iTitle.errors.required">* Field is required</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iTitle.errors.minlength">* Must have at least 8 letters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iTitle.errors.maxlength">* Must have at least 30 letters</small>
+      </div>
+
+      <ion-item>
+        <ion-label>Ciudad:</ion-label>
+        <ion-input id="iCity" formControlName="iCity" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iCity.errors && (errorCtr.iCity.invalid || errorCtr.iCity.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iCity.errors.required">* Field is required</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iCity.errors.minlength">* Must have at least 4 letters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iCity.errors.maxlength">* Must have at least 30 letters</small>
+      </div>
+
+      <ion-item>
+        <ion-label>Rango Salarial:</ion-label>
+        <ion-input id="iRangoSalarial" formControlName="iRangoSalarial" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iRangoSalarial.errors && (errorCtr.iRangoSalarial.invalid || errorCtr.iRangoSalarial.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iRangoSalarial.errors.required">* Field is required</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iRangoSalarial.errors.minlength">* Must have at least 8 letters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iRangoSalarial.errors.maxlength">* Must have at least 30 letters</small>
+      </div>
+    
+      <ion-item>
+        <ion-label>Remoto?:</ion-label>
+        <ion-input id="iRemoto" formControlName="iRemoto" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iRemoto.errors && (errorCtr.iRemoto.invalid || errorCtr.iRemoto.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iRemoto.errors.required">* Field is required</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iRemoto.errors.minlength">* Must have at least 2 letters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iRemoto.errors.maxlength">* Must have at least 30 letters</small>
+      </div>
+    
+      <ion-item>
+        <ion-label>Tipo Contrato:</ion-label>
+        <ion-input id="iTipoContrato" formControlName="iTipoContrato" required> </ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iTipoContrato.errors && (errorCtr.iTipoContrato.invalid || errorCtr.iTipoContrato.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iTipoContrato.errors.required">* Field is required</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iTipoContrato.errors.minlength">* Must have at least 5 letters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iTipoContrato.errors.maxlength">* Must have at least 35 letters</small>
+      </div>
+    
+      <ion-item>
+        <ion-label>Tipo Jornada:</ion-label>
+        <ion-input id="iJornada" formControlName="iJornada" required></ion-input>
+      </ion-item>      
+      <div *ngIf="errorCtr.iJornada.errors && (errorCtr.iJornada.invalid || errorCtr.iJornada.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iJornada.errors.required">* Field is required</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iJornada.errors.maxlength">* Must have at least 30 letters</small>
+      </div>
+    
+      <p class="ion-text-center ion-padding">
+        <ion-button type="submit" fill="solid" color="upmeup" shape="round" [disabled]="!createForm.valid"> 
+          Save 
+        </ion-button>
+        <ion-button type="button" fill="solid" color="danger" shape="round" (click)="cancelCreation()"> 
+          Cancel
+        </ion-button>
+      </p>
+    </form>
+  </div>
+</ion-content>
