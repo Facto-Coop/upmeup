@@ -13,7 +13,7 @@
 
 <ion-content>
   <div class="container">
-    <ion-card>
+    <ion-card> 
       <ion-grid>
         <ion-row>
           <ion-col> </ion-col>
@@ -29,9 +29,10 @@
       <ion-card-header>
         <ion-grid>
           <ion-row>
+            <ion-col size="8"> </ion-col>
             <ion-col>
-              <ion-label>Nivel de Match:</ion-label> 80%
-              <ion-progress-bar color="success" value="0.8"></ion-progress-bar> 
+              <ion-button size="small" color="upmeup" shape="round" (click)="editModal()">
+                <ion-icon color="light" name="build-outline"></ion-icon> <p class="custom-text">Edit</p> </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -55,14 +56,24 @@
           <ion-row>
             <ion-col size="8">
               <div>
-                <p>Contrato: {{ offer.tipoContrato }} </p>     
-                <p>Jornada: {{ offer.jornada }} </p>                    
+                <p>Contrato: {{ offer?.tipoContrato }} </p>     
+                <p>Jornada: {{ offer?.jornada }} </p>                    
               </div>
             </ion-col>
             <ion-col>
-              <p>{{ offer.createdDate | date: 'dd/MM/yyyy' }}</p>  
-              <div>Inscritos: {{ offer.enrolled }} </div> 
+              <p>{{ offer?.createdDate | date: 'dd/MM/yyyy' }}</p>  
+              <div>Inscritos: {{ offer?.enrolled }} </div> 
             </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div>
+                <p> Valores de la empresa: Pending.. </p> <!--<span *ngFor="let skill of offerSkills"><h3> {{ skill }} </h3> </span>-->   
+                <p> Descripción del puesto: <br> {{ offer?.description }} </p>                    
+              </div>
+            </ion-col>            
           </ion-row>
         </ion-grid>
       </ion-card-content>
@@ -70,7 +81,7 @@
     </ion-card>
 
     <ion-title>Inscritos:</ion-title>
-    <div class="ion-padding" *ngIf="usersListData.length === 0">
+    <div class="noEnrolled ion-padding" *ngIf="usersListData.length === 0">
       <ion-label>
         <ion-text color="upmeup"> There are no enrolled people yet... </ion-text>           
       </ion-label> 

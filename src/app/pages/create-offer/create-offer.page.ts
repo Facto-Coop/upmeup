@@ -1,48 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
-import { Apollo, gql, Subscription } from 'apollo-angular';
-
-
-const MUT_CREATEOFFER = gql`
-  mutation createOfferMut($userId: String!, 
-                          $title: String!, 
-                          $city: String!, 
-                          $jornada: String!, 
-                          $rangoSalarial: String!, 
-                          $remoto: String!,
-                          $enrolled: Float!, 
-                          $tipoContrato: String!,
-                          $createdDate: DateTime!) {
-    createOffer(
-      createOfferDto: { 
-        userId: $userId
-        title: $title
-        city: $city
-        jornada: $jornada
-        rangoSalarial: $rangoSalarial
-        remoto: $remoto
-        enrolled: $enrolled
-        tipoContrato: $tipoContrato
-        createdDate: $createdDate
-      }    
-    ) {
-      _id
-      userId
-      title
-      city
-      jornada
-      rangoSalarial
-      remoto
-      enrolled
-      tipoContrato
-      createdDate
-    }
-  }
-`;
-
+import { CompanyOffersService } from 'src/app/services/company-offers.service';
 
 @Component({
   selector: 'app-create-offer',
@@ -60,8 +21,7 @@ export class CreateOfferPage implements OnInit {
               public fBuilder: FormBuilder,
               private mdlController: ModalController,
               private alrtController: AlertController,
-              private apollo: Apollo,
-              private router: Router
+              private compOfService: CompanyOffersService
               ) { }
 
   ngOnInit() {
@@ -84,6 +44,9 @@ export class CreateOfferPage implements OnInit {
     return this.createForm.controls;
   }
 
+  /**
+   * Close modal when create
+   */
   async dismissEditModal() {
     this.mdlController.dismiss();
   }
@@ -94,7 +57,6 @@ export class CreateOfferPage implements OnInit {
     this.alertToConfirm();
   }
 
-  // TODO: Add 'createDate = TODAY' & 'enrolled = 0'
   getDate() {
     this.cDate = new Date().toISOString();
   }
@@ -105,32 +67,39 @@ export class CreateOfferPage implements OnInit {
       console.log('Please provide all the required values!');
       return false;
     } else {
-      console.log(this.createForm.value);
       this.getDate();
-      this.createNewOffer();
+      this.createNewOffer(
+            this.userID,
+            this.createForm.value.iTitle,
+            this.createForm.value.iCity,
+            this.createForm.value.iJornada,
+            this.createForm.value.iRangoSalarial,
+            this.createForm.value.iRemoto,
+            this.addEnroll,
+            this.createForm.value.iTipoContrato,
+            this.cDate
+      );
     }
   }
 
-  createNewOffer() {
-    this.apollo.mutate<any>({
-      mutation: MUT_CREATEOFFER,
-      variables: {
-        userId: this.userID,
-        title: this.createForm.value.iTitle,
-        city: this.createForm.value.iCity,
-        jornada: this.createForm.value.iJornada,
-        rangoSalarial: this.createForm.value.iRangoSalarial,
-        remoto: this.createForm.value.iRemoto,
-        enrolled: this.addEnroll,
-        tipoContrato: this.createForm.value.iTipoContrato,
-        createdDate: this.cDate
-      }
-    }).subscribe((response) => {
-      console.log('Done!: ', response);
-      // Return to MyOffers:
-      this.dismissEditModal();
-      window.location.reload();
-    },(error) => { console.log('Mutation Error:', error); });
+  /**
+   * Call to Create Offer Service.
+   * @param uId
+   * @param iTitle
+   * @param iCity
+   * @param iJornada
+   * @param iRango
+   * @param iRemoto
+   * @param iEnroll
+   * @param iContrato
+   * @param iDate
+   */
+  createNewOffer(uId: any, iTitle: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iEnroll: any, iContrato: any, iDate: string) {
+   this.compOfService.mCreateOffer(uId, iTitle, iCity, iJornada, iRango, iRemoto, iEnroll, iContrato, iDate)
+    .subscribe((response) => {
+      console.log('Done!');
+    });
+    this.dismissEditModal();
   }
 
   /**

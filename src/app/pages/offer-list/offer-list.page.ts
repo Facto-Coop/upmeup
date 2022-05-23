@@ -73,12 +73,6 @@ export class OfferListPage implements OnInit, OnDestroy {
     });
   }
 
- /* getUsersById() {
-    this.allOffers.forEach(element => {
-      this.qGetUserById(element.userId);
-    });
-  }*/
-
   doInfinite(e) {
     setTimeout(() => {
       this.topLimit += 10;
@@ -97,21 +91,6 @@ export class OfferListPage implements OnInit, OnDestroy {
     // this.router.navigate(['/offer-detail']);
     this.router.navigate(['/offer-detail', id]); // Passing with ID.
   }
-
-  /**
-   * Query to get User by Id.
-   */
-  /*qGetUserById(userId: string) {
-    this.queryUsersByIDSubs = this.apollo.watchQuery({
-      query: GET_UINFO,
-      variables: {
-        id: userId,
-      },
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>) => {
-        this.usersListData = result.data.getUser;
-        console.log('eyyy! Aquí tenim: ', this.usersListData);
-    });
-  }*/
 
   ngOnDestroy() {
     this.querySubscription.unsubscribe();

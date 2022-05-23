@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'create-offer',
     loadChildren: () => import('./pages/create-offer/create-offer.module').then( m => m.CreateOfferPageModule)
+  },  {
+    path: 'edit-offer',
+    loadChildren: () => import('./pages/edit-offer/edit-offer.module').then( m => m.EditOfferPageModule)
   },
+
 
 
 

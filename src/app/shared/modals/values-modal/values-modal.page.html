@@ -1,10 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Seleccion de valores por puntos</ion-title>
+  <ion-toolbar color="loginbtn">
+    <ion-title>Selecciona els teus valors</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()"> <ion-icon name="close-outline"></ion-icon> </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div *ngIf="!userSkills" class="ion-margin">
+    <p> Encara no has seleccionat cap valor </p>
+  </div>
+  <div *ngIf="userSkills?.length > 0" class="ion-margin">
+    <ion-label> Els teus valors son: </ion-label><br/>
+    <ion-chip outline color="loginbtn" *ngFor="let item of userSkills;">
+      <ion-label> {{ item.name }} </ion-label>
+      <!--<ion-icon name="close-circle"></ion-icon>-->
+    </ion-chip>
+  </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1"></ion-col>
+        <ion-col size="10">
+          <ion-item *ngFor="let skill of skillsList; let i of index" lines="none">
+            <ion-label color="light"> {{ skill.name }} </ion-label>
+            <ion-toggle slot="start" name={{skill.name}} id={{skill._id}} color="loginbtn" (ionChange)="changeSelection($event, skill)" 
+                        [disabled]="disableCheckbox(skill)"> <!-- [checked]="isChecked(skill)"> -->
+            </ion-toggle>
+          </ion-item>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button type="submit" fill="solid" color="loginbtn" expand="block" (click)="saveSkills()"> Guardar </ion-button>
+
+<!-- 
   <ion-item>
     <ion-grid>
       <ion-row>
@@ -87,5 +119,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-item>
+  </ion-item> 
+-->
+
 </ion-content>

@@ -1,0 +1,8 @@
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
+
+ion-content { 
+    --ion-background-color: var(--ion-color-dark-upmeup); 
+    ion-button { --border-radius: 25px !important; margin-left: 15px; margin-right: 15px; margin-bottom: 30px; font-weight: bold; height: 40px; }
+}

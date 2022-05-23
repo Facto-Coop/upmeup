@@ -81,6 +81,24 @@
     --ion-color-tint: var(--ion-color-dark-upmeup-tint);
 }
 
+.ion-color-login-dgDark {
+    --ion-color-base: var(--ion-color-login-dgDark);
+    --ion-color-base-rgb: var(--ion-color-login-dgDark-rgb);
+    --ion-color-contrast: var(--ion-color-login-dgDark-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-login-dgDark-contrast-rgb);
+    --ion-color-shade: var(--ion-color-login-dgDark-shade);
+    --ion-color-tint: var(--ion-color-login-dgDark-tint);
+}
+
+.ion-color-loginbtn {
+    --ion-color-base: var(--ion-color-loginbtn);
+    --ion-color-base-rgb: var(--ion-color-loginbtn-rgb);
+    --ion-color-contrast: var(--ion-color-loginbtn-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-loginbtn-contrast-rgb);
+    --ion-color-shade: var(--ion-color-loginbtn-shade);
+    --ion-color-tint: var(--ion-color-loginbtn-tint);
+}
+
 /* Modal Styles */
 .modalCss {
     --height: 775px !important;

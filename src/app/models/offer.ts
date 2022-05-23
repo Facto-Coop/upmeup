@@ -5,12 +5,14 @@ export class Offer {
         public _id: string,
         public userId: string,
         public title: string,
+        public eduLevel: string,
         public city: string,
         public jornada: string,
         public rangoSalarial: string,
         public remoto: string,
         public enrolled: number,
         public tipoContrato: string,
+        public description: string,
         public createdDate: string
 
         /*public id: number,

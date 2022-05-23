@@ -1,69 +1,207 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { EmptyObject } from 'apollo-angular/build/types';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Offer } from '../models/offer';
+
+const GET_ALLOFFERS = gql`
+query {
+  getCompanyOffers {
+    _id
+    userId
+    title
+    eduLevel
+    city
+    jornada
+    rangoSalarial
+    remoto
+    enrolled
+    tipoContrato
+    description
+    createdDate
+  }
+}
+`;
+
+const GET_OFFER = gql`
+query getDetailOffer($id: String!) {
+  getOffer(id: $id) {
+    _id
+    userId
+    title
+    eduLevel
+    city
+    jornada
+    rangoSalarial
+    remoto
+    enrolled
+    tipoContrato
+    description
+    createdDate
+  }
+}
+`;
+
+const MUT_CREATEOFFER = gql`
+  mutation createOfferMut($userId: String!, 
+                          $title: String!, 
+                          $city: String!, 
+                          $jornada: String!, 
+                          $rangoSalarial: String!, 
+                          $remoto: String!,
+                          $enrolled: Float!, 
+                          $tipoContrato: String!,
+                          $createdDate: DateTime!) {
+    createOffer(
+      createOfferDto: { 
+        userId: $userId
+        title: $title
+        city: $city
+        jornada: $jornada
+        rangoSalarial: $rangoSalarial
+        remoto: $remoto
+        enrolled: $enrolled
+        tipoContrato: $tipoContrato
+        createdDate: $createdDate
+      }    
+    ) {
+      _id
+      userId
+      title
+      city
+      jornada
+      rangoSalarial
+      remoto
+      enrolled
+      tipoContrato
+      createdDate
+    }
+  }
+`;
+
+const MUT_EDITOFFER = gql`
+  mutation editOfferMut(  $id: String!, 
+                          $title: String!, 
+                          $city: String!, 
+                          $jornada: String!, 
+                          $rangoSalarial: String!, 
+                          $remoto: String!,
+                          $tipoContrato: String!
+                        ) {
+    updateOffer( 
+      id: $id
+      offerInputs: { 
+            title: $title
+            city: $city
+            jornada: $jornada
+            rangoSalarial: $rangoSalarial
+            remoto: $remoto
+            tipoContrato: $tipoContrato
+      }    
+    ) {
+      _id
+      userId
+      title
+      city
+      jornada
+      rangoSalarial
+      remoto
+      enrolled
+      tipoContrato
+      createdDate
+    }
+  }
+`;
+
+const REFRESH = 1000;
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfferService {
 
-  constructor() { }
+  constructor(private apollo: Apollo) { }
 
-  public getOffers() {
-    let offers: Offer[];
+  /**
+   * Get All Offers from DB.
+   */
+  /*private _offersWatchQuery: QueryRef<any, EmptyObject>;
 
-    offers = [{"id":1,"companyName":"Shufflebeat","jobTitle":"Assistant Professor","city":"Munich","address":"425 Marcy Lane","email":"mcastanone0@ucsd.edu","phone":"+57 871 642 7063","salary":"$5877.16","valuesType":"Flexibilidad","enrolled": 29,"contractType": "Formación","workingday": "Festivos","workingType": "Flexible","createdDate": "23-02-2022T05:22:56 -01:00"},
-    {"id":2,"companyName":"Buzzshare","jobTitle":"Research Assistant I","city":"San Sebastian","address":"1214 Erie Pass","email":"doflaverty1@admin.ch","phone":"+7 574 294 7713","salary":"$2593.75","valuesType":"Transparencia","enrolled": 9,"contractType": "Indefinido","workingday": "Completa","workingType": "Presencial","createdDate": "05-02-2022T12:58:21 -01:00"},
-    {"id":3,"companyName":"BonesMatch","jobTitle":"Geologist II","city":"Athens","address":"46 Maple Wood Plaza","email":"bconquest2@ucoz.ru","phone":"+7 128 877 9149","salary":"$4653.54","valuesType":"Igualdad","enrolled": 30,"contractType": "Indefinido","workingday": "Por horas","workingType": "Parcial 50%","createdDate": "03-01-2022T03:01:13 -01:00"},
-    {"id":4,"companyName":"News&Books","jobTitle":"Technical Writer","city":"Paris","address":"7695 Warrior Point","email":"chowselee3@springer.com","phone":"+7 300 515 1834","salary":"$3195.74","valuesType":"Igualdad","enrolled": 31,"contractType": "Formación","workingday": "Por turnos","workingType": "Parcial 50%","createdDate": "17-01-2022T10:20:38 -01:00"},
-    {"id":5,"companyName":"High School","jobTitle":"Teacher","city":"Rennes","address":"52 Porter Alley","email":"lvonhindenburg4@reverbnation.com","phone":"+33 795 801 5213","salary":"$4365.61","valuesType":"Flexibilidad","enrolled": 15,"contractType": "Formación","workingday": "Nocturna","workingType": "Flexible","createdDate": "21-02-2022T04:36:03 -01:00"},
-    {"id":6,"companyName":"A-Twim, SA","jobTitle":"Administrative","city":"Dublin","address":"07 Fieldstone Road","email":"rbernollet5@prweb.com","phone":"+55 858 335 2158","salary":"$3676.21","valuesType":"Ecológico", "enrolled": 18,"contractType": "Indefinido","workingday": "Por turnos","workingType": "Remoto 100%","createdDate": "31-01-2022T04:11:12 -01:00"},
-    {"id":7,"companyName":"Tagopia","jobTitle":"Geological Engineer","city":"Berlin","address":"670 Kensington Alley","email":"ctott6@pagesperso-orange.fr","phone":"+226 592 199 0779","salary":"$3209.04","valuesType":"Transparencia","enrolled": 17,"contractType": "Temporal","workingday": "Completa","workingType": "Remoto 100%","createdDate": "21-02-2022T04:57:58 -01:00"},
-    {"id":8,"companyName":"ORB Pharma","jobTitle":"Pharmacist","city":"Shangai","address":"62 Jenifer Way","email":"btiptaft7@amazon.de","phone":"+86 223 371 6512","salary":"$2100.32","valuesType":"Transparencia","enrolled": 21,"contractType": "Prácticas","workingday": "Partida","workingType": "Flexible","createdDate": "18-02-2022T05:12:09 -01:00"},
-    {"id":9,"companyName":"Affinity Group","jobTitle":"Help Desk Operator","city":"Porto","address":"5 Carpenter Parkway","email":"kvannacci8@google.com.hk","phone":"+62 835 444 6520","salary":"$4307.61","valuesType":"Diversidad","enrolled": 15,"contractType": "Prácticas","workingday": "Completa","workingType": "Remoto 100%","createdDate": "08-02-2022T05:12:43 -01:00"},
-    {"id":10,"companyName":"Future Tech","jobTitle":"Software Consultant","city":"Bordeaux","address":"94 Johnson Parkway","email":"pmaslin9@upenn.edu","phone":"+93 273 678 8137","salary":"$3244.94","valuesType":"Flexibilidad","enrolled": 21,"contractType": "Prácticas","workingday": "Festivos","workingType": "Flexible","createdDate": "05-01-2022T06:42:56 -01:00"},
-    {"id":11,"companyName":"BlaBla Moto","jobTitle":"Marketing Manager","city":"Göteborg","address":"3719 Spaight Circle","email":"jserlea@japanpost.jp","phone":"+46 445 434 3099","salary":"$5062.11","valuesType":"Flexibilidad","enrolled": 32,"contractType": "Indefinido","workingday": "Festivos","workingType": "Parcial 50%","createdDate": "23-02-2022T07:56:42 -01:00"},
-    {"id":12,"companyName":"Twinte","jobTitle":"Structural Analysis Engineer","city":"Boevange-sur-Attert","address":"771 Cody Court","email":"cmortimerb@google.com.hk","phone":"+352 213 262 3580","salary":"$5663.20","valuesType":"Transparencia","enrolled": 10,"contractType": "Formación","workingday": "Media Jornada","workingType": "Presencial","createdDate": "17-02-2022T08:32:30 -01:00"},
-    {"id":13,"companyName":"Innovation","jobTitle":"Director of Sales","city":"Zürich","address":"62877 Mockingbird Pass","email":"rpantingc@goo.gl","phone":"+55 364 484 9619","salary":"$1193.53","valuesType":"Flexibilidad","enrolled": 10,"contractType": "Formación","workingday": "Por turnos","workingType": "Parcial 50%","createdDate": "10-01-2022T07:29:49 -01:00"},
-    {"id":14,"companyName":"Quaxo","jobTitle":"Budget/Accounting Analyst","city":"Ljubljana","address":"3097 Maple Wood Court","email":"swesgated@wunderground.com","phone":"+7 847 723 2769","salary":"$3428.07","valuesType":"Diversidad","enrolled": 38,"contractType": "Temporal","workingday": "Completa","workingType": "Presencial","createdDate": "09-01-2022T03:06:20 -01:00"},
-    {"id":15,"companyName":"ZoomCast TV","jobTitle":"Backend Developer","city":"London","address":"234 Armistice Pass","email":"jfranzmane@multiply.com","phone":"+86 943 869 3614","salary":"$1143.82","valuesType":"Medio Ambiente","enrolled": 29,"contractType": "Indefinido","workingday": "Reducida","workingType": "Remoto 100%","createdDate": "04-02-2022T01:12:07 -01:00"},
-    {"id":16,"companyName":"Dynazzy","jobTitle":"Office Assistant IV","city":"Honolulu","address":"777 Talmadge Court","email":"hspencef@gizmodo.com","phone":"+86 640 537 4530","salary":"$1895.40","valuesType":"Diversidad","enrolled": 14,"contractType": "Indefinido","workingday": "Media Jornada","workingType": "Presencial","createdDate": "03-01-2022T09:37:07 -01:00"},
-    {"id":17,"companyName":"Black-Cards","jobTitle":"Director of Sales","city":"Napoli","address":"4 Thackeray Lane","email":"pghelerdinig@cargocollective.com","phone":"+62 179 276 7021","salary":"$5049.79","valuesType":"Transparencia","enrolled": 14,"contractType": "Formación","workingday": "Festivos","workingType": "Presencial","createdDate": "14-02-2022T08:26:16 -01:00"},
-    {"id":18,"companyName":"Legacy Int.","jobTitle":"Senior Financial Analyst","city":"Salzburg","address":"7 Kings Trail","email":"bmasterh@telegraph.co.uk","phone":"+86 657 264 7318","salary":"$1035.49","valuesType":"Flexibilidad","enrolled": 16,"contractType": "Formación","workingday": "Media Jornada","workingType": "Presencial","createdDate": "09-02-2022T04:56:22 -01:00"},
-    {"id":19,"companyName":"Ozu, SL","jobTitle":"Structural Engineer","city":"Oslo","address":"5 Northfield Avenue","email":"ksmoguri@infoseek.co.jp","phone":"+86 977 114 0323","salary":"$4276.51","valuesType":"Transparencia","enrolled": 36,"contractType": "Formación","workingday": "Nocturna","workingType": "Parcial 50%","createdDate": "04-01-2022T08:56:42 -01:00"},
-    {"id":20,"companyName":"Fiveclub","jobTitle":"Database Administrator II","city":"L.A","address":"3014 Anthes Point","email":"emcloneyj@rakuten.co.jp","phone":"+7 384 759 5746","salary":"$1316.22","valuesType":"Flexibilidad","enrolled": 21,"contractType": "Prácticas","workingday": "Partida","workingType": "Flexible","createdDate": "20-01-2022T09:01:30 -01:00"},
-    {"id":21,"companyName":"DataVerse","jobTitle":"Recruiter","city":"Mislak","address":"78695 Cherokee Trail","email":"mkleinsmuntzk@adobe.com","phone":"+62 398 793 0743","salary":"$1453.93","valuesType":"Ecológico","enrolled": 5,"contractType": "Prácticas","workingday": "Completa","workingType": "Flexible","createdDate": "14-01-2022T02:46:56 -01:00"},
-    {"id":22,"companyName":"Vampt Motors SC","jobTitle":"Financial Analyst","city":"George Town","address":"368 Walkers Road Grand Cayman KY1, 1107","email":"gskainl@ucoz.com","phone":"+52 219 912 6392","salary":"$4917.92","valuesType":"Impacto Social","enrolled": 32,"contractType": "Temporal","workingday": "Por horas","workingType": "Presencial","createdDate": "03-02-2022T08:00:30 -01:00"},
-    {"id":23,"companyName":"Blue Business","jobTitle":"Assistant Manager","city":"Zagreb","address":"594 Hallows Hill","email":"dcolbertsonm@patch.com","phone":"+380 192 470 1245","salary":"$5155.74","valuesType":"Flexibilidad","enrolled": 36,"contractType": "Formación","workingday": "Por horas","workingType": "Remoto 100%","createdDate": "23-01-2022T01:16:58 -01:00"},
-    {"id":24,"companyName":"Skinix VP","jobTitle":"Front end","city":"Akaa","address":"0 Springview Circle","email":"pgoatmann@biglobe.ne.jp","phone":"+62 162 313 8153","salary":"$3238.11","valuesType":"Transparencia","enrolled": 12,"contractType": "Temporal","workingday": "Nocturna","workingType": "Flexible","createdDate": "01-02-2022T04:53:49 -01:00"},
-    {"id":25,"companyName":"HealthVeo","jobTitle":"Dental Hygienist","city":"Liverpool","address":"03837 Grasskamp Park","email":"echaddertono@ca.gov","phone":"+84 922 179 0769","salary":"$4686.88","valuesType":"Ecológico","enrolled": 15,"contractType": "Temporal","workingday": "Completa","workingType": "Remoto 100%","createdDate": "23-02-2022T03:39:11 -01:00"},
-    {"id":26,"companyName":"Wire Group","jobTitle":"Full Stack Developer","city":"Valencia","address":"3 Redwing Street","email":"jiliffep@shareasale.com","phone":"+374 664 910 4845","salary":"$5686.89","valuesType":"Flexibilidad","enrolled": 37,"contractType": "Indefinido","workingday": "Completa","workingType": "Flexible","createdDate": "07-02-2022T12:05:44 -01:00"},
-    {"id":27,"companyName":"Shuffle","jobTitle":"Full Stack Dev","city":"Manchester","address":"645 Center Hill","email":"vwalczakq@reference.com","phone":"+62 717 161 2303","salary":"$5125.22","valuesType":"Inclusión","enrolled": 27,"contractType": "Temporal","workingday": "Indefinido","workingType": "Flexible","createdDate": "26-01-2022T07:52:11 -01:00"},
-    {"id":28,"companyName":"Big Bug Catch","jobTitle":"Senior Developer","city":"Barcelona","address":"0838 Onsgard Point","email":"lscrowsonr@friendfeed.com","phone":"+7 218 797 0251","salary":"$4770.28","valuesType":"Inclusión","enrolled": 21,"contractType": "Prácticas","workingday": "Partida","workingType": "Remoto 100%","createdDate": "19-02-2022T08:33:36 -01:00"},
-    {"id":29,"companyName":"Zazio Data","jobTitle":"Database Administrator","city":"Copenhagen","address":"9 Sundown Crossing","email":"mbasilones@zdnet.com","phone":"+86 157 918 2039","salary":"$3272.62","valuesType":"Flexibilidad","enrolled": 3,"contractType": "Indefinido","workingday": "Nocturna","workingType": "Presencial","createdDate": "08-02-2022T04:42:00 -01:00"},
-    {"id":30,"companyName":"Sphere Banking","jobTitle":"Tax Accountant","city":"Luxembourg","address":"47 Thackeray Avenue","email":"hgutowskat@seesaa.net","phone":"+358 169 610 5948","salary":"$5898.53","valuesType":"Impacto Social","enrolled": 30,"contractType": "Temporal","workingday": "Completa","workingType": "Remoto 100%","createdDate": "09-02-2022T11:15:27 -01:00"},
-    {"id":31,"companyName":"Mymm Sales","jobTitle":"Sales Associate","city":"Turin","address":"02092 Vidon Crossing","email":"jbevenu@blogspot.com","phone":"+86 392 740 8782","salary":"$5391.89","valuesType":"Transparencia","enrolled": 6,"contractType": "Indefinido","workingday": "Completa","workingType": "Parcial 50%","createdDate": "10-02-2022T09:11:29 -01:00"},
-    {"id":32,"companyName":"Eayo","jobTitle":"Help Desk Technician","city":"Amsterdam","address":"05 Southridge Terrace","email":"cmaylerv@instagram.com","phone":"+46 578 620 6166","salary":"$1894.05","valuesType":"Impacto Social","enrolled": 26,"contractType": "Prácticas","workingday": "Reducida","workingType": "Parcial 50%","createdDate": "28-01-2022T03:12:38 -01:00"},
-    {"id":33,"companyName":"Minyx","jobTitle":"Assistant Manager","city":"Vancouver","address":"834 Westend Parkway","email":"csheatherw@4shared.com","phone":"+55 290 489 0181","salary":"$2245.40","valuesType":"Transparencia","enrolled": 22,"contractType": "Prácticas","workingday": "Partida","workingType": "Remoto 100%","createdDate": "23-01-2022T07:47:28 -01:00"},
-    {"id":34,"companyName":"Feedspan Tech","jobTitle":"Software Developer","city":"London","address":"2 Pennsylvania Parkway","email":"pmeddingsx@csmonitor.com","phone":"+86 109 646 3669","salary":"$5492.87","valuesType":"Impacto Social","enrolled": 28,"contractType": "Temporal","workingday": "Completa","workingType": "Presencial","createdDate": "22-01-2022T03:34:19 -01:00"},
-    {"id":35,"companyName":"Skyvu","jobTitle":"Administrative Assistant","city":"Solna","address":"7310 Hazelcrest Pass","email":"areaneyy@jigsy.com","phone":"+46 667 837 5134","salary":"$3091.88","valuesType":"Diversidad","enrolled": 1,"contractType": "Temporal","workingday": "Festivos","workingType": "Remoto 100%","createdDate": "20-02-2022T12:51:48 -01:00"},
-    {"id":36,"companyName":"Rhycero","jobTitle":"Help Desk Operator","city":"Vienna","address":"4 Amoth Street","email":"leteenz@addtoany.com","phone":"+86 500 196 9030","salary":"$2587.04","valuesType":"Inclusión","enrolled": 37,"contractType": "Temporal","workingday": "Completa","workingType": "Presencial","createdDate": "10-02-2022T07:05:56 -01:00"},
-    {"id":37,"companyName":"DabZ TV","jobTitle":"Staff Accountant I","city":"Sønderborg","address":"7161 Rockefeller Terrace","email":"jklemenz10@baidu.com","phone":"+86 550 267 4283","salary":"$4371.81","valuesType":"Transparencia","enrolled": 14,"contractType": "Formación","workingday": "Reducida","workingType": "Parcial 50%","createdDate": "05-01-2022T10:44:17 -01:00"},
-    {"id":38,"companyName":"Smart Trade","jobTitle":"Junior Executive","city":"Volkhov","address":"463 Hauk Center","email":"cdellenbach11@msu.edu","phone":"+7 151 637 9930","salary":"$4784.03","valuesType":"Flexibilidad","enrolled": 32,"contractType": "Formación","workingday": "Festivos","workingType": "Parcial 50%","createdDate": "09-02-2022T05:33:03 -01:00"},
-    {"id":39,"companyName":"LazzyBoom","jobTitle":"Nuclear Power Engineer","city":"Warsaw","address":"3797 Lawn Hill","email":"cjuszkiewicz12@cornell.edu","phone":"+62 161 218 7367","salary":"$1039.70","valuesType":"Inclusión","enrolled": 40,"contractType": "Temporal","workingday": "Reducida","workingType": "Remoto 100%","createdDate": "11-02-2022T10:20:07 -01:00"},
-    {"id":40,"companyName":"Cogilith","jobTitle":"Editor","city":"New York","address":"8 Mariners Cove Avenue","email":"mphilips13@dot.gov","phone":"+58 612 255 2862","salary":"$1935.05","valuesType":"Inclusión","enrolled": 2,"contractType": "Indefinido","workingday": "Reducida","workingType": "Parcial 50%","createdDate": "10-01-2022T02:39:38 -01:00"},
-    {"id":41,"companyName":"Brainbox, SA","jobTitle":"Structural Engineer","city":"Lyon","address":"6236 Menomonie Terrace","email":"ycholdcroft14@disqus.com","phone":"+62 367 811 6328","salary":"$3166.24","valuesType":"Impacto Social","enrolled": 29,"contractType": "Indefinido","workingday": "Nocturna","workingType": "Parcial 50%","createdDate": "06-02-2022T10:45:51 -01:00"},
-    {"id":42,"companyName":"A-Bank Group","jobTitle":"Tax Accountant","city":"Belfast","address":"210 Service Hill","email":"aserrier15@wired.com","phone":"+86 237 990 3879","salary":"$4018.30","valuesType":"Medio Ambiente","enrolled": 36,"contractType": "Indefinido","workingday": "Por horas","workingType": "Flexible","createdDate": "02-02-2022T05:18:06 -01:00"},
-    {"id":43,"companyName":"Opal Solutions","jobTitle":"Data Coordiator","city":"Saint-Étienne","address":"9825 Ronald Regan Avenue","email":"lribbon16@tripadvisor.com","phone":"+62 517 920 7123","salary":"$2413.37","valuesType":"Impacto Social","enrolled": 0,"contractType": "Formación","workingday": "Festivos","workingType": "Flexible","createdDate": "16-02-2022T11:06:34 -01:00"},
-    {"id":44,"companyName":"Twitterworks","jobTitle":"Accountant III","city":"Andenne","address":"71875 Cody Point","email":"ahorning17@virginia.edu","phone":"+234 188 419 4317","salary":"$3453.93","valuesType":"Transparencia","enrolled": 13,"contractType": "Temporal","workingday": "Completa","workingType": "Parcial 50%","createdDate": "10-01-2022T02:39:55 -01:00"},
-    {"id":45,"companyName":"Jaxworks","jobTitle":"Media Manager","city":"Toronto","address":"58 Susan Place","email":"dwardhaw18@amazon.co.jp","phone":"+7 151 457 0093","salary":"$3751.07","valuesType":"Flexibilidad","enrolled": 12,"contractType": "Formación","workingday": "Nocturna","workingType": "Presencial","createdDate": "17-02-2022T08:05:42 -01:00"},
-    {"id":46,"companyName":"Landspitali","jobTitle":"Research Nurse","city":"Reikiavik","address":"Hringbraut 101, 101","email":"tmarke19@fda.gov","phone":"+354 543 1000","salary":"$4510.00","valuesType":"Igualdad","enrolled": 9,"contractType": "Indefinido","workingday": "Festivos","workingType": "Presencial","createdDate": "05-01-2022T11:35:07 -01:00"},
-    {"id":47,"companyName":"A-Bank Group","jobTitle":"Account Executive","city":"Luxembourg","address":"543 Arapahoe Road","email":"rstobbs1a@wikimedia.org","phone":"+63 684 692 3935","salary":"$5428.93","valuesType":"Medio Ambiente","enrolled": 12,"contractType": "Indefinido","workingday": "Media Jornada","workingType": "Presencial","createdDate": "04-02-2022T12:53:00 -01:00"},
-    {"id":48,"companyName":"Geba Services","jobTitle":"Help Desk Technician","city":"Barcelona","address":"1165 2nd Plaza","email":"troullier1b@google.ru","phone":"+7 187 193 7005","salary":"$2710.29","valuesType":"Medio Ambiente","enrolled": 35,"contractType": "Prácticas","workingday": "Por horas","workingType": "Presencial","createdDate": "31-01-2022T03:51:54 -01:00"},
-    {"id":49,"companyName":"Vinted","jobTitle":"Accountant IV","city":"Roma","address":"13851 Rieder Pass","email":"tfransman1c@ucsd.edu","phone":"+62 142 487 4037","salary":"$2258.30","valuesType":"Diversidad","enrolled": 37,"contractType": "Prácticas","workingday": "Nocturna","workingType": "Flexible","createdDate": "13-02-2022T10:11:52 -01:00"},
-    {"id":50,"companyName":"Globex SA","jobTitle":"Geological Engineer","city":"Copenhagen","address":"99716 Thompson Terrace","email":"sbourgaize1d@imgur.com","phone":"+63 606 256 1925","salary":"$3264.10","valuesType":"Impacto Social","enrolled": 9,"contractType": "Temporal","workingday": "Media Jornada","workingType": "Presencial","createdDate": "07-02-2022T12:24:30 -01:00"}];
-  
+  qGetAllOffers(): QueryRef<any, EmptyObject> {
+    this._offersWatchQuery = this.apollo.watchQuery({
+        query: GET_ALLOFFERS,
+        pollInterval: REFRESH
+    });
 
-    return offers;
-  }
+    return this._offersWatchQuery;
+  }*/
+
+  /**
+   * Get one Offer (by ID) from DB.
+   */
+  /*private _offerWatchQuery: QueryRef<any, EmptyObject>;
+
+  qGetOffer(userId: any): QueryRef<any, EmptyObject> {
+    this._offerWatchQuery = this.apollo.watchQuery({
+        query: GET_OFFER,
+        pollInterval: REFRESH,
+        variables: {
+          id: userId,
+        }
+    });
+    return this._offerWatchQuery;
+  }*/
+
+  /**
+   * Mutation to Create an Offer.
+   * @returns new Offer
+   */
+ /* mCreateOffer(uId: any, iTitle: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iEnroll: any, iContrato: any, iDate: string) {
+    return this.apollo.mutate({
+        mutation: MUT_CREATEOFFER,
+        variables: {
+          userId: uId,
+          title: iTitle,
+          city: iCity,
+          jornada: iJornada,
+          rangoSalarial: iRango,
+          remoto: iRemoto,
+          enrolled: iEnroll,
+          tipoContrato: iContrato,
+          createdDate: iDate
+        }
+    }).pipe(
+        map((data) => {
+          this._offersWatchQuery?.refetch();
+        })
+    );
+  }*/
+
+  /**
+   * Mutation to Edit an Offer.
+   * @returns edited Offer
+   */
+  /*mEditOffer(offerId: any, iTitle: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iContrato: any) {
+    return this.apollo.mutate({
+        mutation: MUT_EDITOFFER,
+        variables: {
+            id: offerId,
+            title: iTitle,
+            city: iCity,
+            jornada: iJornada,
+            rangoSalarial: iRango,
+            remoto: iRemoto,
+            tipoContrato: iContrato
+        }
+    }).pipe(
+        map((data) => {
+          this._offersWatchQuery?.refetch();
+        })
+    );
+  }*/
 
 }
+

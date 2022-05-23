@@ -10,9 +10,29 @@
 ion-content { 
     --ion-background-color: #464646;
 
+	// Soft-Skills style
+	ion-grid {
+		padding: 0 !important;
+
+		ion-col {
+			padding: 0 !important;
+
+			.custom-values {
+				display: inline-flex;
+
+				.values-ico-style {
+					color: var(--ion-color-upmeup); 
+					fill: currentcolor; 
+					margin-right: 15px; 
+				}
+			}
+		}
+	}
+	
     ion-card { 
         --ion-background-color: #f2f2f2; 
 		.avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
+
 	}
 }
 

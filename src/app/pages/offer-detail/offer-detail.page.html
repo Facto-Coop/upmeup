@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="upmeup">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/offer-list"></ion-back-button>
+      <ion-back-button color="light" defaultHref="/offer-list"></ion-back-button>
     </ion-buttons>
-    <ion-title>Offer-Detail</ion-title>
+    <ion-title color="light">Offer-Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,6 +16,7 @@
           <ion-thumbnail class="avatar-center">
             <img src="./../../../assets/thumbnail.svg" />
           </ion-thumbnail>
+          <ion-card-title class="ion-text-center"> {{ userInfo?.name }} </ion-card-title> 
         </ion-col>
         <ion-col> </ion-col>
       </ion-row>
@@ -30,15 +31,46 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+
+      <ion-list lines="none" *ngIf="userSkills.length === 0">  
+        <ion-item>
+          <ion-grid>
+            <div class="ion-padding">
+              <ion-label color="danger" class="ion-text-start">
+                Todavía no tienes valores
+              </ion-label> 
+            </div>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+
+      <ion-list lines="none" *ngIf="userSkills.length > 0">  
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" *ngFor="let skill of userSkills">
+                <div class="custom-values">
+                  <ion-icon class="values-ico-style" name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>
+                  <ion-label>                      
+                    <h4> {{skill.name}} </h4>
+                  </ion-label>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>  
+
       <ion-grid>
         <ion-row>
           <ion-col size="8">
-            <ion-card-subtitle>{{ offer.title }}</ion-card-subtitle>
-            <ion-card-title> {{ offer.city }} </ion-card-title>
+            <ion-card-title>{{ offer?.title }}</ion-card-title>
+            <div> {{ offer?.eduLevel }} </div>
+            <ion-card-subtitle> {{ offer?.city }} </ion-card-subtitle>
           </ion-col>
           <ion-col>
             <div>
-              <ion-card-subtitle>{{ offer.rangoSalarial }}</ion-card-subtitle>
+              <ion-card-subtitle>{{ offer.rangoSalarial }}€</ion-card-subtitle>
               <ion-card-subtitle>{{ offer.remoto }}</ion-card-subtitle>
             </div>
           </ion-col>
@@ -46,21 +78,6 @@
       </ion-grid>
     </ion-card-header>
     <ion-card-content>
-
-     <!-- <ion-grid>
-        <ion-row>
-          <ion-col size="8">
-            <div>
-              <p>{{ offer.address }}</p>
-              <p>{{ offer.phone }}</p>
-              <p>{{ offer.city }}</p>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>{{ offer.valuesType }}</div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>-->
 
       <ion-grid>
         <ion-row>
@@ -76,7 +93,17 @@
           </ion-col>
         </ion-row>
       </ion-grid> 
-      
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4"> <p>Descripción:</p> </ion-col>
+          <ion-col size="8">             
+            <div> {{ offer.description }} </div>
+          </ion-col>
+          <ion-col> </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <ion-button size="small" color="danger" expand="full" shape="round" (click)="addEnrroled(offer._id, offer.enrolled)" >Inscribirme</ion-button>
          
     </ion-card-content>

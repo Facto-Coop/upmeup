@@ -1,8 +1,8 @@
 
 ion-content {     
-    --ion-background-color: -moz-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-dark-upmeup) 100%);
-    --ion-background-color: -webkit-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-dark-upmeup) 100%);
-    --ion-background-color: linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-dark-upmeup) 100%);
+    --ion-background-color: -moz-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
+    --ion-background-color: -webkit-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
+    --ion-background-color: linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
 
     .container-login { padding: 40px; }
     .content-logo { margin-bottom: 50px; /*position: relative; object-fit: cover;*/ }
@@ -25,15 +25,6 @@ ion-content {
     .text-error { font-size: 15px; }
     ion-list .error { font-size: 15px; color: #eb445a; }
     
-    /* Login Button color */
-    .ion-color-loginbtn {
-        --ion-color-base: var(--ion-color-loginbtn);
-        --ion-color-base-rgb: var(--ion-color-loginbtn-rgb);
-        --ion-color-contrast: var(--ion-color-loginbtn-contrast);
-        --ion-color-contrast-rgb: var(--ion-color-loginbtn-contrast-rgb);
-        --ion-color-shade: var(--ion-color-loginbtn-shade);
-        --ion-color-tint: var(--ion-color-loginbtn-tint);
-    }
 }
 
 /**

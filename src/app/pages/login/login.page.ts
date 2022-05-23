@@ -107,9 +107,12 @@ export class LoginPage implements OnInit {
         //TODO: Cambiar este "parche" para cambio de menu!!! (Auth)
         this.appC.logginMenu(this.userType, el.name);
 
+        if (window.localStorage) {
+          localStorage.removeItem('uSelectedSkills');
+        }
 
         if(this.userType === '1'){
-          this.router.navigate(['/offer-list']);
+          this.router.navigate(['/user-profile']);
         } else if(this.userType === '2') {
           this.router.navigate(['/company-profile']);
         }

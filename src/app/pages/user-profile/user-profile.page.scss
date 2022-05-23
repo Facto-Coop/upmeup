@@ -14,7 +14,7 @@ ion-content {
             margin: 0;
             box-shadow: none;
             background: var(--ion-color-upmeup);
-            border-bottom: 4px solid #a4e6dc;
+            border-bottom: 4px solid #c8e3d6;
             border-radius: 0;
         }
 
@@ -61,17 +61,13 @@ ion-content {
             ion-col {
                 padding: 0 !important;
 
-                .custom-values {
-                    display: inline-flex;
-
-                    .values-ico-style {
-                        color: var(--ion-color-upmeup); 
-                        fill: currentcolor; 
-                        margin-right: 15px; 
-                    }
+                .custom-label {
+                    white-space: normal;
                 }
             }
         }
+        
+        ion-fab-button { width: 45px; height: 45px; }
 
         .exp-title {
             h3 { font-weight: bold; margin-top: 25px;} 
@@ -89,7 +85,6 @@ ion-content {
         width: 50%; 
         margin: 0 auto; 
     
-        ion-button { width: 40%; margin: 30px auto !important; }
-    
+        ion-button { width: 40%; margin: 30px auto !important; }    
     }
 }

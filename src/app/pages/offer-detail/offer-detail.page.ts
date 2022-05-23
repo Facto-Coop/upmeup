@@ -4,32 +4,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { gql, Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-//import { OfferService } from '../../services/offer.service';
+import { CompanyOffersService } from 'src/app/services/company-offers.service';
+import { SoftskillsService } from 'src/app/services/softskills.service';
+import { UserService } from 'src/app/services/user.service';
 import { Offer } from '../../models/offer';
 
 
-const GET_OFFER = gql`
-query getDetailOffer($id: String!) {
-  getOffer(id: $id) {
-    _id
-    userId
-    title
-    city
-    jornada
-    rangoSalarial
-    remoto
-    enrolled
-    tipoContrato
-    createdDate
-  }
-}
-`;
-
 const MUT_UPDOFFER_ENROLL = gql`
-  mutation submitUpdateEnroll($id: String!, $updateValue: UpdateOfferInput!) {
-    updateOffer(id: $id, input: $updateValue) 
-    {
+  mutation submitUpdateEnroll(
+                                $id: String!, 
+                                $updateValue: UpdateOfferEnrollInput!
+                              ) {
+    updateEnrollOffer(
+      id: $id, 
+      input: $updateValue
+    ) {
       title
       city
       enrolled
@@ -56,13 +47,12 @@ export class OfferDetailPage implements OnInit, OnDestroy {
   offer: Offer[] = [];
   offerID: any;
   enrolledValue = '';
-  date: Date;
-  error: any;
-  loading = true;
+  usID: any;
+  userInfo: any[] = [];
+  userSkills: any[] = [];
 
   feedQuery: QueryRef<any>;
 
-  private querySubscription: Subscription;
   private mutationSubscription: Subscription;
   private mutationNewValue: Subscription;
 
@@ -70,7 +60,10 @@ export class OfferDetailPage implements OnInit, OnDestroy {
     private aRoute: ActivatedRoute,
     private router: Router,
     private apollo: Apollo,
-    private toastCtrl: ToastController) { }
+    private toastCtrl: ToastController,
+    private cOfferService: CompanyOffersService,
+    private uService: UserService,
+    private softSkillService: SoftskillsService) { }
 
   ngOnInit() {
     this.offerID = this.aRoute.snapshot.params.id;
@@ -83,20 +76,13 @@ export class OfferDetailPage implements OnInit, OnDestroy {
    * @param ofId
    */
   qGetOffer(ofId: string) {
-    this.feedQuery = this.apollo.watchQuery<any>({
-      query: GET_OFFER,
-      variables: {
-        id: ofId,
-      },
-      fetchPolicy: 'network-only',
+    this.cOfferService.qGetOffer(ofId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      console.log(item);
+      this.offer = item.getOffer;
+      this.qGetUser(item.getOffer.userId);
     });
-
-    this.querySubscription = this.feedQuery
-      .valueChanges.subscribe(({ data }) => {
-        this.offer = data.getOffer;
-      });
-
-      // this.feedQuery.refetch();
   }
 
   /**
@@ -155,7 +141,7 @@ export class OfferDetailPage implements OnInit, OnDestroy {
   /**
    * Alert to confirm an action
    *  */
-   async enrolled() {
+  async enrolled() {
     const toast = await this.toastCtrl.create({
       color: 'dark',
       message: 'Inscrito correctamente! ¡Mucha Suerte!',
@@ -166,8 +152,42 @@ export class OfferDetailPage implements OnInit, OnDestroy {
     await toast.present();
   }
 
+  /**
+   * Get User info (Owner of offer) from DB
+   * @param userId
+   */
+   qGetUser(userID: string) {
+    this.uService.qGetUser(userID).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      console.log(item);
+      this.userInfo = item.getUser;
+      this.qGetSkillName(item.getUser.valors);
+    });
+  }
+
+  /**
+   * Get ID Skills from User (Owner of offer)
+   */
+  qGetSkillName(values: Array<any>) {
+    values.forEach(el => {
+      //console.log(el);
+      this.qSkillName(el);
+    });
+  }
+
+  /** Get SkillNames */
+  qSkillName(skillId: string) {
+    this.softSkillService.qGetSkill(skillId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      console.log(item);
+      this.userSkills.push(item.getSkill);
+    });
+  }
+
   reloadQueries() {
-    this.feedQuery.refetch();
+    //this.feedQuery.refetch();
     this.goToList();
   }
 
@@ -176,10 +196,6 @@ export class OfferDetailPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.querySubscription) {
-      this.querySubscription.unsubscribe();
-    }
-
     if(this.mutationSubscription) {
       this.mutationSubscription.unsubscribe();
     }

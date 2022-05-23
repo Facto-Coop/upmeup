@@ -76,6 +76,45 @@
   --ion-color-light-tint: #f5f6f9;
 
   /** custom upmeup **/
+  --ion-color-upmeup: #a3d1bb;
+	--ion-color-upmeup-rgb: 163,209,187;
+	--ion-color-upmeup-contrast: #000000;
+	--ion-color-upmeup-contrast-rgb: 0,0,0;
+	--ion-color-upmeup-shade: #8fb8a5;
+	--ion-color-upmeup-tint: #acd6c2;
+
+  --ion-color-dark-upmeup: #5fb1b5;
+	--ion-color-dark-upmeup-rgb: 95,177,181;
+	--ion-color-dark-upmeup-contrast: #000000;
+	--ion-color-dark-upmeup-contrast-rgb: 0,0,0;
+	--ion-color-dark-upmeup-shade: #549c9f;
+	--ion-color-dark-upmeup-tint: #6fb9bc;
+
+  /** Login & other buttons color **/
+  --ion-color-loginbtn: #13505e;
+	--ion-color-loginbtn-rgb: 19,80,94;
+	--ion-color-loginbtn-contrast: #ffffff;
+	--ion-color-loginbtn-contrast-rgb: 255,255,255;
+	--ion-color-loginbtn-shade: #114653;
+	--ion-color-loginbtn-tint: #2b626e;
+
+  /** Login degraded colors **/
+  --ion-color-login-dg: #a2ddc2;
+	--ion-color-login-dg-rgb: 162,221,194;
+	--ion-color-login-dg-contrast: #000000;
+	--ion-color-login-dg-contrast-rgb: 0,0,0;
+	--ion-color-login-dg-shade: #8fc2ab;
+	--ion-color-login-dg-tint: #abe0c8;
+
+	--ion-color-login-dgDark: #248ba9;
+	--ion-color-login-dgDark-rgb: 36,139,169;
+	--ion-color-login-dgDark-contrast: #ffffff;
+	--ion-color-login-dgDark-contrast-rgb: 255,255,255;
+	--ion-color-login-dgDark-shade: #207a95;
+	--ion-color-login-dgDark-tint: #3a97b2;
+}
+
+/** Old colors:
   --ion-color-upmeup: #4acdba;
 	--ion-color-upmeup-rgb: 74,205,186;
 	--ion-color-upmeup-contrast: #000000;
@@ -89,15 +128,7 @@
   --ion-color-dark-upmeup-contrast-rgb: 255,255,255;
   --ion-color-dark-upmeup-shade: #1c7894;
   --ion-color-dark-upmeup-tint: #3694b1;
-
-  /** Login button color **/
-  --ion-color-loginbtn: #15515f  ;
-	--ion-color-loginbtn-rgb: 21,81,95;
-	--ion-color-loginbtn-contrast: #ffffff;
-	--ion-color-loginbtn-contrast-rgb: 255,255,255;
-	--ion-color-loginbtn-shade: #124754;
-	--ion-color-loginbtn-tint: #2c626f;
-}
+*/
 
 @media (prefers-color-scheme: dark) {
   /*
@@ -169,26 +200,41 @@
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
 
-    --ion-color-upmeup: #4acdba;
-    --ion-color-upmeup-rgb: 74,205,186;
+    --ion-color-upmeup: #a3d1bb;
+    --ion-color-upmeup-rgb: 163,209,187;
     --ion-color-upmeup-contrast: #000000;
     --ion-color-upmeup-contrast-rgb: 0,0,0;
-    --ion-color-upmeup-shade: #41b4a4;
-    --ion-color-upmeup-tint: #5cd2c1;
-
-    --ion-color-dark-upmeup: #2088a8;
-    --ion-color-dark-upmeup-rgb: 32,136,168;
-    --ion-color-dark-upmeup-contrast: #ffffff;
-    --ion-color-dark-upmeup-contrast-rgb: 255,255,255;
-    --ion-color-dark-upmeup-shade: #1c7894;
-    --ion-color-dark-upmeup-tint: #3694b1;
-
-    --ion-color-loginbtn: #15515f  ;
-    --ion-color-loginbtn-rgb: 21,81,95;
+    --ion-color-upmeup-shade: #8fb8a5;
+    --ion-color-upmeup-tint: #acd6c2;
+  
+    --ion-color-dark-upmeup: #5fb1b5;
+    --ion-color-dark-upmeup-rgb: 95,177,181;
+    --ion-color-dark-upmeup-contrast: #000000;
+    --ion-color-dark-upmeup-contrast-rgb: 0,0,0;
+    --ion-color-dark-upmeup-shade: #549c9f;
+    --ion-color-dark-upmeup-tint: #6fb9bc;
+  
+    --ion-color-loginbtn: #13505e;
+    --ion-color-loginbtn-rgb: 19,80,94;
     --ion-color-loginbtn-contrast: #ffffff;
     --ion-color-loginbtn-contrast-rgb: 255,255,255;
-    --ion-color-loginbtn-shade: #124754;
-    --ion-color-loginbtn-tint: #2c626f;
+    --ion-color-loginbtn-shade: #114653;
+    --ion-color-loginbtn-tint: #2b626e;
+
+    /** Login degraded colors **/
+    --ion-color-login-dg: #a2ddc2;
+    --ion-color-login-dg-rgb: 162,221,194;
+    --ion-color-login-dg-contrast: #000000;
+    --ion-color-login-dg-contrast-rgb: 0,0,0;
+    --ion-color-login-dg-shade: #8fc2ab;
+    --ion-color-login-dg-tint: #abe0c8;
+
+    --ion-color-login-dgDark: #248ba9;
+    --ion-color-login-dgDark-rgb: 36,139,169;
+    --ion-color-login-dgDark-contrast: #ffffff;
+    --ion-color-login-dgDark-contrast-rgb: 255,255,255;
+    --ion-color-login-dgDark-shade: #207a95;
+    --ion-color-login-dgDark-tint: #3a97b2;
   }
 
   /*

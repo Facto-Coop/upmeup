@@ -1,89 +1,79 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Apollo } from 'apollo-angular';
-import { ApolloQueryResult } from 'apollo-client';
-import gql from 'graphql-tag';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
 import { CreateOfferPage } from '../create-offer/create-offer.page';
+import { CompanyOffersService } from 'src/app/services/company-offers.service';
+import { QueryRef } from 'apollo-angular';
+import { Offer } from 'src/app/models/offer';
 
-const GET_ALLOFFERS = gql`
-query {
-  getCompanyOffers {
-    _id
-    userId
-    title
-    city
-    jornada
-    rangoSalarial
-    remoto
-    enrolled
-    tipoContrato
-    createdDate
-  }
-}
-`;
 
 @Component({
   selector: 'app-company-offer',
   templateUrl: './company-offer.page.html',
   styleUrls: ['./company-offer.page.scss'],
 })
-export class CompanyOfferPage implements OnInit, OnDestroy {
-  offers: any[];
+export class CompanyOfferPage implements OnInit {
+  offers: Observable<Offer[]>;
   error: any;
   loading = true;
   cOffers: any[] = [];
   userId = '';
   company = '';
-  private querySubscription: Subscription;
 
-  constructor(private apollo: Apollo, private router: Router, private mController: ModalController) { }
+  //postsQuery: QueryRef<{ offers: Offer[] }>;
 
-  ngOnInit() {
-    this.company = localStorage.getItem('user');
-    this.userId = localStorage.getItem('userid');
-    this.qUserQuery();
-  }
+    constructor(
+              private router: Router,
+              private mController: ModalController,
+              private compOfService: CompanyOffersService
+            ) { }
 
-    // Get info from DB.
-    qUserQuery() {
-      this.querySubscription = this.apollo.watchQuery({
-        query: GET_ALLOFFERS
-      }).valueChanges.subscribe((result: ApolloQueryResult<any> ) => {
-        this.offers = result.data && result.data.getCompanyOffers;
-        this.companyOffers();
+    ngOnInit() {
+      this.company = localStorage.getItem('user');
+      this.userId = localStorage.getItem('userid');
+      this.qOffersQuery();
+    }
 
-        this.loading = result.loading;
-        this.error = result.errors;
+    /**
+     * Get offers from DB.
+     */
+    qOffersQuery() {
+      this.compOfService.qGetAllOffers().valueChanges.pipe(
+        map(result => result.data)
+      ).subscribe((item) => {
+        //console.log(item);
+        this.companyOffers(item.getCompanyOffers);
       });
 
     }
 
-    companyOffers() {
-      this.offers.forEach(item => {
-        if(item.userId === this.userId) {
+    /**
+     * Get Offers (from user logged).
+     */
+    companyOffers(offersList) {
+      this.cOffers = [];
+      offersList.forEach(item => {
+        if(item['userId'] === this.userId) {
           this.cOffers.push({item});
-           // console.log(this.cOffers);
         }
       });
     }
 
     goOfferDetail(offer) {
-      // eslint-disable-next-line no-underscore-dangle
       this.router.navigate(['/company-offer-detail', offer._id]);
     }
 
-    ngOnDestroy() {
-      this.querySubscription.unsubscribe();
-    }
+    /*async refresh() {
+      await this.postsQuery.refetch();
+    }*/
 
+    /**
+     * Modal to Create New Offer
+     */
     async createModal() {
-      /*const dismissEditModal = () => {
-        editModal.dismiss();
-      };*/
-
       const editModal = await this.mController.create({
         component: CreateOfferPage,
         animated: true,
@@ -91,6 +81,5 @@ export class CompanyOfferPage implements OnInit, OnDestroy {
       });
       await editModal.present();
     }
-
 
 }

@@ -13,11 +13,9 @@ ion-content {
             .avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
         }
     }
-    
-    
+        
     ion-card { 
-        //--ion-background-color: #ffffff; 
-    
+
         .custom-line { 
             white-space: normal !important; 
             display: inline-flex; 
@@ -26,6 +24,8 @@ ion-content {
             display: -ms-flex;
         }
     }
+
+    .custom-text { margin-left: 8px; color: white; }
 }
 
 /**
@@ -36,5 +36,6 @@ ion-content {
     .container {
         ion-title { width: 50%; margin: 30px auto !important; }
     }
+    .noEnrolled { width: 50%; margin: 0 auto !important; }
     
 }

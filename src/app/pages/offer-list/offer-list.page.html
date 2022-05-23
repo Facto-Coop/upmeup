@@ -22,21 +22,25 @@
 
       <ion-label size="8">
         <ion-text color="custom">
-          <h2> {{ offer.title }}</h2>          
+          <h2 class="custom-text-space"> {{ offer.title }}</h2>          
           <!-- TODO: Add userName (future?)
             <ion-text color="medium" *ngIf="offer.userId === usersListData._id">
             <h3> {{ usersListData.name }} </h3>
           </ion-text>-->
           <ion-text color="medium">
-            <p> {{ offer.jornada }} </p>
+            <p> {{ offer.tipoContrato }} </p>
+          </ion-text>
+          <ion-text color="medium">
+            <ion-text color="dark"><p> {{ offer.rangoSalarial }}€ </p></ion-text>            
           </ion-text>
         </ion-text>  
       </ion-label>
       <ion-label>
         <div class="ion-text-end">
           <ion-text><p><ion-icon name="location-outline"></ion-icon>{{ offer.city }}</p></ion-text>
-          <ion-text color="dark"><p> {{ offer.rangoSalarial }} </p></ion-text>
+          <ion-text color="dark"><p> {{ offer.createdDate | date: 'dd/MM/yyyy' }} </p></ion-text>
           <ion-text color="dark"><p> {{ offer.remoto }} </p></ion-text>
+          <ion-text color="dark"><p> <b> Inscritos: {{ offer.enrolled }} </b> </p></ion-text>
         </div>
       </ion-label>  
     </ion-item>

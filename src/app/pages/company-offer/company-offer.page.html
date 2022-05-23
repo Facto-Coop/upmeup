@@ -21,23 +21,24 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding" *ngIf="cOffers.length === 0">
+  <div class="noEnrolled ion-padding" *ngIf="cOffers.length === 0">
     <ion-label>
       <ion-text color="light"> You haven't published any offer </ion-text>           
     </ion-label> 
   </div>
 
-  <ion-card class="container" *ngFor="let offer of cOffers; let i = index" (click)="goOfferDetail(offer.item)">
+  <ion-card class="container" *ngFor="let offer of cOffers;" (click)="goOfferDetail(offer.item)">
     <ion-card-content>
       <ion-list lines="none">
-        <!-- Info de comprobación -->
-        <ion-item>
-          <ion-label>
+        
+        <!-- <ion-item>
+          Info de comprobación -->
+          <!--  <ion-label>
             <ion-text color="danger">
-              <h2> Company: {{ company }}</h2>
+             <h2> Company: {{ company }}</h2>
             </ion-text>           
-          </ion-label>          
-        </ion-item>
+          </ion-label> 
+        </ion-item>--> 
 
         <ion-item>          
           <ion-thumbnail slot="start">

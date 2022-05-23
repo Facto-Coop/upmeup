@@ -20,8 +20,8 @@
       <ion-card-header>
         <div class="center-class">  
           <ion-label>
-            <h1> {{ userName }} </h1>
-            <h3> Cognom Cognom </h3>
+            <h1> {{ userName }} {{userInfo?.surname}}</h1>
+            <h3> de {{userInfo?.city}} </h3>
           </ion-label> 
           <ion-thumbnail class="avatar-center">
             <img src="./../../../assets/avatar.svg" />
@@ -34,125 +34,100 @@
       <ion-card-content>
         <div class="center-class">  
           <ion-label>
-            <h2 class="custom-title"> Técnico/a de RRHH </h2>
-            <h3 class="custom-subtitle"> 3 años de experiencia </h3>
+            <h2 class="custom-title"> Técnic/a de RRHH </h2>
+            <h3 class="custom-subtitle"> 3 anys d'experiencia </h3>
           </ion-label> 
           <ion-label>
             <h4 class="margin">
-              Preparo ofertas de empleo, realizo entrevistas y me encargo de la selección de personal. 
-              También administro nominas y asesoro sobre legislación laboral. 
+              Preparo ofertes de treball, realitzo entrevistes i m'encarrego de la selecció de personal.
+              També administro nòmines i assessoro sobre legislació laboral.
             </h4>
           </ion-label>        
         </div>
 
-        <!-- Soft Skills -->
+        <!-- Skills -->
         <div class="center-class">  
           <ion-row>
             <ion-col> </ion-col>
             <ion-col size="8"> <h2 class="custom-title"> Soft Skills </h2> </ion-col>
             <ion-col>
-              <ion-label>
-                <button class="edit-btn" color="danger" fill="outline" size="small" shape="round" slot="icon-only" (click)="openAlert()">
-                  <ion-icon name="create-outline"></ion-icon>
+              <ion-fab vertical="center" horizontal="end">
+                <ion-fab-button color="upmeup"  (click)="openModal()"> <ion-icon name="create-outline" color="light"></ion-icon> </ion-fab-button>
+              </ion-fab>
+              <!--<ion-label>
+                <button class="edit-btn" color="danger" fill="outline" size="small" shape="round" slot="icon-only" (click)="openModal()">
+                  <ion-icon name="create-outline"></ion-icon> 
                 </button>
-              </ion-label>
+              </ion-label>-->
             </ion-col>
           </ion-row>
 
-          <!--<ion-label>
-            <h2 class="custom-title"> Soft Skills 
-              <ion-button class="ion-justify-content-end ion-align-items-center edit-btn" color="danger" fill="outline" size="small" shape="round" slot="icon-only" (click)="openAlert()">
-                <ion-icon name="pencil-outline"></ion-icon>
-              </ion-button>     
-            </h2>
-          </ion-label> -->
-
-          <ion-list lines="none">  
+          <ion-list lines="none" *ngIf="userSkills.length === 0">  
+            <ion-item>
+              <ion-grid>
+                <div class="ion-padding">
+                  <ion-label color="danger" class="ion-text-start">
+                    Encara no has seleccionat cap valor
+                  </ion-label> 
+                </div>
+              </ion-grid>
+            </ion-item>
+          </ion-list>
+    
+          <ion-list lines="none" *ngIf="userSkills?.length > 0">  
             <ion-item>
               <ion-grid>
                 <ion-row>
-                  <ion-col>
+                  <ion-col size="6" *ngFor="let skill of userSkills">                   
+                    <ion-label class="custom-label">                      
+                      <h4> 
+                        <ion-icon class="values-ico-style" name="rocket" slot="icon-only" size="small" slot="start" color="upmeup"></ion-icon> {{skill.name}} 
+                      </h4>
+                    </ion-label>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-list>  
+
+          <!--<ion-list lines="none">  
+            <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6" *ngFor="let skill of skillsList">
                     <div class="custom-values">
                       <ion-icon class="values-ico-style" name="eye" slot="icon-only" size="small" slot="start"></ion-icon>
                       <ion-label>                      
-                        <h4> Curiosidad </h4>
-                      </ion-label>
-                    </div>
-                  </ion-col>
-                  <ion-col>
-                    <div class="custom-values">
-                      <ion-icon class="values-ico-style" name="bulb" slot="icon-only" size="small" slot="start"></ion-icon>
-                      <ion-label> 
-                        <h4> Creatividad </h4>
+                        <h4> {{skill.name}} </h4>
                       </ion-label>
                     </div>
                   </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-item>
-            <ion-item> 
-              <ion-grid>
-                <ion-row>
-                  <ion-col>
-                    <div class="custom-values">
-                      <ion-icon class="values-ico-style" name="male-female" slot="icon-only" size="small" slot="start"></ion-icon>
-                      <ion-label>
-                        <h4> Igualdad </h4>
-                      </ion-label>
-                    </div>
-                  </ion-col>
-                  <ion-col>
-                    <div class="custom-values">
-                      <ion-icon class="values-ico-style" name="leaf" slot="icon-only" size="small" slot="start"></ion-icon>
-                      <ion-label>
-                        <h4> Ecologia </h4>
-                      </ion-label>
-                    </div>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-item>          
-            <ion-item>
-              <ion-grid>
-                <ion-row>
-                  <ion-col>
-                    <div class="custom-values">
-                      <ion-icon class="values-ico-style" name="beer" slot="icon-only" size="small" slot="start"></ion-icon>
-                      <ion-label>
-                        <h4> Social </h4>
-                      </ion-label>
-                    </div>
-                  </ion-col>
-                  <ion-col>
-                    <div class="custom-values"></div>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-item>  
-          </ion-list>  
-         <!-- <ion-button type="submit" fill="solid" color="upmeup" expand="block" shape="round"> <span> Quieres hablar? </span> </ion-button> -->
+          </ion-list>  -->
+
         </div>
 
         <!-- Experience -->
         <div class="center-class">  
           <ion-label class="exp-title">
             <h2 class="custom-title"> Titulación </h2>
-            <h3 class="bold"> Tec. Relaciones Laborales y Recursos Humanos </h3>
+            <h3 class="bold"> {{userInfo?.eduLevel}} Tec. en Recursos Humanos </h3>
             <h5> Universitat Autónoma Bcn </h5>
           </ion-label> 
         </div>
 
         <div class="center-class">  
-            <ion-label class="cv-title">
-              <h2 class="custom-title"> Curriculum Vitae </h2>
-            </ion-label> 
+          <ion-label class="cv-title">
+            <h2 class="custom-title"> Curriculum Vitae </h2>
+          </ion-label> 
           <ion-label>
             <h4 class="margin">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt
               molestie pharetra. Cras non massa in diam gravida imperdiet. 
             </h4>
           </ion-label>
-         <!-- <ion-button type="submit" fill="solid" color="upmeup" expand="block" shape="round"> <span> Descargar </span> </ion-button> -->
         </div>
 
         <!-- Moviments/ Valors -->
@@ -162,7 +137,7 @@
           </ion-label> 
           <ion-label>
             <h4 class="margin">
-              Feminismo, Ecología, Medio Ambiente, Igualdad, Consumo responsable
+              Feminisme, Ecología, Medi Ambiente, Igualtat, Consum responsable
             </h4>
           </ion-label>        
         </div>
