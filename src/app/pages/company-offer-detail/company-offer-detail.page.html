@@ -7,19 +7,82 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title color="light">My Offer Detail</ion-title>
+
+    <!--<ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon color="light" slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
   </ion-toolbar>
+
+  <div class="header-class">   
+    <ion-thumbnail class="avatar-center" >
+      <img class="profile" src="./../../../assets/thumbnail.svg" />
+    </ion-thumbnail> 
+    <ion-label class="header-text ion-padding">
+      <div>
+        <ion-row>
+          <ion-col> </ion-col>
+          <ion-col size="8"> 
+            <ion-title class="ion-padding"> <ion-label color="light"><b> {{ offer.title }} </b></ion-label></ion-title>
+          </ion-col>
+          <ion-col>
+            <ion-fab-button color="upmeup" (click)="editModal()"> <ion-icon style="color: #5a7266;" name="construct-outline"></ion-icon> </ion-fab-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-label> 
+    <ion-grid class="grid-info">
+      <ion-row>
+        <ion-col size="6"> 
+          <div class="calendar-ico custom-icon">
+            <ion-label> {{ offer?.createdDate | date: 'dd/MM/yyyy' }} </ion-label>
+          </div>
+        </ion-col>
+        <ion-col size="6"> 
+          <div class="location-ico custom-icon">
+            <ion-label> {{ offer.city }} </ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <div class="remoto-ico custom-icon">
+            <ion-label> {{ offer.remoto }} </ion-label>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="jornada-ico custom-icon">
+            <ion-label> {{ offer.jornada }} </ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <div class="salary-ico custom-icon">
+            <ion-label> {{ offer.rangoSalarial }} € </ion-label>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="enrolled-ico custom-icon">
+            <ion-label> {{ offer?.enrolled }} </ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
 </ion-header>
 
 <ion-content>
   <div class="container">
-    <ion-card> 
+    <!--<ion-card> 
       <ion-grid>
         <ion-row>
           <ion-col> </ion-col>
           <ion-col size="6"> 
             <ion-thumbnail class="avatar-center" >
-              <img src="./../../../assets/thumbnail.svg" />
+              <img class="profile" src="./../../../assets/thumbnail.svg" />
             </ion-thumbnail>
           </ion-col>
           <ion-col> </ion-col>
@@ -32,7 +95,8 @@
             <ion-col size="8"> </ion-col>
             <ion-col>
               <ion-button size="small" color="upmeup" shape="round" (click)="editModal()">
-                <ion-icon color="light" name="build-outline"></ion-icon> <p class="custom-text">Edit</p> </ion-button>
+                <ion-icon color="light" name="build-outline"></ion-icon> <p class="custom-text">Edit</p>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -64,26 +128,33 @@
               <p>{{ offer?.createdDate | date: 'dd/MM/yyyy' }}</p>  
               <div>Inscritos: {{ offer?.enrolled }} </div> 
             </ion-col>
+            <ion-col> <h2> Descripció de funcions: </h2><br> <p>{{ offer?.description }}</p>  </ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid>
           <ion-row>
             <ion-col>
-              <div>
-                <p> Valores de la empresa: Pending.. </p> <!--<span *ngFor="let skill of offerSkills"><h3> {{ skill }} </h3> </span>-->   
-                <p> Descripción del puesto: <br> {{ offer?.description }} </p>                    
-              </div>
+              <ion-text color="dark"><h2>Valors de l'empresa: </h2></ion-text>
+            </ion-col>
+          </ion-row>            
+          <ion-row>
+            <ion-col size="6" *ngFor="let skill of userLoggedSkills">
+              <ion-label class="custom-label">                      
+                <h4> 
+                  <ion-icon class="values-ico-style padding-left" name="rocket" slot="icon-only" size="small" slot="start" color="upmeup"></ion-icon> 
+                  {{skill.name}} 
+                </h4>
+              </ion-label>
             </ion-col>            
           </ion-row>
         </ion-grid>
-      </ion-card-content>
+      </ion-card-content> 
+    </ion-card>-->
 
-    </ion-card>
-
-    <ion-title>Inscritos:</ion-title>
+    <!-- ENROLLED USERS LIST -->
     <div class="noEnrolled ion-padding" *ngIf="usersListData.length === 0">
       <ion-label>
-        <ion-text color="upmeup"> There are no enrolled people yet... </ion-text>           
+        <ion-text color="medium"> Encara no s'ha inscrit ningú... </ion-text>           
       </ion-label> 
     </div>
 
@@ -91,49 +162,46 @@
       <ion-card-content>
           <ion-list lines="none">
             <ion-grid>
+              
+              <div class="separator"></div>
+
               <ion-row>
                 <ion-col>
                   <ion-item>          
-                    <ion-thumbnail slot="start">
-                      <img src="./../../../assets/avatar.svg" />
+                    <ion-thumbnail class="user-avatar" slot="start">
+                      <img class="users" src="./../../../assets/avatar.svg" />
                     </ion-thumbnail>          
                     <ion-label>
-                      <ion-text color="custom">
-                        <h2> {{usoff.name}} </h2>    
+                      <ion-text>
+                        <h2 class="title-color"> {{usoff.data.name}} {{usoff.data.surname}}</h2>    
                       </ion-text>          
                       <ion-text color="medium">
-                        <h3> Fake Fullstack </h3>
+                        <h3> <b>Fake Fullstack</b> </h3>
                       </ion-text>   
                       <ion-text color="medium">
-                        <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon> FakeCityBCN </p></ion-text>
-                      </ion-text>           
+                        <ion-text color="medium"><p>
+                          <ion-icon name="location-outline"></ion-icon> {{ usoff.data.city }} 
+                        </p></ion-text>
+                      </ion-text>
+                      <ion-text color="dark">
+                        <h3 class="padding-top"> Match: {{ usoff.match }} </h3>
+                      </ion-text>        
                     </ion-label>          
                   </ion-item>
                 </ion-col>
-                <ion-row class="ion-justify-content-end">
-                  <ion-col>
-                    <ion-item>
-                      <ion-button fill="solid" expand="small" color="success"> <ion-icon name="thumbs-up-outline"></ion-icon> </ion-button>
-                      <ion-button fill="solid" expand="small" color="danger"> <ion-icon name="thumbs-down-outline"></ion-icon> </ion-button>
-                    </ion-item>
-                  </ion-col>
-                </ion-row>
+              </ion-row>
+
+              <ion-row class="ion-justify-content-right">
+                <ion-col size="3"></ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-button class="candidate-btn" fill="solid" expand="small" color="candidateok" shape="round"> Encaixa </ion-button>
+                    <ion-button class="candidate-btn" fill="solid" expand="small" color="danger" shape="round"> No encaixa </ion-button>
+                  </ion-item>
+                </ion-col>
               </ion-row>
             </ion-grid>
-            
-            <ion-item>
-              <ion-label> 
-                <ion-text>
-                  <h3> Contacto: <ion-text color="medium"> {{usoff.email}} </ion-text></h3>
-                </ion-text>
-                <ion-text>
-                  <h3> Valores: </h3> 
-                  <span *ngFor="let val of uSkills"> 
-                    <ion-text class="custom-line" color="medium" *ngIf="val.userId === usoff._id"><h3> {{val.skill.name}}, </h3></ion-text>
-                  </span>            
-                </ion-text>
-              </ion-label> 
-            </ion-item>
+
           </ion-list>        
       </ion-card-content>
     </ion-card>

@@ -160,7 +160,7 @@ export class OfferDetailPage implements OnInit, OnDestroy {
     this.uService.qGetUser(userID).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      console.log(item);
+      //console.log(item);
       this.userInfo = item.getUser;
       this.qGetSkillName(item.getUser.valors);
     });
@@ -181,7 +181,7 @@ export class OfferDetailPage implements OnInit, OnDestroy {
     this.softSkillService.qGetSkill(skillId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      console.log(item);
+      //console.log(item);
       this.userSkills.push(item.getSkill);
     });
   }

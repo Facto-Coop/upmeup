@@ -13,6 +13,11 @@ ion-content {
     }
 }
 
+/* Outside toolbar */
+.header-class { 
+    .header-text { display:block; text-align: center; text-transform: uppercase; background-color:  var(--ion-color-upmeup); }
+}
+
 /**
 *** Web Responsive style
 **/

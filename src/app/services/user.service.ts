@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { EmptyObject } from 'apollo-angular/build/types';
+import apolloClient from 'apollo-client';
 import { map } from 'rxjs/operators';
 
 const GET_USER = gql`
@@ -76,6 +77,7 @@ export class UserService {
      return this._allUsersWatchQuery;
    }
 
+
   /**
    * Get one User (by ID) from DB.
    */
@@ -90,6 +92,21 @@ export class UserService {
      });
      return this._oneUserWatchQuery;
    }
+
+   /*qGetUser(userId: any) {
+    const request = apolloClient => apolloClient.query({
+      query: GET_USER,
+      variables: {
+        id: userId,
+      }
+    })
+
+    (async () => {
+      const datos = await request(apolloClient);
+      console.log(await datos);
+    })();
+  }*/
+
 
    mUserSkillUpdate(userId, skillsList) {
     const update = { valors: skillsList };
@@ -107,6 +124,22 @@ export class UserService {
     );
 
    }
+
+   /*
+    qGetUser(userId: any) {
+     return this.apollo.query({
+         query: GET_USER,
+         variables: {
+           id: userId,
+         }
+      }).pipe(
+        map((res) => {
+          //console.log('service: ', res.data);
+          return this._oneUserWatchQuery?.refetch();
+        })
+      );
+    }
+   */
 
   /*getUsers() {
     return this.httpClient.get('http://localhost:3000/users');

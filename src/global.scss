@@ -63,6 +63,9 @@
 .padding-left { padding-left: 15px; }
 .padding-right { padding-right: 15px; }
 
+.title-color { color: #7d9e9c !important; }
+ion-toolbar ion-title { text-transform: uppercase; }
+
 .ion-color-upmeup {
     --ion-color-base: var(--ion-color-upmeup);
     --ion-color-base-rgb: var(--ion-color-upmeup-rgb);
@@ -98,6 +101,24 @@
     --ion-color-shade: var(--ion-color-loginbtn-shade);
     --ion-color-tint: var(--ion-color-loginbtn-tint);
 }
+
+.ion-color-candidateok {
+	--ion-color-base: var(--ion-color-candidateok);
+	--ion-color-base-rgb: var(--ion-color-candidateok-rgb);
+	--ion-color-contrast: var(--ion-color-candidateok-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-candidateok-contrast-rgb);
+	--ion-color-shade: var(--ion-color-candidateok-shade);
+	--ion-color-tint: var(--ion-color-candidateok-tint);
+}
+
+/***** Custom Icons *****/
+.calendar-ico { background: url('./icons/data.png') 0 0 / 19px 19px no-repeat; }
+.enrolled-ico { background: url('./icons/inscrits.png') 0 0 / 23px 18px no-repeat; }
+.jornada-ico { background: url('./icons/jornada.png') 0 0 / 19px 19px no-repeat; }
+.salary-ico { background: url('./icons/sou.png') 0 0 / 23px 19px no-repeat; }
+.location-ico { background: url('./icons/ubicacio.png') 0 0 / 20px 20px no-repeat; }
+.remoto-ico { background: url('./icons/model_de_treball.png') 0 0 / 22px 19px no-repeat; }
+
 
 /* Modal Styles */
 .modalCss {

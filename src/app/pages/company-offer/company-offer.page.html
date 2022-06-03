@@ -7,17 +7,20 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col>
-          <ion-title color="light">My Offers</ion-title>
-        </ion-col>
-        <ion-col>
-          <ion-button size="small" color="danger" expand="full" shape="round" (click)="createModal()">Crear Nueva</ion-button>         
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+   
+    <!--<ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon color="light" slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
   </ion-toolbar>
+  
+  <div class="header-class">  
+    <ion-label class="header-text ion-padding">
+      <ion-title class="ion-padding" color="light"><b>Les Meves Ofertes</b></ion-title>
+      <ion-button size="small" color="loginbtn" shape="round" (click)="createModal()">Crear Nueva</ion-button>
+    </ion-label>         
+  </div>
 </ion-header>
 
 <ion-content>

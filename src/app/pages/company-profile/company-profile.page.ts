@@ -43,7 +43,7 @@ export class CompanyProfilePage implements OnInit {
   /** Get ID Skills from User */
   getUserSkills(uValues){
     uValues.forEach(el => {
-      console.log(el);
+      //console.log(el);
       this.qSkillName(el);
     });
   }
@@ -55,7 +55,7 @@ export class CompanyProfilePage implements OnInit {
       map(result => result.data)
     ).subscribe((item) => {
       this.userSkills.push(item.getSkill);
-      console.log('skills: ' + this.userSkills);
+      //console.log('skills: ' + this.userSkills);
       this.useLocalstorage(this.userSkills);
     });
   }

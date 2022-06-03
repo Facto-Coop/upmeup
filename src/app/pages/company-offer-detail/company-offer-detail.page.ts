@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloQueryResult } from 'apollo-client';
@@ -10,6 +11,7 @@ import { EditOfferPage } from '../edit-offer/edit-offer.page';
 import { ModalController } from '@ionic/angular';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
+import { UserService } from 'src/app/services/user.service';
 
 const GET_USOFRS = gql`
   query {
@@ -17,17 +19,6 @@ const GET_USOFRS = gql`
       _id
       offer_id
       user_id
-    }
-  }
-`;
-
-const GET_UINFO = gql`
-  query getUserInfo($id: String!){
-    getUser(id: $id) {
-      _id
-      name 
-      email
-      valors
     }
   }
 `;
@@ -41,48 +32,46 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
   offerID: any;
   offer: Offer[] = [];
   userOfferList: any[] = [];
+  usersList: any[] = [];
   usersListData: any[] = [];
+  uDataList: any[] = [];
   enrolledUser: any[] = [];
   uSkills: any[] = [];
   oSkill: any[] = [];
+  userLoggedSkills = JSON.parse(localStorage.getItem('uSelectedSkills'));
+  sortUsersList: any[] = [];
 
   error: any;
   loading = true;
   private querySubscription: Subscription;
-  private queryUsersByIDSubs: Subscription;
-  private querySkillSubscription: Subscription;
 
   constructor(
         private aRoute: ActivatedRoute,
         private apollo: Apollo,
         private mController: ModalController,
         private compOfService: CompanyOffersService,
-        private softSkillService: SoftskillsService
+        private softSkillService: SoftskillsService,
+        private uService: UserService
     ) { }
 
   ngOnInit() {
     this.offerID = this.aRoute.snapshot.params.id;
     this.qUsersOffers();
     this.qOfferById(this.offerID);
+    setTimeout(() => {
+      this.compareLists(this.userLoggedSkills, this.uDataList);
+    }, 1000);
   }
 
   /**
    * Call Query to Get info of selected offer (by ID).
    *  */
   qOfferById(ofID: any) {
-    const skillsArray = [];
-
     this.compOfService.qGetOffer(ofID).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
       //console.log(item);
       this.offer = item.getOffer;
-
-      //TODO: Obtener valores de cada Usuario Empresa y marcarlos.
-
-      /*skillsArray.push(item.getOffer.valors);
-      const userID = item.getOffer.userId;
-      this.getSkillsById(userID, skillsArray);*/
     });
   }
 
@@ -125,20 +114,26 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
   }
 
   /**
-   * Call Query to Get info of each user (by ID).
+   * Call Query to Get info of each enrolled user (by ID).
    *  */
   qUsersInfo(userId: string) {
-    this.queryUsersByIDSubs = this.apollo.watchQuery({
-      query: GET_UINFO,
-      variables: {
-        id: userId,
-      },
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>) => {
-        this.usersListData.push(result.data.getUser);
-        const skillsArray = result.data.getUser.valors;
+    this.uService.qGetUser(userId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      // console.log(item);
+      this.usersList = item.getUser;
+      this.usersListData.push({ data: item.getUser, match: 0 });
+      // Object to store total match
+      this.uDataList.push({
+        userID: item.getUser._id,
+        values: item.getUser.valors,
+        match: 0
+      });
 
-        this.getSkillsById(userId, skillsArray);
+      const skillsArray = item.getUser.valors;
+      this.getSkillsById(userId, skillsArray);
     });
+
   }
 
   /**
@@ -163,17 +158,47 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
       //console.log(idBySkill);
       this.uSkills.push(idBySkill);
     });
+  }
 
-    /*this.querySkillSubscription = this.apollo.watchQuery({
-      query: GET_SKILLNAME,
-      variables: {
-        id: skillId,
-      },
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>) => {
-        const skill = result.data.getSkill;
-        const idBySkill = { userId, skill };
-        this.uSkills.push(idBySkill);
-    });*/
+  /** Compare Company-Logged-User values with Candidates Values to sort by affinity */
+  compareLists(uLogged, uOwnerOffer) {
+    uLogged.forEach(item => {
+      const userValue = item._id;
+      //console.log('uLogged item: ', item);
+      //console.log('and candidates: ', uOwnerOffer);
+
+      uOwnerOffer.forEach((el) => {
+        //console.log('cada inscrito: ', el);
+        const ownerValue = el.values;
+        if (ownerValue.includes(userValue)) {
+          el.match = el.match + 1;
+        }
+      });
+    });
+    //console.log('result: ', this.uDataList);
+
+    //console.log(sortedCompany);
+    const result = this.addMatch(this.usersListData, this.uDataList);
+
+    // Order by match value:
+    this.sortUsersList = result.sort((a, b) => (a.match > b.match) ? -1 : 1);
+    console.log('Sort Offers: ', this.sortUsersList);
+  }
+
+  /**
+   * Add match to all offers
+  */
+    addMatch(offerList, sortedList) {
+    sortedList.forEach(sortItem => {
+
+      offerList.forEach(el => {
+        if(sortItem.userID === el.data._id) {
+          el.match = sortItem.match;
+        }
+      });
+    });
+
+    return offerList;
   }
 
   /**
@@ -192,9 +217,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-   /* this.querySubscription.unsubscribe();
-    this.queryUsersByIDSubs.unsubscribe();
-    this.querySkillSubscription.unsubscribe();*/
+   /* this.querySubscription.unsubscribe();*/
   }
 
 }

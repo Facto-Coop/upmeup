@@ -6,7 +6,6 @@ import { ModalController } from '@ionic/angular';
 
 import { CreateOfferPage } from '../create-offer/create-offer.page';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
-import { QueryRef } from 'apollo-angular';
 import { Offer } from 'src/app/models/offer';
 
 
@@ -17,8 +16,6 @@ import { Offer } from 'src/app/models/offer';
 })
 export class CompanyOfferPage implements OnInit {
   offers: Observable<Offer[]>;
-  error: any;
-  loading = true;
   cOffers: any[] = [];
   userId = '';
   company = '';
@@ -56,7 +53,7 @@ export class CompanyOfferPage implements OnInit {
     companyOffers(offersList) {
       this.cOffers = [];
       offersList.forEach(item => {
-        if(item['userId'] === this.userId) {
+        if(item.userId === this.userId) {
           this.cOffers.push({item});
         }
       });
@@ -65,10 +62,6 @@ export class CompanyOfferPage implements OnInit {
     goOfferDetail(offer) {
       this.router.navigate(['/company-offer-detail', offer._id]);
     }
-
-    /*async refresh() {
-      await this.postsQuery.refetch();
-    }*/
 
     /**
      * Modal to Create New Offer
