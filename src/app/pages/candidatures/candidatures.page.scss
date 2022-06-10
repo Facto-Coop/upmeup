@@ -1,0 +1,15 @@
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
+ion-content { 
+    .container{
+        --ion-background-color: #c8e3d6;
+    
+        ion-item { --ion-background-color: #f2f2f2; padding-bottom: 5px; }
+    }
+
+}
+
+.header-class { 
+    .header-text { display:block; text-align: center; text-transform: uppercase; background-color: var(--ion-color-upmeup); }
+}

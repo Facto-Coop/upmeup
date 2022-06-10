@@ -1,7 +1,13 @@
 {
-  "name": "Up Me Up",
+  "name": "UpMeUp",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/",
+      "proxyUrl": "http://factodev.upmeup.es/"
+    }
+  ]
 }

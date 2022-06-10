@@ -1,17 +1,13 @@
-.ion-color-custom {
-	--ion-color-base: var(--ion-color-custom);
-	--ion-color-base-rgb: var(--ion-color-custom-rgb);
-	--ion-color-contrast: var(--ion-color-custom-contrast);
-	--ion-color-contrast-rgb: var(--ion-color-custom-contrast-rgb);
-	--ion-color-shade: var(--ion-color-custom-shade);
-	--ion-color-tint: var(--ion-color-custom-tint);
-}
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
 
 ion-content { 
-    --ion-background-color: #464646;
+    --ion-background-color: #c8e3d6;
+	ion-header { box-shadow: none !important; }
 
 	// Soft-Skills style
-	ion-grid {
+	/*ion-grid {
 		padding: 0 !important;
 
 		ion-col {
@@ -27,13 +23,63 @@ ion-content {
 				}
 			}
 		}
-	}
+	}*/
 	
-    ion-card { 
-        --ion-background-color: #f2f2f2; 
-		.avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
+	.container {
+        --ion-background-color: #f2f2f2;
 
+		ion-card-content { 
+			padding: 0px; 
+		
+			//ion-button { height: 28px; width: 105px; text-transform: capitalize; }
+		}
+
+		ion-card {            
+			.user-avatar { width: 85px; height: 85px; }
+			img.users { border-radius: 10%; }
+		}   
 	}
+
+	.text-space { white-space: normal; }
+	.separator { border: 1px solid #4acdba; margin: 85px 0 0px 105px; position: fixed; width: 85%; z-index: 2; }
+
+    ion-card { 
+		.user-avatar { width: 85px; height: 85px; }
+		img.users { border-radius: 10%; }
+        //--ion-background-color: #f2f2f2; 
+		//.avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
+	
+	    ion-label ion-icon { 
+			width: 30px; 
+			height: 30px; 
+			margin: 0 10px; 
+			vertical-align: bottom; 
+		}
+		
+		.custom-icon {
+			height: 30px;
+			margin-left: 10px;
+	
+			ion-label { margin-left: 30px; vertical-align: middle; color: #5a7266; }
+		}
+	
+	}
+}
+
+/* Outside toolbar header */
+.header-class { 
+    background-color: var(--ion-color-upmeup);
+    
+    ion-thumbnail { margin:0 auto; width: 130px; height: 130px; }
+    img { border-radius: 50%; }
+    .header-text { display:block; text-align: center; text-transform: uppercase; }
+
+    .grid-info { margin: 0px 30px; font-size: 14px; font-weight: 700; }
+
+	ion-label.skills { display: inline-flex; }
+	
+    .title-offer { white-space: normal; }
+	.rocket { vertical-align: middle; color: #5a7266; }
 }
 
 /**

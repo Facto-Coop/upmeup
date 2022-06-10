@@ -115,6 +115,22 @@ const MUT_EDITOFFER = gql`
   }
 `;
 
+const MUT_UPDOFFER_ENROLL = gql`
+  mutation submitUpdateEnroll(
+                                $id: String!, 
+                                $updateValue: UpdateOfferEnrollInput!
+                              ) {
+    updateEnrollOffer(
+      id: $id, 
+      input: $updateValue
+    ) {
+      title
+      city
+      enrolled
+    }
+  }
+`;
+
 const REFRESH = 10000;
 
 @Injectable({
@@ -201,4 +217,19 @@ export class CompanyOffersService {
         })
     );
   }
+
+  mEditOfferEnroll(offerId: any, updated: any) {
+    return this.apollo.mutate({
+      mutation: MUT_UPDOFFER_ENROLL,
+      variables: {
+        id: offerId,
+        updateValue: updated
+      },
+    }).pipe(
+      map((data) => {
+        this._offersWatchQuery?.refetch();
+      })
+    );
+  }
+
 }

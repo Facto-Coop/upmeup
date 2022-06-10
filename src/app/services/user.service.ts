@@ -125,26 +125,8 @@ export class UserService {
 
    }
 
-   /*
-    qGetUser(userId: any) {
-     return this.apollo.query({
-         query: GET_USER,
-         variables: {
-           id: userId,
-         }
-      }).pipe(
-        map((res) => {
-          //console.log('service: ', res.data);
-          return this._oneUserWatchQuery?.refetch();
-        })
-      );
-    }
-   */
 
-  /*getUsers() {
-    return this.httpClient.get('http://localhost:3000/users');
-  }
-
+  /*
   getUser() {
     //this.httpClient.get('http://localhost:3000/users').subscribe((data: {}) => {
     //  this.employeeData = data;

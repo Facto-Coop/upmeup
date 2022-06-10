@@ -1,0 +1,41 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="upmeup">
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon color="light" slot="icon-only" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+
+    <!--<ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon color="light" slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
+  </ion-toolbar>
+
+  <div class="header-class">
+    <ion-label class="header-text ion-padding">
+      <ion-title class="ion-padding" color="light"><b>Les Teves Candidatures</b></ion-title>
+    </ion-label>
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-list class="container" *ngIf="usersOffersList"> 
+    <ion-item *ngFor="let offer of usersOffersList" (click)="goOfferDetail(offer)" lines="none">
+      <ion-text>
+        <h4 class="custom-text-space title-color"> {{ offer.title }} </h4>     
+        <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon><b>{{ offer.city }}</b></p></ion-text>
+        <ion-text color="dark"><p> {{ offer.createdDate | date: 'dd/MM/yyyy' }} </p></ion-text>  
+        
+        <ion-text class="margin-top" color="dark"><p> <b> Persones inscrites: {{ offer.enrolled }} </b> </p></ion-text>
+
+      </ion-text>  
+      <ion-text class="text-block">
+        <!--<ion-text color="danger"> <p> ** Match: {{ offer.match }} </p> </ion-text> -->
+      </ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

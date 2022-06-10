@@ -58,6 +58,10 @@ const routes: Routes = [
     path: 'edit-offer',
     loadChildren: () => import('./pages/edit-offer/edit-offer.module').then( m => m.EditOfferPageModule)
   },
+  {
+    path: 'candidatures',
+    loadChildren: () => import('./pages/candidatures/candidatures.module').then( m => m.CandidaturesPageModule)
+  },
 
 
 

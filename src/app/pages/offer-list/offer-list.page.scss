@@ -6,10 +6,18 @@ ion-content {
     .container{
         --ion-background-color: #c8e3d6;
         ion-item { --ion-background-color: #f2f2f2; padding-bottom: 5px; }
+
+        .text-block { display: block; margin-top: 15px; }
     }
+
+    .offer-avatar { width: 85px; height: 85px; }
+    img.offers { border-radius: 10%; }
+
+    .separator { border: 1px solid #4acdba; margin: 21px 0 0px -16px; position: fixed; width: 85%; z-index: 2; }
 }
 
 .header-class { 
+    ion-thumbnail { margin:0 auto; width: 130px; height: 130px; }
     .header-text { display:block; text-align: center; text-transform: uppercase; background-color: var(--ion-color-upmeup); }
 }
 

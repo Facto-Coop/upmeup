@@ -3,109 +3,147 @@
     <ion-buttons slot="start">
       <ion-back-button color="light" defaultHref="/offer-list"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">Offer-Detail</ion-title>
+
+    <!--<ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon color="light" slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
   </ion-toolbar>
+
+  <div class="header-class">   
+    <ion-thumbnail class="avatar-center" >
+      <img class="profile" src="./../../../assets/thumbnail.svg" />
+    </ion-thumbnail> 
+    <ion-label class="header-text ion-padding">
+      <ion-title class="ion-padding"> 
+        <ion-label class="title-offer" color="light"><b> {{ offer.title }} </b></ion-label>
+      </ion-title>
+      <ion-label color="light"><h3  class="ion-text-center"> {{ userInfo?.name }} </h3></ion-label>
+    </ion-label>
+    
+    <ion-grid class="grid-info">
+      <div class="ion-padding-top" *ngIf="userSkills.length === 0">
+        <div class="ion-padding">
+          <ion-label color="danger" class="ion-text-start">
+            Encara no tens valors seleccionats
+          </ion-label> 
+        </div>
+      </div>
+
+      <div class="ion-padding-top" *ngIf="userSkills.length > 0">  
+        <ion-row>
+          <ion-col size="6" *ngFor="let skill of userSkills">
+            <div class="rocket">
+              <ion-label class="skills padding-left">
+                <ion-icon name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>                            
+                <h4 class="text-space"> {{skill.name}} </h4>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div> 
+    </ion-grid>
+  </div>
+
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col> </ion-col>
-        <ion-col size="6"> 
-          <ion-thumbnail class="avatar-center">
-            <img src="./../../../assets/thumbnail.svg" />
-          </ion-thumbnail>
-          <ion-card-title class="ion-text-center"> {{ userInfo?.name }} </ion-card-title> 
-        </ion-col>
-        <ion-col> </ion-col>
-      </ion-row>
-    </ion-grid>
-    
-    <ion-card-header>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-label>Nivel de Match:</ion-label> 70%
-            <ion-progress-bar color="success" value="0.7"></ion-progress-bar> 
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+  <div class="container">
+    <ion-card>
+        
+      <ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Nivel de Match:</ion-label> 70%
+              <ion-progress-bar color="success" value="0.7"></ion-progress-bar> 
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
 
-      <ion-list lines="none" *ngIf="userSkills.length === 0">  
-        <ion-item>
-          <ion-grid>
-            <div class="ion-padding">
-              <ion-label color="danger" class="ion-text-start">
-                Todavía no tienes valores
-              </ion-label> 
-            </div>
-          </ion-grid>
-        </ion-item>
-      </ion-list>
 
-      <ion-list lines="none" *ngIf="userSkills.length > 0">  
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="6" *ngFor="let skill of userSkills">
-                <div class="custom-values">
-                  <ion-icon class="values-ico-style" name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>
-                  <ion-label>                      
-                    <h4> {{skill.name}} </h4>
-                  </ion-label>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-list>  
+      <ion-card-content>
+        <ion-list lines="none">  
+          <ion-item>
+            <ion-grid>
+              <div class="enrolled-ico custom-icon">
+                <ion-label> {{ offer?.enrolled }} </ion-label> 
+              </div>
+            </ion-grid>
+          </ion-item>
+          <ion-item>
+            <ion-grid>
+              <div class="calendar-ico custom-icon">
+                <ion-label> {{ offer.createdDate | date: 'dd/MM/yyyy' }}  </ion-label>
+              </div>
+            </ion-grid>
+          </ion-item>
+          <ion-item>
+            <ion-grid>
+              <div class="location-ico custom-icon">
+                <ion-label>  {{ offer?.city }} </ion-label> 
+              </div>
+            </ion-grid>
+          </ion-item>          
+          <ion-item>
+            <ion-grid>
+              <div class="jornada-ico custom-icon">
+                <ion-label> {{ offer?.jornada }} </ion-label> 
+              </div>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col size="8">
-            <ion-card-title>{{ offer?.title }}</ion-card-title>
-            <div> {{ offer?.eduLevel }} </div>
-            <ion-card-subtitle> {{ offer?.city }} </ion-card-subtitle>
-          </ion-col>
-          <ion-col>
-            <div>
-              <ion-card-subtitle>{{ offer.rangoSalarial }}€</ion-card-subtitle>
-              <ion-card-subtitle>{{ offer.remoto }}</ion-card-subtitle>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-header>
-    <ion-card-content>
+        <div *ngIf="isEnrolled > 0" class="ion-padding-top"> 
+          <ion-label color="dark-upmeup" class="ion-text-center"><h2> <b>Ja ets aspirant! Molta Sort!</b> </h2></ion-label>
+        </div>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col size="8">
-            <div>
-              <p>Contrato: {{ offer.tipoContrato }}</p>     
-              <p>Jornada: {{ offer.jornada }}</p>                    
-            </div>
-          </ion-col>
-          <ion-col>
-            <p>{{ offer.createdDate | date: 'dd/MM/yyyy' }}</p>  
-            <div>Inscritos: {{ offer.enrolled }}</div> 
-          </ion-col>
-        </ion-row>
-      </ion-grid> 
+        <ion-button *ngIf="isEnrolled === -1" size="small" color="danger" expand="full" shape="round" 
+          (click)="addEnrroled(offer._id, offer.enrolled)">
+              Inscribirme
+        </ion-button>
+      </ion-card-content>
+      
+      <!-- <ion-card-content>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4"> <p>Descripción:</p> </ion-col>
-          <ion-col size="8">             
-            <div> {{ offer.description }} </div>
-          </ion-col>
-          <ion-col> </ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">
+              <div>
+                <p>Contrato: {{ offer.tipoContrato }}</p>     
+                <p>Jornada: {{ offer.jornada }}</p>                    
+              </div>
+            </ion-col>
+            <ion-col>
+              <p>{{ offer.createdDate | date: 'dd/MM/yyyy' }}</p>  
+              <div>Inscritos: {{ offer.enrolled }}</div> 
+            </ion-col>
+          </ion-row>
+        </ion-grid> 
 
-      <ion-button size="small" color="danger" expand="full" shape="round" (click)="addEnrroled(offer._id, offer.enrolled)" >Inscribirme</ion-button>
-         
-    </ion-card-content>
-  </ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4"> <p>Descripción:</p> </ion-col>
+            <ion-col size="8">             
+              <div> {{ offer.description }} </div>
+            </ion-col>
+            <ion-col> </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div *ngIf="isEnrolled > 0" class="ion-padding-top"> 
+          <ion-label color="dark-upmeup" class="ion-text-center"><h2> <b>Ja ets aspirant! Molta Sort!</b> </h2></ion-label>
+        </div>
+
+        <ion-button *ngIf="isEnrolled === -1" size="small" color="danger" expand="full" shape="round" 
+          (click)="addEnrroled(offer._id, offer.enrolled)">
+              Inscribirme
+        </ion-button>
+          
+      </ion-card-content> -->
+
+    </ion-card>
+  </div>
 </ion-content>

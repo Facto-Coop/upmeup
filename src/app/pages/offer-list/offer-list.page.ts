@@ -38,9 +38,14 @@ export class OfferListPage implements OnInit {
               ) { }
 
   ngOnInit() {
-    console.log('Logged User Skills: ', this.userLogged);
+    //console.log('Logged User Skills: ', this.userLogged);
     this.userArrayData(this.userLogged);
     this.qGetOffers();
+
+    setTimeout(() => {
+      //console.log(this.userOwnerOffer);
+      this.compareLists(this.uLoggedValues, this.userOwnerOffer);
+    }, 1000);
   }
 
   /** Create user array to compare strings */
@@ -65,13 +70,7 @@ export class OfferListPage implements OnInit {
          //console.log('user: ', el.userId);
          this.qGetUser(el.userId);
       });
-
     });
-
-    setTimeout(() => {
-      //console.log(this.userOwnerOffer);
-      this.compareLists(this.uLoggedValues, this.userOwnerOffer);
-    }, 1000);
 
   }
 
@@ -118,7 +117,7 @@ export class OfferListPage implements OnInit {
 
     // Order by match value:
     this.sortOffersList = result.sort((a, b) => (a.match > b.match) ? -1 : 1);
-    console.log('Sort Offers: ', this.sortOffersList);
+    //console.log('Sort Offers: ', this.sortOffersList);
   }
 
   /**
@@ -154,6 +153,10 @@ export class OfferListPage implements OnInit {
     //console.log(offer);
     // this.router.navigate(['/offer-detail']);
     this.router.navigate(['/offer-detail', id]); // Passing with ID.
+  }
+
+  toCandidatures() {
+    this.router.navigate(['/candidatures']);
   }
 
 }

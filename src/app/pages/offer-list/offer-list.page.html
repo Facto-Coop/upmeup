@@ -16,46 +16,52 @@
     </ion-buttons>-->
   </ion-toolbar>
   
-  <div class="header-class">  
-    <ion-label class="header-text ion-padding">
-      <ion-title class="ion-padding" color="light"><b>Ofertes</b></ion-title>
-      <!--<ion-button type="submit" fill="solid" color="loginbtn" shape="round"> crear nueva </ion-button>-->
-    </ion-label>         
+  <div class="header-class">
+    <ion-label class="header-text ion-padding"> 
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col size="8">
+          <ion-label class="header-text ion-padding">
+            <ion-title class="ion-padding" color="light"><b>Ofertes</b></ion-title>
+          </ion-label>
+        </ion-col>  
+        <ion-col>
+          <ion-fab-button color="upmeup" (click)="toCandidatures()"> <ion-icon color="light" name="briefcase-outline"></ion-icon> </ion-fab-button>
+        </ion-col>
+      </ion-row>
+    </ion-label> 
   </div>
 </ion-header>
 
 <ion-content fullscreen={true}>
 
-  <ion-list class="container">
+  <ion-list class="container">    
     <ion-item *ngFor="let offer of sortOffersList" (click)="goOfferDetail(offer.data)" lines="none">
-      <ion-thumbnail slot="start">
-        <img src="./../../../assets/thumbnail.svg" />  
+      
+    <div class="separator"></div>
+
+      <ion-thumbnail class="offer-avatar" slot="start">
+        <img class="offers" src="./../../../assets/thumbnail.svg" />  
       </ion-thumbnail>
 
       <ion-label size="8">
         <ion-text>
-          <h2 class="custom-text-space title-color"> {{ offer.data.title }} </h2>       
-          <!-- TODO: Add userName (future?)
-            <ion-text color="medium" *ngIf="offer.userId === usersListData._id">
-            <h3> {{ usersListData.name }} </h3>
-          </ion-text>-->
-          <ion-text color="medium">
+          <h2 class="custom-text-space title-color"> {{ offer.data.title }} </h2>     
+          <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon><b>{{ offer.data.city }}</b></p></ion-text>
+          <ion-text color="dark"><p> {{ offer.data.createdDate | date: 'dd/MM/yyyy' }} </p></ion-text>  
+          <!--<ion-text color="medium">
             <p> {{ offer.data.tipoContrato }} </p>
           </ion-text>
-          <!--<ion-text color="medium">
+          <ion-text color="medium">
             <ion-text color="dark"><p> {{ offer.data.rangoSalarial }}€ </p></ion-text>            
-          </ion-text>-->
-          <ion-text color="dark"> <p> <b>** Match: {{ offer.match }}</b> </p> </ion-text> 
+          </ion-text>--> 
         </ion-text>  
+        <ion-text class="text-block">
+          <ion-text class="margin-top" color="dark"><p> <b> Persones inscrites: {{ offer.data.enrolled }} </b> </p></ion-text>
+          <ion-text color="danger"> <p> ** Match: {{ offer.match }} </p> </ion-text> 
+        </ion-text>
       </ion-label>
-      <ion-label>
-        <div class="ion-text-end">
-          <ion-text><p><ion-icon name="location-outline"></ion-icon>{{ offer.data.city }}</p></ion-text>
-          <ion-text color="dark"><p> {{ offer.data.createdDate | date: 'dd/MM/yyyy' }} </p></ion-text>
-          <!--<ion-text color="dark"><p> {{ offer.data.remoto }} </p></ion-text>-->
-          <ion-text color="dark"><p> <b> Inscritos: {{ offer.data.enrolled }} </b> </p></ion-text>
-        </div>
-      </ion-label>  
+       
     </ion-item>
   </ion-list>
 
