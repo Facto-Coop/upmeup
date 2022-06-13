@@ -3,11 +3,5 @@
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular",
-  "proxies": [
-    {
-      "path": "/",
-      "proxyUrl": "http://factodev.upmeup.es/"
-    }
-  ]
+  "type": "angular"
 }

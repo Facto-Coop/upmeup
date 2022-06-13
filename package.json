@@ -6,7 +6,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-dev": "ng serve --public-host=factodev.upmeup.es",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
