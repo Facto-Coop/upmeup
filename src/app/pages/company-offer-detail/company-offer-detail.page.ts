@@ -38,7 +38,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
   enrolledUser: any[] = [];
   uSkills: any[] = [];
   oSkill: any[] = [];
-  userLoggedSkills = JSON.parse(localStorage.getItem('uSelectedSkills'));
+  userLoggedSkills = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
   sortUsersList: any[] = [];
 
   error: any;
@@ -60,7 +60,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
     this.qOfferById(this.offerID);
     setTimeout(() => {
       this.compareLists(this.userLoggedSkills, this.uDataList);
-    }, 1000);
+    }, 300);
   }
 
   /**

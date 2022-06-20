@@ -8,8 +8,15 @@ ion-content {
 
     .container { 
         --ion-background-color: #f2f2f2; 
-    
-        .custom-line { white-space: normal !important; }
+        .text-block { display: block; margin-top: 15px; }
+        ion-card-content { padding: 0; }
+
+        .separator { border: 1px solid #4acdba; margin: 41px 0 0px -17px; position: fixed; width: 100%; z-index: 2; }
+                            
+        .offer-avatar { width: 85px; height: 85px; }
+        img.offers { border-radius: 10%; }
+		 
+        .custom-text-space { white-space: normal; }
     }
 }
 

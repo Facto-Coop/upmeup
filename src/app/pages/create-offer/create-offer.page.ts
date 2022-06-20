@@ -25,7 +25,7 @@ export class CreateOfferPage implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.userID = localStorage.getItem('userid');
+    this.userID = sessionStorage.getItem('userid');
     this.validation();
   }
 

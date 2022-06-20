@@ -29,8 +29,8 @@ export class CompanyOfferPage implements OnInit {
             ) { }
 
     ngOnInit() {
-      this.company = localStorage.getItem('user');
-      this.userId = localStorage.getItem('userid');
+      this.company = sessionStorage.getItem('user');
+      this.userId = sessionStorage.getItem('userid');
       this.qOffersQuery();
     }
 

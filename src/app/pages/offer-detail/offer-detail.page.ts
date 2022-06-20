@@ -17,7 +17,7 @@ import { Offer } from '../../models/offer';
   styleUrls: ['./offer-detail.page.scss'],
 })
 export class OfferDetailPage implements OnInit {
-  userLoggedID = localStorage.getItem('userid');
+  userLoggedID = sessionStorage.getItem('userid');
   offer: Offer[] = [];
   offerID: any;
   enrolledValue = '';

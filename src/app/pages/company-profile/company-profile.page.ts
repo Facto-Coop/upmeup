@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.page';
 
 @Component({
@@ -11,15 +13,17 @@ import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.p
   styleUrls: ['./company-profile.page.scss'],
 })
 export class CompanyProfilePage implements OnInit {
-  userName = localStorage.getItem('user');
-  userID = localStorage.getItem('userid');
+  userName = sessionStorage.getItem('user');
+  userID = sessionStorage.getItem('userid');
   userInfo: any[] = [];
   userSkills: any[] = [];
 
   constructor(private modalController: ModalController,
               private routerOutlet: IonRouterOutlet,
               private uService: UserService,
-              private softSkillService: SoftskillsService
+              private softSkillService: SoftskillsService,
+              private auth: AuthService,
+              private router: Router,
   ) { }
 
   ngOnInit() {
@@ -56,12 +60,17 @@ export class CompanyProfilePage implements OnInit {
     ).subscribe((item) => {
       this.userSkills.push(item.getSkill);
       //console.log('skills: ' + this.userSkills);
-      this.useLocalstorage(this.userSkills);
+      this.useSessionStorage(this.userSkills);
     });
   }
 
-  useLocalstorage(skills) {
-    localStorage.setItem('uSelectedSkills', JSON.stringify(skills));
+  useSessionStorage(skills) {
+    sessionStorage.setItem('uSelectedSkills', JSON.stringify(skills));
+  }
+
+  logOut() {
+    this.auth.onLogout();
+    this.router.navigate(['/login']);
   }
 
   async openModal() {

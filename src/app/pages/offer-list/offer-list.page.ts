@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
+import { SectorsService } from 'src/app/services/sectors.service';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -18,8 +19,8 @@ import { UserService } from 'src/app/services/user.service';
 export class OfferListPage implements OnInit {
   allOffers: any[] = [];
   allOffersList: any[] = [];
-  userLoggedID = localStorage.getItem('userid');
-  userLoggedSkills = JSON.parse(localStorage.getItem('uSelectedSkills'));
+  userLoggedID = sessionStorage.getItem('userid');
+  userLoggedSkills = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
 
   userLogged = {
                  userID: this.userLoggedID,
@@ -28,13 +29,16 @@ export class OfferListPage implements OnInit {
   userOwnerOffer: any[] = [];
   uLoggedValues: any[] = [];
   sortOffersList: any[] = [];
+  allUsers: any[] = [];
+  sectorName: any;
 
   private topLimit = 15;
   private dataList: any = [];
 
   constructor( private router: Router,
                private compOfService: CompanyOffersService,
-               private uService: UserService
+               private uService: UserService,
+               private sectorService: SectorsService
               ) { }
 
   ngOnInit() {
@@ -71,7 +75,6 @@ export class OfferListPage implements OnInit {
          this.qGetUser(el.userId);
       });
     });
-
   }
 
   /** Get user owner from offer */
@@ -79,6 +82,8 @@ export class OfferListPage implements OnInit {
     this.uService.qGetUser(userID).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
+      this.qGetSectorName(item.getUser.sector_id);
+
       const index = this.userOwnerOffer.findIndex(
         object => object.userID === item.getUser._id
       );
@@ -91,9 +96,18 @@ export class OfferListPage implements OnInit {
           match: 0
         });
       }
-
     });
   }
+
+  /** Get the name of the sector */
+  qGetSectorName(value) {
+    this.sectorService.qGetSector(value).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      this.sectorName = item.getSector.name;
+    });
+  }
+
 
   /** Compare every Logged-User value with Company Values */
   compareLists(uLogged, uOwnerOffer) {

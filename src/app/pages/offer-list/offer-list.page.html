@@ -22,7 +22,7 @@
         <ion-col> </ion-col>
         <ion-col size="8">
           <ion-label class="header-text ion-padding">
-            <ion-title class="ion-padding" color="light"><b>Ofertes</b></ion-title>
+            <ion-title class="ion-padding" color="light"><b>Ofertes per tu</b></ion-title>
           </ion-label>
         </ion-col>  
         <ion-col>
@@ -38,30 +38,40 @@
   <ion-list class="container">    
     <ion-item *ngFor="let offer of sortOffersList" (click)="goOfferDetail(offer.data)" lines="none">
       
-    <div class="separator"></div>
+      <ion-label size="8">   
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">  
+              <ion-thumbnail class="offer-avatar">
+                <img class="offers" src="./../../../assets/thumbnail.svg" />  
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="9">
+              <ion-text>
+                <h2 class="custom-text-space title-color"> {{ offer.data.title }} </h2>
+                <ion-text class="custom-text-space" color="medium"><p> {{ sectorName }} </p></ion-text>
+              </ion-text>  
+             
+              <ion-row>
+                <ion-col class="custom-text-space" size="7">
+                  <ion-text color="dark"><p> {{ offer.data.createdDate | date: 'dd/MM/yyyy' }} </p></ion-text>
+                  <ion-text color="medium"><p> {{ offer.data.jornada }} </p></ion-text>
+                  <ion-text color="medium">
+                    <ion-text color="dark"><p> {{ offer.data.rangoSalarial }}€ </p></ion-text>            
+                  </ion-text> 
+                </ion-col>
+                <ion-col class="custom-text-space" size="5">
+                  <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon><b>{{ offer.data.city }}</b></p></ion-text>
+                  <ion-text color="medium"><p> {{ offer.data.remoto }} </p></ion-text>
+                </ion-col>
+              </ion-row>
 
-      <ion-thumbnail class="offer-avatar" slot="start">
-        <img class="offers" src="./../../../assets/thumbnail.svg" />  
-      </ion-thumbnail>
+              <ion-text color="danger"> <p> ** Match: {{ offer.match }} </p> </ion-text> 
+            </ion-col>   
+          </ion-row>
+        </ion-grid>
+      </ion-label>       
 
-      <ion-label size="8">
-        <ion-text>
-          <h2 class="custom-text-space title-color"> {{ offer.data.title }} </h2>     
-          <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon><b>{{ offer.data.city }}</b></p></ion-text>
-          <ion-text color="dark"><p> {{ offer.data.createdDate | date: 'dd/MM/yyyy' }} </p></ion-text>  
-          <!--<ion-text color="medium">
-            <p> {{ offer.data.tipoContrato }} </p>
-          </ion-text>
-          <ion-text color="medium">
-            <ion-text color="dark"><p> {{ offer.data.rangoSalarial }}€ </p></ion-text>            
-          </ion-text>--> 
-        </ion-text>  
-        <ion-text class="text-block">
-          <ion-text class="margin-top" color="dark"><p> <b> Persones inscrites: {{ offer.data.enrolled }} </b> </p></ion-text>
-          <ion-text color="danger"> <p> ** Match: {{ offer.match }} </p> </ion-text> 
-        </ion-text>
-      </ion-label>
-       
     </ion-item>
   </ion-list>
 

@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./candidatures.page.scss'],
 })
 export class CandidaturesPage implements OnInit {
-  userLoggedID = localStorage.getItem('userid');
+  userLoggedID = sessionStorage.getItem('userid');
   allUsersOffers: any[] = [];
   usersOffersList: any[] = [];
   enrolledOffers: any[] = [];

@@ -5,7 +5,7 @@ import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { EmptyObject } from 'apollo-angular/build/types';
 import { map } from 'rxjs/operators';
 
-
+// TODO: Add "userName {_id name}" to companyoffers and detail.
 const GET_ALLOFFERS = gql`
 query {
   getCompanyOffers {
@@ -170,6 +170,7 @@ export class CompanyOffersService {
     return this._offerWatchQuery;
   }
 
+  // TODO: Add sectorId value when modify and Create.
   /**
    * Mutation to Create an Offer.
    * @returns new Offer

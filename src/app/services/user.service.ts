@@ -3,8 +3,19 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { EmptyObject } from 'apollo-angular/build/types';
-import apolloClient from 'apollo-client';
 import { map } from 'rxjs/operators';
+
+const GET_USERLOGIN = gql`
+  query getLogUser($id: String!) {
+    getUser(id: $id) {
+      _id
+      name
+      email
+      password
+      tipo
+    }
+  }
+`;
 
 const GET_USER = gql`
   query getOneUser($id: String!) {
@@ -14,6 +25,7 @@ const GET_USER = gql`
       surname
       eduLevel
       city
+      sector_id
       email
       tipo
       valors 
@@ -29,6 +41,7 @@ const GET_ALLUSERS = gql`
       surname
       eduLevel
       city
+      sector_id
       email
       tipo
       valors 
@@ -51,6 +64,7 @@ mutation editUserSkills(
     surname
     email
     city
+    sector_id
     eduLevel
     valors
   }
@@ -64,6 +78,7 @@ export class UserService {
 
   constructor(private apollo: Apollo) { }
 
+
   /**
    * Get All Users from DB.
    */
@@ -76,7 +91,6 @@ export class UserService {
 
      return this._allUsersWatchQuery;
    }
-
 
   /**
    * Get one User (by ID) from DB.
@@ -93,20 +107,20 @@ export class UserService {
      return this._oneUserWatchQuery;
    }
 
-   /*qGetUser(userId: any) {
-    const request = apolloClient => apolloClient.query({
-      query: GET_USER,
-      variables: {
-        id: userId,
-      }
-    })
+  /**
+   * Get one User (by ID).
+   */
+  /* private _loginUsersWatchQuery: QueryRef<any, EmptyObject>;
 
-    (async () => {
-      const datos = await request(apolloClient);
-      console.log(await datos);
-    })();
-  }*/
-
+   qValidateUser(userId: any): QueryRef<any, EmptyObject> {
+     this._loginUsersWatchQuery = this.apollo.watchQuery({
+         query: GET_USERLOGIN,
+         variables: {
+           id: userId,
+         }
+     });
+     return this._loginUsersWatchQuery;
+   }*/
 
    mUserSkillUpdate(userId, skillsList) {
     const update = { valors: skillsList };

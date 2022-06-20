@@ -1,3 +1,6 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/prefer-for-of */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -28,8 +31,7 @@ export class LoginPage implements OnInit {
   userType = '0';
   userExist = false;
 
-  constructor(private usService: UserService,
-              private menu: MenuController,
+  constructor(private menu: MenuController,
               private apollo: Apollo,
               public fBuilder: FormBuilder,
               private router: Router,
@@ -88,27 +90,25 @@ export class LoginPage implements OnInit {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   get errorControl() {
     return this.initForm.controls;
   }
 
   // Check if input has email
   loginIn(uEmail, uPassword) {
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.users.length; i++) {
       const el = this.users[i];
       if(uEmail === el.email && uPassword === el.password) {
         this.userExist = true;
-        this.useLocalstorage(el._id, el.name, el.email, el.tipo);
+        this.useSessionStorage(el._id, el.name, el.email);
         this.auth.onLogin();
         this.userType = el.tipo;
 
         //TODO: Cambiar este "parche" para cambio de menu!!! (Auth)
         this.appC.logginMenu(this.userType, el.name);
 
-        if (window.localStorage) {
-          localStorage.removeItem('uSelectedSkills');
+        if (window.sessionStorage) {
+          sessionStorage.removeItem('uSelectedSkills');
         }
 
         if(this.userType === '1'){
@@ -127,19 +127,12 @@ export class LoginPage implements OnInit {
     if(this.userExist === false) {
       console.log('Usuario y/o contraseña no son correctos.');
     }
-
   }
 
-  useLocalstorage(uid, uName, uMail, uType) {
-    localStorage.setItem('userid', uid);
-    localStorage.setItem('user', uName);
-    localStorage.setItem('email', uMail);
-    localStorage.setItem('type', uType);
+  useSessionStorage(uid, uName, uMail) {
+    sessionStorage.setItem('userid', uid);
+    sessionStorage.setItem('user', uName);
+    sessionStorage.setItem('email', uMail);
   }
-
-  // TODO: signIn function. Diferent navigations go here.
-  /*signIn(userRol) {
-    console.log(localStorage);
-  }*/
 
 }

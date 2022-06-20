@@ -34,46 +34,36 @@
     <ion-card-content>
       <ion-list lines="none">
         
-        <!-- <ion-item>
-          Info de comprobación -->
-          <!--  <ion-label>
-            <ion-text color="danger">
-             <h2> Company: {{ company }}</h2>
-            </ion-text>           
-          </ion-label> 
-        </ion-item>--> 
+        <ion-item> 
+          
+          <div class="separator"></div>
 
-        <ion-item>          
-          <ion-thumbnail slot="start">
-            <img src="./../../../assets/thumbnail.svg" />
+          <ion-thumbnail class="offer-avatar" slot="start">
+            <img class="offers" src="./../../../assets/thumbnail.svg" />
           </ion-thumbnail>
           
           <ion-label>
             <ion-text color="custom">
-              <h2> {{ offer.item.title }}</h2>    
+              <h2 class="custom-text-space title-color"> {{ offer.item.title }}</h2>    
             </ion-text>
-            <!--            
+            <ion-text color="dark"> <p>{{ offer.item.city }}</p> </ion-text>                      
             <ion-text color="medium">
-              <h3> {{ offer.item.rangoSalarial }} € </h3>
-            </ion-text>   
-            --> 
-            <ion-text color="medium">
-              <ion-text color="medium"><p><ion-icon name="location-outline"></ion-icon>{{ offer.item.city }}</p></ion-text>
-            </ion-text>          
+              <h3> {{ offer.item.createdDate | date: 'dd/MM/yyyy' }} </h3>
+            </ion-text> 
+            <ion-text class="text-block" color="dark">
+              <h3> Persones Inscrites: <ion-text> {{ offer.item.enrolled }} </ion-text></h3>
+            </ion-text>    
           </ion-label>          
         </ion-item>
-        <ion-item>
+        <!--<ion-item>
           <ion-grid>
             <ion-row>
-              <ion-col>
-                <h3> Inscritos: <ion-text color="medium"> {{ offer.item.enrolled }} </ion-text></h3>
-              </ion-col>
-              <ion-col>
-                <h3> Fecha: <ion-text color="medium">{{ offer.item.createdDate | date: 'dd/MM/yyyy' }}</ion-text></h3>
+              <ion-col class="margin-top" color="dark">
+                <h3> Persones Inscrites: <ion-text> {{ offer.item.enrolled }} </ion-text></h3>
               </ion-col>
             </ion-row>
           </ion-grid>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
     </ion-card-content>
   </ion-card>

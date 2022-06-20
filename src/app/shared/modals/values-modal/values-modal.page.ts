@@ -17,7 +17,7 @@ export class ValuesModalPage implements OnInit, OnDestroy {
   maxElementCheckbox = 5;
   skillsSelected: any[] = [];
   currentModal = null;
-  userID = localStorage.getItem('userid');
+  userID = sessionStorage.getItem('userid');
   skillsIds: any[] = [];
   userSkills: any[] = [];
   selected = 0;
@@ -28,7 +28,7 @@ export class ValuesModalPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.qsoftSkillsQuery();
-    this.userSkills = JSON.parse(localStorage.getItem('uSelectedSkills'));
+    this.userSkills = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
     //this.skillsSelected = JSON.parse(localStorage.getItem('uSelectedSkills'));
   }
 
@@ -44,7 +44,7 @@ export class ValuesModalPage implements OnInit, OnDestroy {
   }
 
   saveSkills() {
-    this.useLocalstorage(this.skillsSelected);
+    this.useSessionStorage(this.skillsSelected);
     this.skillsSelected.forEach(element => {
       // console.log(element._id);
       const elementID: string = element._id;
@@ -114,9 +114,9 @@ export class ValuesModalPage implements OnInit, OnDestroy {
    * Use LocalStogare for save an array of selected skills
    * @param uSkills 
    */
-  useLocalstorage(uSkills) {
+  useSessionStorage(uSkills) {
     // TODO: Future SessionStorage
-    localStorage.setItem('uSelectedSkills', JSON.stringify(uSkills));
+    sessionStorage.setItem('uSelectedSkills', JSON.stringify(uSkills));
   }
 
   /** Modal functions if "button back" is clicked */

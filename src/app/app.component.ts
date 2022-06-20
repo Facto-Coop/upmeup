@@ -10,23 +10,27 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   appPages = [];
-  userName = localStorage.getItem('user');
-  userType = localStorage.getItem('type');
+  userName = sessionStorage.getItem('user');
+  userType = sessionStorage.getItem('type');
 
-  constructor(public auth: AuthService, private router: Router, public menuCtrl: MenuController) {}
+  constructor(
+              public auth: AuthService,
+              private router: Router,
+              public menuCtrl: MenuController
+              ) {}
 
   menuView(res, userType) {
     if(res === true){
       if (userType === '2') {
         this.appPages = [
-          { title: 'Profile', url: '/company-profile', icon: 'person' },
-          { title: 'My Offers', url: '/company-offer', icon: 'briefcase' },
+          { title: 'Perfil', url: '/company-profile', icon: 'person'  },
+          { title: 'Les Meves Ofertes', url: '/company-offer', icon: 'briefcase' },
         ];
         //this.openMenu('company-profile');
       } else if(userType === '1') {
         this.appPages = [
-          { title: 'Profile', url: '/user-profile', icon: 'person' },
-          { title: 'Offers', url: '/offer-list', icon: 'briefcase' },
+          { title: 'Perfil', url: '/user-profile', icon: 'person' },
+          { title: 'Ofertes', url: '/offer-list', icon: 'briefcase' },
           { title: 'Entities', url: '/entity-list', icon: 'business' },
         ];
         // this.openMenu('offer-list');
@@ -40,7 +44,7 @@ export class AppComponent {
   logginMenu(uType, uName) {
     this.auth.isLoggedIn.subscribe(
       (res: any) => {
-        console.log(res);
+        console.log('RES: ', res);
         this.userName = uName;
         this.userType = uType;
         this.menuView(res, uType);

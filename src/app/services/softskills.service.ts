@@ -51,12 +51,12 @@ export class SoftskillsService {
    */
   private _skillWatchQuery: QueryRef<any, EmptyObject>;
 
-  qGetSkill(userId: any): QueryRef<any, EmptyObject> {
+  qGetSkill(idValue: any): QueryRef<any, EmptyObject> {
     this._skillWatchQuery = this.apollo.watchQuery({
         query: GET_SKILL,
         //pollInterval: REFRESH,
         variables: {
-          id: userId,
+          id: idValue,
         }
     });
     return this._skillWatchQuery;
