@@ -11,9 +11,9 @@ import { CompanyOfferPage } from './company-offer.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    CompanyOfferPageRoutingModule,
-    ReactiveFormsModule
+    CompanyOfferPageRoutingModule
   ],
   declarations: [CompanyOfferPage]
 })

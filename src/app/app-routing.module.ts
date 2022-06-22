@@ -72,18 +72,18 @@ const routes: Routes = [
     canLoad: [AuthService],
     canActivate: [AuthService]
   },
-  {
+  /*{
     path: 'create-offer',
     loadChildren: () => import('./pages/create-offer/create-offer.module').then( m => m.CreateOfferPageModule),
-    canLoad: [AuthService],
-    canActivate: [AuthService]
-  },
-  {
+    //canLoad: [AuthService],
+    //canActivate: [AuthService]
+  },*/
+  /*{
     path: 'edit-offer',
     loadChildren: () => import('./pages/edit-offer/edit-offer.module').then( m => m.EditOfferPageModule),
     canLoad: [AuthService],
     canActivate: [AuthService]
-  },
+  },*/
   {
     path: 'candidatures',
     loadChildren: () => import('./pages/candidatures/candidatures.module').then( m => m.CandidaturesPageModule),

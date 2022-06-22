@@ -44,7 +44,7 @@ export class AppComponent {
   logginMenu(uType, uName) {
     this.auth.isLoggedIn.subscribe(
       (res: any) => {
-        console.log('RES: ', res);
+        //console.log('RES: ', res);
         this.userName = uName;
         this.userType = uType;
         this.menuView(res, uType);

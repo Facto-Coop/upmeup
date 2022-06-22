@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
@@ -32,11 +33,14 @@ export class CreateOfferPage implements OnInit {
   validation() {
     this.createForm = this.fBuilder.group({
       iTitle: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
+      iEduLevel: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       iRangoSalarial: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
-      iRemoto: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+      iRemoto: ['', [Validators.required]],
       iTipoContrato: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
       iJornada: ['', [Validators.required, Validators.maxLength(30)]],
+      iDescripcio: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(350)]],
+      iRequirements: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(350)]],
     });
   }
 
@@ -71,12 +75,15 @@ export class CreateOfferPage implements OnInit {
       this.createNewOffer(
             this.userID,
             this.createForm.value.iTitle,
+            this.createForm.value.iEduLevel,
             this.createForm.value.iCity,
             this.createForm.value.iJornada,
             this.createForm.value.iRangoSalarial,
             this.createForm.value.iRemoto,
             this.addEnroll,
             this.createForm.value.iTipoContrato,
+            this.createForm.value.iDescripcio,
+            this.createForm.value.iRequirements,
             this.cDate
       );
     }
@@ -94,8 +101,8 @@ export class CreateOfferPage implements OnInit {
    * @param iContrato
    * @param iDate
    */
-  createNewOffer(uId: any, iTitle: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iEnroll: any, iContrato: any, iDate: string) {
-   this.compOfService.mCreateOffer(uId, iTitle, iCity, iJornada, iRango, iRemoto, iEnroll, iContrato, iDate)
+  createNewOffer(uId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iEnroll: any, iContrato: any, iDescripcio: any, iRequirements: any, iDate: string) {
+   this.compOfService.mCreateOffer(uId, iTitle, iEduLevel, iCity, iJornada, iRango, iRemoto, iEnroll, iContrato, iDescripcio, iRequirements, iDate)
     .subscribe((response) => {
       console.log('Done!');
     });

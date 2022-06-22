@@ -65,7 +65,7 @@ export class UserProfilePage implements OnInit {
       map(result => result.data)
     ).subscribe((item) => {
       this.userSkills.push(item.getSkill);
-      console.log('skills: ' + this.userSkills);
+      //console.log('skills: ' + this.userSkills);
       this.useSessionStorage(this.userSkills);
     });
   }

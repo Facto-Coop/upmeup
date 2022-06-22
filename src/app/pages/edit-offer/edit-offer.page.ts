@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
@@ -37,11 +38,14 @@ export class EditOfferPage implements OnInit {
    initForm(){
     this.editForm = this.fBuilder.group({
       iTitle: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
+      iEduLevel: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       iRangoSalarial: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       iRemoto: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       iTipoContrato: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
       iJornada: ['', [Validators.required, Validators.maxLength(30)]],
+      iDescripcio: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(350)]],
+      iRequirements: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(350)]],
     });
   }
 
@@ -52,11 +56,14 @@ export class EditOfferPage implements OnInit {
   setValues(infoOffer) {
     this.offerID = infoOffer._id;
     this.editForm.get('iTitle').setValue(infoOffer.title);
+    this.editForm.get('iEduLevel').setValue(infoOffer.eduLevel);
     this.editForm.get('iCity').setValue(infoOffer.city);
     this.editForm.get('iRangoSalarial').setValue(infoOffer.rangoSalarial);
     this.editForm.get('iRemoto').setValue(infoOffer.remoto);
     this.editForm.get('iTipoContrato').setValue(infoOffer.tipoContrato);
     this.editForm.get('iJornada').setValue(infoOffer.jornada);
+    this.editForm.get('iDescripcio').setValue(infoOffer.description);
+    this.editForm.get('iRequirements').setValue(infoOffer.requirements);
   }
 
   /**
@@ -72,11 +79,14 @@ export class EditOfferPage implements OnInit {
       this.editOffer(
           this.offerID,
           this.editForm.value.iTitle,
+          this.editForm.value.iEduLevel,
           this.editForm.value.iCity,
           this.editForm.value.iJornada,
           this.editForm.value.iRangoSalarial,
           this.editForm.value.iRemoto,
-          this.editForm.value.iTipoContrato
+          this.editForm.value.iTipoContrato,
+          this.editForm.value.iDescripcio,
+          this.editForm.value.iRequirements
       );
     }
   }
@@ -84,8 +94,8 @@ export class EditOfferPage implements OnInit {
   /**
    * Get values from form and update info.
    */
-   editOffer(oId: any, iTitle: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iContrato: any) {
-    this.compOfService.mEditOffer(oId, iTitle, iCity, iJornada, iRango, iRemoto, iContrato)
+   editOffer(oId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iContrato: any, iDescripcio: any, iRequirements: any){
+    this.compOfService.mEditOffer(oId, iTitle, iEduLevel, iCity, iJornada, iRango, iRemoto, iContrato, iDescripcio, iRequirements)
     .subscribe((response) => {
       console.log('Edition done!');
     });
