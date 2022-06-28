@@ -51,8 +51,8 @@ const routes: Routes = [
   {
     path: 'values-modal',
     loadChildren: () => import('./shared/modals/values-modal/values-modal.module').then( m => m.ValuesModalPageModule),
-    canLoad: [AuthService],
-    canActivate: [AuthService]
+    //canLoad: [AuthService],
+    //canActivate: [AuthService]
   },
   {
     path: 'company-profile',

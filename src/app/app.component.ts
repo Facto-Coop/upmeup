@@ -31,7 +31,7 @@ export class AppComponent {
         this.appPages = [
           { title: 'Perfil', url: '/user-profile', icon: 'person' },
           { title: 'Ofertes', url: '/offer-list', icon: 'briefcase' },
-          { title: 'Entities', url: '/entity-list', icon: 'business' },
+          //{ title: 'Entities', url: '/entity-list', icon: 'business' },
         ];
         // this.openMenu('offer-list');
       }
@@ -60,6 +60,7 @@ export class AppComponent {
 
   logOut() {
     this.auth.onLogout();
+    this.menuCtrl.enable(false);
     this.router.navigate(['/login']);
   }
 

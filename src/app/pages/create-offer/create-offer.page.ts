@@ -39,8 +39,8 @@ export class CreateOfferPage implements OnInit {
       iRemoto: ['', [Validators.required]],
       iTipoContrato: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
       iJornada: ['', [Validators.required, Validators.maxLength(30)]],
-      iDescripcio: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(350)]],
-      iRequirements: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(350)]],
+      iDescripcio: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(600)]],
+      iRequirements: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(600)]],
     });
   }
 

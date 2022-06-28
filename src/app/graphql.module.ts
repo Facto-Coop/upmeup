@@ -4,8 +4,7 @@ import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
 import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core';
 
-const uri = '//localhost:3000/graphql';
-//const uri = 'https://48p1r2roz4.sse.codesandbox.io';
+const uri = '/api';
 
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function createApollo(httpLink: HttpLink) {

@@ -41,6 +41,14 @@
           </ion-menu-toggle>
         </ion-list>
       </ion-content>
+
+      <ion-footer>
+        <ion-item>
+          <ion-icon slot="start" color="upmeup" name="power"></ion-icon>
+          <button (click)="logOut()"> <ion-label>Desconectar</ion-label> </button> 
+        </ion-item>
+      </ion-footer>
+      
     </ion-menu>
     
     <ion-router-outlet id="main-content"></ion-router-outlet>

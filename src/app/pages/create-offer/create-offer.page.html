@@ -131,22 +131,22 @@
 
       <ion-item>
         <ion-label>Descripció:</ion-label>
-        <ion-textarea id="iDescripcio" formControlName="iDescripcio" minlength="40" maxlength="350" required></ion-textarea>
+        <ion-textarea id="iDescripcio" formControlName="iDescripcio" minlength="40" maxlength="600" rows="6" cols="10" required></ion-textarea>
       </ion-item>      
       <div *ngIf="errorCtr.iDescripcio.errors && (errorCtr.iDescripcio.invalid || errorCtr.iDescripcio.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iDescripcio.errors.required">* Camp requerit</small>        
-        <small class="error ion-padding" *ngIf="errorCtr.iDescripcio.errors.minlength">* Ha de tenir com a mínim 40 lletres</small>
-        <small class="error ion-padding" *ngIf="errorCtr.iDescripcio.errors.maxlength">* Ha de tenir com a màxim 250 lletres</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iDescripcio.errors.minlength">* Ha de tenir com a mínim 40 caràcters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iDescripcio.errors.maxlength">* Ha de tenir com a màxim 600 caràcters</small>
       </div>
 
       <ion-item>
         <ion-label>Requisits:</ion-label>
-        <ion-textarea id="iRequirements" formControlName="iRequirements" minlength="40" maxlength="350" required></ion-textarea>
+        <ion-textarea id="iRequirements" formControlName="iRequirements" minlength="40" maxlength="600" rows="6" cols="10" required></ion-textarea>
       </ion-item>      
       <div *ngIf="errorCtr.iRequirements.errors && (errorCtr.iRequirements.invalid || errorCtr.iRequirements.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iRequirements.errors.required">* Camp requerit</small>        
-        <small class="error ion-padding" *ngIf="errorCtr.iRequirements.errors.minlength">* Ha de tenir com a mínim 40 lletres</small>
-        <small class="error ion-padding" *ngIf="errorCtr.iRequirements.errors.maxlength">* Ha de tenir com a màxim 250 lletres</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iRequirements.errors.minlength">* Ha de tenir com a mínim 40 caràcters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iRequirements.errors.maxlength">* Ha de tenir com a màxim 600 caràcters</small>
       </div>
 
       <p class="ion-text-center ion-padding">
