@@ -19,7 +19,8 @@ import { AuthService } from './services/auth.service';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    GraphQLModule],
+    GraphQLModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthService],
   bootstrap: [AppComponent],
 })

@@ -1,11 +1,11 @@
 {
   "name": "upmeup",
   "version": "0.0.1",
-  "author": "LMata -- Facto, SL",
+  "author": "LMata - Facto SCCL",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config src/proxy.conf.json",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
