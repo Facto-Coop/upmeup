@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { SectorsService } from 'src/app/services/sectors.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.page';
+import { EditUserPage } from '../edit-user/edit-user.page';
 
 @Component({
   selector: 'app-company-profile',
@@ -17,12 +19,14 @@ export class CompanyProfilePage implements OnInit {
   userID = sessionStorage.getItem('userid');
   userInfo: any[] = [];
   userSkills: any[] = [];
+  sectorName = '';
 
   constructor(private modalController: ModalController,
               private routerOutlet: IonRouterOutlet,
               private uService: UserService,
               private softSkillService: SoftskillsService,
               private auth: AuthService,
+              private sectorService: SectorsService,
               private router: Router,
   ) { }
 
@@ -41,6 +45,7 @@ export class CompanyProfilePage implements OnInit {
       // console.log(item);
       this.userInfo = item.getUser;
       this.getUserSkills(item.getUser.valors);
+      this.qGetSectorName(item.getUser.sector_id);
     });
   }
 
@@ -64,6 +69,15 @@ export class CompanyProfilePage implements OnInit {
     });
   }
 
+  qGetSectorName(sectorId) {
+    //let sectorName = '';
+    this.sectorService.qGetSector(sectorId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      this.sectorName = item.getSector.name;
+    });
+  }
+
   useSessionStorage(skills) {
     sessionStorage.setItem('uSelectedSkills', JSON.stringify(skills));
   }
@@ -80,5 +94,20 @@ export class CompanyProfilePage implements OnInit {
       presentingElement: this.routerOutlet.nativeEl
     });
     return await modal.present();
+  }
+
+  /**
+  * Call modal to edit user profile
+  */
+  async editModal() {
+    const editModal = await this.modalController.create({
+      component: EditUserPage,
+      componentProps: {
+        userData: this.userInfo
+      },
+      animated: true,
+      cssClass: 'modalCss'
+    });
+    await editModal.present();
   }
 }

@@ -88,7 +88,11 @@ const routes: Routes = [
     path: 'candidatures',
     loadChildren: () => import('./pages/candidatures/candidatures.module').then( m => m.CandidaturesPageModule),
     canActivate: [AuthService]
+  },  {
+    path: 'edit-user',
+    loadChildren: () => import('./pages/edit-user/edit-user.module').then( m => m.EditUserPageModule)
   },
+
 
 
 

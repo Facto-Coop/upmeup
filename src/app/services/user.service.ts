@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
@@ -28,6 +30,10 @@ const GET_USER = gql`
       sector_id
       email
       tipo
+      jobPosition
+      lastJobTasks
+      experience
+      languages
       valors 
     }
   }
@@ -44,6 +50,10 @@ const GET_ALLUSERS = gql`
       sector_id
       email
       tipo
+      jobPosition
+      lastJobTasks
+      experience
+      languages
       valors 
     }
   }
@@ -66,7 +76,56 @@ mutation editUserSkills(
     city
     sector_id
     eduLevel
+    jobPosition
+    lastJobTasks
+    experience
+    languages
     valors
+  }
+}
+`;
+
+const MUT_EDIT_USER = gql`
+mutation editUser (
+                    $id: String!,
+                    $name: String!,
+                    $surname: String!,
+                    $email: String!,
+                    $city: String!,
+                    $sector_id: String!,
+                    $eduLevel: String!,
+                    $jobPosition: String!,
+                    $lastJobTasks: String!,
+                    $experience: String!,
+                    $languages: [String!]!
+                  ) {
+
+  updateUser(
+    id: $id,
+    userInputs: {
+      name: $name
+      surname: $surname
+      email: $email
+      city: $city
+      sector_id: $sector_id
+      eduLevel: $eduLevel
+      jobPosition: $jobPosition
+      lastJobTasks: $lastJobTasks
+      experience: $experience
+      languages: $languages
+    }
+  ) {
+    _id
+    name
+    surname
+    email
+    city
+    sector_id
+    eduLevel
+    jobPosition
+    lastJobTasks
+    experience
+    languages
   }
 }
 `;
@@ -139,16 +198,28 @@ export class UserService {
 
    }
 
+   mEditUser(userId, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any) {
+    return this.apollo.mutate({
+        mutation: MUT_EDIT_USER,
+        variables: {
+          id: userId,
+          name: iName,
+          surname: iSurname,
+          email: iEmail,
+          city: iCity,
+          sector_id: iSector,
+          eduLevel: iEduc,
+          jobPosition: iJobPos,
+          lastJobTasks: iLastJob,
+          experience: iExp,
+          languages: iLang
+        }
+    }).pipe(
+        map((data) => {
+          this._oneUserWatchQuery?.refetch();
+        })
+    );
+  }
 
-  /*
-  getUser() {
-    //this.httpClient.get('http://localhost:3000/users').subscribe((data: {}) => {
-    //  this.employeeData = data;
-    //});
-
-    //this.restApi.getEmployee(this.id).subscribe((data: {}) => {
-    //  this.employeeData = data;
-    //})
-  }*/
 
 }

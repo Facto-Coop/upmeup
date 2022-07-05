@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 
-import { CompanyProfilePageRoutingModule } from './company-profile-routing.module';
-import { CompanyProfilePage } from './company-profile.page';
+import { EditUserPageRoutingModule } from './edit-user-routing.module';
+
+import { EditUserPage } from './edit-user.page';
 
 @NgModule({
   imports: [
@@ -12,8 +14,8 @@ import { CompanyProfilePage } from './company-profile.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    CompanyProfilePageRoutingModule
+    EditUserPageRoutingModule
   ],
-  declarations: [CompanyProfilePage]
+  declarations: [EditUserPage]
 })
-export class CompanyProfilePageModule {}
+export class EditUserPageModule {}

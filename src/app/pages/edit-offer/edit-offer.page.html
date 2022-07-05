@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="upmeup">
-    <ion-title color="light">edit-offer</ion-title>
+    <ion-title color="light">Edit Offer</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,7 +24,7 @@
         <ion-input class="form-text" id="iTitle" formControlName="iTitle" minlength="8" maxlength="30" required></ion-input>
       </ion-item>
       <!-- Error messages -->
-      <div *ngIf="errorCtr.iCity.errors && (errorCtr.iCity.invalid || errorCtr.iCity.touched)">
+      <div *ngIf="errorCtr.iTitle.errors && (errorCtr.iTitle.invalid || errorCtr.iTitle.touched)">
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iTitle.errors.required">* Camp requerit</small>
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iTitle.errors.minlength">* Ha de tenir com a mínim 8 lletres</small>
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iTitle.errors.maxlength">* Ha de tenir com a màxim 30 lletres</small>
@@ -154,7 +154,7 @@
           Guardar 
         </ion-button>
         <ion-button type="button" fill="solid" color="danger" shape="round" (click)="cancelEdition()"> 
-          Cancela
+          Cancel·lar
         </ion-button>
       </p>
     </form>

@@ -1,0 +1,12 @@
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
+ion-content { 
+    ion-header { box-shadow: none !important; }
+
+    .container { 
+        .avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
+        ion-list ion-select { max-width: 75%; }
+    }
+
+}

@@ -34,10 +34,12 @@
       <div class="ion-padding-top" *ngIf="userSkills.length > 0">  
         <ion-row>
           <ion-col size="6" *ngFor="let skill of userSkills">
-            <div class="rocket">
+            <div class="custom-icon">
               <ion-label class="skills padding-left">
-                <ion-icon name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>                            
-                <h4 class="text-space"> {{skill.name}} </h4>
+                <h4>
+                  <ion-icon name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>                            
+                  {{skill.name}}
+                </h4>
               </ion-label>
             </div>
           </ion-col>

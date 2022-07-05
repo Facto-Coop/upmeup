@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar color="upmeup">
+    <ion-title color="light">Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col size="6"> 
+          <ion-thumbnail class="avatar-center" >
+            <img src="./../../../assets/thumbnail.svg" />
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col> </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()" novalidate>
+      <ion-item>
+        <ion-label>Nom:</ion-label>
+        <ion-input class="form-text" id="iName" formControlName="iName" minlength="3" maxlength="30" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iName.errors && (errorCtr.iName.invalid || errorCtr.iName.touched)">
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iName.errors.required">* Camp requerit</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iName.errors.minlength">* Ha de tenir com a mínim 3 caracters</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iName.errors.maxlength">* Ha de tenir com a màxim 30 caracters</small>
+      </div>
+      <ion-item>
+        <ion-label>Cognom:</ion-label>
+        <ion-input class="form-text" id="iSurname" formControlName="iSurname" minlength="3" maxlength="30" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iSurname.errors && (errorCtr.iSurname.invalid || errorCtr.iSurname.touched)">
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iSurname.errors.required">* Camp requerit</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iSurname.errors.minlength">* Ha de tenir com a mínim 3 caracters</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iSurname.errors.maxlength">* Ha de tenir com a màxim 30 caracters</small>
+      </div>
+
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input class="form-text" id="iEmail" formControlName="iEmail" minlength="10" maxlength="60" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iEmail.errors && (errorCtr.iEmail.invalid || errorCtr.iEmail.touched)">
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iEmail.errors.required">* Camp requerit</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iEmail.errors.minlength">* Ha de tenir com a mínim 10 caracters</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iEmail.errors.maxlength">* Ha de tenir com a màxim 60 caracters</small>
+      </div>
+
+      <ion-item>
+        <ion-label>Ciutat:</ion-label>
+        <ion-input class="form-text" id="iCity" formControlName="iCity" minlength="4" maxlength="30" required></ion-input>
+      </ion-item>
+      <div *ngIf="errorCtr.iCity.errors && (errorCtr.iCity.invalid || errorCtr.iCity.touched)">
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iCity.errors.required">* Camp requerit</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iCity.errors.minlength">* Ha de tenir com a mínim 4 caracters</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iCity.errors.maxlength">* Ha de tenir com a màxim 30 caracters</small>
+      </div>
+
+      <ion-item>
+        <ion-label>Estudis:</ion-label>
+        <ion-input class="form-text" id="iEduc" formControlName="iEduc" minlength="8" maxlength="40" required></ion-input>
+      </ion-item>      
+      <div *ngIf="errorCtr.iEduc.errors && (errorCtr.iEduc.invalid || errorCtr.iEduc.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iEduc.errors.required">* Camp requerit</small>        
+        <small class="error ion-padding" *ngIf="errorCtr.iEduc.errors.minlength">* Ha de tenir com a mínim 8 caracters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iEduc.errors.maxlength">* Ha de tenir com a màxim 40 caracters</small>
+      </div>
+
+      <ion-item>
+        <ion-label>Ultim carrec:</ion-label>
+        <ion-input class="form-text" id="iJobPos" formControlName="iJobPos" minlength="5" maxlength="70" required></ion-input>
+      </ion-item>      
+      <div *ngIf="errorCtr.iJobPos.errors && (errorCtr.iJobPos.invalid || errorCtr.iJobPos.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iJobPos.errors.required">* Camp requerit</small>        
+        <small class="error ion-padding" *ngIf="errorCtr.iJobPos.errors.minlength">* Ha de tenir com a mínim 5 caracters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iJobPos.errors.maxlength">* Ha de tenir com a màxim 70 caracters</small>
+      </div>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>Sector:</ion-label>
+          <ion-select class="form-text" interface="action-sheet" id="iSector" formControlName="iSector" placeholder="Selecciona..." required>
+            <ion-select-option *ngFor="let sector of sectorsList[0]" value="{{sector._id}}"> {{sector.name}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      
+      <ion-item>
+        <ion-label>Anys d'experiencia:</ion-label>
+        <ion-input class="form-text" id="iExp" formControlName="iExp" minlength="1" maxlength="2" required></ion-input>
+      </ion-item>      
+      <div *ngIf="errorCtr.iExp.errors && (errorCtr.iExp.invalid || errorCtr.iExp.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iExp.errors.required">* Camp requerit</small>        
+        <small class="error ion-padding" *ngIf="errorCtr.iExp.errors.minlength">* Ha de tenir com a mínim 1 valor</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iExp.errors.maxlength">* Ha de tenir com a màxim 2 valors</small>
+      </div>
+
+      <ion-item>
+        <ion-label>Descripció tasques:
+          <br>(A l'ultim carrec)
+        </ion-label>
+        <h4></h4>
+        <ion-textarea id="iLastJob" formControlName="iLastJob" minlength="20" maxlength="400" rows="6" cols="10" required></ion-textarea>
+      </ion-item>      
+      <div *ngIf="errorCtr.iLastJob.errors && (errorCtr.iLastJob.invalid || errorCtr.iLastJob.touched)">
+        <small class="error ion-padding" *ngIf="errorCtr.iLastJob.errors.required">* Camp requerit</small>        
+        <small class="error ion-padding" *ngIf="errorCtr.iLastJob.errors.minlength">* Ha de tenir com a mínim 20 caràcters</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iLastJob.errors.maxlength">* Ha de tenir com a màxim 400 caràcters</small>
+      </div>
+      
+      <ion-list>
+        <ion-item>
+          <ion-label>Idiomes:</ion-label>
+          <ion-select class="form-text" interface="action-sheet" id="iLang" okText="Ok" cancelText="Cancela"
+            formControlName="iLang" [multiple]="true" placeholder="Selecciona..." required>
+              <ion-select-option value="Alemán">Alemán</ion-select-option>
+              <ion-select-option value="Árabe">Árabe</ion-select-option>
+              <ion-select-option value="Aranés">Aranés</ion-select-option>
+              <ion-select-option value="Bosnio">Bosnio</ion-select-option>
+              <ion-select-option value="Catalán">Catalán</ion-select-option>
+              <ion-select-option value="Chino mandarín">Chino mandarín</ion-select-option>
+              <ion-select-option value="Coreano">Coreano</ion-select-option>
+              <ion-select-option value="Croata">Croata</ion-select-option>
+              <ion-select-option value="Danés">Danés</ion-select-option>
+              <ion-select-option value="Español">Español</ion-select-option>
+              <ion-select-option value="Euskera">Euskera</ion-select-option>
+              <ion-select-option value="Francés">Francés</ion-select-option>
+              <ion-select-option value="Gallego">Gallego</ion-select-option>
+              <ion-select-option value="Hindi">Hindi</ion-select-option>
+              <ion-select-option value="Inglés">Inglés</ion-select-option>
+              <ion-select-option value="Italiano">Italiano</ion-select-option>
+              <ion-select-option value="Japonés">Japonés</ion-select-option>
+              <ion-select-option value="Neerlandés">Neerlandés</ion-select-option>
+              <ion-select-option value="Polaco">Polaco</ion-select-option>
+              <ion-select-option value="Portugués">Portugués</ion-select-option>
+              <ion-select-option value="Ruso">Ruso</ion-select-option>
+              <ion-select-option value="Rumano">Rumano</ion-select-option>
+              <ion-select-option value="Serbio">Serbio</ion-select-option>
+              <ion-select-option value="Turco">Turco</ion-select-option>
+              <ion-select-option value="Ucraniano">Ucraniano</ion-select-option>
+              <ion-select-option value="Valenciano">Valenciano</ion-select-option>
+              <ion-select-option value="Vietnamita">Vietnamita</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <p class="ion-text-center ion-padding">
+        <ion-button type="submit" fill="solid" color="upmeup" shape="round"> 
+          Guardar 
+        </ion-button>
+        <ion-button type="button" fill="solid" color="danger" shape="round" (click)="cancelEdition()"> 
+          Cancel·lar
+        </ion-button>
+      </p>
+    </form>
+
+  </div>
+</ion-content>

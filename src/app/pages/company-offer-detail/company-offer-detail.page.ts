@@ -182,7 +182,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
 
     // Order by match value:
     this.sortUsersList = result.sort((a, b) => (a.match > b.match) ? -1 : 1);
-    console.log('Sort Offers: ', this.sortUsersList);
+    //console.log('Sort Offers: ', this.sortUsersList);
   }
 
   /**

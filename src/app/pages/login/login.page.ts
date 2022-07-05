@@ -94,33 +94,39 @@ export class LoginPage implements OnInit {
     return this.initForm.controls;
   }
 
-  // Check if input has email
+  // Check if user exist
   loginIn(uEmail, uPassword) {
-    for (let i = 0; i < this.users.length; i++) {
-      const el = this.users[i];
-      if(uEmail === el.email && uPassword === el.password) {
-        this.userExist = true;
-        this.useSessionStorage(el._id, el.name, el.email);
-        this.auth.onLogin();
-        this.userType = el.tipo;
+    if(this.users.length) {
+      for (let i = 0; i < this.users.length; i++) {
+        const el = this.users[i];
+        // TODO: Refactor --> encrypt passw.
+        if(uEmail === el.email && uPassword === el.password) {
+          this.userExist = true;
+          this.useSessionStorage(el._id, el.name, el.email);
+          this.auth.onLogin();
+          this.userType = el.tipo;
 
-        //TODO: Cambiar este "parche" para cambio de menu!!! (Auth)
-        this.appC.logginMenu(this.userType, el.name);
+          //TODO: Cambiar este "parche" para cambio de menu!!
+          this.appC.logginMenu(this.userType, el.name);
 
-        if (window.sessionStorage) {
-          sessionStorage.removeItem('uSelectedSkills');
+          if (window.sessionStorage) {
+            sessionStorage.removeItem('uSelectedSkills');
+          }
+
+          // Show one menu or another.
+          if(this.userType === '1'){
+            this.router.navigate(['/user-profile']);
+          } else if(this.userType === '2') {
+            this.router.navigate(['/company-profile']);
+          }
+
+          this.menu.enable(true);
+
+          return;
         }
-
-        if(this.userType === '1'){
-          this.router.navigate(['/user-profile']);
-        } else if(this.userType === '2') {
-          this.router.navigate(['/company-profile']);
-        }
-
-        this.menu.enable(true);
-
-        return;
       }
+    } else {
+      console.log('Parece que hubo un error... :( ');
     }
 
     // TODO: Control de errores.

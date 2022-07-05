@@ -76,10 +76,13 @@ ion-content {
 
     .grid-info { margin: 0px 30px; font-size: 14px; font-weight: 700; }
 
-	ion-label.skills { display: inline-flex; }
-	
+	//ion-label.skills { display: inline-flex; }
+	ion-label ion-icon { margin: 0 10px; vertical-align: bottom; }
+
     .title-offer { white-space: normal; }
-	.rocket { vertical-align: middle; color: #5a7266; }
+	.custom-icon { 
+		ion-label { vertical-align: middle; color: #5a7266; }
+	}
 }
 
 /**

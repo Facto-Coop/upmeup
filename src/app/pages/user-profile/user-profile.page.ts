@@ -2,10 +2,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { SectorsService } from 'src/app/services/sectors.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.page';
+import { EditUserPage } from '../edit-user/edit-user.page';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,14 +17,17 @@ import { ValuesModalPage } from '../../shared/modals/values-modal/values-modal.p
 export class UserProfilePage implements OnInit {
   userName = sessionStorage.getItem('user');
   userID = sessionStorage.getItem('userid');
-  skillsList: any[] = []; //JSON.parse(sessionStorage.getItem('uSelectedSkills'));
+  skillsList: any[] = [];
   userInfo: any[] = [];
   userSkills: any[] = [];
+  sectorName = '';
 
-  constructor(private modalController: ModalController,
+  constructor(
+              private modalController: ModalController,
               private routerOutlet: IonRouterOutlet,
               private uService: UserService,
               private softSkillService: SoftskillsService,
+              private sectorService: SectorsService,
               private auth: AuthService,
               private router: Router,
               ) { }
@@ -41,12 +46,13 @@ export class UserProfilePage implements OnInit {
     this.uService.qGetUser(userId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      // console.log(item);
+      console.log(item.getUser);
       this.userInfo = item.getUser;
       /*this.userInfo.forEach((el) => {
         this.qSkillName(el.valors);
       });*/
       this.getUserSkills(item.getUser.valors);
+      this.qGetSectorName(item.getUser.sector_id);
     });
   }
 
@@ -70,6 +76,15 @@ export class UserProfilePage implements OnInit {
     });
   }
 
+  qGetSectorName(sectorId) {
+    //let sectorName = '';
+    this.sectorService.qGetSector(sectorId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      this.sectorName = item.getSector.name;
+    });
+  }
+
   useSessionStorage(skills) {
     sessionStorage.setItem('uSelectedSkills', JSON.stringify(skills));
   }
@@ -90,6 +105,21 @@ export class UserProfilePage implements OnInit {
       presentingElement: this.routerOutlet.nativeEl,
     });
     return await modal.present();
+  }
+
+  /**
+   * Call modal to edit user profile
+   */
+  async editModal() {
+    const editModal = await this.modalController.create({
+      component: EditUserPage,
+      componentProps: {
+        userData: this.userInfo
+      },
+      animated: true,
+      cssClass: 'modalCss'
+    });
+    await editModal.present();
   }
 
 }
