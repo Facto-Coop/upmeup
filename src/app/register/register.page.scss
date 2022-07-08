@@ -1,0 +1,48 @@
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
+ion-content { 
+    --ion-background-color: -moz-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
+    --ion-background-color: -webkit-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
+    --ion-background-color: linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
+
+    .container { margin: 80px 25px; width: 90%; }
+    .container-medium { margin: 140px 25px; width: 90%; }
+    .container-short { margin: 230px 30px; width: 90%; }
+
+    h2, h4 { color: #FFF; }
+    .big-button { 
+        width: 100%; 
+        height: 80px; 
+        text-transform: none; 
+    
+        span { font-size: 16px; color: var(--ion-color-loginbtn); }
+    }
+
+    div {
+        .input-container { 
+            background: #FFF; 
+            border-radius: 40px; 
+            padding: 10px; 
+            margin: 15px; 
+    
+            input, input[type="text"], input[type="password"], 
+            input:focus, input:focus-visible { border: 0; text-align: center; outline: none; font-size: 16px; color: var(--ion-color-loginbtn); }    
+        }
+
+        ::placeholder { color: var(--ion-color-upmeup); }
+        ion-select { max-width: 98% !important; color: var(--ion-color-loginbtn); font-size: 16px; }
+
+        .input-select-container {
+            background: #FFF; 
+            border-radius: 40px; 
+            margin: 15px;
+        }
+    }
+
+    .padding-btn { padding-top: 50px; }
+    
+
+
+
+}

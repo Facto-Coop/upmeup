@@ -1,0 +1,224 @@
+<ion-header></ion-header>
+
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+ 
+    <ion-slides [options]="slideOpts" #registerSlider>
+      <ion-slide>
+        <div class="container-short">
+          <ion-grid>
+            <h2>Com vols entrar a l'aplicació?</h2>
+            <ion-row class="padding-btn">
+              <ion-col size="12">
+                <ion-button class="big-button" fill="solid" color="light" shape="round" (click)="getType('iType', '2')"> 
+                  <b>Empresa/Entitat</b>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-button class="big-button" fill="solid" color="light" shape="round" (click)="getType('iType', '1')"> 
+                  <b>Treballador</b>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <div class="container">          
+          <ion-grid>
+            <h2>Nom</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <input class="native-input sc-ion-input-md" type="text" placeholder="Nom" id="iName" required>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid>
+            <h2>Cognoms</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <input class="native-input sc-ion-input-md" type="text" placeholder="Cognom" id="iSurname" required>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid>
+            <h2>Ciutat de residencia</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <input class="native-input sc-ion-input-md" type="text" placeholder="Ciutat" id="iCity" required>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid>
+            <h2>Email</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <input class="native-input sc-ion-input-md" type="email" placeholder="Email" id="iEmail" required>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="padding-btn">
+              <ion-col size="12"> <!-- [disabled]="!initForm.valid" -->
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" (click)="swipeNext()"> Continuar </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>       
+      </ion-slide>
+
+      <ion-slide>
+        <div class="container-medium">          
+          <ion-grid>
+            <h2>Ultim carrec o feina</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <input class="native-input sc-ion-input-md" type="text" placeholder="Carrec" id="iJobPos" required>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid>
+            <h2>Sector</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-select-container">
+                  <ion-select class="form-text" interface="action-sheet" id="iSector" placeholder="Selecciona..." required>
+                    <ion-select-option *ngFor="let sector of sectorList" class="native-input sc-ion-input-md" value="{{sector._id}}"> {{sector.name}} </ion-select-option>
+                  </ion-select>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid>
+            <h2>Anys d'experiencia laboral</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <input class="native-input sc-ion-input-md" type="text" placeholder="Experiencia" id="iExp" required>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="padding-btn">
+              <ion-col size="12"> <!-- [disabled]="!initForm.valid" -->
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" (click)="swipeNext()"> Continuar </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>       
+      </ion-slide>
+
+      <ion-slide>
+        <div class="container-medium">          
+          <ion-grid>
+            <h2>Descriu breument la feina que desenvolupes en l'actualitat i/o les habilitats 
+              que tens com a treballador/a</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <ion-textarea id="iJobPos" minlength="20" maxlength="400" rows="8" cols="10" required></ion-textarea>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="padding-btn">
+              <ion-col size="12"> <!-- [disabled]="!initForm.valid" -->
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" (click)="swipeNext()"> Continuar </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>     
+      </ion-slide>
+
+      <ion-slide>
+        <div class="container-medium">          
+          <ion-grid>
+            <h2>Potser t'identifiques amb tots els valors o característiques que et proposem en la següent pantalla, però 
+              et demanem que elegeixis el 4 que més et representen.
+            </h2>
+            <h4>(máxim: 5)</h4>
+            <ion-row>
+              <ion-col size="12"> <!-- [disabled]="!initForm.valid" -->
+                <ion-button type="submit" fill="solid" color="light" expand="block" shape="round" (click)="valuesModal()"> Afegir </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid class="padding-btn">
+            <ion-row>
+              <ion-col size="12"> <!-- [disabled]="!initForm.valid" -->
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" (click)="swipeNext()"> Continuar </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>     
+      </ion-slide>
+
+      <ion-slide>
+        <div class="container-short">          
+          <ion-grid>
+            <h2>Nivell estudis</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-container">
+                  <input class="native-input sc-ion-input-md" type="text" placeholder="Estudis" id="iEduc" required>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid>
+            <h2>Idiomes</h2>
+            <ion-row>
+              <ion-col size="12">
+                <div class="list list-inset input-select-container">
+                  <ion-select class="form-text" interface="action-sheet" id="iLang" okText="Ok" cancelText="Cancela"
+                   [multiple]="true" placeholder="Selecciona..." required>
+                    <ion-select-option value="Alemán">Alemán</ion-select-option>
+                    <ion-select-option value="Árabe">Árabe</ion-select-option>
+                    <ion-select-option value="Aranés">Aranés</ion-select-option>
+                    <ion-select-option value="Bosnio">Bosnio</ion-select-option>
+                    <ion-select-option value="Catalán">Catalán</ion-select-option>
+                    <ion-select-option value="Chino mandarín">Chino mandarín</ion-select-option>
+                    <ion-select-option value="Coreano">Coreano</ion-select-option>
+                    <ion-select-option value="Croata">Croata</ion-select-option>
+                    <ion-select-option value="Danés">Danés</ion-select-option>
+                    <ion-select-option value="Español">Español</ion-select-option>
+                    <ion-select-option value="Euskera">Euskera</ion-select-option>
+                    <ion-select-option value="Francés">Francés</ion-select-option>
+                    <ion-select-option value="Gallego">Gallego</ion-select-option>
+                    <ion-select-option value="Hindi">Hindi</ion-select-option>
+                    <ion-select-option value="Inglés">Inglés</ion-select-option>
+                    <ion-select-option value="Italiano">Italiano</ion-select-option>
+                    <ion-select-option value="Japonés">Japonés</ion-select-option>
+                    <ion-select-option value="Neerlandés">Neerlandés</ion-select-option>
+                    <ion-select-option value="Polaco">Polaco</ion-select-option>
+                    <ion-select-option value="Portugués">Portugués</ion-select-option>
+                    <ion-select-option value="Ruso">Ruso</ion-select-option>
+                    <ion-select-option value="Rumano">Rumano</ion-select-option>
+                    <ion-select-option value="Serbio">Serbio</ion-select-option>
+                    <ion-select-option value="Turco">Turco</ion-select-option>
+                    <ion-select-option value="Ucraniano">Ucraniano</ion-select-option>
+                    <ion-select-option value="Valenciano">Valenciano</ion-select-option>
+                    <ion-select-option value="Vietnamita">Vietnamita</ion-select-option>
+                </ion-select>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12"> <!-- [disabled]="!initForm.valid" -->
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round"> Finalitzar </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>       
+      </ion-slide>
+
+  </ion-slides>
+</ion-content>

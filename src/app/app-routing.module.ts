@@ -9,12 +9,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'access',
-    loadChildren: () => import('./pages/access/access.module').then( m => m.AccessPageModule),
-    canLoad: [AuthService],
-    canActivate: [AuthService]
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
@@ -51,8 +45,6 @@ const routes: Routes = [
   {
     path: 'values-modal',
     loadChildren: () => import('./shared/modals/values-modal/values-modal.module').then( m => m.ValuesModalPageModule),
-    //canLoad: [AuthService],
-    //canActivate: [AuthService]
   },
   {
     path: 'company-profile',
@@ -72,37 +64,25 @@ const routes: Routes = [
     canLoad: [AuthService],
     canActivate: [AuthService]
   },
-  /*{
-    path: 'create-offer',
-    loadChildren: () => import('./pages/create-offer/create-offer.module').then( m => m.CreateOfferPageModule),
-    //canLoad: [AuthService],
-    //canActivate: [AuthService]
-  },*/
-  /*{
-    path: 'edit-offer',
-    loadChildren: () => import('./pages/edit-offer/edit-offer.module').then( m => m.EditOfferPageModule),
-    canLoad: [AuthService],
-    canActivate: [AuthService]
-  },*/
   {
     path: 'candidatures',
     loadChildren: () => import('./pages/candidatures/candidatures.module').then( m => m.CandidaturesPageModule),
     canActivate: [AuthService]
-  },  {
+  },
+  {
     path: 'edit-user',
     loadChildren: () => import('./pages/edit-user/edit-user.module').then( m => m.EditUserPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'welcome',
+    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
   },
 
 
 
-
-
-
-
- /*{
-    path: 'menu',
-    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
-  },*/
 
 ];
 

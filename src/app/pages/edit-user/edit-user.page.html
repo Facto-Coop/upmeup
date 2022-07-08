@@ -101,7 +101,6 @@
         <ion-label>Descripció tasques:
           <br>(A l'ultim carrec)
         </ion-label>
-        <h4></h4>
         <ion-textarea id="iLastJob" formControlName="iLastJob" minlength="20" maxlength="400" rows="6" cols="10" required></ion-textarea>
       </ion-item>      
       <div *ngIf="errorCtr.iLastJob.errors && (errorCtr.iLastJob.invalid || errorCtr.iLastJob.touched)">

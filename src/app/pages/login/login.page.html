@@ -34,20 +34,6 @@
                   <input class="native-input sc-ion-input-md" type="password" placeholder="Password" id="userPassword" formControlName="userPassword" required>
                 </label>
               </div>
-
-              <!--<ion-list>
-                <label id="rounded" class="item item-input">
-                  <ion-input placeholder="Email" type="text" id="userEmail" formControlName="userEmail" required></ion-input>
-                </label>
-                // Email Error messages 
-                <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userEmail.errors?.required"> Email is mandatory </span>-->
-
-                <!--<ion-item lines="full">
-                  <ion-input placeholder="Password" type="password" id="userPassword" formControlName="userPassword" required></ion-input>
-                </ion-item>
-                // Passw Error messages 
-                <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userPassword.errors?.required"> Password is mandatory </span>
-              </ion-list> -->
                       
               <!-- (click)="loginIn(user)"-->              
               <ion-button type="submit" fill="solid" color="loginbtn" expand="block" [disabled]="!initForm.valid"> Sign In </ion-button>
@@ -67,7 +53,19 @@
         <ion-row>
           <ion-col>
             <ion-label>
-              <a [routerLink]="['/login']" class="small-text">¿Has olvidado tu contraseña?</a>
+              <a [routerLink]="['/login']" class="small-text">Has oblidat la teva contrasenya?</a>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        
+        <div class="h-divider">
+          <span color="light"> OR </span>
+        </div>
+        
+        <ion-row>
+          <ion-col>
+            <ion-label color="light">
+              <h4> Encara no estar registrat? <a [routerLink]="['/welcome']" class="small-text">Registrat</a></h4>
             </ion-label>
           </ion-col>
         </ion-row>

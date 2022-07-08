@@ -115,18 +115,67 @@ mutation editUser (
       languages: $languages
     }
   ) {
-    _id
-    name
-    surname
-    email
-    city
-    sector_id
-    eduLevel
-    jobPosition
-    lastJobTasks
-    experience
-    languages
-  }
+      _id
+      name
+      surname
+      email
+      city
+      sector_id
+      eduLevel
+      jobPosition
+      lastJobTasks
+      experience
+      languages
+    }
+}
+`;
+
+const MUT_CREATEUSER = gql`
+mutation createUserMut( $name: String!,
+                        $surname: String!,
+                        $email: String!,
+                        $password: String!,
+                        $tipo: String!,
+                        $city: String!,
+                        $sector_id: String!,
+                        $eduLevel: String!,
+                        $jobPosition: String!,
+                        $lastJobTasks: String!,
+                        $experience: String!,
+                        $languages: [String!]!, 
+                        $valors: [String!]!) {
+  createUser(
+      createUserDto: { 
+        name: $name
+        surname: $surname
+        email: $email
+        password: $password
+        tipo: $tipo
+        city: $city
+        sector_id: $sector_id
+        eduLevel: $eduLevel
+        jobPosition: $jobPosition
+        lastJobTasks: $lastJobTasks
+        experience: $experience
+        languages: $languages
+        valors: $valors
+      }    
+  ) {
+      _id
+      name
+      surname
+      email
+      password
+      tipo
+      city
+      sector_id
+      eduLevel
+      jobPosition
+      lastJobTasks
+      experience
+      languages
+      valors
+    }
 }
 `;
 
@@ -166,21 +215,6 @@ export class UserService {
      return this._oneUserWatchQuery;
    }
 
-  /**
-   * Get one User (by ID).
-   */
-  /* private _loginUsersWatchQuery: QueryRef<any, EmptyObject>;
-
-   qValidateUser(userId: any): QueryRef<any, EmptyObject> {
-     this._loginUsersWatchQuery = this.apollo.watchQuery({
-         query: GET_USERLOGIN,
-         variables: {
-           id: userId,
-         }
-     });
-     return this._loginUsersWatchQuery;
-   }*/
-
    mUserSkillUpdate(userId, skillsList) {
     const update = { valors: skillsList };
 
@@ -198,6 +232,9 @@ export class UserService {
 
    }
 
+  /**
+  * Mutation to Edit user profile
+  */
    mEditUser(userId, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any) {
     return this.apollo.mutate({
         mutation: MUT_EDIT_USER,
@@ -222,4 +259,31 @@ export class UserService {
   }
 
 
+  /**
+   * Mutation to create a new user
+   */
+  /*mCreateOffer(iName: any, iSurname: any, iCity: any, iSector: any, iEduc: any, iPassw:any, iType: any, iEmail: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iValue: any) {
+      return this.apollo.mutate({
+        mutation: MUT_CREATEUSER,
+        variables: {
+          name: iName,
+          surname: iSurname,
+          city: iCity,
+          sector_id: iSector,
+          eduLevel: iEduc,
+          password: iPassw,
+          tipo: iType,
+          email: iEmail,
+          jobPosition: iJobPos,
+          lastJobTasks: iLastJob,
+          experience: iExp,
+          languages: iLang,
+          valors: iValue
+        }
+      }).pipe(
+        map((data) => {
+          this._oneUserWatchQuery?.refetch();
+        })
+      );
+  }*/
 }

@@ -58,10 +58,13 @@ export class ValuesModalPage implements OnInit, OnDestroy {
    * @param skills
    */
   mEditUserSkills(skillsList: string[]) {
-    this.uService.mUserSkillUpdate(this.userID, skillsList)
-    .subscribe((response) => {
-      console.log('Edition Done!');
-    });
+    if(this.userID) {
+      this.uService.mUserSkillUpdate(this.userID, skillsList)
+      .subscribe((response) => {
+        console.log('Edition Done!');
+      });
+    }
+
     this.dismissEditModal();
   }
 

@@ -1,3 +1,6 @@
+/***************************************************************************/
+/***************************** Custom Styles *******************************/
+/***************************************************************************/
 
 ion-content {     
     --ion-background-color: -moz-linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
@@ -25,6 +28,29 @@ ion-content {
     .text-error { font-size: 15px; }
     ion-list .error { font-size: 15px; color: #eb445a; }
     
+    .h-divider { 
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 30px;
+
+        span { color: #FFF; }
+    }
+
+    .h-divider::after,
+    .h-divider::before {
+        content: "";
+        border: 1px solid #c7c7c7;
+        flex: 1;
+    }
+    
+    .h-divider:not(:empty)::before {
+        margin-right: 0.25em;
+    }
+      
+    .h-divider:not(:empty)::after {
+        margin-left: 0.25em;
+    }
 }
 
 /**
