@@ -17,7 +17,7 @@ export class AppComponent {
               public auth: AuthService,
               private router: Router,
               public menuCtrl: MenuController
-              ) {}
+              ) {  }
 
   menuView(res, userType) {
     if(res === true){

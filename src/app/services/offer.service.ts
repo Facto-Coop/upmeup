@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
-import { EmptyObject } from 'apollo-angular/build/types';
+import { EmptyObject } from 'apollo-angular/types';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Offer } from '../models/offer';

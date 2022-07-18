@@ -2,7 +2,7 @@
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Offer } from 'src/app/models/offer';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
@@ -14,14 +14,14 @@ import { CompanyOffersService } from 'src/app/services/company-offers.service';
   styleUrls: ['./edit-offer.page.scss'],
 })
 export class EditOfferPage implements OnInit {
-  editForm: FormGroup;
+  editForm: UntypedFormGroup;
   isSubmitted = false;
   offerID: any;
 
   @Input() offer: Offer[];
 
   constructor(
-      public fBuilder: FormBuilder,
+      public fBuilder: UntypedFormBuilder,
       private mdlController: ModalController,
       private alrtController: AlertController,
       private compOfService: CompanyOffersService,

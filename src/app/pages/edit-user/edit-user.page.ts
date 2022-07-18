@@ -3,7 +3,7 @@
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditUserPage implements OnInit {
   userID = sessionStorage.getItem('userid');
-  editUserForm: FormGroup;
+  editUserForm: UntypedFormGroup;
   isSubmitted = false;
   sectorsList: any[] = [];
 
@@ -27,7 +27,7 @@ export class EditUserPage implements OnInit {
   constructor(
           private uService: UserService,
           private sectService: SectorsService,
-          public fBuilder: FormBuilder,
+          public fBuilder: UntypedFormBuilder,
           private alrtController: AlertController,
           private mdlController: ModalController
         ) { }

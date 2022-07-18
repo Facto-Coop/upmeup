@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
 
@@ -12,14 +12,14 @@ import { CompanyOffersService } from 'src/app/services/company-offers.service';
   styleUrls: ['./create-offer.page.scss'],
 })
 export class CreateOfferPage implements OnInit {
-  createForm: FormGroup;
+  createForm: UntypedFormGroup;
   isSubmitted = false;
   userID: any;
   cDate: string;
   addEnroll = 0;
 
   constructor(
-              public fBuilder: FormBuilder,
+              public fBuilder: UntypedFormBuilder,
               private mdlController: ModalController,
               private alrtController: AlertController,
               private compOfService: CompanyOffersService

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable max-len */
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { SoftskillsService } from 'src/app/services/softskills.service';
@@ -14,13 +14,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ValuesModalPage implements OnInit, OnDestroy {
   skillsList: any[] = [];
-  maxElementCheckbox = 5;
+  maxElementCheckbox = 6;
   skillsSelected: any[] = [];
   currentModal = null;
   userID = sessionStorage.getItem('userid');
   skillsIds: any[] = [];
   userSkills: any[] = [];
   selected = 0;
+  selectedSkills: any[] = [];
+
+  @Output()
+  sendSelectedSkills: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private modalController: ModalController,
               private softSkillService: SoftskillsService,
@@ -29,7 +33,6 @@ export class ValuesModalPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.qsoftSkillsQuery();
     this.userSkills = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
-    //this.skillsSelected = JSON.parse(localStorage.getItem('uSelectedSkills'));
   }
 
    /**
@@ -47,6 +50,7 @@ export class ValuesModalPage implements OnInit, OnDestroy {
     this.useSessionStorage(this.skillsSelected);
     this.skillsSelected.forEach(element => {
       // console.log(element._id);
+      this.sendSelectedSkills.emit(element);
       const elementID: string = element._id;
       this.skillsIds.push(elementID);
     });
@@ -65,14 +69,14 @@ export class ValuesModalPage implements OnInit, OnDestroy {
       });
     }
 
-    this.dismissEditModal();
+    this.dismissEditModal(this.skillsSelected);
   }
 
   /**
   * Close modal when update
   */
-  async dismissEditModal() {
-    this.modalController.dismiss();
+  async dismissEditModal(data) {
+    this.modalController.dismiss(data);
   }
 
   /**

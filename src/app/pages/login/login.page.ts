@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ApolloQueryResult } from 'apollo-client';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   users: any[];
   error: any;
   loading = true;
-  initForm: FormGroup;
+  initForm: UntypedFormGroup;
   isSubmitted = false;
   emailRegex = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/';
 
@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
 
   constructor(private menu: MenuController,
               private apollo: Apollo,
-              public fBuilder: FormBuilder,
+              public fBuilder: UntypedFormBuilder,
               private router: Router,
               private auth: AuthService,
               private appC: AppComponent) { }

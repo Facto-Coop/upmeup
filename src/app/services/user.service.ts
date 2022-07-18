@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
-import { EmptyObject } from 'apollo-angular/build/types';
+import { EmptyObject } from 'apollo-angular/types';
 import { map } from 'rxjs/operators';
 
 const GET_USERLOGIN = gql`
@@ -262,7 +262,7 @@ export class UserService {
   /**
    * Mutation to create a new user
    */
-  /*mCreateOffer(iName: any, iSurname: any, iCity: any, iSector: any, iEduc: any, iPassw:any, iType: any, iEmail: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iValue: any) {
+  mCreateUser(iName: any, iSurname: any, iCity: any, iSector: any, iEduc: any, iPassw: any, iType: any, iEmail: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iValue: any) {
       return this.apollo.mutate({
         mutation: MUT_CREATEUSER,
         variables: {
@@ -285,5 +285,6 @@ export class UserService {
           this._oneUserWatchQuery?.refetch();
         })
       );
-  }*/
+  }
+
 }
