@@ -23,7 +23,7 @@
     </ion-label>
     
     <ion-grid class="grid-info">
-      <div class="ion-padding-top" *ngIf="userSkills.length === 0">
+      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills.length === 0">
         <div class="ion-padding">
           <ion-label color="danger" class="ion-text-start">
             Encara no tens valors seleccionats
@@ -31,11 +31,11 @@
         </div>
       </div>
 
-      <div class="ion-padding-top" *ngIf="userSkills.length > 0">  
+      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills.length > 0">  
         <ion-row>
           <ion-col size="6" *ngFor="let skill of userSkills">
             <div class="custom-icon">
-              <ion-label class="skills padding-left">
+              <ion-label class="skills">
                 <h4>
                   <ion-icon name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>                            
                   {{skill.name}}
@@ -67,39 +67,70 @@
 
 
       <ion-card-content>
-        <ion-list lines="none">  
-          <ion-item>
-            <ion-grid>
-              <div class="enrolled-ico custom-icon">
-                <ion-label> {{ offer?.enrolled }} </ion-label> 
-              </div>
-            </ion-grid>
-          </ion-item>
-          <ion-item>
-            <ion-grid>
-              <div class="calendar-ico custom-icon">
-                <ion-label> {{ offer.createdDate | date: 'dd/MM/yyyy' }}  </ion-label>
-              </div>
-            </ion-grid>
-          </ion-item>
-          <ion-item>
-            <ion-grid>
-              <div class="location-ico custom-icon">
-                <ion-label>  {{ offer?.city }} </ion-label> 
-              </div>
-            </ion-grid>
-          </ion-item>          
-          <ion-item>
-            <ion-grid>
-              <div class="jornada-ico custom-icon">
-                <ion-label> {{ offer?.jornada }} </ion-label> 
-              </div>
-            </ion-grid>
-          </ion-item>
+        <ion-list lines="none"> 
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-grid>
+                  <div class="enrolled-ico custom-icon">
+                    <ion-label> {{ offer?.enrolled }} </ion-label> 
+                  </div>
+                </ion-grid>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-grid>
+                  <div class="calendar-ico custom-icon">
+                    <ion-label> {{ offer.createdDate | date: 'dd/MM/yyyy' }}  </ion-label>
+                  </div>
+                </ion-grid>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-grid>
+                  <div class="location-ico custom-icon">
+                    <ion-label> {{ offer?.jornada }} </ion-label> 
+                  </div>
+                </ion-grid>
+              </ion-item>              
+            </ion-col>
+            <ion-col size="6">    
+              <ion-item>
+                <ion-grid>
+                  <div class="jornada-ico custom-icon">
+                    <ion-label> {{ offer?.city }} </ion-label> 
+                  </div>
+                </ion-grid>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
         </ion-list>
 
+        <!-- Competencies -->
+        <ion-item *ngIf="userCompets">
+          <div class="center-class">
+            <ion-label class="cv-title">
+              <h2 class="custom-title"> Competencies/Habilitats </h2>
+            </ion-label> 
+            <ion-label class="chip-space">
+              <h4 class="margin">
+                <ion-chip *ngFor="let compet of userCompets">
+                  <ion-label> {{ compet.name }} </ion-label>
+                </ion-chip>
+              </h4>
+            </ion-label>
+          </div>
+        </ion-item>
+
         <div *ngIf="isEnrolled > 0" class="ion-padding-top"> 
-          <ion-label color="dark-upmeup" class="ion-text-center"><h2> <b>Ja ets aspirant! Molta Sort!</b> </h2></ion-label>
+          <ion-label color="dark-upmeup" class="ion-text-center">
+            <h2 class="ion-padding-bottom"> <b>Ja ets aspirant! Molta Sort!</b> </h2>
+          </ion-label>
         </div>
 
         <ion-button *ngIf="isEnrolled === -1" size="small" color="danger" expand="full" shape="round" 
@@ -107,44 +138,6 @@
               Inscribirme
         </ion-button>
       </ion-card-content>
-      
-      <!-- <ion-card-content>
-
-        <ion-grid>
-          <ion-row>
-            <ion-col size="8">
-              <div>
-                <p>Contrato: {{ offer.tipoContrato }}</p>     
-                <p>Jornada: {{ offer.jornada }}</p>                    
-              </div>
-            </ion-col>
-            <ion-col>
-              <p>{{ offer.createdDate | date: 'dd/MM/yyyy' }}</p>  
-              <div>Inscritos: {{ offer.enrolled }}</div> 
-            </ion-col>
-          </ion-row>
-        </ion-grid> 
-
-        <ion-grid>
-          <ion-row>
-            <ion-col size="4"> <p>Descripción:</p> </ion-col>
-            <ion-col size="8">             
-              <div> {{ offer.description }} </div>
-            </ion-col>
-            <ion-col> </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <div *ngIf="isEnrolled > 0" class="ion-padding-top"> 
-          <ion-label color="dark-upmeup" class="ion-text-center"><h2> <b>Ja ets aspirant! Molta Sort!</b> </h2></ion-label>
-        </div>
-
-        <ion-button *ngIf="isEnrolled === -1" size="small" color="danger" expand="full" shape="round" 
-          (click)="addEnrroled(offer._id, offer.enrolled)">
-              Inscribirme
-        </ion-button>
-          
-      </ion-card-content> -->
 
     </ion-card>
   </div>

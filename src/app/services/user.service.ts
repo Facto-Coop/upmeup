@@ -8,8 +8,8 @@ import { EmptyObject } from 'apollo-angular/types';
 import { map } from 'rxjs/operators';
 
 const GET_USERLOGIN = gql`
-  query getLogUser($id: String!) {
-    getUser(id: $id) {
+  query getLogUser {
+    getUsers {
       _id
       name
       email
@@ -34,7 +34,8 @@ const GET_USER = gql`
       lastJobTasks
       experience
       languages
-      valors 
+      valors
+      competencies
     }
   }
 `;
@@ -54,7 +55,8 @@ const GET_ALLUSERS = gql`
       lastJobTasks
       experience
       languages
-      valors 
+      valors
+      competencies
     }
   }
 `;
@@ -97,7 +99,8 @@ mutation editUser (
                     $jobPosition: String!,
                     $lastJobTasks: String!,
                     $experience: String!,
-                    $languages: [String!]!
+                    $languages: [String!]!,
+                    $competencies: [String!]!
                   ) {
 
   updateUser(
@@ -113,6 +116,7 @@ mutation editUser (
       lastJobTasks: $lastJobTasks
       experience: $experience
       languages: $languages
+      competencies: $competencies
     }
   ) {
       _id
@@ -126,6 +130,7 @@ mutation editUser (
       lastJobTasks
       experience
       languages
+      competencies
     }
 }
 `;
@@ -142,7 +147,8 @@ mutation createUserMut( $name: String!,
                         $jobPosition: String!,
                         $lastJobTasks: String!,
                         $experience: String!,
-                        $languages: [String!]!, 
+                        $languages: [String!]!,
+                        $competencies: [String!]!,
                         $valors: [String!]!) {
   createUser(
       createUserDto: { 
@@ -158,6 +164,7 @@ mutation createUserMut( $name: String!,
         lastJobTasks: $lastJobTasks
         experience: $experience
         languages: $languages
+        competencies: $competencies
         valors: $valors
       }    
   ) {
@@ -174,6 +181,7 @@ mutation createUserMut( $name: String!,
       lastJobTasks
       experience
       languages
+      competencies
       valors
     }
 }
@@ -186,11 +194,18 @@ export class UserService {
 
   constructor(private apollo: Apollo) { }
 
-
   /**
-   * Get All Users from DB.
+   * Get Users Login from DB.
    */
    private _allUsersWatchQuery: QueryRef<any, EmptyObject>;
+
+   qGetUsersLog(): QueryRef<any, EmptyObject> {
+     this._allUsersWatchQuery = this.apollo.watchQuery({
+         query: GET_USERLOGIN
+     });
+
+     return this._allUsersWatchQuery;
+   }
 
    qGetAllUsers(): QueryRef<any, EmptyObject> {
      this._allUsersWatchQuery = this.apollo.watchQuery({
@@ -235,7 +250,7 @@ export class UserService {
   /**
   * Mutation to Edit user profile
   */
-   mEditUser(userId, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any) {
+   mEditUser(userId, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iCompetence: any) {
     return this.apollo.mutate({
         mutation: MUT_EDIT_USER,
         variables: {
@@ -249,7 +264,8 @@ export class UserService {
           jobPosition: iJobPos,
           lastJobTasks: iLastJob,
           experience: iExp,
-          languages: iLang
+          languages: iLang,
+          competencies: iCompetence
         }
     }).pipe(
         map((data) => {
@@ -262,7 +278,7 @@ export class UserService {
   /**
    * Mutation to create a new user
    */
-  mCreateUser(iName: any, iSurname: any, iCity: any, iSector: any, iEduc: any, iPassw: any, iType: any, iEmail: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iValue: any) {
+  mCreateUser(iName: any, iSurname: any, iCity: any, iSector: any, iEduc: any, iPassw: any, iType: any, iEmail: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iCompetence: any, iValue: any) {
       return this.apollo.mutate({
         mutation: MUT_CREATEUSER,
         variables: {
@@ -278,6 +294,7 @@ export class UserService {
           lastJobTasks: iLastJob,
           experience: iExp,
           languages: iLang,
+          competencies: iCompetence,
           valors: iValue
         }
       }).pipe(

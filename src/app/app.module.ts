@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
@@ -17,6 +18,7 @@ import { AuthService } from './services/auth.service';
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,

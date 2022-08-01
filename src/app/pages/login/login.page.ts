@@ -5,12 +5,14 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ApolloQueryResult } from 'apollo-client';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { AppComponent } from 'src/app/app.component';
 import { MenuController } from '@ionic/angular';
+import { map } from 'rxjs';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +21,10 @@ import { MenuController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   users: any[];
-  error: any;
-  loading = true;
-  initForm: UntypedFormGroup;
+  userData: any = '';
+  // error: any;
+  // loading = true;
+  initForm: FormGroup;
   isSubmitted = false;
   emailRegex = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/';
 
@@ -32,22 +35,25 @@ export class LoginPage implements OnInit {
   userExist = false;
 
   constructor(private menu: MenuController,
+              private uService: UserService,
               private apollo: Apollo,
-              public fBuilder: UntypedFormBuilder,
+              public fBuilder: FormBuilder,
               private router: Router,
               private auth: AuthService,
-              private appC: AppComponent) { }
+              private appC: AppComponent,
+              public loadingCtrl: LoadingController,) {  }
 
   ngOnInit() {
     this.menu.enable(false);
     this.validation();
     this.userQuery();
+    //this.qUserLog();
   }
 
+  //TODO: Refactor Login!!!!!
   // Get info from DB.
   userQuery() {
-    this.apollo
-    .watchQuery({
+    this.apollo.watchQuery({
       query: gql`
         {
           getUsers {
@@ -56,14 +62,15 @@ export class LoginPage implements OnInit {
             email
             password
             tipo
+            valors
           }
         }
       `,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>) => {
 
       this.users = result.data && result.data.getUsers;
-      this.loading = result.loading;
-      this.error = result.errors;
+      //this.loading = result.loading;
+      //this.error = result.errors;
     });
   }
 
@@ -78,20 +85,53 @@ export class LoginPage implements OnInit {
     this.userType = '0';
     this.userExist = false;
     this.isSubmitted = true;
-    if (!this.initForm.valid) {
-      console.log('Please provide all the required values!');
-      return false;
-    } else {
-      console.log(this.initForm.value.userEmail);
-      this.user.email = this.initForm.value.userEmail;
-      this.user.pw = this.initForm.value.userPassword;
 
+    if (this.initForm.valid) {
+     /* this.loadingCtrl.create({
+        message: 'Autenticando usuario...',
+        duration: 700
+      }).then(async res => {
+        res.present();
+        this.loadingCtrl.dismiss();*/
+        //console.log(this.initForm.value.userEmail);
+        this.user.email = this.initForm.value.userEmail;
+        this.user.pw = this.initForm.value.userPassword;
+      //});
+     
       this.loginIn(this.user.email, this.user.pw);
     }
+
+    console.log('Please provide all the required values!');
+    return false;
   }
 
-  get errorControl() {
-    return this.initForm.controls;
+  qUserLog() {
+    /*this.uService.qGetUsersLog().valueChanges.pipe(
+      map(result => {
+        this.users = result.data.getUsers;
+      })
+    ).subscribe((item) => {
+      this.findUser(this.initForm.value.userEmail);
+    });*/
+
+    this.uService.qGetUsersLog().valueChanges
+      .subscribe((result: any) => {
+        this.users = result?.data?.items;
+      });
+  }
+
+  findUser(mail) {
+    const index = this.users.findIndex(
+      object => object.email === mail
+    );
+
+    if(index === -1) {
+      console.log('No se encuentra usuario!');
+    } else {
+      this.userData.push(this.users[index]);
+    }
+
+    console.log('ID Compets that need to User Profile --> ', this.userData);
   }
 
   // Check if user exist
@@ -102,7 +142,7 @@ export class LoginPage implements OnInit {
         // TODO: Refactor --> encrypt passw.
         if(uEmail === el.email && uPassword === el.password) {
           this.userExist = true;
-          this.useSessionStorage(el._id, el.name, el.email);
+          this.useSessionStorage(el._id, el.name, el.email, el.valors);
           this.auth.onLogin();
           this.userType = el.tipo;
 
@@ -135,10 +175,15 @@ export class LoginPage implements OnInit {
     }
   }
 
-  useSessionStorage(uid, uName, uMail) {
+  get errorControl() {
+    return this.initForm.controls;
+  }
+
+  useSessionStorage(uid, uName, uMail, uSkills) {
     sessionStorage.setItem('userid', uid);
     sessionStorage.setItem('user', uName);
     sessionStorage.setItem('email', uMail);
+    sessionStorage.setItem('uSelectedSkills', uSkills);
   }
 
 }

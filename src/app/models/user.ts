@@ -13,6 +13,8 @@ export class User {
         public jobPosition: string,
         public lastJobTasks: string,
         public languages: Array<string>,
-        public tipo: string
+        public tipo: string,
+        public competencies: Array<string>,
     ) {}
 }
+

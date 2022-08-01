@@ -5,39 +5,23 @@
 ion-content { 
     --ion-background-color: #c8e3d6;
 	ion-header { box-shadow: none !important; }
-
-	// Soft-Skills style
-	/*ion-grid {
-		padding: 0 !important;
-
-		ion-col {
-			padding: 0 !important;
-
-			.custom-values {
-				display: inline-flex;
-
-				.values-ico-style {
-					color: var(--ion-color-upmeup); 
-					fill: currentcolor; 
-					margin-right: 15px; 
-				}
-			}
-		}
-	}*/
 	
 	.container {
         --ion-background-color: #f2f2f2;
-
+        .center-class { text-align: center; }  
+		
 		ion-card-content { 
 			padding: 0px; 
 		
-			//ion-button { height: 28px; width: 105px; text-transform: capitalize; }
+			h4.margin { margin: 25px 15px 25px 15px;} 
+            .custom-title { color: var(--ion-color-upmeup); font-weight: bold; }
+			.chip-space { white-space: normal; }
 		}
 
 		ion-card {            
 			.user-avatar { width: 85px; height: 85px; }
 			img.users { border-radius: 10%; }
-		}   
+		}
 	}
 
 	.text-space { white-space: normal; }
@@ -46,8 +30,6 @@ ion-content {
     ion-card { 
 		.user-avatar { width: 85px; height: 85px; }
 		img.users { border-radius: 10%; }
-        //--ion-background-color: #f2f2f2; 
-		//.avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
 	
 	    ion-label ion-icon { 
 			width: 30px; 
@@ -74,7 +56,10 @@ ion-content {
     img { border-radius: 50%; }
     .header-text { display:block; text-align: center; text-transform: uppercase; }
 
-    .grid-info { margin: 0px 30px; font-size: 14px; font-weight: 700; }
+    .grid-info { 
+		margin: 0px 30px; font-size: 14px; font-weight: 700; 
+		ion-col { margin-top: 0px; }
+	}
 
 	//ion-label.skills { display: inline-flex; }
 	ion-label ion-icon { margin: 0 10px; vertical-align: bottom; }

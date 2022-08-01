@@ -1,0 +1,30 @@
+@import "~node_modules/ngx-chips/core/styles/core/_core.scss";
+
+$upmeup-color: #026875;
+$upmeup-focus-color: #4a8d8a;
+
+// The container's theme
+$upm-theme: (
+    container-border-bottom: 1px solid $upmeup-color
+);
+
+// this is the tag's theme
+$upm-tag-theme: (
+    background: $upmeup-color,
+    background-focused: $upmeup-focus-color,
+    background-active: $upmeup-focus-color,
+    background-hover: $upmeup-focus-color,
+    color: #fff,
+    color-hover: #fff,
+    border-radius: 2px
+);
+
+// Apply theme to the container
+:host ::ng-deep .ng2-tag-input.upm-tag-theme{
+    @include tag-theme($upm-theme);
+}
+
+// Apply theme to the tags
+:host ::ng-deep .ng2-tag-input.upm-tag-theme tag{
+    @include tag-theme($upm-tag-theme);
+}

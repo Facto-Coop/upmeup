@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonRouterOutlet, IonSlides, LoadingController, MenuController, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import Validation from './../utils/validation';
@@ -11,6 +13,8 @@ import { ValuesModalPage } from '../shared/modals/values-modal/values-modal.page
 import { SectorsService } from '../services/sectors.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { CompetenceService } from '../services/competence.service';
+
 
 @Component({
   selector: 'app-register',
@@ -28,21 +32,26 @@ export class RegisterPage implements OnInit {
   passwordRegex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$';
   skillsListId: any[] = [];
   sectorList: any[] = [];
-  registerForm: UntypedFormGroup;
+  registerForm: FormGroup;
   isSubmitted = false;
   userType = '0';
   passw = '';
   userSkills: any[] = [];
+  competList: any[] = [];
+  userCompets: any[] = [];
+  userCompetsIds: any[] = [];
+  nameNewCompet: any = [];
+  createdCompet: any = [];
 
   slideOpts = {
     allowTouchMove: false,
     scrollbar: true
   };
-  formSlide1: UntypedFormGroup;
-  formSlide2: UntypedFormGroup;
-  formSlide3: UntypedFormGroup;
-  formSlide4: UntypedFormGroup;
-  formSlide5: UntypedFormGroup;
+  formSlide1: FormGroup;
+  formSlide2: FormGroup;
+  formSlide3: FormGroup;
+  formSlide4: FormGroup;
+  formSlide5: FormGroup;
 
   @ViewChild('registerSlider')  slides: IonSlides;
 
@@ -51,16 +60,20 @@ export class RegisterPage implements OnInit {
               private modalController: ModalController,
               private routerOutlet: IonRouterOutlet,
               private router: Router,
-              public fBuilder: UntypedFormBuilder,
+              public fBuilder: FormBuilder,
               private uService: UserService,
               private sectorService: SectorsService,
-              public loadingCtrl: LoadingController
+              private competService: CompetenceService,
+              public loadingCtrl: LoadingController,
              ) { }
 
   ngOnInit() {
     sessionStorage.clear();
     this.menu.enable(false);
     this.qGetSectorList();
+    this.qGetCompetencies();
+
+    //Init all forms:
     this.createFormSlide1();
     this.createFormSlide2();
     this.createFormSlide3();
@@ -82,6 +95,9 @@ export class RegisterPage implements OnInit {
       this.userType = selected;
       this.swipeNext();
     }
+
+    //Init last form according to Type:
+    this.createFormSlide5();
   }
 
   createFormSlide1() {
@@ -123,14 +139,38 @@ export class RegisterPage implements OnInit {
     });
   }
 
-  createFormSlide5() {
-    this.formSlide5 = this.fBuilder.group({
-      iEduc: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
-      iLang: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]]
+  qGetCompetencies() {
+    this.competService.qGetCompetencies().valueChanges.pipe(
+      map(result => {
+        this.competList = result.data.getCompetencies;
+      })
+    ).subscribe((item) => {
+      //console.log(this.competList);
     });
   }
 
+  createFormSlide5() {
+    if(this.userType === '2' || this.userType === '0') {
+      this.formSlide5 = this.fBuilder.group({
+          iEduc: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+          iLang: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+        });
+    } else if(this.userType === '1') {
+        this.formSlide5 = this.fBuilder.group({
+          iEduc: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+          iLang: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+          iCompetence: ['', [Validators.required,  Validators.minLength(4), Validators.maxLength(20)]]
+        });
+    }
+  }
+
   submitForm() {
+    console.log(this.formSlide1.value);
+    console.log(this.formSlide2.value);
+    console.log(this.formSlide3.value);
+    console.log(this.formSlide4.value);
+    console.log(this.formSlide5.value);
+
     if(this.userSkills.length > 0) {
       this.getSkillsId();
     }
@@ -150,21 +190,27 @@ export class RegisterPage implements OnInit {
    * @param iContrato
    * @param iDate
    */
-  createNewUser(iName: any, iSurname: any, iCity: any, iSector: any, iEduc: any, iPassw: any, iType: any, iEmail: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iSkills: any) {
-  this.uService.mCreateUser(iName, iSurname, iCity, iSector, iEduc, iPassw, iType, iEmail, iJobPos, iLastJob, iExp, iLang, iSkills)
+  createNewUser(iName: any, iSurname: any, iCity: any, iSector: any, iEduc: any, iPassw: any, iType: any, iEmail: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iCompetence: any, iSkills: any) {
+  this.uService.mCreateUser(iName, iSurname, iCity, iSector, iEduc, iPassw, iType, iEmail, iJobPos, iLastJob, iExp, iLang, iCompetence, iSkills)
     .subscribe((response) => {
       console.log('Created user!');
     });
   }
 
   saveNewUser() {
-    console.log(this.formSlide4.value);
-    console.log(this.skillsListId);
+    if(this.userType === '1') {
+      this.insertedTags(this.formSlide5.value.iCompetence);
+    } else {
+      this.userCompetsIds = [];
+    }
 
     this.loadingCtrl.create({
       message: 'Creant nou usuari...'
     }).then(async res => {
       res.present();
+      console.log('Guardando info...!');
+      this.findCompetence(this.nameNewCompet);
+
       await this.createNewUser(
         this.formSlide1.value.iName,
         this.formSlide1.value.iSurname,
@@ -178,15 +224,57 @@ export class RegisterPage implements OnInit {
         this.formSlide4.value.iLastJob,
         this.formSlide3.value.iExp,
         this.formSlide5.value.iLang,
+        this.userCompetsIds,
         this.skillsListId
       );
-
       this.loadingCtrl.dismiss();
     });
 
     setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 700);
+      //this.router.navigate(['/login']);
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+    }, 1000);
+  }
+
+  //Created new competence if not exist yet
+  insertedTags(competencies) {
+    const existCompets = [];
+
+    competencies.forEach(el => {
+      if(!el._id && !el.name) {
+        this.createNewCompetence(el.value);
+        this.nameNewCompet.push(el);
+      } else {
+        existCompets.push(el);
+        this.userCompetsIds.push(el._id);
+      }
+    });
+    this.userCompets.push(existCompets);
+  }
+
+  //Call to create new competencies service:
+  createNewCompetence(iName: any) {
+    this.competService.mCreateCompetence(iName).subscribe(() => {
+      console.log('New Competence created!');
+    });
+  }
+
+  //Find id of new competencies:
+  findCompetence(names) {
+    names.forEach(el => {
+      const index = this.competList.findIndex(
+        object => object.name === el.value
+      );
+
+      if(index === -1) {
+        console.log('No se encuentra competencia!!');
+      } else {
+        this.createdCompet.push(this.competList[index]);
+        this.userCompetsIds.push(this.competList[index]._id);
+      }
+    });
+
+    //console.log('ID Compets that need to User Profile --> ', this.userCompetsIds);
   }
 
   swipeNext(){

@@ -13,7 +13,8 @@ export class Offer {
         public enrolled: number,
         public tipoContrato: string,
         public description: string,
-        public createdDate: string
+        public createdDate: string,
+        public competencies: Array<string>
 
         /*public id: number,
         public companyName: string,

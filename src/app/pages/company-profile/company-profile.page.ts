@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { CompetenceService } from 'src/app/services/competence.service';
 import { SectorsService } from 'src/app/services/sectors.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
@@ -87,6 +88,10 @@ export class CompanyProfilePage implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  /**
+  * Call modal to change values from profile.
+  * @returns
+  */
   async openModal() {
     const modal = await this.modalController.create({
       component: ValuesModalPage,

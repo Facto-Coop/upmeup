@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { CompetenceService } from 'src/app/services/competence.service';
 import { SectorsService } from 'src/app/services/sectors.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
@@ -20,6 +21,7 @@ export class UserProfilePage implements OnInit {
   skillsList: any[] = [];
   userInfo: any[] = [];
   userSkills: any[] = [];
+  userCompets: any[] = [];
   sectorName = '';
 
   constructor(
@@ -28,11 +30,13 @@ export class UserProfilePage implements OnInit {
               private uService: UserService,
               private softSkillService: SoftskillsService,
               private sectorService: SectorsService,
+              private competService: CompetenceService,
               private auth: AuthService,
               private router: Router,
               ) { }
 
   ngOnInit() {
+    console.log('Init!!');
     this.qGetUser(this.userID);
     // TODO: Get info from user in DB.
     this.skillsList = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
@@ -50,6 +54,7 @@ export class UserProfilePage implements OnInit {
       this.userInfo = item.getUser;
       this.getUserSkills(item.getUser.valors);
       this.qGetSectorName(item.getUser.sector_id);
+      this.getUserCompets(item.getUser.competencies);
     });
   }
 
@@ -73,6 +78,27 @@ export class UserProfilePage implements OnInit {
     });
   }
 
+  /** Get ID Competence from User */
+  getUserCompets(uCompets){
+    uCompets.forEach(el => {
+      //console.log(el);
+      this.qGetCompetencies(el);
+    });
+  }
+
+  //Get Competences data from DB
+  qGetCompetencies(competId) {
+    this.userCompets = [];
+    this.competService.qGetCompetence(competId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      this.userCompets.push(item.getCompetence);
+    });
+  }
+
+  /**
+   * Get sector
+   * */
   qGetSectorName(sectorId) {
     //let sectorName = '';
     this.sectorService.qGetSector(sectorId).valueChanges.pipe(

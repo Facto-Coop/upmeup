@@ -1,3 +1,5 @@
+@import "../../theme/chips-theme.scss";
+
 /***************************************************************************/
 /***************************** Custom Styles *******************************/
 /***************************************************************************/
@@ -41,8 +43,15 @@ ion-content {
     }
 
     .padding-btn { padding-top: 40px; }
-    
+      
+   
+}  
 
-
-
+//Input ngx-chips: 
+:host ::ng-deep .ng2-tag-input__text-input {
+    width: 100%;
+    border: 0px;
+    border-radius: 50px;
+    margin: 18px;
+    padding: 8px;
 }

@@ -25,6 +25,7 @@
         </div>
       </ion-slide>
 
+      <!-- Form 1 -->
       <ion-slide>
         <div class="container">      
           <form [formGroup]="formSlide1" (ngSubmit)="submitForm()" novalidate>
@@ -80,6 +81,7 @@
         </div>       
       </ion-slide>
 
+      <!-- Form 2 -->
       <ion-slide>
         <div class="container-medium">
           <form [formGroup]="formSlide2" (ngSubmit)="submitForm()" novalidate>
@@ -92,7 +94,7 @@
                   </div>
                   <div *ngIf="errorsSld2.iEmail.errors && (errorsSld2.iEmail.invalid || errorsSld2.iEmail.touched)">
                     <small class="error ion-padding" *ngIf="errorsSld2.iEmail.errors?.required">* Camp requerit</small><br>   
-                    <small class="error ion-padding" *ngIf="errorsSld2.iEmail.errors">* L'Email introduït no és vàlid</small><br>
+                    <small class="error ion-padding" *ngIf="errorsSld2.iEmail.errors">* L'Email introduït no és vàlid (evita fer servir majúscules o espais)</small><br>
                     <small class="error ion-padding" *ngIf="errorsSld2.iEmail.errors?.minlength">* Ha de tenir com a mínim 8 caràcters</small>
                   </div>
                 </ion-col>
@@ -107,11 +109,11 @@
                      required>
                   </div>
                   <div *ngIf="errorsSld2.iPassword.errors && (errorsSld2.iPassword.invalid || errorsSld2.iPassword.touched)">
-                    <small class="error ion-padding" *ngIf="errorsSld2.iPassword.errors?.required">* Camp requerit</small><br>
+                    <small class="error ion-padding" *ngIf="errorsSld2.iPassword.errors?.required">* Camp requerit</small><br>                    
+                    <small class="error ion-padding" *ngIf="errorsSld2.iPassword.errors?.pattern">
+                      * La contrasenya ha de tenir entre 8 i 16 caràcters, almenys un dígit, almenys una minúscula i almenys una majúscula.
+                    </small><br>
                     <small class="error ion-padding" *ngIf="errorsSld2.iPassword.errors?.minlength">* Ha de tenir com a mínim 8 caràcters</small>
-                    <small class="error ion-padding" *ngIf="errorsSld2.iPassword.errors?.pattern">* 
-                      La contrasenya ha de tenir a l'entre 8 i 16 caràcters, almenys un dígit, almenys una minúscula i almenys una majúscula.
-                    </small>
                   </div>
                 </ion-col>
               </ion-row>
@@ -140,6 +142,7 @@
         </div>       
       </ion-slide>
 
+      <!-- Form 3 -->
       <ion-slide>
         <div class="container-medium">
           <form [formGroup]="formSlide3" (ngSubmit)="submitForm()" novalidate>
@@ -198,7 +201,8 @@
           </form>
         </div>       
       </ion-slide>
-
+      
+      <!-- Form 4 -->
       <ion-slide>
         <div class="container-medium">
           <form [formGroup]="formSlide4" (ngSubmit)="submitForm()" novalidate>  
@@ -227,11 +231,12 @@
         </div>     
       </ion-slide>
 
+      <!-- Select Skills -->
       <ion-slide>
         <div class="container-medium"> 
           <ion-grid>
             <h2>Potser t'identifiques amb tots els valors o característiques que et proposem en la següent pantalla, però 
-              et demanem que elegeixis el 4 que més et representen.
+              et demanem que elegeixis el que més et representen.
             </h2>
             <h4>(máxim: 6)</h4>
             <ion-row>
@@ -274,8 +279,9 @@
         </div>     
       </ion-slide>
 
+      <!-- Form 5 -->
       <ion-slide>
-        <div class="container-short">
+        <div class="container-medium">
           <form [formGroup]="formSlide5" (ngSubmit)="submitForm()" novalidate>
             <ion-grid>
               <h2>Nivell estudis</h2>
@@ -303,7 +309,27 @@
                     </ion-select>
                   </div>
                 </ion-col>
+              </ion-row>            
+            </ion-grid>
+            <ion-grid *ngIf="userType === '1'"> 
+              <h2>Competencies o Habilitats</h2>
+              <ion-row>
+                <ion-col size="12">
+                  <tag-input [identifyBy]="'id'" [placeholder]="'+ Competencies'" [displayBy]="'value'" [maxItems]='20' id="iCompetence" formControlName="iCompetence" [removable]="true" [theme]="'upm-tag-theme'">
+                      <ng-template let-item="item">
+                            {{ item.value }}
+                      </ng-template>
+                      <tag-input-dropdown [autocompleteItems]="competList" [identifyBy]="'_id'" [displayBy]="'name'">
+                          <ng-template let-item="item" let-index="index">
+                            {{ item.name }}
+                          </ng-template>
+                      </tag-input-dropdown>
+                  </tag-input>
+                </ion-col>
               </ion-row>
+            </ion-grid>
+
+            <ion-grid>
               <ion-row>
                 <ion-col size="12"> 
                   <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!formSlide5.valid" (click)="saveNewUser()"> Finalitzar </ion-button>

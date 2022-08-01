@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
+import { CompetenceService } from 'src/app/services/competence.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
 import { UsersOffersService } from 'src/app/services/users-offers.service';
@@ -25,6 +26,7 @@ export class OfferDetailPage implements OnInit {
   userSkills: any[] = [];
   usersOffersList: any[] = [];
   isEnrolled: number;
+  userCompets: any[] = [];
 
   constructor(
               private aRoute: ActivatedRoute,
@@ -33,7 +35,8 @@ export class OfferDetailPage implements OnInit {
               private cOfferService: CompanyOffersService,
               private uService: UserService,
               private usOffServ: UsersOffersService,
-              private softSkillService: SoftskillsService
+              private softSkillService: SoftskillsService,
+              private competService: CompetenceService
             ) { }
 
   ngOnInit() {
@@ -56,6 +59,7 @@ export class OfferDetailPage implements OnInit {
       // console.log(item);
       this.offer = item.getOffer;
       this.qGetUser(item.getOffer.userId);
+      this.getUserCompets(item.getOffer.competencies);
     });
   }
 
@@ -99,7 +103,6 @@ export class OfferDetailPage implements OnInit {
 
     // Message Alert!
     this.enrolled();
-
     this.goToList();
   }
 
@@ -156,6 +159,23 @@ export class OfferDetailPage implements OnInit {
 
   goToList() {
     this.router.navigate(['/', 'candidatures']);
+  }
+
+  /** Get ID Competence from User */
+  getUserCompets(uCompets){
+    uCompets.forEach(el => {
+      //console.log(el);
+      this.qGetCompetencies(el);
+    });
+  }
+
+  /** Get Competencies data from DB */
+  qGetCompetencies(competId) {
+    this.competService.qGetCompetence(competId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      this.userCompets.push(item.getCompetence);
+    });
   }
 
   /**

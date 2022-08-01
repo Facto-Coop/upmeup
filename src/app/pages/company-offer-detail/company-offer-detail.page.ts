@@ -138,7 +138,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
 
   /**
   * Function to call softSkills of each user enrolled.
-  *  */
+  **/
   getSkillsById(userId, skills) {
     skills.forEach(element => {
       this.qSkillName(userId, element);
@@ -164,8 +164,6 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
   compareLists(uLogged, uOwnerOffer) {
     uLogged.forEach(item => {
       const userValue = item._id;
-      //console.log('uLogged item: ', item);
-      //console.log('and candidates: ', uOwnerOffer);
 
       uOwnerOffer.forEach((el) => {
         //console.log('cada inscrito: ', el);
@@ -175,7 +173,6 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
         }
       });
     });
-    //console.log('result: ', this.uDataList);
 
     //console.log(sortedCompany);
     const result = this.addMatch(this.usersListData, this.uDataList);
@@ -208,7 +205,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
     const editModal = await this.mController.create({
       component: EditOfferPage,
       componentProps: {
-        offer: this.offer
+        offerData: this.offer
       },
       animated: true,
       cssClass: 'modalCss'

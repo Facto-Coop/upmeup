@@ -16,6 +16,7 @@ query {
     eduLevel
     city
     jornada
+    competencies
     rangoSalarial
     remoto
     enrolled
@@ -36,6 +37,7 @@ query getDetailOffer($id: String!) {
     eduLevel
     city
     jornada
+    competencies
     rangoSalarial
     remoto
     enrolled
@@ -51,6 +53,7 @@ const MUT_CREATEOFFER = gql`
   mutation createOfferMut($userId: String!, 
                           $title: String!, 
                           $eduLevel: String!,
+                          $competencies: [String!]!,
                           $city: String!,
                           $jornada: String!, 
                           $rangoSalarial: String!, 
@@ -65,6 +68,7 @@ const MUT_CREATEOFFER = gql`
         userId: $userId
         title: $title
         eduLevel: $eduLevel
+        competencies: $competencies
         city: $city
         jornada: $jornada
         rangoSalarial: $rangoSalarial
@@ -80,6 +84,7 @@ const MUT_CREATEOFFER = gql`
       userId
       title
       eduLevel
+      competencies
       city
       jornada
       rangoSalarial
@@ -99,6 +104,7 @@ const MUT_EDITOFFER = gql`
                           $eduLevel: String!,
                           $city: String!, 
                           $jornada: String!, 
+                          $competencies: [String!]!,
                           $rangoSalarial: String!, 
                           $remoto: String!,
                           $tipoContrato: String!
@@ -112,6 +118,7 @@ const MUT_EDITOFFER = gql`
             eduLevel: $eduLevel
             city: $city
             jornada: $jornada
+            competencies: $competencies
             rangoSalarial: $rangoSalarial
             remoto: $remoto
             tipoContrato: $tipoContrato
@@ -125,6 +132,7 @@ const MUT_EDITOFFER = gql`
       eduLevel
       city
       jornada
+      competencies
       rangoSalarial
       remoto
       enrolled
@@ -195,7 +203,7 @@ export class CompanyOffersService {
    * Mutation to Create an Offer.
    * @returns new Offer
    */
-  mCreateOffer(uId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, 
+  mCreateOffer(uId: any, iTitle: any, iEduLevel: any, iCompetence: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, 
     iEnroll: any, iContrato: any, iDescripcio: any, iRequirements: any, iDate: string) {
       return this.apollo.mutate({
         mutation: MUT_CREATEOFFER,
@@ -203,6 +211,7 @@ export class CompanyOffersService {
           userId: uId,
           title: iTitle,
           eduLevel: iEduLevel,
+          competencies: iCompetence,
           city: iCity,
           jornada: iJornada,
           rangoSalarial: iRango,
@@ -224,7 +233,7 @@ export class CompanyOffersService {
    * Mutation to Edit an Offer.
    * @returns edited Offer
    */
-  mEditOffer(offerId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iContrato: any, iDescripcio: any, iRequirements: any) {
+  mEditOffer(offerId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iCompetence: any, iRango: any, iRemoto: any, iContrato: any, iDescripcio: any, iRequirements: any) {
     return this.apollo.mutate({
         mutation: MUT_EDITOFFER,
         variables: {
@@ -233,6 +242,7 @@ export class CompanyOffersService {
             eduLevel: iEduLevel,
             city: iCity,
             jornada: iJornada,
+            competencies: iCompetence,
             rangoSalarial: iRango,
             remoto: iRemoto,
             tipoContrato: iContrato,

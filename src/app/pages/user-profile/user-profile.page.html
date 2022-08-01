@@ -93,6 +93,20 @@
           </ion-label>    
         </div>
 
+        <!-- Competencies -->
+        <div class="center-class" *ngIf="userCompets">  
+          <ion-label class="cv-title">
+            <h2 class="custom-title"> Competencies/Habilitats </h2>
+          </ion-label> 
+          <ion-label>
+            <h4 class="margin">
+              <ion-chip *ngFor="let compet of userCompets">
+                <ion-label> {{ compet.name }} </ion-label>
+              </ion-chip>
+            </h4>
+          </ion-label>
+        </div>
+
         <!-- Experience -->
         <div class="center-class">  
           <ion-label class="exp-title">

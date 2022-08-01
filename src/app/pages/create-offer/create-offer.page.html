@@ -40,6 +40,30 @@
         <small class="error ion-padding" *ngIf="errorCtr.iEduLevel.errors.maxlength">* Ha de tenir com a màxim 30 lletres</small>
       </div>
 
+       <!-- Competencies -->
+       <ion-item>
+        <ion-label>Competencies/Habilitats:</ion-label>
+      </ion-item>
+      <ion-item class="ion-padding-top ion-padding-bottom">
+        <tag-input [identifyBy]="'id'"
+                   [displayBy]="'value'"
+                   [placeholder]="'+ Competencies'"
+                   [maxItems]='20'
+                   id="iCompetence"
+                   formControlName="iCompetence"
+                   [removable]="true"
+                   [theme]="'upm-tag-theme'">
+              <ng-template let-item="item">
+                {{ item.value }}
+              </ng-template>
+          <tag-input-dropdown [autocompleteItems]="competList" [identifyBy]="'_id'" [displayBy]="'name'">
+              <ng-template let-item="item" let-index="index">
+                {{ item.name }}
+              </ng-template>
+          </tag-input-dropdown>
+        </tag-input>
+      </ion-item>
+
       <ion-item>
         <ion-label>Ciutat:</ion-label>
         <ion-input id="iCity" formControlName="iCity" minlength="4" maxlength="30" required></ion-input>

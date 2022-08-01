@@ -2,9 +2,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { map } from 'rxjs';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
+import { CompetenceService } from 'src/app/services/competence.service';
 
 @Component({
   selector: 'app-create-offer',
@@ -12,21 +14,29 @@ import { CompanyOffersService } from 'src/app/services/company-offers.service';
   styleUrls: ['./create-offer.page.scss'],
 })
 export class CreateOfferPage implements OnInit {
-  createForm: UntypedFormGroup;
+  createForm: FormGroup;
   isSubmitted = false;
   userID: any;
   cDate: string;
   addEnroll = 0;
 
+  competList: any[] = [];
+  offerCompets: any[] = [];
+  offerCompetsIds: any[] = [];
+  nameNewCompet: any = [];
+
   constructor(
-              public fBuilder: UntypedFormBuilder,
+              public fBuilder: FormBuilder,
               private mdlController: ModalController,
               private alrtController: AlertController,
-              private compOfService: CompanyOffersService
+              private compOfService: CompanyOffersService,
+              private competService: CompetenceService,
+              public loadingCtrl: LoadingController
               ) { }
 
   ngOnInit() {
     this.userID = sessionStorage.getItem('userid');
+    this.qGetCompetencies();
     this.validation();
   }
 
@@ -34,13 +44,24 @@ export class CreateOfferPage implements OnInit {
     this.createForm = this.fBuilder.group({
       iTitle: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       iEduLevel: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      iCompetence: ['', [Validators.required,  Validators.minLength(4), Validators.maxLength(20)]],
       iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       iRangoSalarial: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       iRemoto: ['', [Validators.required]],
       iTipoContrato: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
       iJornada: ['', [Validators.required, Validators.maxLength(30)]],
       iDescripcio: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(600)]],
-      iRequirements: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(600)]],
+      iRequirements: ['', [Validators.required,  Validators.minLength(40), Validators.maxLength(600)]]
+    });
+  }
+
+  qGetCompetencies() {
+    this.competService.qGetCompetencies().valueChanges.pipe(
+      map(result => {
+        this.competList = result.data.getCompetencies;
+      })
+    ).subscribe((item) => {
+      //console.log(this.competList);
     });
   }
 
@@ -71,11 +92,21 @@ export class CreateOfferPage implements OnInit {
       console.log('Please provide all the required values!');
       return false;
     } else {
-      this.getDate();
-      this.createNewOffer(
+      this.insertedTags(this.createForm.value.iCompetence);
+
+      this.loadingCtrl.create({
+        message: 'Creant nou usuari...'
+      }).then(async res => {
+        res.present();
+        console.log('Guardando info...!');
+        this.getDate();
+        this.findCompetence(this.nameNewCompet);
+
+        await this.createNewOffer(
             this.userID,
             this.createForm.value.iTitle,
             this.createForm.value.iEduLevel,
+            this.offerCompetsIds,
             this.createForm.value.iCity,
             this.createForm.value.iJornada,
             this.createForm.value.iRangoSalarial,
@@ -85,8 +116,48 @@ export class CreateOfferPage implements OnInit {
             this.createForm.value.iDescripcio,
             this.createForm.value.iRequirements,
             this.cDate
-      );
+        );
+        this.loadingCtrl.dismiss();
+      });
     }
+  }
+
+  //Created new competence if not exist yet
+  insertedTags(competencies) {
+    const existCompets = [];
+
+    competencies.forEach(el => {
+      if(!el._id && !el.name) {
+        this.createNewCompetence(el.value);
+        this.nameNewCompet.push(el);
+      } else {
+        existCompets.push(el);
+        this.offerCompetsIds.push(el._id);
+      }
+    });
+    this.offerCompets.push(existCompets);
+  }
+
+  //Call to create new competencies service:
+  createNewCompetence(iName: any) {
+    this.competService.mCreateCompetence(iName).subscribe(() => {
+      console.log('New Competence created!');
+    });
+  }
+
+  //Find id of new competencies:
+  findCompetence(names) {
+    names.forEach(el => {
+      const index = this.competList.findIndex(
+        object => object.name === el.value
+      );
+
+      if(index === -1) {
+        console.log('No se encuentra competencia!!');
+      } else {
+        this.offerCompetsIds.push(this.competList[index]._id);
+      }
+    });
   }
 
   /**
@@ -101,10 +172,10 @@ export class CreateOfferPage implements OnInit {
    * @param iContrato
    * @param iDate
    */
-  createNewOffer(uId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iEnroll: any, iContrato: any, iDescripcio: any, iRequirements: any, iDate: string) {
-   this.compOfService.mCreateOffer(uId, iTitle, iEduLevel, iCity, iJornada, iRango, iRemoto, iEnroll, iContrato, iDescripcio, iRequirements, iDate)
-    .subscribe((response) => {
-      console.log('Done!');
+  createNewOffer(uId: any, iTitle: any, iEduLevel: any, iCompetence: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iEnroll: any, iContrato: any, iDescripcio: any, iRequirements: any, iDate: string) {
+   this.compOfService.mCreateOffer(uId, iTitle, iEduLevel, iCompetence, iCity, iJornada, iRango, iRemoto, iEnroll, iContrato, iDescripcio, iRequirements, iDate)
+    .subscribe(() => {
+      console.log('New Competence created!');
     });
     this.dismissEditModal();
   }

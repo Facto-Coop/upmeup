@@ -35,10 +35,10 @@ export class AppComponent {
         ];
         // this.openMenu('offer-list');
       }
-    } else {
-      alert ('Se ha cerrado la sesión.');
-      this.router.navigate(['/login']);
-    }
+    } //else {
+      //alert ('Se ha cerrado la sesión.');
+      //this.router.navigate(['/login']);
+    //}
   }
 
   logginMenu(uType, uName) {
@@ -61,6 +61,7 @@ export class AppComponent {
   logOut() {
     this.auth.onLogout();
     this.menuCtrl.enable(false);
+    alert ('Se ha cerrado la sesión.');
     this.router.navigate(['/login']);
   }
 

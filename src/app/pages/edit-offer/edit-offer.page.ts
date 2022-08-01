@@ -1,11 +1,15 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
 import { AlertController, ModalController } from '@ionic/angular';
+import { map } from 'rxjs';
 import { Offer } from 'src/app/models/offer';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
+import { CompetenceService } from 'src/app/services/competence.service';
 
 
 @Component({
@@ -14,22 +18,62 @@ import { CompanyOffersService } from 'src/app/services/company-offers.service';
   styleUrls: ['./edit-offer.page.scss'],
 })
 export class EditOfferPage implements OnInit {
-  editForm: UntypedFormGroup;
+  editForm: FormGroup;
   isSubmitted = false;
   offerID: any;
+  competList: any[] = [];
 
-  @Input() offer: Offer[];
+  offerCompetIDs: any[] = [];
+  selectedCompet: any[] = [];
+  newOfferCompets: any[] = [];
+  newOfferCompetsList: any[] = [];
+  nameNewCompet: any[] = [];
+
+  @Input() offerData: Offer;
 
   constructor(
-      public fBuilder: UntypedFormBuilder,
+      public fBuilder: FormBuilder,
       private mdlController: ModalController,
       private alrtController: AlertController,
       private compOfService: CompanyOffersService,
+      private competService: CompetenceService,
+      public loadingCtrl: LoadingController
     ) { }
 
   ngOnInit() {
     this.initForm();
-    this.setValues(this.offer);
+    this.offerCompetIDs = this.offerData.competencies;
+    this.qGetCompetencies();
+    this.setValues(this.offerData);
+  }
+
+  // Get competence List
+  qGetCompetencies() {
+    this.competService.qGetCompetencies().valueChanges.pipe(
+      map(result => {
+        this.competList = result.data.getCompetencies;
+      })
+    ).subscribe((item) => {
+      //console.log(this.competList);
+      this.getUserCompets(this.offerCompetIDs);
+    });
+  }
+
+   /** Get ID Competence from User */
+   getUserCompets(uCompets){
+    uCompets.forEach(el => {
+      //console.log(el);
+      this.qGetCompetence(el);
+    });
+  }
+
+  /** Get Competencies data from DB */
+  qGetCompetence(competId) {
+    this.competService.qGetCompetence(competId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      this.selectedCompet.push(item.getCompetence);
+    });
   }
 
   /**
@@ -39,6 +83,7 @@ export class EditOfferPage implements OnInit {
     this.editForm = this.fBuilder.group({
       iTitle: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       iEduLevel: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      iCompetence: ['', [Validators.required,  Validators.minLength(4), Validators.maxLength(20)]],
       iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       iRangoSalarial: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       iRemoto: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
@@ -57,6 +102,7 @@ export class EditOfferPage implements OnInit {
     this.offerID = infoOffer._id;
     this.editForm.get('iTitle').setValue(infoOffer.title);
     this.editForm.get('iEduLevel').setValue(infoOffer.eduLevel);
+    this.editForm.get('iCompetence').setValue(infoOffer.competencies);
     this.editForm.get('iCity').setValue(infoOffer.city);
     this.editForm.get('iRangoSalarial').setValue(infoOffer.rangoSalarial);
     this.editForm.get('iRemoto').setValue(infoOffer.remoto);
@@ -76,26 +122,76 @@ export class EditOfferPage implements OnInit {
       console.log('Please provide all the required values!');
       return false;
     } else {
-      this.editOffer(
-          this.offerID,
-          this.editForm.value.iTitle,
-          this.editForm.value.iEduLevel,
-          this.editForm.value.iCity,
-          this.editForm.value.iJornada,
-          this.editForm.value.iRangoSalarial,
-          this.editForm.value.iRemoto,
-          this.editForm.value.iTipoContrato,
-          this.editForm.value.iDescripcio,
-          this.editForm.value.iRequirements
-      );
+      this.insertedTags(this.editForm.value.iCompetence);
+
+      this.loadingCtrl.create({
+        message: 'Desant canvis...'
+      }).then(async res => {
+        res.present();
+        console.log('Guardando data...');
+        this.findCompetence(this.nameNewCompet);
+
+        await this.editOffer(
+            this.offerID,
+            this.editForm.value.iTitle,
+            this.editForm.value.iEduLevel,
+            this.editForm.value.iCity,
+            this.editForm.value.iJornada,
+            this.newOfferCompets,
+            this.editForm.value.iRangoSalarial,
+            this.editForm.value.iRemoto,
+            this.editForm.value.iTipoContrato,
+            this.editForm.value.iDescripcio,
+            this.editForm.value.iRequirements
+        );
+        this.loadingCtrl.dismiss();
+      });
     }
+  }
+
+  //Created new competence if not exist yet
+  insertedTags(competencies) {
+    const existCompets = [];
+
+    competencies.forEach(el => {
+      if(el._id === el.name) {
+        this.createNewCompetence(el.name);
+        this.nameNewCompet.push(el);
+      } else {
+        existCompets.push(el);
+        this.newOfferCompets.push(el._id);
+      }
+    });
+    this.newOfferCompetsList.push(existCompets);
+  }
+
+  //Call to create new competence service:
+  createNewCompetence(iName: any) {
+    this.competService.mCreateCompetence(iName).subscribe(() => {
+      console.log('New Competence created!');
+    });
+  }
+
+  //Find id of new competencies:
+  findCompetence(names) {
+    names.forEach(el => {
+      const index = this.competList.findIndex(
+        object => object.name === el.name
+      );
+
+      if(index === -1) {
+        console.log('No se encuentra competencia!!');
+      } else {
+        this.newOfferCompets.push(this.competList[index]._id);
+      }
+    });
   }
 
   /**
    * Get values from form and update info.
    */
-   editOffer(oId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iContrato: any, iDescripcio: any, iRequirements: any){
-    this.compOfService.mEditOffer(oId, iTitle, iEduLevel, iCity, iJornada, iRango, iRemoto, iContrato, iDescripcio, iRequirements)
+   editOffer(oId: any, iTitle: any, iEduLevel: any, iCity: any, iJornada: any, iRango: any, iRemoto: any, iContrato: any, iDescripcio: any, iRequirements: any, iCompetence: any){
+    this.compOfService.mEditOffer(oId, iTitle, iEduLevel, iCity, iJornada, iRango, iRemoto, iContrato, iDescripcio, iRequirements, iCompetence)
     .subscribe((response) => {
       console.log('Edition done!');
     });

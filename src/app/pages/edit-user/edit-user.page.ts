@@ -3,10 +3,11 @@
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
+import { CompetenceService } from 'src/app/services/competence.service';
 import { SectorsService } from 'src/app/services/sectors.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,23 +19,34 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditUserPage implements OnInit {
   userID = sessionStorage.getItem('userid');
-  editUserForm: UntypedFormGroup;
+  editUserForm: FormGroup;
   isSubmitted = false;
   sectorsList: any[] = [];
+  competList: any[] = [];
 
-  @Input() userData: User[];
+  userCompetIDs: any[] = [];
+  selectedCompet: any[] = [];
+  newUserCompets: any[] = [];
+  newUserCompetsList: any[] = [];
+  nameNewCompet: any[] = [];
+
+  @Input() userData: User;
 
   constructor(
           private uService: UserService,
           private sectService: SectorsService,
-          public fBuilder: UntypedFormBuilder,
+          public fBuilder: FormBuilder,
           private alrtController: AlertController,
-          private mdlController: ModalController
+          private mdlController: ModalController,
+          private competService: CompetenceService,
+          public loadingCtrl: LoadingController
         ) { }
 
   ngOnInit() {
     this.initForm();
+    this.userCompetIDs = this.userData.competencies;
     this.qGetSectors();
+    this.qGetCompetencies();
     this.setValues(this.userData);
   }
 
@@ -45,6 +57,35 @@ export class EditUserPage implements OnInit {
     ).subscribe((item) => {
       //console.log(item.getSectors);
       this.sectorsList.push(item.getSectors);
+    });
+  }
+
+  // Get competence List
+  qGetCompetencies() {
+    this.competService.qGetCompetencies().valueChanges.pipe(
+      map(result => {
+        this.competList = result.data.getCompetencies;
+      })
+    ).subscribe((item) => {
+      //console.log(this.competList);
+      this.getUserCompets(this.userCompetIDs);
+    });
+  }
+
+   /** Get ID Competence from User */
+   getUserCompets(uCompets){
+    uCompets.forEach(el => {
+      //console.log(el);
+      this.qGetCompetence(el);
+    });
+  }
+
+  /** Get Competencies data from DB */
+  qGetCompetence(competId) {
+    this.competService.qGetCompetence(competId).valueChanges.pipe(
+      map(result => result.data)
+    ).subscribe((item) => {
+      this.selectedCompet.push(item.getCompetence);
     });
   }
 
@@ -66,7 +107,8 @@ export class EditUserPage implements OnInit {
       iJobPos: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(70)]],
       iLastJob: ['', [Validators.required,  Validators.minLength(20), Validators.maxLength(400)]],
       iExp: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
-      iLang: ['', [Validators.required,  Validators.minLength(1), Validators.maxLength(30)]]
+      iLang: ['', [Validators.required,  Validators.minLength(1), Validators.maxLength(30)]],
+      iCompetence: ['', [Validators.required,  Validators.minLength(4), Validators.maxLength(20)]]
     });
   }
 
@@ -86,6 +128,7 @@ export class EditUserPage implements OnInit {
     this.editUserForm.get('iLastJob').setValue(infoUser.lastJobTasks);
     this.editUserForm.get('iExp').setValue(infoUser.experience);
     this.editUserForm.get('iLang').setValue(infoUser.languages);
+    this.editUserForm.get('iCompetence').setValue(infoUser.competencies);
   }
 
   /**
@@ -98,24 +141,74 @@ export class EditUserPage implements OnInit {
       console.log('Please provide all the required values!');
       return false;
     } else {
-      this.editUser(
-          this.userID,
-          this.editUserForm.value.iName,
-          this.editUserForm.value.iSurname,
-          this.editUserForm.value.iEmail,
-          this.editUserForm.value.iCity,
-          this.editUserForm.value.iSector,
-          this.editUserForm.value.iEduc,
-          this.editUserForm.value.iJobPos,
-          this.editUserForm.value.iLastJob,
-          this.editUserForm.value.iExp,
-          this.editUserForm.value.iLang
-      );
+      this.insertedTags(this.editUserForm.value.iCompetence);
+
+      this.loadingCtrl.create({
+        message: 'Desant canvis...'
+      }).then(async res => {
+        res.present();
+        console.log('Guardando data...');
+        this.findCompetence(this.nameNewCompet);
+
+        await this.editUser(
+            this.userID,
+            this.editUserForm.value.iName,
+            this.editUserForm.value.iSurname,
+            this.editUserForm.value.iEmail,
+            this.editUserForm.value.iCity,
+            this.editUserForm.value.iSector,
+            this.editUserForm.value.iEduc,
+            this.editUserForm.value.iJobPos,
+            this.editUserForm.value.iLastJob,
+            this.editUserForm.value.iExp,
+            this.editUserForm.value.iLang,
+            this.newUserCompets
+        );
+        this.loadingCtrl.dismiss();
+      });
     }
   }
 
-  editUser(uId: any, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any){
-    this.uService.mEditUser(uId, iName, iSurname, iEmail, iCity, iSector, iEduc, iJobPos, iLastJob, iExp, iLang)
+  //Created new competence if not exist yet
+  insertedTags(competencies) {
+    const existCompets = [];
+
+    competencies.forEach(el => {
+      if(el._id === el.name) {
+        this.createNewCompetence(el.name);
+        this.nameNewCompet.push(el);
+      } else {
+        existCompets.push(el);
+        this.newUserCompets.push(el._id);
+      }
+    });
+    this.newUserCompetsList.push(existCompets);
+  }
+
+  //Call to create new competence service:
+  createNewCompetence(iName: any) {
+    this.competService.mCreateCompetence(iName).subscribe(() => {
+      console.log('New Competence created!');
+    });
+  }
+
+  //Find id of new competencies:
+  findCompetence(names) {
+    names.forEach(el => {
+      const index = this.competList.findIndex(
+        object => object.name === el.name
+      );
+
+      if(index === -1) {
+        console.log('No se encuentra competencia!!');
+      } else {
+        this.newUserCompets.push(this.competList[index]._id);
+      }
+    });
+  }
+
+  editUser(uId: any, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iCompetence: any){
+    this.uService.mEditUser(uId, iName, iSurname, iEmail, iCity, iSector, iEduc, iJobPos, iLastJob, iExp, iLang, iCompetence)
     .subscribe((response) => {
       sessionStorage.setItem('user', iName);
       console.log('Profile edition!');
