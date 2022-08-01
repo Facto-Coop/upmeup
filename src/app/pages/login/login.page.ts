@@ -186,4 +186,8 @@ export class LoginPage implements OnInit {
     sessionStorage.setItem('uSelectedSkills', uSkills);
   }
 
+  alertMail() {
+    alert('Ponte en contacto con: lmata@facto.cat');
+  }
+
 }
