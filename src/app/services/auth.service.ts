@@ -68,6 +68,7 @@ export class AuthService {
     // this.authToken = null;
     await sessionStorage.clear();
     this._isLoggedIn.next(false);
+    window.location.assign('/');
   }
 
 }

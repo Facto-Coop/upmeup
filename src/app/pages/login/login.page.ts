@@ -47,6 +47,7 @@ export class LoginPage implements OnInit {
     this.menu.enable(false);
     this.validation();
     this.userQuery();
+    this.initForm.reset();
     //this.qUserLog();
   }
 
