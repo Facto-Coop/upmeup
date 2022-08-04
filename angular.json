@@ -15,7 +15,10 @@
           "options": {
             "customWebpackConfig": {
               "path": "./custom-webpack.config.js",
-              "replaceDuplicatePlugins": true
+              "replaceDuplicatePlugins": true,
+              "mergeRules": {
+                "externals": "replace"
+              }
             },
             "outputPath": "www",
             "index": "src/index.html",
@@ -77,7 +80,7 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "app:build",
-            "proxyConfig": "proxy.conf.json",
+            //"proxyConfig": "proxy.conf.json",
             "publicHost": "factodev.upmeup.es"
           },
           "configurations": {

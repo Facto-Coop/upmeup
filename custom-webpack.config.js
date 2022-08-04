@@ -64,7 +64,7 @@ module.exports = {
     /*client: {
         webSocketURL: 'ws://127.0.0.1:8100/ws',
     },*/
-    compress: true,
+  compress: true,
     //host: "http://factodev.upmeup.es/login",
     //port: 4200,
   },

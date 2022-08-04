@@ -5,30 +5,16 @@
         <ion-toolbar color="custom">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
-        <!--<ion-grid>
-          <ion-row class="ion-align-items-center">
-            <ion-col size="9">
-              <ion-toolbar color="custom">
-                <ion-title> Menu </ion-title>
-              </ion-toolbar>
-            </ion-col>
-            <ion-col>
-              <ion-button color="danger" size="small" (click)="logOut()"> <ion-icon slot="icon-only" name="power"></ion-icon> </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>-->
       </ion-header>
 
       <ion-content>
         <ion-list>
           <div class="center-class">
             <ion-avatar *ngIf="userType === '1'" class="avatar-center">
-              <img src="./../assets/user-avatar.png" alt="User avatar" class="avatar-custom"/>
-              <!-- <img src="https://randomuser.me/api/portraits/lego/0.jpg" /> -->          
+              <img src="./../assets/user-avatar.png" alt="User avatar" class="avatar-custom"/>    
             </ion-avatar>
             <ion-avatar *ngIf="userType === '2'" class="avatar-center">
               <img src="./../assets/building-avatar.png" alt="Building avatar" class="avatar-custom"/>
-              <!-- <img src="https://cdn-icons-png.flaticon.com/512/288/288744.png" /> -->
             </ion-avatar>
             <ion-label> <h1>{{ userName }}</h1> </ion-label>
           </div>
@@ -40,6 +26,38 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
+
+
+<!--************* TEST WEBSOCKET **************-->
+<h4> Angular + WebSockets TEST</h4>
+<br>
+<div class="row">
+  <div class="column">
+    <textarea [value]="content" (input)="envio_mens($event)" name="contentInput" cols="40" rows="5"></textarea>
+    <br>
+    <ion-button (click)="sendMsg()">Send Message</ion-button>
+  </div>
+
+</div>
+<br>
+<div>
+  <h4>Sent Messages</h4>
+  <br>
+  <ul style="font-size: 13px">
+    <li *ngFor="let item of sent">Source: {{item.source}} -> Content {{item.content}}</li>
+  </ul>
+</div>
+
+<br>
+<div>
+  <h4>Received Messages</h4>
+  <br>
+  <ul style="font-size: 13px">
+    <li *ngFor="let item of received">Source: {{item.source}} </li>
+    <li *ngFor="let item of sent"> -> Content {{item.content}}</li>
+  </ul>
+</div>
+
       </ion-content>
 
       <ion-footer>
