@@ -7,12 +7,13 @@ import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 
 //const localUri = 'http://localhost:3000/graphql';
-//const ServerUri = 'factodev.upmemup.es/graphql';
+const ServerUri = 'http://factodev.upmemup.es/graphql';
 
 export function createApollo(httpLink: HttpLink) {
     return {
       link: httpLink.create({
-        uri: `http://${environment.apiUrl}/graphql`,
+        //uri: `http://${environment.apiUrl}/graphql`,
+        uri: ServerUri
       }),
       cache: new InMemoryCache(),
     };
