@@ -1,16 +1,19 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { NgModule } from '@angular/core';
 
-import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
-import {HttpLink} from 'apollo-angular/http';
-import {InMemoryCache} from '@apollo/client/core';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { InMemoryCache } from '@apollo/client/core';
+import { environment } from 'src/environments/environment';
 
-const uri = 'http://localhost:3000/graphql';
+//const localUri = 'http://localhost:3000/graphql';
+//const ServerUri = 'factodev.upmemup.es/graphql';
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function createApollo(httpLink: HttpLink) {
-  //console.log(uri);
     return {
-      link: httpLink.create({uri}),
+      link: httpLink.create({
+        uri: `http://${environment.apiUrl}/graphql`,
+      }),
       cache: new InMemoryCache(),
     };
 }
