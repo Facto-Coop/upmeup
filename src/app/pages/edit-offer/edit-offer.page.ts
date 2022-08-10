@@ -202,6 +202,13 @@ export class EditOfferPage implements OnInit {
     return this.editForm.controls;
   }
 
+  // Delete function to competencies/tags.
+  removeCompetence(item) {
+    const tags = this.editForm.value.iCompetence;
+    const index = tags.indexOf(item);
+    tags.splice(index, 1);
+  }
+
   cancelEdition(){
     //this.editForm.reset();
     // Alert to confirm:

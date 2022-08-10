@@ -5,18 +5,6 @@
         <ion-toolbar color="custom">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
-        <!--<ion-grid>
-          <ion-row class="ion-align-items-center">
-            <ion-col size="9">
-              <ion-toolbar color="custom">
-                <ion-title> Menu </ion-title>
-              </ion-toolbar>
-            </ion-col>
-            <ion-col>
-              <ion-button color="danger" size="small" (click)="logOut()"> <ion-icon slot="icon-only" name="power"></ion-icon> </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>-->
       </ion-header>
 
       <ion-content>
@@ -45,7 +33,7 @@
       <ion-footer>
         <ion-item>
           <ion-icon slot="start" color="upmeup" name="power"></ion-icon>
-          <button (click)="logOut()"> <ion-label>Desconectar</ion-label> </button> 
+          <button (click)="logOut()" class="logOutbtn"> <h6>Desconectar</h6> </button> 
         </ion-item>
       </ion-footer>
       

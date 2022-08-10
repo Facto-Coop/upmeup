@@ -31,15 +31,13 @@
         </div>
       </div>
 
-      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills.length > 0">  
+      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills?.length > 0">  
         <ion-row>
-          <ion-col size="6" *ngFor="let skill of userSkills">
+          <ion-col size="6" *ngFor="let skill of skillsIco">
             <div class="custom-icon">
-              <ion-label class="skills">
-                <h4>
-                  <ion-icon name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>                            
-                  {{skill.name}}
-                </h4>
+              <ion-label class="title-offer">
+                <ion-icon class="{{skill.sClass}} custom-icon"></ion-icon>
+                <span><b>{{ skill.sname }}</b></span>
               </ion-label>
             </div>
           </ion-col>

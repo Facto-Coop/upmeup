@@ -21,6 +21,8 @@ export class CompanyProfilePage implements OnInit {
   userInfo: any[] = [];
   userSkills: any[] = [];
   sectorName = '';
+  skillsName: any;
+  skillsIco: any[] = [];
 
   constructor(private modalController: ModalController,
               private routerOutlet: IonRouterOutlet,
@@ -65,7 +67,14 @@ export class CompanyProfilePage implements OnInit {
       map(result => result.data)
     ).subscribe((item) => {
       this.userSkills.push(item.getSkill);
-      //console.log('skills: ' + this.userSkills);
+      const nameClass = item.getSkill.name.replace(/ /g, '_');
+      this.skillsName = nameClass.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      this.skillsIco.push({
+        sid: item.getSkill._id,
+        sname: item.getSkill.name,
+        sClass: this.skillsName
+      });
+
       this.useSessionStorage(this.userSkills);
     });
   }

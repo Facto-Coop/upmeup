@@ -6,9 +6,9 @@ ion-content {
     ion-header { box-shadow: none !important; }
     
     .container { 
-        --ion-background-color: #f2f2f2; 
+        //--ion-background-color: #f2f2f2; 
         .center-class { text-align: center; }  
-        .margin-fab-btn { margin: 0 50px; }
+        .margin-fab-btn { margin: 15px 50px; }
 
         ion-card.card-title {
             margin: 0;
@@ -28,7 +28,8 @@ ion-content {
         ion-card.content-info { 
             margin: 0; 
             border-radius: 0; 
-            
+            box-shadow: none;
+
             ion-button { 
                 margin: 30px 15px; 
                 font-weight: bold; 
@@ -40,7 +41,7 @@ ion-content {
             }
         }
         ion-card-content {     
-            h4.margin { margin: 25px 15px 25px 15px;} 
+            h4.margin { margin: 30px; } 
             .custom-title { color: var(--ion-color-upmeup); font-weight: bold; }
             .custom-subtitle { color: #3f99b4; font-weight: bold; }
 
@@ -56,8 +57,6 @@ ion-content {
               
         }
         
-        ion-fab-button { width: 45px; height: 45px; }
-
         ion-label ion-chip {
             background-color: var(--ion-color-upmeup);
         }
@@ -82,7 +81,9 @@ ion-content {
 /* Outside toolbar header */
 .header-class { 
     background-color: var(--ion-color-upmeup);
-    
+
+    .head-line { border: 3px #c8e3d6 solid; }
+
     ion-thumbnail { margin:0 auto; width: 130px; height: 130px; }
     img { border-radius: 50%; }
     .header-text { display: block; text-align: center; }
@@ -93,22 +94,21 @@ ion-content {
     }
 
     ion-label ion-icon { 
-       //width: 30px; 
-       //height: 30px; 
-        margin: 0 10px; 
-        vertical-align: bottom; 
+        width: 40px; 
+        height: 40px; 
+        vertical-align: middle; 
     }
 
     .title-offer { white-space: normal; }
     
-    .custom-icon {
-        //height: 30px;
-        //margin-left: 10px;
-
-        ion-label { vertical-align: middle; color: #5a7266; /*margin-left: 30px;*/ }
+    .custom-icon { 
+        ion-label { color: #5a7266; /*vertical-align: middle; text-align: center;*/ }
+        span { margin-left: 5px; font-size: 13px; /*line-height: normal; height: 36px;*/ }
     }
 }
         
+ion-fab-button { --box-shadow: none !important; --background: none !important; --color: none !important; }
+
 /**
 *** Web Responsive style
 **/

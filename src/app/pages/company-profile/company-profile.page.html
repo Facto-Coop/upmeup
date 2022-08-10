@@ -16,7 +16,10 @@
   </ion-toolbar>
 
   <div class="header-class">
-    <ion-label class="header-text ion-padding">
+    <ion-thumbnail class="avatar-center">
+      <img src="./../../../assets/avatar.svg" />
+    </ion-thumbnail> 
+    <ion-label class="header-text">
       <div>
         <ion-row>
           <ion-col> 
@@ -27,24 +30,15 @@
           </ion-col>
         </ion-row>
       </div>
-    </ion-label> 
-    <ion-thumbnail class="avatar-center">
-      <img src="./../../../assets/avatar.svg" />
-    </ion-thumbnail>   
+    </ion-label>   
 
-    <!-- Skills -->
-    <ion-row>
-      <ion-col> </ion-col>
-      <ion-col size="8"> </ion-col>
-      <ion-col>
-        <ion-fab vertical="center" horizontal="end">
-          <ion-fab-button color="upmeup" (click)="openModal()"> <ion-icon name="create-outline" color="light"></ion-icon> </ion-fab-button>
-        </ion-fab>
-      </ion-col>
-    </ion-row>
+    <!-- Skills -->    
+    <ion-fab horizontal="end">
+      <ion-fab-button color="upmeup" size="small" (click)="openModal()"> <ion-icon name="create-outline" style="color: #5a7266;"></ion-icon> </ion-fab-button>
+    </ion-fab>
     
     <ion-grid class="skills-info">
-      <div class="ion-padding-top" *ngIf="userSkills.length === 0">
+      <div class="ion-padding-bottom" *ngIf="userSkills.length === 0">
         <div class="header-text ion-padding">
           <ion-label color="danger" class="ion-text-start">
             Encara no tens valors seleccionats
@@ -52,29 +46,28 @@
         </div>
       </div>
 
-      <div class="ion-padding-top" *ngIf="userSkills?.length > 0">
+      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills?.length > 0">
         <ion-row>
-          <ion-col size="6" *ngFor="let skill of userSkills">
+          <ion-col size="6" *ngFor="let skill of skillsIco">
             <div class="custom-icon">
               <ion-label class="title-offer">
-                <h4>
-                  <ion-icon class="values-ico-style" name="rocket" slot="icon-only" size="small" slot="start"></ion-icon>
-                  {{ skill.name }}
-                </h4>
+                <ion-icon class="{{skill.sClass}} custom-icon"></ion-icon>
+                <span><b> {{ skill.sname }} </b></span>
               </ion-label>
             </div>
           </ion-col>
         </ion-row>
       </div>
     </ion-grid>
+    <div class="head-line"></div>
   </div>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button color="light" (click)="editModal()"> <ion-icon style="color: #5a7266;" name="create-outline"></ion-icon> </ion-fab-button>
+  <ion-fab horizontal="end" slot="fixed">
+    <ion-fab-button size="small" (click)="editModal()"> <ion-icon style="color: #5a7266;" name="create-outline"></ion-icon> </ion-fab-button>
   </ion-fab>
 
   <div class="container">
@@ -95,7 +88,7 @@
         </div>
 
         <!-- Idiomes -->
-        <div class="center-class">  
+        <!--<div class="center-class">  
           <ion-label class="cv-title">
             <h2 class="custom-title"> Idiomes de comunicació </h2>
           </ion-label> 
@@ -106,10 +99,10 @@
               </ion-chip>
             </h4>
           </ion-label>
-        </div>
+        </div>-->
 
-        <!-- Contacte -->
-        <div class="center-class">
+        <!-- Info Contacte -->
+        <!--<div class="center-class">
           <ion-row>
             <ion-col> </ion-col>
             <ion-col size="8"> <h2 class="custom-title"> Informació de contacte </h2> </ion-col>
@@ -122,47 +115,14 @@
               <p>Email</p>
             </ion-label>
           </ion-item>
-        </div>
-
-        <!-- Info Company 
-        <div class="center-class">
-          <ion-row>
-            <ion-col> </ion-col>
-            <ion-col size="8"> <h2 class="custom-title"> Informació de contacte </h2> </ion-col>
-            <ion-col> </ion-col>
-          </ion-row>
-          <ion-list lines="none">
-            <ion-item>
-              <ion-icon class="vertical-ico-style" name="call" slot="start"></ion-icon>
-              <ion-label>
-                <h3>93 666 66 66</h3>
-                <p>Teléfon</p>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon class="vertical-ico-style" name="at" slot="start"></ion-icon>
-              <ion-label>
-                <h3>info@workmail.com</h3>
-                <p>Email</p>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon class="vertical-ico-style" name="map" slot="start"></ion-icon>
-              <ion-label>
-                <h3>Carrer de Comerç, 33, entl. 1.</h3>
-                <h2>08003, Barcelona</h2>
-                <p>Oficina</p>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon class="vertical-ico-style" name="earth" slot="start"></ion-icon>
-              <ion-label>
-                <h3>https://facto.cat/</h3>
-                <p>Web</p>
-              </ion-label>
-            </ion-item>
-          </ion-list>
-        </div> -->
+          <ion-item lines="none">
+            <ion-icon class="vertical-ico-style" name="at" slot="start"></ion-icon>
+            <ion-label>
+              <h3> (+34) 93 000 00 00</h3>
+              <p>Teléfon</p>
+            </ion-label>
+          </ion-item>
+        </div>-->
 
       </ion-card-content>
     </ion-card>

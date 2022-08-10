@@ -180,6 +180,13 @@ export class CreateOfferPage implements OnInit {
     this.dismissEditModal();
   }
 
+  // Delete function to competencies/tags.
+  removeCompetence(item) {
+    const tags = this.createForm.value.iCompetence;
+    const index = tags.indexOf(item);
+    tags.splice(index, 1);
+  }
+
   /**
    * Alert to confirm action
    */

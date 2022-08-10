@@ -3,7 +3,29 @@
 /***************************************************************************/
 
 ion-content { 
-    .avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
-    .form-text { font-weight: 700; color: #a1a1a1; }
+    ion-header { box-shadow: none !important; }
 
+    .container { 
+        .avatar-center { margin:0 auto; width: 130px; height: 130px; margin-top: 25px; margin-bottom: 20px; }
+        .custom-title { color: #8cb2a1; }
+        .textarea-title { font-size: 21px; }
+        .custom-text { font-size: 15px; }
+        
+        ion-list ion-select { max-width: 75%; }
+
+        ion-card { box-shadow: none !important; }
+    }
+}
+
+/* Outside toolbar header */
+.header-class { 
+    background-color: var(--ion-color-upmeup);
+    padding-bottom: 15px;
+    text-align: center;
+
+    ion-thumbnail { margin:0 auto; width: 130px; height: 130px; }
+    img { border-radius: 50%; }
+
+    .title-offer { white-space: normal; }
+    
 }

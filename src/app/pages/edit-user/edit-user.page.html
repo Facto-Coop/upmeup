@@ -1,27 +1,22 @@
 <ion-header>
   <ion-toolbar color="upmeup">
-    <ion-title color="light">Edit Profile</ion-title>
+    <ion-title class="header-text" color="light">Edita el teu perfil</ion-title>
   </ion-toolbar>
+
+  <div class="header-class">
+    <ion-thumbnail class="avatar-center ion-padding">
+      <img src="./../../../assets/thumbnail.svg" />
+    </ion-thumbnail>
+  </div>
 </ion-header>
 
 <ion-content>
   <div class="container">
-    <ion-grid>
-      <ion-row>
-        <ion-col> </ion-col>
-        <ion-col size="6"> 
-          <ion-thumbnail class="avatar-center" >
-            <img src="./../../../assets/thumbnail.svg" />
-          </ion-thumbnail>
-        </ion-col>
-        <ion-col> </ion-col>
-      </ion-row>
-    </ion-grid>
 
     <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()" novalidate>
       <ion-item>
-        <ion-label>Nom:</ion-label>
-        <ion-input class="form-text" id="iName" formControlName="iName" minlength="3" maxlength="30" required></ion-input>
+        <ion-label> <h2 class="custom-title">Nom:</h2></ion-label>
+        <ion-input class="custom-text form-text" id="iName" formControlName="iName" minlength="3" maxlength="30" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iName.errors && (errorCtr.iName.invalid || errorCtr.iName.touched)">
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iName.errors.required">* Camp requerit</small>
@@ -29,8 +24,8 @@
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iName.errors.maxlength">* Ha de tenir com a màxim 30 caracters</small>
       </div>
       <ion-item>
-        <ion-label>Cognom:</ion-label>
-        <ion-input class="form-text" id="iSurname" formControlName="iSurname" minlength="3" maxlength="30" required></ion-input>
+        <ion-label><h2 class="custom-title">Cognom:</h2></ion-label>
+        <ion-input class="custom-text form-text" id="iSurname" formControlName="iSurname" minlength="3" maxlength="30" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iSurname.errors && (errorCtr.iSurname.invalid || errorCtr.iSurname.touched)">
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iSurname.errors.required">* Camp requerit</small>
@@ -39,8 +34,8 @@
       </div>
 
       <ion-item>
-        <ion-label>Email:</ion-label>
-        <ion-input class="form-text" id="iEmail" formControlName="iEmail" minlength="10" maxlength="60" required></ion-input>
+        <ion-label><h2 class="custom-title">Email:</h2></ion-label>
+        <ion-input class="custom-text form-text" id="iEmail" formControlName="iEmail" minlength="10" maxlength="60" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iEmail.errors && (errorCtr.iEmail.invalid || errorCtr.iEmail.touched)">
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iEmail.errors.required">* Camp requerit</small>
@@ -49,8 +44,8 @@
       </div>
 
       <ion-item>
-        <ion-label>Ciutat:</ion-label>
-        <ion-input class="form-text" id="iCity" formControlName="iCity" minlength="4" maxlength="30" required></ion-input>
+        <ion-label><h2 class="custom-title">Ciutat:</h2></ion-label>
+        <ion-input class="custom-text form-text" id="iCity" formControlName="iCity" minlength="4" maxlength="30" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iCity.errors && (errorCtr.iCity.invalid || errorCtr.iCity.touched)">
         <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iCity.errors.required">* Camp requerit</small>
@@ -59,8 +54,8 @@
       </div>
 
       <ion-item>
-        <ion-label>Estudis:</ion-label>
-        <ion-input class="form-text" id="iEduc" formControlName="iEduc" minlength="8" maxlength="40" required></ion-input>
+        <ion-label><h2 class="custom-title">Estudis:</h2></ion-label>
+        <ion-input class="custom-text form-text" id="iEduc" formControlName="iEduc" minlength="8" maxlength="40" required></ion-input>
       </ion-item>      
       <div *ngIf="errorCtr.iEduc.errors && (errorCtr.iEduc.invalid || errorCtr.iEduc.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iEduc.errors.required">* Camp requerit</small>        
@@ -69,10 +64,10 @@
       </div>
 
       <!-- Competencies -->
-      <ion-item>
-        <ion-label>Competencies/Habilitats:</ion-label>
+      <ion-item *ngIf="userType === '1'" class="no-lines">
+        <ion-label><h2 class="custom-title">Competencies/Habilitats:</h2></ion-label>
       </ion-item>
-      <ion-item class="ion-padding-top ion-padding-bottom">
+      <ion-item class="ion-padding-top ion-padding-bottom" *ngIf="userType === '1'">
         <tag-input [(ngModel)]="selectedCompet" 
                    [identifyBy]="'_id'"
                    [displayBy]="'name'"
@@ -82,8 +77,9 @@
                    formControlName="iCompetence"
                    [removable]="true"
                    [theme]="'upm-tag-theme'">
-              <ng-template let-item="item">
+              <ng-template let-index="index" let-item="item">
                 {{ item.name }}
+                <delete-icon (click)="removeCompetence(item)"></delete-icon>
               </ng-template>
           <tag-input-dropdown [autocompleteItems]="competList" [identifyBy]="'_id'" [displayBy]="'name'">
               <ng-template let-item="item" let-index="index">
@@ -94,8 +90,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Ultim carrec:</ion-label>
-        <ion-input class="form-text" id="iJobPos" formControlName="iJobPos" minlength="5" maxlength="70" required></ion-input>
+        <ion-label><h2 class="custom-title">Últim càrrec:</h2></ion-label>
+        <ion-input class="custom-text form-text" id="iJobPos" formControlName="iJobPos" minlength="5" maxlength="70" required></ion-input>
       </ion-item>      
       <div *ngIf="errorCtr.iJobPos.errors && (errorCtr.iJobPos.invalid || errorCtr.iJobPos.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iJobPos.errors.required">* Camp requerit</small>        
@@ -105,16 +101,16 @@
 
       <ion-list>
         <ion-item>
-          <ion-label>Sector:</ion-label>
-          <ion-select class="form-text" interface="action-sheet" id="iSector" formControlName="iSector" placeholder="Selecciona..." required>
+          <ion-label><h2 class="custom-title">Sector:</h2></ion-label>
+          <ion-select class="custom-text form-text" interface="action-sheet" id="iSector" formControlName="iSector" placeholder="Selecciona..." required>
             <ion-select-option *ngFor="let sector of sectorsList[0]" value="{{sector._id}}"> {{sector.name}} </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
       
       <ion-item>
-        <ion-label>Anys d'experiencia:</ion-label>
-        <ion-input class="form-text" id="iExp" formControlName="iExp" minlength="1" maxlength="2" required></ion-input>
+        <ion-label><h2 class="custom-title">Anys d'experiencia:</h2></ion-label>
+        <ion-input class="custom-text form-text" id="iExp" formControlName="iExp" minlength="1" maxlength="2" required></ion-input>
       </ion-item>      
       <div *ngIf="errorCtr.iExp.errors && (errorCtr.iExp.invalid || errorCtr.iExp.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iExp.errors.required">* Camp requerit</small>        
@@ -123,11 +119,11 @@
       </div>
 
       <ion-item>
-        <ion-label>Descripció tasques:
-          <br>(A l'ultim carrec)
+        <ion-label position="stacked">
+          <div class="custom-title textarea-title"> Descripció tasques (últim càrrec): </div>
         </ion-label>
-        <ion-textarea id="iLastJob" formControlName="iLastJob" minlength="20" maxlength="400" rows="6" cols="10" required></ion-textarea>
-      </ion-item>      
+        <ion-textarea id="iLastJob" formControlName="iLastJob" minlength="20" maxlength="400" rows="6" cols="60" required></ion-textarea>
+      </ion-item>
       <div *ngIf="errorCtr.iLastJob.errors && (errorCtr.iLastJob.invalid || errorCtr.iLastJob.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iLastJob.errors.required">* Camp requerit</small>        
         <small class="error ion-padding" *ngIf="errorCtr.iLastJob.errors.minlength">* Ha de tenir com a mínim 20 caràcters</small>
@@ -136,8 +132,8 @@
       
       <ion-list>
         <ion-item>
-          <ion-label>Idiomes:</ion-label>
-          <ion-select class="form-text" interface="action-sheet" id="iLang" okText="Ok" cancelText="Cancela"
+          <ion-label><h2 class="custom-title">Idiomes:</h2></ion-label>
+          <ion-select class="custom-text form-text" interface="action-sheet" id="iLang" okText="Ok" cancelText="Cancela"
             formControlName="iLang" [multiple]="true" placeholder="Selecciona..." required>
               <ion-select-option value="Alemán">Alemán</ion-select-option>
               <ion-select-option value="Árabe">Árabe</ion-select-option>
@@ -171,12 +167,12 @@
       </ion-list>
 
       <p class="ion-text-center ion-padding">
-        <ion-button type="submit" fill="solid" color="upmeup" shape="round"> 
-          Guardar 
+        <ion-button type="submit" fill="solid" color="loginbtn" shape="round"> 
+          Actualitzar 
         </ion-button>
-        <ion-button type="button" fill="solid" color="danger" shape="round" (click)="cancelEdition()"> 
+        <!--<ion-button type="button" fill="solid" color="danger" shape="round" (click)="cancelEdition()"> 
           Cancel·lar
-        </ion-button>
+        </ion-button>-->
       </p>
     </form>
 

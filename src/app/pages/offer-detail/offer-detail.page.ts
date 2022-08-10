@@ -24,6 +24,8 @@ export class OfferDetailPage implements OnInit {
   enrolledValue = '';
   userInfo: any[] = [];
   userSkills: any[] = [];
+  skillsName: any;
+  skillsIco: any[] = [];
   usersOffersList: any[] = [];
   isEnrolled: number;
   userCompets: any[] = [];
@@ -152,8 +154,14 @@ export class OfferDetailPage implements OnInit {
     this.softSkillService.qGetSkill(skillId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      //console.log(item);
       this.userSkills.push(item.getSkill);
+      const nameClass = item.getSkill.name.replace(/ /g, '_');
+      this.skillsName = nameClass.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      this.skillsIco.push({
+        sid: item.getSkill._id,
+        sname: item.getSkill.name,
+        sClass: this.skillsName
+      });
     });
   }
 

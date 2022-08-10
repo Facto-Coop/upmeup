@@ -1,27 +1,22 @@
 <ion-header>
   <ion-toolbar color="upmeup">
-    <ion-title color="light">Nova Oferta</ion-title>
+    <ion-title class="header-text" color="light">Nova Oferta</ion-title>
   </ion-toolbar>
+
+  <div class="header-class">
+    <ion-thumbnail class="avatar-center ion-padding">
+      <img src="./../../../assets/thumbnail.svg" />
+    </ion-thumbnail>
+  </div>
 </ion-header>
-     
+
 
 <ion-content>
   <div class="container">
-    <ion-grid>
-      <ion-row>
-        <ion-col> </ion-col>
-        <ion-col size="6"> 
-          <ion-thumbnail class="avatar-center" >
-            <img src="./../../../assets/thumbnail.svg" />
-          </ion-thumbnail>
-        </ion-col>
-        <ion-col> </ion-col>
-      </ion-row>
-    </ion-grid>
     
     <form [formGroup]="createForm" (ngSubmit)="onSubmit()" novalidate>
      <ion-item>
-        <ion-label>Títol:</ion-label>
+        <ion-label><h2 class="custom-title">Títol:</h2></ion-label>
         <ion-input id="iTitle" formControlName="iTitle" minlength="8" maxlength="30" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iTitle.errors && (errorCtr.iEduLevel.invalid || errorCtr.iEduLevel.touched)">
@@ -31,7 +26,7 @@
       </div>
 
       <ion-item>
-        <ion-label>Estudis mínims:</ion-label>
+        <ion-label><h2 class="custom-title">Estudis mínims:</h2></ion-label>
         <ion-input id="iEduLevel" formControlName="iEduLevel" minlength="3" maxlength="30" required></ion-input>
       </ion-item>      
       <div *ngIf="errorCtr.iEduLevel.errors && (errorCtr.iEduLevel.invalid || errorCtr.iEduLevel.touched)">
@@ -42,7 +37,7 @@
 
        <!-- Competencies -->
        <ion-item>
-        <ion-label>Competencies/Habilitats:</ion-label>
+        <ion-label><h2 class="custom-title">Competencies/Habilitats:</h2></ion-label>
       </ion-item>
       <ion-item class="ion-padding-top ion-padding-bottom">
         <tag-input [identifyBy]="'id'"
@@ -55,6 +50,7 @@
                    [theme]="'upm-tag-theme'">
               <ng-template let-item="item">
                 {{ item.value }}
+                <delete-icon (click)="removeCompetence(item)"></delete-icon>
               </ng-template>
           <tag-input-dropdown [autocompleteItems]="competList" [identifyBy]="'_id'" [displayBy]="'name'">
               <ng-template let-item="item" let-index="index">
@@ -65,7 +61,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Ciutat:</ion-label>
+        <ion-label><h2 class="custom-title">Ciutat:</h2></ion-label>
         <ion-input id="iCity" formControlName="iCity" minlength="4" maxlength="30" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iCity.errors && (errorCtr.iCity.invalid || errorCtr.iCity.touched)">
@@ -75,7 +71,7 @@
       </div>
 
       <ion-item>
-        <ion-label>Rang Salarial:</ion-label>
+        <ion-label><h2 class="custom-title">Rang Salarial:</h2></ion-label>
         <ion-input id="iRangoSalarial" formControlName="iRangoSalarial" minlength="8" maxlength="30" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iRangoSalarial.errors && (errorCtr.iRangoSalarial.invalid || errorCtr.iRangoSalarial.touched)">
@@ -86,7 +82,7 @@
     
       <ion-list>
         <ion-item>
-          <ion-label>Model treball:</ion-label>
+          <ion-label><h2 class="custom-title">Model treball:</h2></ion-label>
           <ion-select interface="action-sheet" id="iRemoto" formControlName="iRemoto" placeholder="Selecciona..." required>
             <ion-select-option value="Presencial">Presencial</ion-select-option>
             <ion-select-option value="Teletreball">Teletreball</ion-select-option>
@@ -97,7 +93,7 @@
 
       <ion-list>
         <ion-item>
-          <ion-label>Tipus Contracte:</ion-label>
+          <ion-label><h2 class="custom-title">Tipus Contracte:</h2></ion-label>
           <ion-select interface="action-sheet" id="iTipoContrato" formControlName="iTipoContrato" placeholder="Selecciona..." required>
             <ion-select-option value="Indefinit">Indefinit</ion-select-option>
             <ion-select-option value="Fix-Discontinu">Fix-Discontinu</ion-select-option>
@@ -109,7 +105,7 @@
 
       <ion-list>
         <ion-item>
-          <ion-label>Tipus Jornada:</ion-label>
+          <ion-label><h2 class="custom-title">Tipus Jornada:</h2></ion-label>
           <ion-select interface="action-sheet" id="iJornada" formControlName="iJornada" placeholder="Selecciona..." required>
             <ion-select-option value="Completa">Completa</ion-select-option>
             <ion-select-option value="Parcial/Mitja Jornada">Parcial/Mitja Jornada</ion-select-option>
@@ -154,8 +150,8 @@
       </div>-->
 
       <ion-item>
-        <ion-label>Descripció:</ion-label>
-        <ion-textarea id="iDescripcio" formControlName="iDescripcio" minlength="40" maxlength="600" rows="6" cols="10" required></ion-textarea>
+        <ion-label position="stacked"><div class="custom-title textarea-title">Descripció:</div></ion-label>
+        <ion-textarea id="iDescripcio" formControlName="iDescripcio" minlength="40" maxlength="600" rows="6" cols="60" required></ion-textarea>
       </ion-item>      
       <div *ngIf="errorCtr.iDescripcio.errors && (errorCtr.iDescripcio.invalid || errorCtr.iDescripcio.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iDescripcio.errors.required">* Camp requerit</small>        
@@ -164,8 +160,8 @@
       </div>
 
       <ion-item>
-        <ion-label>Requisits:</ion-label>
-        <ion-textarea id="iRequirements" formControlName="iRequirements" minlength="40" maxlength="600" rows="6" cols="10" required></ion-textarea>
+        <ion-label position="stacked"><div class="custom-title textarea-title">Requisits:</div></ion-label>
+        <ion-textarea id="iRequirements" formControlName="iRequirements" minlength="40" maxlength="600" rows="6" cols="60" required></ion-textarea>
       </ion-item>      
       <div *ngIf="errorCtr.iRequirements.errors && (errorCtr.iRequirements.invalid || errorCtr.iRequirements.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iRequirements.errors.required">* Camp requerit</small>        
@@ -174,12 +170,12 @@
       </div>
 
       <p class="ion-text-center ion-padding">
-        <ion-button type="submit" fill="solid" color="upmeup" shape="round" [disabled]="!createForm.valid"> 
-          Guardar 
+        <ion-button type="submit" fill="solid" color="loginbtn" shape="round" [disabled]="!createForm.valid"> 
+          Actualitzar 
         </ion-button>
-        <ion-button type="button" fill="solid" color="danger" shape="round" (click)="cancelCreation()"> 
+        <!--<ion-button type="button" fill="solid" color="danger" shape="round" (click)="cancelCreation()"> 
           Cancela
-        </ion-button>
+        </ion-button>-->
       </p>
     </form>
   </div>

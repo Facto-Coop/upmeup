@@ -32,7 +32,7 @@ export default {
   ],
 };*/
 
-const webpack = require('webpack');
+/*const webpack = require('webpack');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const path = require('path');
 
@@ -49,7 +49,7 @@ module.exports = {
   devServer: {
     proxy: {
         '/api': {
-          target: 'http://localhost:3000',
+          target: 'http://localhost:3000/',
           pathRewrite: { '^/api': '' },
           secure: false,
           changeOrigin: true
@@ -64,8 +64,8 @@ module.exports = {
     /*client: {
         webSocketURL: 'ws://127.0.0.1:8100/ws',
     },*/
-    compress: true,
+  //compress: true,
     //host: "http://factodev.upmeup.es/login",
     //port: 4200,
-  },
-};
+  //},
+//};

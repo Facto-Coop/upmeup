@@ -14,7 +14,7 @@ ion-content {
 			padding: 0px; 
 		
 			h4.margin { margin: 25px 15px 25px 15px;} 
-            .custom-title { color: var(--ion-color-upmeup); font-weight: bold; }
+            .custom-title { color: #8cb2a1; font-weight: bold; }
 			.chip-space { white-space: normal; }
 		}
 
@@ -61,12 +61,16 @@ ion-content {
 		ion-col { margin-top: 0px; }
 	}
 
-	//ion-label.skills { display: inline-flex; }
-	ion-label ion-icon { margin: 0 10px; vertical-align: bottom; }
+	ion-label ion-icon { 
+        width: 40px; 
+        height: 40px; 
+        vertical-align: middle; 
+    }
 
     .title-offer { white-space: normal; }
 	.custom-icon { 
-		ion-label { vertical-align: middle; color: #5a7266; }
+		ion-label { color: #5a7266; }
+		span { margin-left: 5px; font-size: 13px; }
 	}
 }
 

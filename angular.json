@@ -77,7 +77,7 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "app:build",
-            "proxyConfig": "proxy.conf.json",
+            //"proxyConfig": "proxy.conf.json",
             "publicHost": "factodev.upmeup.es"
           },
           "configurations": {

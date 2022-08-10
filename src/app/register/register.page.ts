@@ -277,6 +277,13 @@ export class RegisterPage implements OnInit {
     //console.log('ID Compets that need to User Profile --> ', this.userCompetsIds);
   }
 
+  // Delete function to competencies/tags.
+  removeCompetence(item) {
+    const tags = this.formSlide5.value.iCompetence;
+    const index = tags.indexOf(item);
+    tags.splice(index, 1);
+  }
+
   swipeNext(){
     this.slides.slideNext(500);
   }

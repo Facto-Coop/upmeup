@@ -19,6 +19,12 @@ $upm-tag-theme: (
     border-radius: 2px
 );
 
+$foundation-icon-theme: (
+    fill: #fff,
+    fill-focus: #eee,
+    transition: all 0.35s
+);
+
 // Apply theme to the container
 :host ::ng-deep .ng2-tag-input.upm-tag-theme{
     @include tag-theme($upm-theme);
@@ -27,4 +33,8 @@ $upm-tag-theme: (
 // Apply theme to the tags
 :host ::ng-deep .ng2-tag-input.upm-tag-theme tag{
     @include tag-theme($upm-tag-theme);
+}
+
+:host ::ng-deep .ng2-tag-input.upm-tag-theme tag delete-icon {
+    @include icon-theme($upm-tag-theme);
 }

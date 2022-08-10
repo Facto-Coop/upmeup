@@ -317,7 +317,8 @@
                 <ion-col size="12">
                   <tag-input [identifyBy]="'id'" [placeholder]="'+ Competencies'" [displayBy]="'value'" [maxItems]='20' id="iCompetence" formControlName="iCompetence" [removable]="true" [theme]="'upm-tag-theme'">
                       <ng-template let-item="item">
-                            {{ item.value }}
+                          {{ item.value }}
+                          <delete-icon (click)="removeCompetence(item)"></delete-icon>
                       </ng-template>
                       <tag-input-dropdown [autocompleteItems]="competList" [identifyBy]="'_id'" [displayBy]="'name'">
                           <ng-template let-item="item" let-index="index">

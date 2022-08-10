@@ -21,6 +21,8 @@ export class UserProfilePage implements OnInit {
   skillsList: any[] = [];
   userInfo: any[] = [];
   userSkills: any[] = [];
+  skillsName: any;
+  skillsIco: any[] = [];
   userCompets: any[] = [];
   sectorName = '';
 
@@ -69,11 +71,19 @@ export class UserProfilePage implements OnInit {
   /** Get SkillNames */
   qSkillName(skillId: string) {
     this.userSkills = [];
+    this.skillsIco = [];
     this.softSkillService.qGetSkill(skillId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
       this.userSkills.push(item.getSkill);
-      //console.log('skills: ' + this.userSkills);
+      const nameClass = item.getSkill.name.replace(/ /g, '_');
+      this.skillsName = nameClass.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      this.skillsIco.push({
+        sid: item.getSkill._id,
+        sname: item.getSkill.name,
+        sClass: this.skillsName
+      });
+
       this.useSessionStorage(this.userSkills);
     });
   }

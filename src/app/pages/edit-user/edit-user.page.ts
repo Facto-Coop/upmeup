@@ -5,7 +5,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { CompetenceService } from 'src/app/services/competence.service';
 import { SectorsService } from 'src/app/services/sectors.service';
@@ -19,6 +20,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditUserPage implements OnInit {
   userID = sessionStorage.getItem('userid');
+  userType = '0';
   editUserForm: FormGroup;
   isSubmitted = false;
   sectorsList: any[] = [];
@@ -43,8 +45,11 @@ export class EditUserPage implements OnInit {
         ) { }
 
   ngOnInit() {
+    this.userType = this.userData.tipo;
+    if (this.userType === '1') {
+        this.userCompetIDs = this.userData.competencies;
+    }
     this.initForm();
-    this.userCompetIDs = this.userData.competencies;
     this.qGetSectors();
     this.qGetCompetencies();
     this.setValues(this.userData);
@@ -144,7 +149,8 @@ export class EditUserPage implements OnInit {
       this.insertedTags(this.editUserForm.value.iCompetence);
 
       this.loadingCtrl.create({
-        message: 'Desant canvis...'
+        message: 'Desant canvis...',
+        duration: 700
       }).then(async res => {
         res.present();
         console.log('Guardando data...');
@@ -214,6 +220,13 @@ export class EditUserPage implements OnInit {
       console.log('Profile edition!');
     });
     this.dismissEditModal();
+  }
+
+  // Delete function to competencies/tags.
+  removeCompetence(item) {
+    const tags = this.editUserForm.value.iCompetence;
+    const index = tags.indexOf(item);
+    tags.splice(index, 1);
   }
 
   // Cancel edition
