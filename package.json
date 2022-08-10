@@ -6,8 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start --prod": "ng serve --configurations=production",
-    "build --prod": "ng build --configurations production",
+    "start --prod": "ng serve -c production",
+    "build --prod": "ng build -c production",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

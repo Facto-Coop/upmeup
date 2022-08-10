@@ -7,7 +7,7 @@ import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 
 //const localUri = 'http://localhost:3000/graphql';
-const ServerUri = 'http://factodev.upmeup.es/graphql';
+const ServerUri = 'http://api-factodev.upmeup.es';
 
 export function createApollo(httpLink: HttpLink) {
   console.log('**** Env Uri: ', `http://${environment.apiUrl}`);

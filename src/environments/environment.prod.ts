@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'factodev.upmeup.es'
+  apiUrl: 'api-factodev.upmeup.es'
 };
