@@ -73,7 +73,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "app:build",
-            "publicHost": "api-factodev.upmeup.es"
+            "publicHost": "factodev.upmeup.es"
           },
           "configurations": {
             "production": {
