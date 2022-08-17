@@ -7,9 +7,9 @@ import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { EmptyObject } from 'apollo-angular/types';
 import { map } from 'rxjs/operators';
 
-const GET_USERLOGIN = gql`
+/*const GET_USERLOGIN = gql`
   query getLogUser {
-    getUsers {
+    getUsersData {
       _id
       name
       email
@@ -17,7 +17,7 @@ const GET_USERLOGIN = gql`
       tipo
     }
   }
-`;
+`;*/
 
 const GET_USER = gql`
   query getOneUser($id: String!) {
@@ -199,13 +199,13 @@ export class UserService {
    */
    private _allUsersWatchQuery: QueryRef<any, EmptyObject>;
 
-   qGetUsersLog(): QueryRef<any, EmptyObject> {
+   /*qGetUsersLog(): QueryRef<any, EmptyObject> {
      this._allUsersWatchQuery = this.apollo.watchQuery({
          query: GET_USERLOGIN
      });
 
      return this._allUsersWatchQuery;
-   }
+   }*/
 
    qGetAllUsers(): QueryRef<any, EmptyObject> {
      this._allUsersWatchQuery = this.apollo.watchQuery({

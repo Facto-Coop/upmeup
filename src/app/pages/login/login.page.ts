@@ -114,10 +114,10 @@ export class LoginPage implements OnInit {
       this.findUser(this.initForm.value.userEmail);
     });*/
 
-    this.uService.qGetUsersLog().valueChanges
+   /* this.uService.qGetUsersLog().valueChanges
       .subscribe((result: any) => {
         this.users = result?.data?.items;
-      });
+      });*/
   }
 
   findUser(mail) {
