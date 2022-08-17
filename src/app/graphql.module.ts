@@ -11,11 +11,16 @@ import { InMemoryCache } from '@apollo/client/core';
 const link = 'http://localhost:3000/graphql'
 const slink = 'http://api-factodev.upmeup.es/graphql'
 */
+let host = window.location.hostname;
 
 export function createApollo(httpLink: HttpLink) {
+    if (host === 'localhost') {
+      host = host + ':3000';
+    }
+    console.log('***Connected to: ', host);
     return {
       link: httpLink.create({
-        uri: 'http://api-factodev.upmeup.es/graphql'
+        uri: 'http://' + host + '/graphql'
       }),
       cache: new InMemoryCache(),
     };

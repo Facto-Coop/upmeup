@@ -52,7 +52,7 @@ export class UserProfilePage implements OnInit {
     this.uService.qGetUser(userId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-     // console.log(item.getUser);
+      //console.log(item.getUser);
       this.userInfo = item.getUser;
       this.getUserSkills(item.getUser.valors);
       this.qGetSectorName(item.getUser.sector_id);

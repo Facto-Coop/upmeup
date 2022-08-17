@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
     this.apollo.watchQuery({
       query: gql`
         {
-          getUsers {
+          getUsersData {
             _id
             name
             email
@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
       `,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>) => {
 
-      this.users = result.data && result.data.getUsers;
+      this.users = result.data && result.data.getUsersData;
       //this.loading = result.loading;
       //this.error = result.errors;
     });
@@ -102,7 +102,6 @@ export class LoginPage implements OnInit {
       this.loginIn(this.user.email, this.user.pw);
     }
 
-    console.log('Please provide all the required values!');
     return false;
   }
 
