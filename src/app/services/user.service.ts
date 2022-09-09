@@ -269,11 +269,10 @@ export class UserService {
         }
     }).pipe(
         map((data) => {
-          this._oneUserWatchQuery?.refetch();
+          this._allUsersWatchQuery?.refetch();
         })
     );
   }
-
 
   /**
    * Mutation to create a new user
@@ -299,7 +298,7 @@ export class UserService {
         }
       }).pipe(
         map((data) => {
-          this._oneUserWatchQuery?.refetch();
+          this._allUsersWatchQuery?.refetch();
         })
       );
   }
