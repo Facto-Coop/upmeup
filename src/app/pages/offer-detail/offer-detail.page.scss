@@ -77,6 +77,12 @@ ion-content {
 /**
 *** Web Responsive style
 **/
-@media (min-width: 1020px) {
+@media (min-width: 720px) {
     ion-card { width: 50%; margin: 10px auto; }    
+
+	ion-content {
+		.container {
+			ion-card-content { padding: 0px; }
+		}
+	}
 }
