@@ -250,7 +250,7 @@ export class UserService {
   /**
   * Mutation to Edit user profile
   */
-   mEditUser(userId, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iCompetence: any) {
+  mEditUser(userId, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iCompetence: any) {
     return this.apollo.mutate({
         mutation: MUT_EDIT_USER,
         variables: {
@@ -269,7 +269,7 @@ export class UserService {
         }
     }).pipe(
         map((data) => {
-          this._allUsersWatchQuery?.refetch();
+          this._oneUserWatchQuery?.refetch();
         })
     );
   }

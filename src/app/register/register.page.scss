@@ -55,3 +55,10 @@ ion-content {
     margin: 18px;
     padding: 8px;
 }
+
+/**
+*** Web Responsive style
+**/
+@media (min-width: 1020px) {
+    ion-slide { display: grid; }    
+}

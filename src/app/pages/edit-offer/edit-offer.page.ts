@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { AlertController, ModalController } from '@ionic/angular';
@@ -18,6 +18,11 @@ import { CompetenceService } from 'src/app/services/competence.service';
   styleUrls: ['./edit-offer.page.scss'],
 })
 export class EditOfferPage implements OnInit {
+  cityList: any[] = ['Corunya', 'Almeria', 'Astúries', 'Avila', 'Badajoz', 'Barcelona', 'Burgos', 'Càceres', 'Cadis', 'Cantàbria', 'Castelló', 'Ceuta', 'Ciudad Real',
+  'Còrdova', 'Conca', 'Formentera', 'Girona', 'Granada', 'Guadalajara', 'Guipuzcoa', 'Huelva', 'Osca', 'Eivissa', 'Jaén', 'La Rioja', 'Gran Canària', 'Fuerteventura',
+  'Lanzarote', 'Lleó', 'Lleida', 'Lugo', 'Madrid', 'Màlaga', 'Mallorca', 'Menorca', 'Múrcia', 'Navarra', 'Orense', 'Palència', 'Pontevedra', 'Salamanca', 'Tenerife',
+  'La Gomera', 'La Palma', 'El Hierro', 'Segòvia', 'Sevilla', 'Sòria', 'Tarragona', 'Terol', 'Toledo', 'València', 'Valladolid', 'Biscaia', 'Zamora', 'Saragossa'];
+
   editForm: FormGroup;
   isSubmitted = false;
   offerID: any;
@@ -83,7 +88,7 @@ export class EditOfferPage implements OnInit {
     this.editForm = this.fBuilder.group({
       iTitle: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       iEduLevel: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      iCompetence: ['', [Validators.required,  Validators.minLength(4), Validators.maxLength(20)]],
+      iCompetence: ['', [Validators.minLength(4), Validators.maxLength(20)]],
       iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       iRangoSalarial: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       iRemoto: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
@@ -209,12 +214,6 @@ export class EditOfferPage implements OnInit {
     tags.splice(index, 1);
   }
 
-  cancelEdition(){
-    //this.editForm.reset();
-    // Alert to confirm:
-    this.alertToConfirm();
-  }
-
   /**
    * Close modal when update
    */
@@ -222,10 +221,21 @@ export class EditOfferPage implements OnInit {
     this.mdlController.dismiss();
   }
 
+  @HostListener('window:popstate', ['$event'])
+  dismissModal() {
+    this.mdlController.dismiss();
+  }
+
+  /*cancelEdition(){
+    //this.editForm.reset();
+    // Alert to confirm:
+    this.alertToConfirm();
+  }*/
+
   /**
    * Alert to confirm action
    */
-   async alertToConfirm() {
+   /*async alertToConfirm() {
     const alert = await this.alrtController.create({
       header: 'Cancelar edición',
       message: 'Seguro que quieres cancelar la edición de la oferta?',
@@ -250,6 +260,6 @@ export class EditOfferPage implements OnInit {
     });
 
     await alert.present();
-  }
+  }*/
 
 }

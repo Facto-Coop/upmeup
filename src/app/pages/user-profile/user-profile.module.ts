@@ -6,7 +6,7 @@ import { TagInputModule } from 'ngx-chips';
 
 import { UserProfilePageRoutingModule } from './user-profile-routing.module';
 import { UserProfilePage } from './user-profile.page';
-import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.component';
+//import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.component';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.com
     IonicModule,
     UserProfilePageRoutingModule
   ],
-  declarations: [UserProfilePage, ProgressBarComponent]
+  declarations: [UserProfilePage] //, ProgressBarComponent]
 })
 export class UserProfilePageModule {}

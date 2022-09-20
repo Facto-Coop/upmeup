@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { map } from 'rxjs';
@@ -14,6 +14,11 @@ import { CompetenceService } from 'src/app/services/competence.service';
   styleUrls: ['./create-offer.page.scss'],
 })
 export class CreateOfferPage implements OnInit {
+  cityList: any[] = ['Corunya', 'Almeria', 'Astúries', 'Avila', 'Badajoz', 'Barcelona', 'Burgos', 'Càceres', 'Cadis', 'Cantàbria', 'Castelló', 'Ceuta', 'Ciudad Real',
+  'Còrdova', 'Conca', 'Formentera', 'Girona', 'Granada', 'Guadalajara', 'Guipuzcoa', 'Huelva', 'Osca', 'Eivissa', 'Jaén', 'La Rioja', 'Gran Canària', 'Fuerteventura',
+  'Lanzarote', 'Lleó', 'Lleida', 'Lugo', 'Madrid', 'Màlaga', 'Mallorca', 'Menorca', 'Múrcia', 'Navarra', 'Orense', 'Palència', 'Pontevedra', 'Salamanca', 'Tenerife',
+  'La Gomera', 'La Palma', 'El Hierro', 'Segòvia', 'Sevilla', 'Sòria', 'Tarragona', 'Terol', 'Toledo', 'València', 'Valladolid', 'Biscaia', 'Zamora', 'Saragossa'];
+
   createForm: FormGroup;
   isSubmitted = false;
   userID: any;
@@ -67,19 +72,6 @@ export class CreateOfferPage implements OnInit {
 
   get errorCtr() {
     return this.createForm.controls;
-  }
-
-  /**
-   * Close modal when create
-   */
-  async dismissEditModal() {
-    this.mdlController.dismiss();
-  }
-
-  cancelCreation(){
-    this.createForm.reset();
-    // Alert to confirm:
-    this.alertToConfirm();
   }
 
   getDate() {
@@ -188,9 +180,27 @@ export class CreateOfferPage implements OnInit {
   }
 
   /**
+   * Close modal when create
+   */
+   async dismissEditModal() {
+    this.mdlController.dismiss();
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  dismissModal() {
+    this.mdlController.dismiss();
+  }
+
+  /*cancelCreation(){
+    this.createForm.reset();
+    // Alert to confirm:
+    this.alertToConfirm();
+  }*/
+
+  /**
    * Alert to confirm action
    */
-  async alertToConfirm() {
+  /*async alertToConfirm() {
     const alert = await this.alrtController.create({
       header: 'Cancelar oferta',
       message: 'Seguro que quieres cancelar la creación de oferta?',
@@ -215,6 +225,6 @@ export class CreateOfferPage implements OnInit {
     });
 
     await alert.present();
-  }
+  }*/
 
 }

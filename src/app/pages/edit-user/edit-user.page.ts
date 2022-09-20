@@ -1,12 +1,12 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
-import { Observable, of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { CompetenceService } from 'src/app/services/competence.service';
 import { SectorsService } from 'src/app/services/sectors.service';
@@ -19,19 +19,27 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./edit-user.page.scss'],
 })
 export class EditUserPage implements OnInit {
+  languageList: any = ['Alemany', 'Àrab', 'Aranès', 'Bosnià', 'Català', 'Xinès mandarí', 'Coreà', 'Croat', 'Danès', 'Espanyol', 'Basc', 'Francès', 'Gallec',
+  'Hindi', 'Anglès', 'Italià', 'Japonès', 'Neerlandès', 'Polonès', 'Portuguès', 'Rus', 'Romanès', 'Serbi', 'Turc', 'Ucraïnès', 'Valencià', 'Vietnamita'];
+  cityList: any[] = ['Corunya', 'Almeria', 'Astúries', 'Avila', 'Badajoz', 'Barcelona', 'Burgos', 'Càceres', 'Cadis', 'Cantàbria', 'Castelló', 'Ceuta', 'Ciudad Real',
+    'Còrdova', 'Conca', 'Formentera', 'Girona', 'Granada', 'Guadalajara', 'Guipuzcoa', 'Huelva', 'Osca', 'Eivissa', 'Jaén', 'La Rioja', 'Gran Canària', 'Fuerteventura',
+    'Lanzarote', 'Lleó', 'Lleida', 'Lugo', 'Madrid', 'Màlaga', 'Mallorca', 'Menorca', 'Múrcia', 'Navarra', 'Orense', 'Palència', 'Pontevedra', 'Salamanca', 'Tenerife',
+    'La Gomera', 'La Palma', 'El Hierro', 'Segòvia', 'Sevilla', 'Sòria', 'Tarragona', 'Terol', 'Toledo', 'València', 'Valladolid', 'Biscaia', 'Zamora', 'Saragossa'];
+
   userID = sessionStorage.getItem('userid');
   userType = '0';
   editUserForm: FormGroup;
   isSubmitted = false;
   sectorsList: any[] = [];
-  competList: any[] = [];
 
+  competList: any[] = [];
   userCompetIDs: any[] = [];
   selectedCompet: any[] = [];
   newUserCompets: any[] = [];
   newUserCompetsList: any[] = [];
   nameNewCompet: any[] = [];
 
+ // updateUserData: User;
   @Input() userData: User;
 
   constructor(
@@ -102,19 +110,30 @@ export class EditUserPage implements OnInit {
    * Initialized form
    */
    initForm(){
-    this.editUserForm = this.fBuilder.group({
-      iName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      iSurname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      iEmail: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]],
-      iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      iSector: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(35)]],
-      iEduc: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
-      iJobPos: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(70)]],
-      iLastJob: ['', [Validators.required,  Validators.minLength(20), Validators.maxLength(400)]],
-      iExp: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
-      iLang: ['', [Validators.required,  Validators.minLength(1), Validators.maxLength(30)]],
-      iCompetence: ['', [Validators.required,  Validators.minLength(4), Validators.maxLength(20)]]
-    });
+    if(this.userType === '2') {
+      this.editUserForm = this.fBuilder.group({
+        iName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+        iEmail: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]],
+        iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+        iSector: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(35)]],
+        iLastJob: ['', [Validators.required,  Validators.minLength(20), Validators.maxLength(400)]],
+        iExp: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]]
+      });
+    } else if(this.userType === '1') {
+      this.editUserForm = this.fBuilder.group({
+        iName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+        iSurname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+        iEmail: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]],
+        iCity: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+        iSector: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(35)]],
+        iEduc: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
+        iJobPos: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(70)]],
+        iLastJob: ['', [Validators.required,  Validators.minLength(20), Validators.maxLength(400)]],
+        iExp: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
+        iLang: ['', [Validators.required,  Validators.minLength(1), Validators.maxLength(30)]],
+        iCompetence: ['', [Validators.minLength(4), Validators.maxLength(20)]]
+      });
+    }
   }
 
   /**
@@ -122,18 +141,28 @@ export class EditUserPage implements OnInit {
    * @param infoOffer
   */
   setValues(infoUser) {
-    this.userID = infoUser._id;
-    this.editUserForm.get('iName').setValue(infoUser.name);
-    this.editUserForm.get('iSurname').setValue(infoUser.surname);
-    this.editUserForm.get('iEmail').setValue(infoUser.email);
-    this.editUserForm.get('iCity').setValue(infoUser.city);
-    this.editUserForm.get('iSector').setValue(infoUser.sector_id);
-    this.editUserForm.get('iEduc').setValue(infoUser.eduLevel);
-    this.editUserForm.get('iJobPos').setValue(infoUser.jobPosition);
-    this.editUserForm.get('iLastJob').setValue(infoUser.lastJobTasks);
-    this.editUserForm.get('iExp').setValue(infoUser.experience);
-    this.editUserForm.get('iLang').setValue(infoUser.languages);
-    this.editUserForm.get('iCompetence').setValue(infoUser.competencies);
+    if(this.userType === '2') {
+      this.userID = infoUser._id;
+      this.editUserForm.get('iName').setValue(infoUser.name);
+      this.editUserForm.get('iEmail').setValue(infoUser.email);
+      this.editUserForm.get('iCity').setValue(infoUser.city);
+      this.editUserForm.get('iSector').setValue(infoUser.sector_id);
+      this.editUserForm.get('iLastJob').setValue(infoUser.lastJobTasks);
+      this.editUserForm.get('iExp').setValue(infoUser.experience);
+    } else if(this.userType === '1') {
+      this.userID = infoUser._id;
+      this.editUserForm.get('iName').setValue(infoUser.name);
+      this.editUserForm.get('iSurname').setValue(infoUser.surname);
+      this.editUserForm.get('iEmail').setValue(infoUser.email);
+      this.editUserForm.get('iCity').setValue(infoUser.city);
+      this.editUserForm.get('iSector').setValue(infoUser.sector_id);
+      this.editUserForm.get('iEduc').setValue(infoUser.eduLevel);
+      this.editUserForm.get('iJobPos').setValue(infoUser.jobPosition);
+      this.editUserForm.get('iLastJob').setValue(infoUser.lastJobTasks);
+      this.editUserForm.get('iExp').setValue(infoUser.experience);
+      this.editUserForm.get('iLang').setValue(infoUser.languages);
+      this.editUserForm.get('iCompetence').setValue(infoUser.competencies);
+    }
   }
 
   /**
@@ -146,17 +175,27 @@ export class EditUserPage implements OnInit {
       console.log('Please provide all the required values!');
       return false;
     } else {
-      this.insertedTags(this.editUserForm.value.iCompetence);
+      if(this.userType === '1') {
+        this.insertedTags(this.editUserForm.value.iCompetence);
+      } else {
+        this.newUserCompets = [];
+        this.editUserForm.value.iSurname = '-';
+        this.editUserForm.value.iJobPos = '-';
+        this.editUserForm.value.iEduc = '-';
+        this.editUserForm.value.iLang = [];
+      }
 
       this.loadingCtrl.create({
-        message: 'Desant canvis...',
-        duration: 700
+        message: 'Desant canvis...'
       }).then(async res => {
         res.present();
-        console.log('Guardando data...');
-        this.findCompetence(this.nameNewCompet);
+        //console.log('Guardando data...');
+        if(this.userType === '1') {
+          this.findCompetence(this.nameNewCompet);
+        }
 
-        await this.editUser(
+       // setTimeout(() => {
+          await this.editUser(
             this.userID,
             this.editUserForm.value.iName,
             this.editUserForm.value.iSurname,
@@ -169,9 +208,15 @@ export class EditUserPage implements OnInit {
             this.editUserForm.value.iExp,
             this.editUserForm.value.iLang,
             this.newUserCompets
-        );
-        this.loadingCtrl.dismiss();
+          );
+        //  res.present();
+       // }, 2000);
+
+        //setTimeout(() => {
+          this.loadingCtrl.dismiss();
+        //}, 3000);
       });
+      //this.loadingCtrl.dismiss();
     }
   }
 
@@ -214,11 +259,12 @@ export class EditUserPage implements OnInit {
   }
 
   editUser(uId: any, iName: any, iSurname: any, iEmail: any, iCity: any, iSector: any, iEduc: any, iJobPos: any, iLastJob: any, iExp: any, iLang: any, iCompetence: any){
+    sessionStorage.setItem('user', iName);
     this.uService.mEditUser(uId, iName, iSurname, iEmail, iCity, iSector, iEduc, iJobPos, iLastJob, iExp, iLang, iCompetence)
     .subscribe((response) => {
-      sessionStorage.setItem('user', iName);
-      console.log('Profile edition!');
+      console.log('Profile edited!');
     });
+
     this.dismissEditModal();
   }
 
@@ -229,45 +275,15 @@ export class EditUserPage implements OnInit {
     tags.splice(index, 1);
   }
 
-  // Cancel edition
-  cancelEdition(){
-    this.alertToConfirm();
-  }
-
-  /**
-   * Alert to confirm action
-   */
-   async alertToConfirm() {
-    const alert = await this.alrtController.create({
-      header: 'Cancelar edició',
-      message: 'Segur que vols cancel·lar l´edició de perfil?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          cssClass: 'secondary',
-          id: 'cancel-button',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Sí',
-          id: 'confirm-button',
-          handler: () => {
-            console.log('Confirm Okay');
-            this.dismissEditModal();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
   /**
   * Close modal when update
   */
-  async dismissEditModal() {
+   async dismissEditModal() {
+    this.mdlController.dismiss();
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  dismissModal() {
     this.mdlController.dismiss();
   }
 

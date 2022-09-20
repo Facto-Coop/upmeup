@@ -24,8 +24,8 @@
         <ion-row>
           <ion-col> 
             <ion-title class="ion-padding"> <ion-label class="title-offer" color="light">
-               {{ userName }} {{userInfo?.surname}} 
-               <h3> de {{userInfo?.city}} </h3> </ion-label>
+               {{ userInfo.name }} {{userInfo.surname}} 
+               <h3> de {{userInfo.city}} </h3> </ion-label>
             </ion-title>
           </ion-col>
         </ion-row>
@@ -37,7 +37,7 @@
       <ion-fab-button color="upmeup" size="small" (click)="openModal()"> <ion-icon name="create-outline" style="color: #5a7266;"></ion-icon> </ion-fab-button>
     </ion-fab>
     
-    <ion-grid class="skills-info">
+    <ion-grid>
       <div class="ion-padding-bottom" *ngIf="userSkills.length === 0">
         <div class="header-text ion-padding">
           <ion-label color="danger" class="ion-text-start">
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills?.length > 0">
+      <div class="skills-info ion-padding-top ion-padding-bottom" *ngIf="userSkills?.length > 0">
         <ion-row>
           <ion-col size="6" *ngFor="let skill of skillsIco">
             <div class="custom-icon">
@@ -74,15 +74,15 @@
       <ion-card-content>
         <div class="center-class margin-fab-btn">  
           <ion-label>
-            <h2 class="custom-title"> {{ userInfo?.jobPosition }} </h2>
+            <h2 class="custom-title"> {{ userInfo.jobPosition }} </h2>
             <h4> <b>Sector:</b> {{ sectorName }} </h4>
-            <h3 class="custom-subtitle"> {{ userInfo?.experience }} anys d'experiencia </h3>
+            <h3 class="custom-subtitle"> {{ userInfo.experience }} anys d'experiencia </h3>
           </ion-label>               
         </div>
 
         <div class="center-class">
           <ion-label>
-            <h4 class="margin"> {{ userInfo?.lastJobTasks }} </h4>
+            <h4 class="margin"> {{ userInfo.lastJobTasks }} </h4>
           </ion-label>    
         </div>
 
@@ -104,7 +104,7 @@
         <div class="center-class">  
           <ion-label class="exp-title">
             <h2 class="custom-title"> Titulació </h2>
-            <h3 class="bold"> {{userInfo?.eduLevel}} </h3>
+            <h3 class="bold"> {{userInfo.eduLevel}} </h3>
             <h5> Universitat Autónoma Bcn </h5>
           </ion-label> 
         </div>

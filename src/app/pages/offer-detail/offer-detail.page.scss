@@ -39,10 +39,9 @@ ion-content {
 		}
 		
 		.custom-icon {
-			height: 30px;
 			margin-left: 10px;
 	
-			ion-label { margin-left: 30px; vertical-align: middle; color: #5a7266; }
+			ion-label { margin-left: 30px; vertical-align: middle; color: #5a7266; white-space: inherit; }
 		}
 	
 	}
@@ -54,7 +53,8 @@ ion-content {
     
     ion-thumbnail { margin:0 auto; width: 130px; height: 130px; }
     img { border-radius: 50%; }
-    .header-text { display:block; text-align: center; text-transform: uppercase; }
+    .header-text { display: block; text-align: center; text-transform: uppercase; }
+	.text-no-valors { display: block; text-align: center; font-size: 14px; }
 
     .grid-info { 
 		margin: 0px 30px; font-size: 14px; font-weight: 700; 

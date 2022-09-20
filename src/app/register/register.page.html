@@ -30,7 +30,8 @@
         <div class="container">      
           <form [formGroup]="formSlide1" (ngSubmit)="submitForm()" novalidate>
             <ion-grid>
-              <h2>Nom</h2>
+              <h2 *ngIf="userType === '1'">Nom</h2>
+              <h2 *ngIf="userType === '2'">Nom de l'empresa o entitat</h2>
               <ion-row>
                 <ion-col size="12">
                   <div class="list list-inset input-container">
@@ -44,7 +45,7 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-            <ion-grid>
+            <ion-grid *ngIf="userType === '1'">
               <h2>Cognoms</h2>
               <ion-row>
                 <ion-col size="12">
@@ -101,7 +102,7 @@
               </ion-row>
             </ion-grid>
             <ion-grid>
-              <h2>Password</h2>
+              <h2>Contrasenya</h2>
               <ion-row>
                 <ion-col size="12">
                   <div class="list list-inset input-container">
@@ -119,7 +120,7 @@
               </ion-row>
             </ion-grid>
             <ion-grid>
-              <h2>Confirm password</h2>
+              <h2>Confirmar contrasenya</h2>
               <ion-row>
                 <ion-col size="12">
                   <div class="list list-inset input-container">
@@ -146,7 +147,7 @@
       <ion-slide>
         <div class="container-medium">
           <form [formGroup]="formSlide3" (ngSubmit)="submitForm()" novalidate>
-            <ion-grid>
+            <ion-grid *ngIf="userType === '1'">
               <h2>Ultim carrec o feina</h2>
               <ion-row>
                 <ion-col size="12">
@@ -162,7 +163,8 @@
               </ion-row>
             </ion-grid>
             <ion-grid>
-              <h2>Sector</h2>
+              <h2 *ngIf="userType === '1'">Sector</h2>
+              <h2 *ngIf="userType === '2'">A quin sector pertany?</h2>
               <ion-row>
                 <ion-col size="12">
                   <div class="list list-inset input-select-container">
@@ -179,7 +181,8 @@
               </ion-row>
             </ion-grid>
             <ion-grid>
-              <h2>Anys d'experiencia laboral</h2>
+              <h2 *ngIf="userType === '1'">Anys d'experiencia laboral</h2>
+              <h2 *ngIf="userType === '2'">Antiguitat de l'empresa</h2>
               <ion-row>
                 <ion-col size="12">
                   <div class="list list-inset input-container">
@@ -192,6 +195,8 @@
                   </div>
                 </ion-col>
               </ion-row>
+            </ion-grid>
+            <ion-grid>
               <ion-row class="padding-btn">
                 <ion-col size="12">
                   <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!formSlide3.valid"> Continuar </ion-button>
@@ -207,8 +212,13 @@
         <div class="container-medium">
           <form [formGroup]="formSlide4" (ngSubmit)="submitForm()" novalidate>  
             <ion-grid>
-              <h2>Descriu breument la feina que desenvolupes en l'actualitat i/o les habilitats 
-                que tens com a treballador/a</h2>
+              <h2 *ngIf="userType === '1'">
+                Descriu breument la feina que desenvolupes en l'actualitat i/o les habilitats 
+                que tens com a treballador/a
+              </h2>
+              <h2 *ngIf="userType === '2'">
+                Que feu a la teva empresa o entitat?
+              </h2>
               <ion-row>
                 <ion-col size="12">
                   <div class="list list-inset input-container">
@@ -235,10 +245,12 @@
       <ion-slide>
         <div class="container-medium"> 
           <ion-grid>
-            <h2>Potser t'identifiques amb tots els valors o característiques que et proposem en la següent pantalla, però 
-              et demanem que elegeixis el que més et representen.
+            <h2 *ngIf="userType === '1'">Potser t'identifiques amb tots els valors o característiques que et proposem en la següent pantalla, però 
+              et demanem que triïs els 6 que més et representen.
             </h2>
-            <h4>(máxim: 6)</h4>
+            <h2 *ngIf="userType === '2'">Potser la teva empresa o entitat s'identifica amb tots els valors o característiques que et proposem en la següent 
+              pantalla, però et demanem que triïs els 6 que més et representen.
+            </h2>
             <ion-row>
               <ion-col size="12">
                 <ion-button type="button" fill="solid" color="light" expand="block" shape="round" (click)="valuesModal()"> Afegir </ion-button>
@@ -269,22 +281,30 @@
               </ion-col>
             </ion-row>
           </ion-grid>
-          <ion-grid class="padding-btn">
+          <ion-grid *ngIf="userType === '1'" class="padding-btn">
             <ion-row>
               <ion-col size="12"> 
                 <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!userSkills?.length > 0" (click)="swipeNext()"> Continuar </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
+          <ion-grid *ngIf="userType === '2'">
+            <ion-row>
+              <ion-col size="12"> 
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!userSkills?.length > 0" (click)="saveNewUser()"> Finalitzar </ion-button>
+              </ion-col>
+              <p> </p>
+            </ion-row>
+          </ion-grid>
         </div>     
       </ion-slide>
 
       <!-- Form 5 -->
-      <ion-slide>
+      <ion-slide *ngIf="userType === '1'">
         <div class="container-medium">
           <form [formGroup]="formSlide5" (ngSubmit)="submitForm()" novalidate>
             <ion-grid>
-              <h2>Nivell estudis</h2>
+              <h2>Nivell d'estudis</h2>
               <ion-row>
                 <ion-col size="12">
                   <div class="list list-inset input-container">
@@ -311,11 +331,19 @@
                 </ion-col>
               </ion-row>            
             </ion-grid>
-            <ion-grid *ngIf="userType === '1'"> 
-              <h2>Competencies o Habilitats</h2>
+            <ion-grid> 
+              <h2>Competències o habilitats</h2>
               <ion-row>
                 <ion-col size="12">
-                  <tag-input [identifyBy]="'id'" [placeholder]="'+ Competencies'" [displayBy]="'value'" [maxItems]='20' id="iCompetence" formControlName="iCompetence" [removable]="true" [theme]="'upm-tag-theme'">
+                  <tag-input [identifyBy]="'id'"
+                             [secondaryPlaceholder]="'+ Competencies'"
+                             [placeholder]="'+ Competencies'" 
+                             [displayBy]="'value'" 
+                             [maxItems]='20' 
+                             id="iCompetence" 
+                             formControlName="iCompetence"
+                             [removable]="true" 
+                             [theme]="'upm-tag-theme'">
                       <ng-template let-item="item">
                           {{ item.value }}
                           <delete-icon (click)="removeCompetence(item)"></delete-icon>

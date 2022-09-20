@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="upmeup">
     <ion-title class="header-text" color="light">Edita l'Oferta</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()"> <ion-icon name="close-outline" color="light"></ion-icon> </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 
   <div class="header-class">
@@ -63,23 +66,11 @@
 
       <ion-item>
         <ion-label><h2 class="custom-title">Ciutat:</h2></ion-label>
-        <ion-input class="form-text" id="iCity" formControlName="iCity" minlength="4" maxlength="30" required></ion-input>
+        <ion-select class="form-text" interface="action-sheet" id="iCity" formControlName="iCity" minlength="1" maxlength="80"
+          placeholder="Selecciona..." required>
+          <ion-select-option *ngFor="let city of cityList" value="{{city}}">{{city}}</ion-select-option>
+        </ion-select>  
       </ion-item>
-      <div *ngIf="errorCtr.iCity.errors && (errorCtr.iCity.invalid || errorCtr.iCity.touched)">
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iCity.errors.required">* Camp requerit</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iCity.errors.minlength">* Ha de tenir com a mínim 4 lletres</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iCity.errors.maxlength">* Ha de tenir com a màxim 30 lletres</small>
-      </div>
-
-      <ion-item>
-        <ion-label><h2 class="custom-title">Rang Salarial:</h2></ion-label>
-        <ion-input class="form-text" id="iRangoSalarial" formControlName="iRangoSalarial" minlength="8" maxlength="30" required></ion-input>
-      </ion-item>
-      <div *ngIf="errorCtr.iRangoSalarial.errors && (errorCtr.iRangoSalarial.invalid || errorCtr.iRangoSalarial.touched)">
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRangoSalarial.errors.required">* Camp requerit</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRangoSalarial.errors.minlength">* Ha de tenir com a mínim 8 lletres</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRangoSalarial.errors.maxlength">* Ha de tenir com a màxim 30 lletres</small>
-      </div>
 
       <ion-list>
         <ion-item>
@@ -108,48 +99,29 @@
         <ion-item>
           <ion-label><h2 class="custom-title">Tipus Jornada:</h2></ion-label>
           <ion-select class="form-text" interface="action-sheet" id="iJornada" formControlName="iJornada" placeholder="Selecciona..." required>
-            <ion-select-option value="Completa">Completa</ion-select-option>
+            <ion-select-option value="Jornada Completa">Jornada Completa</ion-select-option>
             <ion-select-option value="Parcial/Mitja Jornada">Parcial/Mitja Jornada</ion-select-option>
-            <ion-select-option value="Partida">Partida</ion-select-option>
-            <ion-select-option value="Continua">Continua</ion-select-option>
+            <ion-select-option value="Jornada Partida">Jornada Partida</ion-select-option>
+            <ion-select-option value="Jornada Continua">Jornada Continua</ion-select-option>
             <ion-select-option value="Per hores">Per hores</ion-select-option>
-            <ion-select-option value="Reduida">Reduida</ion-select-option>
-            <ion-select-option value="Nocturna">Nocturna</ion-select-option>
+            <ion-select-option value="Jornada Reduida">Jornada Reduida</ion-select-option>
+            <ion-select-option value="Jornada Nocturna">Jornada Nocturna</ion-select-option>
             <ion-select-option value="Per torns">Per torns</ion-select-option>
             <ion-select-option value="Només Festius">Només Festius</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
     
-      <!--<ion-item>
-        <ion-label>Model treball:</ion-label>
-        <ion-input class="form-text" id="iRemoto" formControlName="iRemoto" minlength="2" maxlength="30" required></ion-input>
-      </ion-item>
-      <div *ngIf="errorCtr.iRemoto.errors && (errorCtr.iRemoto.invalid || errorCtr.iRemoto.touched)">
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRemoto.errors.required">* Camp requerit</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRemoto.errors.minlength">* Ha de tenir com a mínim 2 lletres</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRemoto.errors.maxlength">* Ha de tenir com a màxim 30 lletres</small>
-      </div>
-    
       <ion-item>
-        <ion-label>Tipus Contracte:</ion-label>
-        <ion-input class="form-text" id="iTipoContrato" formControlName="iTipoContrato" minlength="5" maxlength="35" required> </ion-input>
+        <ion-label><h2 class="custom-title">Rang Salarial:</h2></ion-label>
+        <ion-input id="iRangoSalarial" formControlName="iRangoSalarial" minlength="8" maxlength="30" required></ion-input>
       </ion-item>
-      <div *ngIf="errorCtr.iTipoContrato.errors && (errorCtr.iTipoContrato.invalid || errorCtr.iTipoContrato.touched)">
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iTipoContrato.errors.required">* Camp requerit</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iTipoContrato.errors.minlength">* Ha de tenir com a mínim 5 lletres</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iTipoContrato.errors.maxlength">* Ha de tenir com a màxim 35 lletres</small>
+      <div *ngIf="errorCtr.iRangoSalarial.errors && (errorCtr.iRangoSalarial.invalid || errorCtr.iRangoSalarial.touched)">
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRangoSalarial.errors.required">* Camp requerit</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRangoSalarial.errors.minlength">* Ha de tenir com a mínim 8 lletres</small>
+        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iRangoSalarial.errors.maxlength">* Ha de tenir com a màxim 30 lletres</small>
       </div>
-    
-      <ion-item>
-        <ion-label>Tipus Jornada:</ion-label>
-        <ion-input class="form-text" id="iJornada" formControlName="iJornada" maxlength="30" required></ion-input>
-      </ion-item>      
-      <div *ngIf="errorCtr.iJornada.errors && (errorCtr.iJornada.invalid || errorCtr.iJornada.touched)">
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iJornada.errors.required">* Camp requerit</small>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorCtr.iJornada.errors.maxlength">* Ha de tenir com a màxim 30 lletres</small>
-      </div> -->
-    
+
       <ion-item>
         <ion-label position="stacked"><div class="custom-title textarea-title">Descripció:</div></ion-label>
         <ion-textarea id="iDescripcio" formControlName="iDescripcio" minlength="40" maxlength="600" rows="6" cols="60" required></ion-textarea>

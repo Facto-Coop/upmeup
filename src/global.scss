@@ -120,28 +120,40 @@ ion-toolbar ion-title { text-transform: uppercase; }
 .remoto-ico { background: url('./icons/model_de_treball.png') 0 0 / 22px 19px no-repeat; }
 
 //**** Skills Icons: *****//
-.medi_ambient { background: url('./icons/skills-ico/medi_ambient.png') 0 0 / 35px 35px no-repeat; }
-.impacte_social { background: url('./icons/skills-ico/impacte_social.png') 0 0 / 35px 35px no-repeat; }
-.igualtat { background: url('./icons/skills-ico/igualtat.png') 0 0 / 35px 35px no-repeat; }
-.transparencia { background: url('./icons/skills-ico/transparencia.png') 0 0 / 35px 35px no-repeat; }
-.proactivitat { background: url('./icons/skills-ico/proactivitat.png') 0 0 / 35px 35px no-repeat; }
-.organitzacio_participativa { background: url('./icons/skills-ico/organitzacio.png') 0 0 / 35px 35px no-repeat; }
+.igualtat_de_genere { background: url('./icons/skills-ico/igualtat.png') 0 0 / 35px 35px no-repeat; }
 .inclusio { background: url('./icons/skills-ico/inclusio.png') 0 0 / 35px 35px no-repeat; }
 .diversitat { background: url('./icons/skills-ico/diversitat.png') 0 0 / 35px 35px no-repeat; } 
-.responsabilitat { background: url('./icons/skills-ico/responsabilitat.png') 0 0 / 35px 35px no-repeat; }
-.innovacio { background: url('./icons/skills-ico/innovacio.png') 0 0 / 35px 35px no-repeat; }
 .aprenentatge { background: url('./icons/skills-ico/aprenentatge.png') 0 0 / 35px 35px no-repeat; }
+.sostenibilitat_medi_ambiental { background: url('./icons/skills-ico/medi_ambient.png') 0 0 / 35px 35px no-repeat; }
+.lideratge_participatiu { background: url('./icons/skills-ico/lideratge.png') 0 0 / 35px 35px no-repeat; }
+.transparencia { background: url('./icons/skills-ico/transparencia.png') 0 0 / 35px 35px no-repeat; }
+.innovacio { background: url('./icons/skills-ico/innovacio.png') 0 0 / 35px 35px no-repeat; }
+.col·laboracio { background: url('./icons/skills-ico/colaboracio.png') 0 0 / 35px 35px no-repeat; }
+.integritat { background: url('./icons/skills-ico/integritat.png') 0 0 / 35px 35px no-repeat; }
+.responsabilitat { background: url('./icons/skills-ico/responsabilitat.png') 0 0 / 35px 35px no-repeat; }
+.cultura_participativa { background: url('./icons/skills-ico/organitzacio.png') 0 0 / 35px 35px no-repeat; }
+.confianca { background: url('./icons/skills-ico/seguretat.png') 0 0 / 35px 35px no-repeat; }
+.co-responsabilitat { background: url('./icons/skills-ico/responsabilitat.png') 0 0 / 35px 35px no-repeat; }
+.resiliencia { background: url('./icons/skills-ico/resiliencia.png') 0 0 / 35px 35px no-repeat; }
+.produccio_sostenible { background: url('./icons/skills-ico/sostenibilitat.png') 0 0 / 35px 35px no-repeat; }
+// TODO: Pendientes de icono propio:
+.vinculacio_amb_la_comunitat { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
+.solidaritat { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
+.equitat { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
+.consum_responsable { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
+.retribucio_justa { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
+.orientacio_al_client { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
+.orientacio_a_resultats { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
+
+/* Quedan fuera:
+.impacte_social { background: url('./icons/skills-ico/impacte_social.png') 0 0 / 35px 35px no-repeat; }
+.proactivitat { background: url('./icons/skills-ico/proactivitat.png') 0 0 / 35px 35px no-repeat; }
 .treball_en_equip { background: url('./icons/skills-ico/treball_equip.png') 0 0 / 35px 35px no-repeat; }
 .passio { background: url('./icons/skills-ico/passio.png') 0 0 / 35px 35px no-repeat; }
-.colaboracio { background: url('./icons/skills-ico/colaboracio.png') 0 0 / 35px 35px no-repeat; }
 .qualitat { background: url('./icons/skills-ico/qualitat.png') 0 0 / 35px 35px no-repeat; }
 .educacio { background: url('./icons/skills-ico/educacio.png') 0 0 / 35px 35px no-repeat; }
-.lideratge { background: url('./icons/skills-ico/lideratge.png') 0 0 / 35px 35px no-repeat; }
 .accessibilitat { background: url('./icons/skills-ico/accessibilitat.png') 0 0 / 35px 35px no-repeat; }
-.creativitat { background: url('./icons/skills-ico/creativitat.png') 0 0 / 35px 35px no-repeat; }
-.seguretat { background: url('./icons/skills-ico/seguretat.png') 0 0 / 35px 35px no-repeat; }
-.sostenibilitat { background: url('./icons/skills-ico/sostenibilitat.png') 0 0 / 35px 35px no-repeat; }
-.integritat { background: url('./icons/skills-ico/integritat.png') 0 0 / 35px 35px no-repeat; }
+.creativitat { background: url('./icons/skills-ico/creativitat.png') 0 0 / 35px 35px no-repeat; }*/
 
 /* Modal Styles */
 .modalCss {

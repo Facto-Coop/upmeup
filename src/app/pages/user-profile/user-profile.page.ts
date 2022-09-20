@@ -16,13 +16,13 @@ import { EditUserPage } from '../edit-user/edit-user.page';
   styleUrls: ['./user-profile.page.scss'],
 })
 export class UserProfilePage implements OnInit {
-  userName = sessionStorage.getItem('user');
   userID = sessionStorage.getItem('userid');
   skillsList: any[] = [];
   userInfo: any[] = [];
   userSkills: any[] = [];
   skillsName: any;
   skillsIco: any[] = [];
+  compet: any;
   userCompets: any[] = [];
   sectorName = '';
 
@@ -38,7 +38,6 @@ export class UserProfilePage implements OnInit {
               ) { }
 
   ngOnInit() {
-    console.log('Init!!');
     this.qGetUser(this.userID);
     // TODO: Get info from user in DB.
     this.skillsList = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
@@ -48,11 +47,11 @@ export class UserProfilePage implements OnInit {
    * Get User info from DB
    * @param userId
    */
-  qGetUser(userId: string) {
+  qGetUser(userId: any) {
     this.uService.qGetUser(userId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      //console.log(item.getUser);
+      console.log(item.getUser);
       this.userInfo = item.getUser;
       this.getUserSkills(item.getUser.valors);
       this.qGetSectorName(item.getUser.sector_id);

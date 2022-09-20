@@ -23,8 +23,8 @@
     </ion-label>
     
     <ion-grid class="grid-info">
-      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills.length === 0">
-        <div class="ion-padding">
+      <div class="ion-padding-bottom" *ngIf="userSkills.length === 0">
+        <div class="text-no-valors ion-padding">
           <ion-label color="danger" class="ion-text-start">
             Encara no tens valors seleccionats
           </ion-label> 
@@ -52,7 +52,7 @@
   <div class="container">
     <ion-card>
         
-      <ion-card-header>
+      <!--<ion-card-header>
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -61,8 +61,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-card-header>
-
+      </ion-card-header> -->
 
       <ion-card-content>
         <ion-list lines="none"> 
@@ -127,7 +126,7 @@
 
         <div *ngIf="isEnrolled > 0" class="ion-padding-top"> 
           <ion-label color="dark-upmeup" class="ion-text-center">
-            <h2 class="ion-padding-bottom"> <b>Ja ets aspirant! Molta Sort!</b> </h2>
+            <h2 class="ion-padding-bottom"> <b>Ja ets aspirant! Molta sort!</b> </h2>
           </ion-label>
         </div>
 

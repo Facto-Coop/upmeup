@@ -22,19 +22,19 @@ import { CompetenceService } from '../services/competence.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  languageList: any = ['Alemán', 'Árabe', 'Aranés', 'Bosnio', 'Catalán', 'Chino mandarín', 'Coreano', 'Croata', 'Danés', 'Español', 'Euskera', 'Francés', 'Gallego',
-  'Hindi', 'Inglés', 'Italiano', 'Japonés', 'Neerlandés', 'Polaco', 'Portugués', 'Ruso', 'Rumano', 'Serbio', 'Turco', 'Ucraniano', 'Valenciano', 'Vietnamita'];
-  cityList: any[] = ['A Coruña', 'Almería', 'Asturias', 'Avila', 'Badajoz', 'Barcelona', 'Burgos', 'Cáceres', 'Cádiz', 'Cantabria', 'Castellón', 'Ceuta', 'Ciudad Real',
-  'Córdoba', 'Cuenca', 'Formentera', 'Girona', 'Granada', 'Guadalajara', 'Guipuzcoa', 'Huelva', 'Huesca', 'Ibiza', 'Jaén', 'La Rioja', 'Gran Canaria', 'Fuerteventura',
-  'Lanzarote', 'León', 'Lérida', 'Lugo', 'Madrid', 'Málaga', 'Mallorca', 'Menorca', 'Murcia', 'Navarra', 'Orense', 'Palencia', 'Pontevedra', 'Salamanca', 'Tenerife',
-  'La Gomera', 'La Palma', 'El Hierro', 'Segovia', 'Sevilla', 'Soria', 'Tarragona', 'Teruel', 'Toledo', 'Valencia', 'Valladolid', 'Vizcaya', 'Zamora', 'Zaragoza'];
+  languageList: any = ['Alemany', 'Àrab', 'Aranès', 'Bosnià', 'Català', 'Xinès mandarí', 'Coreà', 'Croat', 'Danès', 'Espanyol', 'Basc', 'Francès', 'Gallec',
+  'Hindi', 'Anglès', 'Italià', 'Japonès', 'Neerlandès', 'Polonès', 'Portuguès', 'Rus', 'Romanès', 'Serbi', 'Turc', 'Ucraïnès', 'Valencià', 'Vietnamita'];
+  cityList: any[] = ['Corunya', 'Almeria', 'Astúries', 'Avila', 'Badajoz', 'Barcelona', 'Burgos', 'Càceres', 'Cadis', 'Cantàbria', 'Castelló', 'Ceuta', 'Ciudad Real',
+    'Còrdova', 'Conca', 'Formentera', 'Girona', 'Granada', 'Guadalajara', 'Guipuzcoa', 'Huelva', 'Osca', 'Eivissa', 'Jaén', 'La Rioja', 'Gran Canària', 'Fuerteventura',
+    'Lanzarote', 'Lleó', 'Lleida', 'Lugo', 'Madrid', 'Màlaga', 'Mallorca', 'Menorca', 'Múrcia', 'Navarra', 'Orense', 'Palència', 'Pontevedra', 'Salamanca', 'Tenerife',
+    'La Gomera', 'La Palma', 'El Hierro', 'Segòvia', 'Sevilla', 'Sòria', 'Tarragona', 'Terol', 'Toledo', 'València', 'Valladolid', 'Biscaia', 'Zamora', 'Saragossa'];
   emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   passwordRegex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$';
   skillsListId: any[] = [];
   sectorList: any[] = [];
   registerForm: FormGroup;
   isSubmitted = false;
-  userType = '0';
+  userType = '1';
   passw = '';
   userSkills: any[] = [];
   competList: any[] = [];
@@ -96,16 +96,27 @@ export class RegisterPage implements OnInit {
       this.swipeNext();
     }
 
-    //Init last form according to Type:
+    //Init form according to Type (if type change):
+    this.createFormSlide1();
+    this.createFormSlide2();
+    this.createFormSlide3();
+    this.createFormSlide4();
     this.createFormSlide5();
   }
 
   createFormSlide1() {
-    this.formSlide1 = this.fBuilder.group({
-      iName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
-      iSurname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
-      iCity: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]]
-    });
+    if(this.userType === '2') {
+      this.formSlide1 = this.fBuilder.group({
+        iName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
+        iCity: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]]
+      });
+    } else if(this.userType === '1') {
+      this.formSlide1 = this.fBuilder.group({
+        iName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
+        iSurname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+        iCity: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]]
+      });
+    }
   }
 
   createFormSlide2() {
@@ -120,11 +131,18 @@ export class RegisterPage implements OnInit {
   }
 
   createFormSlide3() {
-    this.formSlide3 = this.fBuilder.group({
-      iJobPos: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
-      iSector: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
-      iExp: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
-    });
+    if(this.userType === '2') {
+      this.formSlide3 = this.fBuilder.group({
+        iSector: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
+        iExp: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]]
+      });
+    } else if(this.userType === '1') {
+      this.formSlide3 = this.fBuilder.group({
+        iJobPos: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
+        iSector: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
+        iExp: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
+      });
+    }
   }
 
   createFormSlide4() {
@@ -150,12 +168,7 @@ export class RegisterPage implements OnInit {
   }
 
   createFormSlide5() {
-    if(this.userType === '2' || this.userType === '0') {
-      this.formSlide5 = this.fBuilder.group({
-          iEduc: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
-          iLang: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-        });
-    } else if(this.userType === '1') {
+    if(this.userType === '1') {
         this.formSlide5 = this.fBuilder.group({
           iEduc: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
           iLang: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
@@ -170,10 +183,6 @@ export class RegisterPage implements OnInit {
     console.log(this.formSlide3.value);
     console.log(this.formSlide4.value);
     console.log(this.formSlide5.value);
-
-    if(this.userSkills.length > 0) {
-      this.getSkillsId();
-    }
 
     this.swipeNext();
   }
@@ -198,10 +207,18 @@ export class RegisterPage implements OnInit {
   }
 
   saveNewUser() {
+    if(this.userSkills.length > 0) {
+      this.getSkillsId();
+    }
+
     if(this.userType === '1') {
       this.insertedTags(this.formSlide5.value.iCompetence);
     } else {
       this.userCompetsIds = [];
+      this.formSlide1.value.iSurname = '-';
+      this.formSlide3.value.iJobPos = '-';
+      this.formSlide5.value.iEduc = '-';
+      this.formSlide5.value.iLang = [];
     }
 
     this.loadingCtrl.create({
@@ -300,7 +317,13 @@ export class RegisterPage implements OnInit {
     });
 
     modal.onDidDismiss().then((infoMdl) => {
-      this.userSkills = infoMdl.data;
+      //console.log('data skills?: ', infoMdl);
+
+      if(infoMdl.data !== undefined) {
+        this.userSkills = infoMdl.data;
+      } else {
+        this.userSkills = [];
+      }
     });
 
     //console.log(this.userSkills);

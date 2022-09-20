@@ -24,7 +24,7 @@
         <ion-row>
           <ion-col> 
             <ion-title class="ion-padding"> <ion-label class="title-offer" color="light">
-               {{ userName }} {{userInfo?.surname}} 
+               {{ userInfo?.name }} <span *ngIf="userType === '2'"> {{userInfo?.surname}} </span>
                <h3> de {{userInfo?.city}} </h3> </ion-label>
             </ion-title>
           </ion-col>
@@ -37,16 +37,16 @@
       <ion-fab-button color="upmeup" size="small" (click)="openModal()"> <ion-icon name="create-outline" style="color: #5a7266;"></ion-icon> </ion-fab-button>
     </ion-fab>
     
-    <ion-grid class="skills-info">
+    <ion-grid>
       <div class="ion-padding-bottom" *ngIf="userSkills.length === 0">
-        <div class="header-text ion-padding">
+        <div class="text-no-valors ion-padding">
           <ion-label color="danger" class="ion-text-start">
             Encara no tens valors seleccionats
           </ion-label> 
         </div>
       </div>
 
-      <div class="ion-padding-top ion-padding-bottom" *ngIf="userSkills?.length > 0">
+      <div class="skills-info ion-padding-top ion-padding-bottom" *ngIf="userSkills?.length > 0">
         <ion-row>
           <ion-col size="6" *ngFor="let skill of skillsIco">
             <div class="custom-icon">
@@ -75,7 +75,7 @@
       <ion-card-content>
         <div class="center-class margin-fab-btn"> 
           <ion-label>
-            <h2 class="custom-title"> {{ userInfo?.jobPosition }} </h2>
+            <h2 *ngIf="userType === '2'" class="custom-title"> {{ userInfo?.jobPosition }} </h2>
             <h4> <b>Sector:</b> {{ sectorName }} </h4>
             <h3 class="custom-subtitle"> {{ userInfo?.experience }} anys d'antiguitat </h3>
           </ion-label>

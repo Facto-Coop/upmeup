@@ -16,7 +16,6 @@ import { EditUserPage } from '../edit-user/edit-user.page';
   styleUrls: ['./company-profile.page.scss'],
 })
 export class CompanyProfilePage implements OnInit {
-  userName = sessionStorage.getItem('user');
   userID = sessionStorage.getItem('userid');
   userInfo: any[] = [];
   userSkills: any[] = [];
@@ -47,6 +46,7 @@ export class CompanyProfilePage implements OnInit {
     ).subscribe((item) => {
       // console.log(item);
       this.userInfo = item.getUser;
+      const userType = item.getUser.tipo;
       this.getUserSkills(item.getUser.valors);
       this.qGetSectorName(item.getUser.sector_id);
     });
@@ -63,6 +63,7 @@ export class CompanyProfilePage implements OnInit {
   /** Get SkillNames */
   qSkillName(skillId: string) {
     this.userSkills = [];
+    this.skillsIco = [];
     this.softSkillService.qGetSkill(skillId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
@@ -122,6 +123,7 @@ export class CompanyProfilePage implements OnInit {
       animated: true,
       cssClass: 'modalCss'
     });
+
     await editModal.present();
   }
 }
