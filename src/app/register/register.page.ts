@@ -309,7 +309,7 @@ export class RegisterPage implements OnInit {
    * Call modal to change values from profile.
    * @returns
    */
-   async valuesModal() {
+  async valuesModal() {
     const modal = await this.modalController.create({
       component: ValuesModalPage,
       swipeToClose: true,
