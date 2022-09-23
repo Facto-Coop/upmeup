@@ -14,7 +14,11 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  
+
+</ion-header>
+
+<ion-content>   
+   
   <div class="header-class"> 
     <ion-thumbnail class="avatar-center">
       <img src="./../../../assets/avatar.svg" />
@@ -62,13 +66,11 @@
     <div class="head-line"></div>
   </div>
 
-</ion-header>
-
-<ion-content>   
-  <ion-fab horizontal="end" slot="fixed">
+  <!-- Content -->
+  <ion-fab horizontal="end">
     <ion-fab-button size="small" (click)="editModal()"> <ion-icon style="color: #5a7266;" name="create-outline"></ion-icon> </ion-fab-button>
   </ion-fab>
-
+  
   <div class="container">
     <ion-card class="content-info"> 
       <ion-card-content>
@@ -86,10 +88,10 @@
           </ion-label>    
         </div>
 
-        <!-- Competencies -->
+        <!-- Competències -->
         <div class="center-class" *ngIf="userCompets">  
           <ion-label class="cv-title">
-            <h2 class="custom-title"> Competencies/Habilitats </h2>
+            <h2 class="custom-title"> Competències/Habilitats </h2>
           </ion-label> 
           <ion-label>
             <h4 class="margin">

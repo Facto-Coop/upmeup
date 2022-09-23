@@ -251,7 +251,7 @@ export class EditUserPage implements OnInit {
       );
 
       if(index === -1) {
-        console.log('No se encuentra competencia!!');
+        console.log('No se encuentra competéncia!!');
       } else {
         this.newUserCompets.push(this.competList[index]._id);
       }

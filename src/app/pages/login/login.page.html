@@ -21,7 +21,7 @@
           <ion-col>
             <form [formGroup]="initForm" (ngSubmit)="submitForm()" novalidate>
               <div class="error-box" *ngIf="isSubmitted && !userExist">
-                <ion-label color="danger" class="text-error">Usuario y/o contraseña no son correctos</ion-label>
+                <ion-label color="danger" class="text-error">Usuari i/o contrasenya no són correctes</ion-label>
               </div>
               
               
@@ -31,7 +31,7 @@
 
               <div class="list list-inset input-container">
                 <label class="item item-input">
-                  <input class="native-input sc-ion-input-md" type="password" placeholder="Password" id="userPassword" formControlName="userPassword" required>
+                  <input class="native-input sc-ion-input-md" type="password" placeholder="Contrasenya" id="userPassword" formControlName="userPassword" required>
                 </label>
               </div>
                       
@@ -59,13 +59,13 @@
         </ion-row>
         
         <div class="h-divider">
-          <span color="light"> OR </span>
+          <span color="light"> O </span>
         </div>
         
         <ion-row>
           <ion-col>
             <ion-label color="light">
-              <h4> Encara no estar registrat? <a [routerLink]="['/welcome']" class="small-text">Registrat</a></h4>
+              <h4> Encara no estàs registrat? <a [routerLink]="['/welcome']" class="small-text">Registrat</a></h4>
             </ion-label>
           </ion-col>
         </ion-row>

@@ -185,7 +185,7 @@ export class EditOfferPage implements OnInit {
       );
 
       if(index === -1) {
-        console.log('No se encuentra competencia!!');
+        console.log('No se encuentra competència!!');
       } else {
         this.newOfferCompets.push(this.competList[index]._id);
       }

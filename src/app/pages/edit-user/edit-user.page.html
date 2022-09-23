@@ -72,15 +72,18 @@
         </div>
       </ion-list>
 
-      <!-- Competencies -->
-      <ion-item *ngIf="userType === '1'" class="no-lines">
-        <ion-label><h2 class="custom-title">Competencies/Habilitats:</h2></ion-label>
+      <!-- Competències -->
+      <ion-item *ngIf="userType === '1'" lines="none">
+        <ion-label>
+          <h2 class="custom-title">Competències/Habilitats:</h2>
+          <h5 class="custom-sub">(selecciona almenys 4 competències)</h5>
+        </ion-label>
       </ion-item>
       <ion-item class="ion-padding-top ion-padding-bottom" *ngIf="userType === '1'">
         <tag-input [(ngModel)]="selectedCompet" 
                    [identifyBy]="'_id'"
                    [displayBy]="'name'"
-                   [placeholder]="'+ Competencies'"
+                   [placeholder]="'+ Competències'"
                    [maxItems]='20'
                    id="iCompetence"
                    formControlName="iCompetence"
@@ -135,7 +138,7 @@
       <ion-item>
         <ion-label position="stacked">
           <div *ngIf="userType === '1'" class="custom-title textarea-title"> Descripció tasques (últim càrrec): </div>
-          <div *ngIf="userType === '2'" class="custom-title textarea-title"> Que feu a la teva empresa o entitat? </div>
+          <div *ngIf="userType === '2'" class="custom-title textarea-title"> Què feu a la teva empresa o entitat? </div>
         </ion-label>
         <ion-textarea id="iLastJob" formControlName="iLastJob" minlength="20" maxlength="400" rows="6" cols="60" required></ion-textarea>
       </ion-item>

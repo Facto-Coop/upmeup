@@ -284,7 +284,7 @@ export class RegisterPage implements OnInit {
       );
 
       if(index === -1) {
-        console.log('No se encuentra competencia!!');
+        console.log('No se encuentra competència!!');
       } else {
         this.createdCompet.push(this.competList[index]);
         this.userCompetsIds.push(this.competList[index]._id);
@@ -319,7 +319,7 @@ export class RegisterPage implements OnInit {
     modal.onDidDismiss().then((infoMdl) => {
       //console.log('data skills?: ', infoMdl);
 
-      if(infoMdl.data !== undefined) {
+      if(infoMdl.data !== undefined || window.sessionStorage) {
         this.userSkills = infoMdl.data;
       } else {
         this.userSkills = [];

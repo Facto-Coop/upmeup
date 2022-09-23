@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="upmeup">
     <ion-buttons slot="start">
       <ion-back-button color="light" defaultHref="/offer-list"></ion-back-button>
@@ -11,15 +11,28 @@
     </ion-buttons>-->
   </ion-toolbar>
 
+</ion-header>
+
+<ion-content>
+  
   <div class="header-class">   
     <ion-thumbnail class="avatar-center" >
       <img class="profile" src="./../../../assets/thumbnail.svg" />
     </ion-thumbnail> 
-    <ion-label class="header-text ion-padding">
-      <ion-title class="ion-padding"> 
+    <ion-label class="header-text">
+      <ion-row>
+        <ion-col> 
+          <ion-title class="ion-padding"> <ion-label class="title-offer" color="light">
+            {{ offer.title }} 
+             <h3> {{ userInfo?.name }} </h3> </ion-label>
+          </ion-title>
+        </ion-col>
+      </ion-row>
+
+      <!--<ion-title class="ion-padding"> 
         <ion-label class="title-offer" color="light"><b> {{ offer.title }} </b></ion-label>
-      </ion-title>
-      <ion-label color="light"><h3  class="ion-text-center"> {{ userInfo?.name }} </h3></ion-label>
+        <ion-label color="light"><h3 class="ion-text-center"> {{ userInfo?.name }} </h3></ion-label>
+      </ion-title>-->
     </ion-label>
     
     <ion-grid class="grid-info">
@@ -46,9 +59,7 @@
     </ion-grid>
   </div>
 
-</ion-header>
-
-<ion-content>
+  <!-- Offer details -->
   <div class="container">
     <ion-card>
         
@@ -108,10 +119,10 @@
 
         </ion-list>
 
-        <!-- Competencies -->
+        <!-- Competències -->
         <div class="center-class" *ngIf="userCompets">  
           <ion-label class="cv-title">
-            <h2 class="custom-title"> Competencies/Habilitats </h2>
+            <h2 class="custom-title"> Competències/Habilitats </h2>
           </ion-label> 
           <ion-label>
             <h4 class="margin">

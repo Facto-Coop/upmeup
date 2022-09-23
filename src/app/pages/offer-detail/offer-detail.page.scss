@@ -50,8 +50,9 @@ ion-content {
 /* Outside toolbar header */
 .header-class { 
     background-color: var(--ion-color-upmeup);
-    
-    ion-thumbnail { margin:0 auto; width: 130px; height: 130px; }
+	padding-top: 15px;
+
+    ion-thumbnail { margin:0 auto; width: 115px; height: 115px; }
     img { border-radius: 50%; }
     .header-text { display: block; text-align: center; text-transform: uppercase; }
 	.text-no-valors { display: block; text-align: center; font-size: 14px; }
