@@ -20,12 +20,12 @@
     <form [formGroup]="createForm" (ngSubmit)="onSubmit()" novalidate>
      <ion-item>
         <ion-label><h2 class="custom-title">Títol:</h2></ion-label>
-        <ion-input id="iTitle" formControlName="iTitle" minlength="8" maxlength="30" required></ion-input>
+        <ion-input id="iTitle" formControlName="iTitle" minlength="8" maxlength="50" required></ion-input>
       </ion-item>
       <div *ngIf="errorCtr.iTitle.errors && (errorCtr.iEduLevel.invalid || errorCtr.iEduLevel.touched)">
         <small class="error ion-padding" *ngIf="errorCtr.iTitle.errors?.required">* Camp requerit</small>
         <small class="error ion-padding" *ngIf="errorCtr.iTitle.errors?.minlength">* Ha de tenir com a mínim 8 lletres</small>
-        <small class="error ion-padding" *ngIf="errorCtr.iTitle.errors?.maxlength">* Ha de tenir com a màxim 30 lletres</small>
+        <small class="error ion-padding" *ngIf="errorCtr.iTitle.errors?.maxlength">* Ha de tenir com a màxim 50 lletres</small>
       </div>
 
       <ion-item>
@@ -46,7 +46,7 @@
         </ion-label>
       </ion-item>
       <ion-item class="ion-padding-top ion-padding-bottom">
-        <tag-input [identifyBy]="'_id'"
+        <tag-input [identifyBy]="'id'"
                    [displayBy]="'value'"
                    [secondaryPlaceholder]="'+ Competències'"
                    [placeholder]="'+ Competències'"

@@ -159,7 +159,8 @@ export class EditOfferPage implements OnInit {
     const existCompets = [];
 
     competencies.forEach(el => {
-      if(el._id === el.name) {
+      //if(el._id === el.name) {
+      if(!el._id) {
         this.createNewCompetence(el.name);
         this.nameNewCompet.push(el);
       } else {
