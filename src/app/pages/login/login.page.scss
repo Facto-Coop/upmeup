@@ -8,7 +8,7 @@ ion-content {
     --ion-background-color: linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
 
     .container-login { padding: 40px; }
-    .content-logo { margin-bottom: 50px; /*position: relative; object-fit: cover;*/ }
+    .content-logo { margin-bottom: 40px; /*position: relative; object-fit: cover;*/ }
     
     div .input-container { 
         background: #FFF; 
@@ -32,7 +32,7 @@ ion-content {
         display: flex;
         align-items: center;
         text-align: center;
-        margin: 30px;
+        margin: 20px;
 
         span { color: #FFF; }
     }

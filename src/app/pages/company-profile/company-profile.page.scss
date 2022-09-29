@@ -86,13 +86,16 @@ ion-content {
 
     ion-thumbnail { margin:0 auto; width: 110px; height: 110px; }
     img { border-radius: 50%; }
-    .header-text { display: block; text-align: center; margin-top: 10px; }
-    .text-no-valors { text-align: center; }
-
-    .skills-info { 
-        margin: 0px 25px; font-size: 14px; font-weight: 700; 
-        ion-col { margin-top: 0px; }
+    .header-text { 
+        display: block; 
+        text-align: center; 
+        text-transform: uppercase;
+        h3 { text-transform: none; }
     }
+
+    .text-no-valors { text-align: center; font-size: 14px; }
+
+    .skills-info { margin: 0px 10px; }
 
     ion-label ion-icon { 
         width: 35px; 
@@ -100,11 +103,10 @@ ion-content {
         vertical-align: middle; 
     }
 
-    .title-offer { white-space: normal; }
-    
+    .title-offer { white-space: normal; }    
     .custom-icon { 
         ion-label { color: #5a7266; /*vertical-align: middle; text-align: center;*/ }
-        span { margin-left: 5px; font-size: 13px; /*line-height: normal; height: 36px;*/ }
+        span { font-size: 12px; }
     }
 }
         

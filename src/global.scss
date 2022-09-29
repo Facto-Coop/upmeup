@@ -112,12 +112,12 @@ ion-toolbar ion-title { text-transform: uppercase; }
 }
 
 /***** Custom Icons *****/
-.calendar-ico { background: url('./icons/data.png') 0 0 / 19px 19px no-repeat; }
-.enrolled-ico { background: url('./icons/inscrits.png') 0 0 / 23px 18px no-repeat; }
-.jornada-ico { background: url('./icons/jornada.png') 0 0 / 19px 19px no-repeat; }
-.salary-ico { background: url('./icons/sou.png') 0 0 / 23px 19px no-repeat; }
-.location-ico { background: url('./icons/ubicacio.png') 0 0 / 20px 20px no-repeat; }
-.remoto-ico { background: url('./icons/model_de_treball.png') 0 0 / 22px 19px no-repeat; }
+.calendar-ico { background: url('./icons/data.png') 0 0 / 18px 18px no-repeat; }
+.enrolled-ico { background: url('./icons/inscrits.png') 0 0 / 22px 18px no-repeat; }
+.jornada-ico { background: url('./icons/jornada.png') 0 0 / 19px 18px no-repeat; }
+.salary-ico { background: url('./icons/sou.png') 0 0 / 23px 18px no-repeat; }
+.location-ico { background: url('./icons/ubicacio.png') 0 0 / 18px 18px no-repeat; }
+.remoto-ico { background: url('./icons/model_de_treball.png') 0 0 / 22px 18px no-repeat; }
 
 //**** Skills Icons: *****//
 .igualtat_de_genere { background: url('./icons/skills-ico/igualtat.png') 0 0 / 30px 30px no-repeat; }
@@ -136,14 +136,13 @@ ion-toolbar ion-title { text-transform: uppercase; }
 .co-responsabilitat { background: url('./icons/skills-ico/responsabilitat.png') 0 0 / 30px 30px no-repeat; }
 .resiliencia { background: url('./icons/skills-ico/resiliencia.png') 0 0 / 30px 30px no-repeat; }
 .produccio_sostenible { background: url('./icons/skills-ico/sostenibilitat.png') 0 0 / 30px 30px no-repeat; }
-// TODO: Pendientes de icono propio:
-.vinculacio_amb_la_comunitat { background: url('./icons/skills-ico/qualitat.png') 0 0 / 30px 30px no-repeat; }
-.solidaritat { background: url('./icons/skills-ico/qualitat.png') 0 0 / 30px 30px no-repeat; }
-.equitat { background: url('./icons/skills-ico/qualitat.png') 0 0 / 30px 30px no-repeat; }
-.consum_responsable { background: url('./icons/skills-ico/qualitat.png') 0 0 / 30px 30px no-repeat; }
-.retribucio_justa { background: url('./icons/skills-ico/qualitat.png') 0 0 / 30px 30px no-repeat; }
-.orientacio_al_client { background: url('./icons/skills-ico/qualitat.png') 0 0 / 30px 30px no-repeat; }
-.orientacio_a_resultats { background: url('./icons/skills-ico/qualitat.png') 0 0 / 30px 30px no-repeat; }
+.vinculacio_amb_la_comunitat { background: url('./icons/skills-ico/vinculacio_comunitat.png') 0 0 / 30px 30px no-repeat; }
+.solidaritat { background: url('./icons/skills-ico/solidaritat.png') 0 0 / 30px 30px no-repeat; }
+.equitat { background: url('./icons/skills-ico/equitat.png') 0 0 / 30px 30px no-repeat; }
+.consum_responsable { background: url('./icons/skills-ico/consum_responsable.png') 0 0 / 30px 30px no-repeat; }
+.retribucio_justa { background: url('./icons/skills-ico/retribucio_justa.png') 0 0 / 30px 30px no-repeat; }
+.orientacio_al_client { background: url('./icons/skills-ico/orientacio_client.png') 0 0 / 30px 30px no-repeat; }
+.orientacio_a_resultats { background: url('./icons/skills-ico/orientacio_resultats.png') 0 0 / 30px 30px no-repeat; }
 
 /* Quedan fuera:
 .impacte_social { background: url('./icons/skills-ico/impacte_social.png') 0 0 / 30px 30px no-repeat; }
@@ -156,9 +155,9 @@ ion-toolbar ion-title { text-transform: uppercase; }
 .creativitat { background: url('./icons/skills-ico/creativitat.png') 0 0 / 30px 30px no-repeat; }*/
 
 /* Modal Styles */
-.modalCss {
+/*.modalCss {
     --height: 775px !important;
-}
+}*/
 
 /**
 *** Web Responsive style

@@ -22,7 +22,13 @@ ion-content {
 
 /* Outside toolbar */
 .header-class { 
-    .header-text { display:block; text-align: center; text-transform: uppercase; background-color:  var(--ion-color-upmeup); }
+    background-color: var(--ion-color-upmeup);
+
+    .header-text { 
+        display: block; 
+        text-align: center; 
+        text-transform: uppercase; 
+    }
 }
 
 /**

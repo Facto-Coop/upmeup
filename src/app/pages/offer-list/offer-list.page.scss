@@ -7,7 +7,7 @@ ion-content {
     
     .container{
         --ion-background-color: #c8e3d6;
-        ion-item { --ion-background-color: #f2f2f2; padding-bottom: 5px; }
+        ion-item { --ion-background-color: #fff; padding-bottom: 5px; }
 
         .text-block { display: block; margin-top: 15px; }
     }
@@ -18,8 +18,14 @@ ion-content {
 }
 
 .header-class { 
+    background-color: var(--ion-color-upmeup);
     ion-thumbnail { margin:0 auto; width: 130px; height: 130px; }
-    .header-text { display:block; text-align: center; text-transform: uppercase; background-color: var(--ion-color-upmeup); }
+    
+    .header-text { 
+        display: block; 
+        text-align: center; 
+        text-transform: uppercase; 
+    }
 }
 
 .custom-text-space { white-space: normal; }

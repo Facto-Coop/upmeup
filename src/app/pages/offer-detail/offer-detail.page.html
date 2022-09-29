@@ -20,14 +20,16 @@
       <img class="profile" src="./../../../assets/thumbnail.svg" />
     </ion-thumbnail> 
     <ion-label class="header-text">
-      <ion-row>
-        <ion-col> 
-          <ion-title class="ion-padding"> <ion-label class="title-offer" color="light">
-            {{ offer.title }} 
-             <h3> {{ userInfo?.name }} </h3> </ion-label>
-          </ion-title>
-        </ion-col>
-      </ion-row>
+      <ion-grid class="ion-padding-top ion-padding-bottom">
+        <ion-row>
+          <ion-col class="ion-text-center"> 
+            <ion-title> <ion-label class="title-offer" color="light">
+              {{ offer.title }} 
+              <h3> {{ userInfo?.name }} </h3> </ion-label>
+            </ion-title>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
       <!--<ion-title class="ion-padding"> 
         <ion-label class="title-offer" color="light"><b> {{ offer.title }} </b></ion-label>
@@ -57,11 +59,12 @@
         </ion-row>
       </div> 
     </ion-grid>
+    <div class="head-line"></div>
   </div>
 
   <!-- Offer details -->
   <div class="container">
-    <ion-card>
+    <ion-card class="content-info">
         
       <!--<ion-card-header>
         <ion-grid>
@@ -75,49 +78,36 @@
       </ion-card-header> -->
 
       <ion-card-content>
-        <ion-list lines="none"> 
-          <ion-row>
-            <ion-col size="6">
-              <ion-item>
-                <ion-grid>
-                  <div class="enrolled-ico custom-icon">
-                    <ion-label> {{ offer?.enrolled }} </ion-label> 
-                  </div>
-                </ion-grid>
-              </ion-item>
+        <ion-grid class="ion-padding-bottom">
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="6">                
+              <div class="custom-icon">                
+                <ion-icon class="enrolled-ico custom-icon"></ion-icon>
+                <span><b> {{ offer?.enrolled }} </b></span>
+              </div>                
             </ion-col>
             <ion-col size="6">
-              <ion-item>
-                <ion-grid>
-                  <div class="calendar-ico custom-icon">
-                    <ion-label> {{ offer.createdDate | date: 'dd/MM/yyyy' }}  </ion-label>
-                  </div>
-                </ion-grid>
-              </ion-item>
+              <div class="custom-icon">
+                <ion-icon class="calendar-ico custom-icon"></ion-icon>
+                <span><b> {{ offer.createdDate | date: 'dd/MM/yyyy' }} </b></span>
+              </div>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row class="ion-justify-content-center">
             <ion-col size="6">
-              <ion-item>
-                <ion-grid>
-                  <div class="location-ico custom-icon">
-                    <ion-label> {{ offer?.jornada }} </ion-label> 
-                  </div>
-                </ion-grid>
-              </ion-item>              
+              <div class="custom-icon">
+                <ion-icon class="location-ico custom-icon"></ion-icon>
+                <span><b> {{ offer?.jornada }} </b></span> 
+              </div>             
             </ion-col>
-            <ion-col size="6">    
-              <ion-item>
-                <ion-grid>
-                  <div class="jornada-ico custom-icon">
-                    <ion-label> {{ offer?.city }} </ion-label> 
-                  </div>
-                </ion-grid>
-              </ion-item>
+            <ion-col size="6">  
+              <div class="custom-icon">
+                <ion-icon class="jornada-ico custom-icon"></ion-icon>
+                <span><b> {{ offer?.city }} </b></span> 
+              </div>
             </ion-col>
           </ion-row>
-
-        </ion-list>
+        </ion-grid>       
 
         <!-- Competències -->
         <div class="center-class" *ngIf="userCompets">  
@@ -132,7 +122,6 @@
             </h4>
           </ion-label>
         </div>
-
 
         <div *ngIf="isEnrolled > 0" class="ion-padding-top"> 
           <ion-label color="dark-upmeup" class="ion-text-center">

@@ -24,16 +24,18 @@
       <img src="./../../../assets/avatar.svg" />
     </ion-thumbnail> 
     <ion-label class="header-text">
-      <div>
+      <ion-grid class="ion-padding-top ion-padding-bottom">
         <ion-row>
           <ion-col> 
-            <ion-title class="ion-padding"> <ion-label class="title-offer" color="light">
-               {{ userInfo?.name }} <span *ngIf="userType === '2'"> {{userInfo?.surname}} </span>
-               <h3> de {{userInfo?.city}} </h3> </ion-label>
+            <ion-title> 
+              <ion-label class="title-offer" color="light">
+                {{ userInfo?.name }} <span *ngIf="userType === '2'"> {{userInfo?.surname}} </span>
+                <h3> de {{userInfo?.city}} </h3> 
+              </ion-label>
             </ion-title>
           </ion-col>
         </ion-row>
-      </div>
+      </ion-grid>
     </ion-label>   
 
     <!-- Skills -->    
@@ -51,7 +53,7 @@
       </div>
 
       <div class="skills-info ion-padding-top ion-padding-bottom" *ngIf="userSkills?.length > 0">
-        <ion-row>
+        <ion-row class="ion-justify-content-center">
           <ion-col size="6" *ngFor="let skill of skillsIco">
             <div class="custom-icon">
               <ion-label class="title-offer">
