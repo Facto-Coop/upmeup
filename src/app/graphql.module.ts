@@ -18,8 +18,10 @@ export function createApollo(httpLink: HttpLink) {
     if (host === 'localhost') {
       protocol = 'http://';
       host = host + ':3000';
+    } else if (host === 'factodev.upmeup.es') {
+      host = 'api-factodev.upmeup.es';
     }
-    console.log('***Connected to: ', protocol + host);
+    //console.log('***Call to: ', protocol + host);
     return {
       link: httpLink.create({
         uri: protocol + host + '/graphql'
