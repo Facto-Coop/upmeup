@@ -1,5 +1,5 @@
 {
-  "name": "upmeup",
+  "name": "Up me Up",
   "version": "0.0.1",
   "author": "LMata - Facto SCCL",
   "homepage": "https://ionicframework.com/",
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~13.0.3",
     "@angular/platform-browser-dynamic": "~13.0.3",
     "@angular/router": "~13.0.3",
+    "@angular/service-worker": "~13.0.3",
     "@apollo/client": "^3.6.9",
     "@capacitor/android": "3.4.1",
     "@capacitor/app": "1.1.0",

@@ -12,15 +12,17 @@ const link = 'http://localhost:3000/graphql'
 const slink = 'http://api-factodev.upmeup.es/graphql'
 */
 let host = window.location.hostname;
+let protocol = 'https://';
 
 export function createApollo(httpLink: HttpLink) {
     if (host === 'localhost') {
+      protocol = 'http://';
       host = host + ':3000';
     }
-    console.log('***Connected to: ', host);
+    console.log('***Connected to: ', protocol + host);
     return {
       link: httpLink.create({
-        uri: 'http://' + host + '/graphql'
+        uri: protocol + host + '/graphql'
       }),
       cache: new InMemoryCache(),
     };

@@ -1,0 +1,22 @@
+{
+  "name": "Up me Up, MORE THAN WORK!",
+  "short_name": "Up me Up",
+  "theme_color": "#a3d1bc",
+  "background_color": "#a3d1bc", 
+  "description": "L'App que t'ajudarà a alinear el que sents, el que penses, de què treballes i a on ho fas.",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/icon-512px.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-192px.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

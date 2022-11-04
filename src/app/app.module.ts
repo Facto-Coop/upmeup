@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
 import { AuthService } from './services/auth.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 //import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'; //Añadido para probar
 
@@ -22,7 +24,13 @@ import { AuthService } from './services/auth.service';
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
-        GraphQLModule
+        GraphQLModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the application is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthService],
     bootstrap: [AppComponent]
