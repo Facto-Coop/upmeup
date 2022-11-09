@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
 import { CompetenceService } from 'src/app/services/competence.service';
 import { SectorsService } from 'src/app/services/sectors.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
@@ -18,7 +19,7 @@ import { EditUserPage } from '../edit-user/edit-user.page';
 export class UserProfilePage implements OnInit {
   userID = sessionStorage.getItem('userid');
   skillsList: any[] = [];
-  userInfo: any[] = [];
+  userInfo: User;
   userSkills: any[] = [];
   skillsName: any;
   skillsIco: any[] = [];
@@ -51,8 +52,12 @@ export class UserProfilePage implements OnInit {
     this.uService.qGetUser(userId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      //console.log(item.getUser);
-      this.userInfo = item.getUser;
+      if(!item) {
+        console.log('Ops, sembla que no hi han dades que mostrar....');
+      } else {
+        console.log(item.getUser);
+        this.userInfo = item.getUser;
+      }
       this.getUserSkills(item.getUser.valors);
       this.qGetSectorName(item.getUser.sector_id);
       this.getUserCompets(item.getUser.competencies);

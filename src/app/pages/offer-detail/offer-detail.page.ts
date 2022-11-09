@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
 
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
 import { CompetenceService } from 'src/app/services/competence.service';
@@ -19,10 +20,10 @@ import { Offer } from '../../models/offer';
 })
 export class OfferDetailPage implements OnInit {
   userLoggedID = sessionStorage.getItem('userid');
-  offer: Offer[] = [];
+  offer: Offer;
   offerID: any;
   enrolledValue = '';
-  userInfo: any[] = [];
+  userInfo: User;
   userSkills: any[] = [];
   skillsName: any;
   skillsIco: any[] = [];
@@ -58,8 +59,12 @@ export class OfferDetailPage implements OnInit {
     this.cOfferService.qGetOffer(ofId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      // console.log(item);
-      this.offer = item.getOffer;
+      //console.log(item);
+      if(!item) {
+        console.log('Ops, sembla que no hi han dades que mostrar....');
+      } else {
+        this.offer = item.getOffer;
+      }
       this.qGetUser(item.getOffer.userId);
       this.getUserCompets(item.getOffer.competencies);
     });

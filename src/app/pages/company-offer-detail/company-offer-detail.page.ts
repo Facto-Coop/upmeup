@@ -1,9 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApolloQueryResult } from 'apollo-client';
 import { Apollo, gql } from 'apollo-angular';
-import { Subscription, of } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Offer } from '../../models/offer';
@@ -12,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 const GET_USOFRS = gql`
   query {
@@ -30,7 +30,7 @@ const GET_USOFRS = gql`
 })
 export class CompanyOfferDetailPage implements OnInit, OnDestroy {
   offerID: any;
-  offer: Offer[] = [];
+  offer: Offer;
   userOfferList: any[] = [];
   usersList: any[] = [];
   usersListData: any[] = [];
@@ -70,8 +70,12 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
     this.compOfService.qGetOffer(ofID).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      //console.log(item);
-      this.offer = item.getOffer;
+      console.log(item);
+      if(!item) {
+        console.log('Ops, sembla que no hi han dades que mostrar....');
+      } else {
+        this.offer = item.getOffer;
+      }
     });
   }
 

@@ -23,7 +23,7 @@
       <ion-row>
         <ion-col size="1"></ion-col>
         <ion-col size="10">
-          <ion-item *ngFor="let skill of skillsList; let i of index" lines="none">
+          <ion-item *ngFor="let skill of skillsList" lines="none">
             <ion-label color="light"> {{ skill.name }} </ion-label>
             <ion-toggle slot="start" name={{skill.name}} id={{skill._id}} color="loginbtn" (ionChange)="changeSelection($event, skill)" 
                         [disabled]="disableCheckbox(skill)"> <!-- [checked]="isChecked(skill)"> -->

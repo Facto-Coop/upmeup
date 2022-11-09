@@ -11,10 +11,13 @@ import { EntityService } from '../../services/entity.service';
 export class EntityListPage implements OnInit {
   entities: Entity[];
   img = 0;
-  private topLimit = 15;
-  private entityList: any = [];
+  entityList: any = [];
 
-  constructor(private router: Router, private entityService: EntityService) { }
+  private topLimit = 15;
+
+  constructor(private router: Router,
+              private entityService: EntityService
+              ) { }
 
   ngOnInit() {
     this.entities = this.entityService.getEntities();

@@ -1,7 +1,20 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 export class User {
+     _id: string;
+     name: string;
+     surname: string;
+     email: string;
+     eduLevel: string;
+     city: string;
+     sector_id: string;
+     experience: string;
+     jobPosition: string;
+     lastJobTasks: string;
+     languages: Array<string>;
+     tipo: string;
+     competencies: Array<string>;
 
-    constructor(
+    /*constructor(
         public _id: string,
         public name: string,
         public surname: string,
@@ -15,6 +28,6 @@ export class User {
         public languages: Array<string>,
         public tipo: string,
         public competencies: Array<string>,
-    ) {}
+    ) {}*/
 }
 

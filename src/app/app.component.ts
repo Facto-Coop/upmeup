@@ -61,7 +61,7 @@ export class AppComponent {
   logOut() {
     this.auth.onLogout();
     this.menuCtrl.enable(false);
-    alert ('Se ha cerrado la sesión.');
+    //alert ('Se ha cerrado la sesión.');
     this.router.navigate(['/login']);
   }
 

@@ -22,7 +22,7 @@ import { LoadingController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   users: any[];
   userData: any = '';
-  // error: any;
+  error: any = '';
   // loading = true;
   initForm: FormGroup;
   isSubmitted = false;
@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
 
       this.users = result.data && result.data.getUsersData;
       //this.loading = result.loading;
-      //this.error = result.errors;
+      this.error = result.errors;
     });
   }
 

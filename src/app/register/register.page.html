@@ -300,14 +300,14 @@
           <ion-grid *ngIf="userType === '1'" class="padding-btn">
             <ion-row>
               <ion-col size="12"> 
-                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!userSkills?.length > 0" (click)="swipeNext()"> Continuar </ion-button>
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!(userSkills?.length > 0)" (click)="swipeNext()"> Continuar </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
           <ion-grid *ngIf="userType === '2'">
             <ion-row>
               <ion-col size="12"> 
-                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!userSkills?.length > 0" (click)="saveNewUser()"> Finalitzar </ion-button>
+                <ion-button type="submit" fill="solid" color="loginbtn" expand="block" shape="round" [disabled]="!(userSkills?.length > 0)" (click)="saveNewUser()"> Finalitzar </ion-button>
               </ion-col>
               <p> </p>
             </ion-row>
