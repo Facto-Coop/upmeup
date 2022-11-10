@@ -55,7 +55,7 @@ export class UserProfilePage implements OnInit {
       if(!item) {
         console.log('Ops, sembla que no hi han dades que mostrar....');
       } else {
-        console.log(item.getUser);
+        // console.log(item.getUser);
         this.userInfo = item.getUser;
       }
       this.getUserSkills(item.getUser.valors);
