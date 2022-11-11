@@ -11,7 +11,7 @@ import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { AppComponent } from 'src/app/app.component';
 import { MenuController } from '@ionic/angular';
-import { map } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -33,12 +33,14 @@ export class LoginPage implements OnInit {
   //password: string;
   userType = '0';
   userExist = false;
+  roleMsg = '';
 
   constructor(private menu: MenuController,
               private uService: UserService,
               private apollo: Apollo,
               public fBuilder: FormBuilder,
               private router: Router,
+              private alertController: AlertController,
               private auth: AuthService,
               private appC: AppComponent,
               public loadingCtrl: LoadingController,) {  }
@@ -185,6 +187,29 @@ export class LoginPage implements OnInit {
     sessionStorage.setItem('email', uMail);
     sessionStorage.setItem('uSelectedSkills', uSkills);
   }
+
+  // Popup to install app:
+  /*async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Vols instal·lar Up me Up al teu mòbil?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel'
+        },
+        {
+          text: 'D\'Acord',
+          role: 'confirm'
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    this.roleMsg = `Dismissed with role: ${role}`;
+  }*/
+
 
   alertMail() {
     alert('Ponte en contacto con: lmata@facto.cat');

@@ -5,8 +5,8 @@
   "background_color": "#a3d1bc", 
   "description": "L'App que t'ajudarà a alinear el que sents, el que penses, de què treballes i a on ho fas.",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "scope": "/index.html",
+  "start_url": "/index.html",
   "icons": [
     {
       "src": "assets/icon-512px.png",
