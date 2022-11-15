@@ -35,6 +35,9 @@ export class LoginPage implements OnInit {
   userExist = false;
   roleMsg = '';
 
+  modalPwaEvent: any;
+  modalPwaPlatform: string|undefined;
+
   constructor(private menu: MenuController,
               private uService: UserService,
               private apollo: Apollo,
@@ -51,6 +54,8 @@ export class LoginPage implements OnInit {
     this.userQuery();
     this.initForm.reset();
     //this.qUserLog();
+
+    //this.loadModalPwa();
   }
 
   //TODO: Refactor Login!!!!!
@@ -191,26 +196,46 @@ export class LoginPage implements OnInit {
   // Popup to install app:
   /*async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Vols instal·lar Up me Up al teu mòbil?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel'
-        },
-        {
-          text: 'D\'Acord',
-          role: 'confirm'
-        },
-      ],
+      header: 'Instal·la't Up me Up',
+      subHeader: 'Vols instal·lar Up me Up al teu mòbil?',
+      message: `<p>This is an alert!</p>
+      <p>Pases a seguir:</p>
+        <ul>
+          <li>1. Prémer el botó d'ajustos (els tres puntets de dalt a la dreta). </li>
+          <li>2. Selecciona "Afegir a pantalla d'inici"</li>
+        </ul>
+      `,
+      buttons: [`D'acord`]
     });
 
     await alert.present();
 
-    const { role } = await alert.onDidDismiss();
-    this.roleMsg = `Dismissed with role: ${role}`;
+   // const { role } = await alert.onDidDismiss();
   }*/
 
+  /*loadModalPwa() {
+    if (this.platform.ANDROID) {
+      window.addEventListener('beforeinstallprompt', (event: any) => {
+        event.preventDefault();
+        this.modalPwaEvent = event;
+        this.modalPwaPlatform = 'ANDROID';
+      });
+    }
 
+    if (this.platform.IOS && this.platform.SAFARI) {
+      const isInStandaloneMode = ('standalone' in window.navigator) && ((<any>window.navigator)['standalone']);
+      if (!isInStandaloneMode) {
+        this.modalPwaPlatform = 'IOS';
+      }
+    }
+  }
+
+  addToHomeScreen(): void {
+    this.modalPwaEvent.prompt();
+    this.modalPwaPlatform = undefined;
+  }*/
+
+  // Mail contact:
   alertMail() {
     alert('Ponte en contacto con: lmata@facto.cat');
   }
