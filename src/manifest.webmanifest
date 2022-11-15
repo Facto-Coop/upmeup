@@ -5,8 +5,8 @@
   "background_color": "#a3d1bc", 
   "description": "L'App que t'ajudarà a alinear el que sents, el que penses, de què treballes i a on ho fas.",
   "display": "standalone",
-  "scope": "http://127.0.0.1:4200/",
-  "start_url": "http://127.0.0.1:4200/",
+  "scope": "https://127.0.0.1:4200/",
+  "start_url": "https://127.0.0.1:4200/",
   "icons": [
     {
       "src": "assets/icon-512px.png",
