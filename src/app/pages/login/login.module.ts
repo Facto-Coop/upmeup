@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
-import { NgxPwaInstallModule } from 'ngx-pwa-install';
 
 @NgModule({
   imports: [
@@ -13,8 +12,7 @@ import { NgxPwaInstallModule } from 'ngx-pwa-install';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    LoginPageRoutingModule,
-    NgxPwaInstallModule.forRoot(),
+    LoginPageRoutingModule
   ],
   declarations: [LoginPage]
 })
