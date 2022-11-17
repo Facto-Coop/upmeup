@@ -235,6 +235,7 @@ export class LoginPage implements OnInit {
     this.modalPwaPlatform = undefined;
   }*/
 
+
   // Mail contact:
   alertMail() {
     alert('Ponte en contacto con: lmata@facto.cat');

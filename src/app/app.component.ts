@@ -65,4 +65,7 @@ export class AppComponent {
     this.router.navigate(['/login']);
   }
 
+  //TODO: Reload page for updates.
+
+
 }

@@ -39,6 +39,7 @@
     "graphql-tag": "^2.12.6",
     "moment": "^2.29.1",
     "ngx-chips": "^2.2.2",
+    "ngx-pwa-install": "^0.2.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
