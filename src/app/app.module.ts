@@ -13,8 +13,7 @@ import { GraphQLModule } from './graphql.module';
 import { AuthService } from './services/auth.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-
-//import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'; //Añadido para probar
+import { NgxPwaInstallModule } from 'ngx-pwa-install';
 
 @NgModule({
     declarations: [AppComponent],
@@ -25,6 +24,7 @@ import { environment } from '../environments/environment';
         AppRoutingModule,
         HttpClientModule,
         GraphQLModule,
+        NgxPwaInstallModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: environment.production,
           // Register the ServiceWorker as soon as the application is stable
@@ -38,5 +38,3 @@ import { environment } from '../environments/environment';
 export class AppModule {
     constructor(httpClient: HttpClient) {}
 }
-
-//platformBrowserDynamic().bootstrapModule(AppModule); //Añadido para probar
