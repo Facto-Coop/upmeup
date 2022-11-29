@@ -8,7 +8,7 @@ ion-content {
     --ion-background-color: linear-gradient(135deg, var(--ion-color-upmeup) 0%, var(--ion-color-login-dgDark) 100%);
 
     .container-login { padding: 40px; }
-    .content-logo { margin-bottom: 40px; /*position: relative; object-fit: cover;*/ }
+    .content-logo { margin-bottom: 40px; }
     
     div .input-container { 
         background: #FFF; 
@@ -53,11 +53,7 @@ ion-content {
     }
 }
 
-/**
-*** Web Responsive style
-**/
-@media (min-width: 1020px) {
+/* Outside toolbar header */
+//.header-text { text-align: left; text-transform: none; }
 
-}
-
-
+  

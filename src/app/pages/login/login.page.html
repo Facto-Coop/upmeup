@@ -1,13 +1,7 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <!--<ion-toolbar color="upmeup">
-    <ion-button id="btn" type="button" color="loginbtn" shape="round" slot="end" size="small" onclick="presentAlert()">
-      <ion-icon slot="icon-only" name="information-outline"></ion-icon>
-    </ion-button>-->
-
-   <!-- <ion-buttons slot="start">
-    </ion-buttons>
-    <ion-title>UPMEUP</ion-title>
-  </ion-toolbar> -->
+    <ion-button shape="round" size="small" slot="end" color="warning" (click)="loadModalPwa($event)">Instal·lar App</ion-button>
+  </ion-toolbar>-->
 </ion-header>
 
 <ion-content>
@@ -28,7 +22,6 @@
                 <ion-label color="danger" class="text-error">Usuari i/o contrasenya no són correctes</ion-label>
               </div>
               
-              
               <div class="list list-inset input-container">
                 <input class="native-input sc-ion-input-md" type="text" placeholder="Email" id="userEmail" formControlName="userEmail" required>
               </div>
@@ -38,8 +31,7 @@
                   <input class="native-input sc-ion-input-md" type="password" placeholder="Contrasenya" id="userPassword" formControlName="userPassword" required>
                 </label>
               </div>
-                      
-              <!-- (click)="loginIn(user)"-->              
+                                  
               <ion-button type="submit" fill="solid" color="loginbtn" expand="block" [disabled]="!initForm.valid"> Inicia sessió </ion-button>
                 
             </form>
@@ -74,17 +66,9 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      
-  <!--<ngx-pwa-install #pwa (prompt)="showPanel=true">
-    <div class="pwa-install-panel" onClick="pwa.install()">
-      <ion-card>
-        Puedes instalar esta aplicación en tu dispositivo
-        <ion-button onClick="pwa.install()"> INSTALAR EN PC </ion-button>
-      </ion-card>
-    </div>
-  </ngx-pwa-install>-->
 
     </div>
   </ion-slide>
 
 </ion-content>
+ 
