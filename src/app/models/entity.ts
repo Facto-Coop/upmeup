@@ -1,5 +1,6 @@
 export class Entity {
 
+    // No se está usando
     constructor(
         public id: number,
         public entityName: string,

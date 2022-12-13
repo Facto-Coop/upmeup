@@ -43,19 +43,19 @@ export class CandidaturesPage implements OnInit {
       })
     ).subscribe((item) => {
       this.usersOffersList = [];
-      //console.log(this.allUsersOffers);
     });
   }
 
+  // Get offers
   qGetOffers(offerID) {
     this.offServ.qGetOffer(offerID).valueChanges.pipe(
       map(result => result.data)
       ).subscribe((item) => {
         this.usersOffersList.push(item.getOffer);
-        //console.log(this.usersOffersList);
     });
   }
 
+  // Get offers detail
   goOfferDetail(offer) {
     const id = offer._id;
     this.router.navigate(['/offer-detail', id]);

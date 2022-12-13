@@ -2,7 +2,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Offer } from '../../models/offer';
@@ -11,7 +11,6 @@ import { ModalController } from '@ionic/angular';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
 import { SoftskillsService } from 'src/app/services/softskills.service';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user';
 
 const GET_USOFRS = gql`
   query {
@@ -63,9 +62,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
     }, 300);
   }
 
-  /**
-   * Call Query to Get info of selected offer (by ID).
-   *  */
+  // Call Query to Get info of selected offer (by ID).
   qOfferById(ofID: any) {
     this.compOfService.qGetOffer(ofID).valueChanges.pipe(
       map(result => result.data)
@@ -108,9 +105,7 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
     this.getUsersById(this.enrolledUser);
   }
 
-  /**
-   * Function to get ID's of each user enrolled.
-   *  */
+  // Function to get ID's of each user enrolled.
   getUsersById(eUsers) {
     eUsers.forEach(item => {
       this.qUsersInfo(item.user_id);
@@ -124,7 +119,6 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
     this.uService.qGetUser(userId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      // console.log(item);
       this.usersList = item.getUser;
       this.usersListData.push({ data: item.getUser, match: 0 });
       // Object to store total match
@@ -156,10 +150,8 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
     this.softSkillService.qGetSkill(skillId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe(( data ) => {
-      //console.log(data);
       const skill = data.getSkill;
       const idBySkill = { userId, skill };
-      //console.log(idBySkill);
       this.uSkills.push(idBySkill);
     });
   }
@@ -170,7 +162,6 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
       const userValue = item._id;
 
       uOwnerOffer.forEach((el) => {
-        //console.log('cada inscrito: ', el);
         const ownerValue = el.values;
         if (ownerValue.includes(userValue)) {
           el.match = el.match + 1;
@@ -178,17 +169,13 @@ export class CompanyOfferDetailPage implements OnInit, OnDestroy {
       });
     });
 
-    //console.log(sortedCompany);
     const result = this.addMatch(this.usersListData, this.uDataList);
 
     // Order by match value:
     this.sortUsersList = result.sort((a, b) => (a.match > b.match) ? -1 : 1);
-    //console.log('Sort Offers: ', this.sortUsersList);
   }
 
-  /**
-   * Add match to all offers
-  */
+  // Add match to all offers
     addMatch(offerList, sortedList) {
     sortedList.forEach(sortItem => {
 

@@ -1,5 +1,6 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
+// Validations
 export default class Validation {
     static match(controlName: string, checkControlName: string): ValidatorFn {
        return (controls: AbstractControl) => {

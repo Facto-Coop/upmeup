@@ -73,7 +73,6 @@ export class RegisterPage implements OnInit {
     this.qGetSectorList();
     this.qGetCompetencies();
 
-    //Init all forms:
     this.createFormSlide1();
     this.createFormSlide2();
     this.createFormSlide3();
@@ -81,6 +80,7 @@ export class RegisterPage implements OnInit {
     this.createFormSlide5();
   }
 
+  // Get sectors list
   qGetSectorList(){
     this.sectorService.qGetAllSectors().valueChanges.pipe(
       map(result => result.data)
@@ -89,14 +89,13 @@ export class RegisterPage implements OnInit {
     });
   }
 
-  getType(item, selected) {
+  getType(selected) {
     if(selected) {
-      //console.log(' selected: ', selected);
       this.userType = selected;
       this.swipeNext();
     }
 
-    //Init form according to Type (if type change):
+    // Init form according to Type
     this.createFormSlide1();
     this.createFormSlide2();
     this.createFormSlide3();
@@ -104,6 +103,7 @@ export class RegisterPage implements OnInit {
     this.createFormSlide5();
   }
 
+  // Forms slides
   createFormSlide1() {
     if(this.userType === '2') {
       this.formSlide1 = this.fBuilder.group({
@@ -151,12 +151,14 @@ export class RegisterPage implements OnInit {
     });
   }
 
+  // Get Skills
   getSkillsId() {
     this.userSkills.forEach(el => {
       this.skillsListId.push(el._id);
     });
   }
 
+  // Get competencies
   qGetCompetencies() {
     this.competService.qGetCompetencies().valueChanges.pipe(
       map(result => {
@@ -206,6 +208,7 @@ export class RegisterPage implements OnInit {
     });
   }
 
+  // Save user info
   saveNewUser() {
     if(this.userSkills.length > 0) {
       this.getSkillsId();
@@ -248,12 +251,11 @@ export class RegisterPage implements OnInit {
     });
 
     setTimeout(() => {
-      //this.router.navigate(['/login']);
       this.router.navigateByUrl('/login', { replaceUrl: true });
     }, 1000);
   }
 
-  //Created new competence if not exist yet
+  // Created new competence if not exist yet
   insertedTags(competencies) {
     const existCompets = [];
 
@@ -269,14 +271,14 @@ export class RegisterPage implements OnInit {
     this.userCompets.push(existCompets);
   }
 
-  //Call to create new competencies service:
+  // Create new competence:
   createNewCompetence(iName: any) {
     this.competService.mCreateCompetence(iName).subscribe(() => {
       console.log('New Competence created!');
     });
   }
 
-  //Find id of new competencies:
+  // Find id of new competencies:
   findCompetence(names) {
     names.forEach(el => {
       const index = this.competList.findIndex(
@@ -290,8 +292,6 @@ export class RegisterPage implements OnInit {
         this.userCompetsIds.push(this.competList[index]._id);
       }
     });
-
-    //console.log('ID Compets that need to User Profile --> ', this.userCompetsIds);
   }
 
   // Delete function to competencies/tags.
@@ -307,7 +307,6 @@ export class RegisterPage implements OnInit {
 
   /**
    * Call modal to change values from profile.
-   * @returns
    */
   async valuesModal() {
     const modal = await this.modalController.create({
@@ -317,8 +316,6 @@ export class RegisterPage implements OnInit {
     });
 
     modal.onDidDismiss().then((infoMdl) => {
-      //console.log('data skills?: ', infoMdl);
-
       if(infoMdl.data !== undefined || window.sessionStorage) {
         this.userSkills = infoMdl.data;
       } else {
@@ -326,7 +323,6 @@ export class RegisterPage implements OnInit {
       }
     });
 
-    //console.log(this.userSkills);
     return await modal.present();
   }
 

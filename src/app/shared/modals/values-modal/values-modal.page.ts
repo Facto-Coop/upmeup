@@ -35,7 +35,7 @@ export class ValuesModalPage implements OnInit, OnDestroy {
     this.userSkills = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
   }
 
-   /**
+  /**
    * Get softSkills from DB.
    */
   qsoftSkillsQuery() {
@@ -49,7 +49,6 @@ export class ValuesModalPage implements OnInit, OnDestroy {
   saveSkills() {
     this.useSessionStorage(this.skillsSelected);
     this.skillsSelected.forEach(element => {
-      // console.log(element._id);
       this.sendSelectedSkills.emit(element);
       const elementID: string = element._id;
       this.skillsIds.push(elementID);
@@ -80,24 +79,6 @@ export class ValuesModalPage implements OnInit, OnDestroy {
   }
 
   /**
-   * Checks if the user has saved skills and selects them from the list.
-   * @param item 
-   * @returns boolean
-   */
-  /*isChecked(item) {
-    let isChecked = false;
-    // this.skillsSelected = this.userSkills;
-    //this.skillsList.forEach((index) => {
-      this.userSkills.forEach((el) => {
-        if (el.name === item.name) {
-          isChecked = true;
-        }
-      });
-    //});
-    return isChecked;
-  }*/
-
-  /**
    * Selection of skills
    * @param $event 
    * @param item 
@@ -122,7 +103,6 @@ export class ValuesModalPage implements OnInit, OnDestroy {
    * @param uSkills 
    */
   useSessionStorage(uSkills) {
-    // TODO: Future SessionStorage
     sessionStorage.setItem('uSelectedSkills', JSON.stringify(uSkills));
   }
 

@@ -45,7 +45,6 @@ export class CompanyProfilePage implements OnInit {
     this.uService.qGetUser(userId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      // console.log(item);
       this.userInfo = item.getUser;
       this.userType = item.getUser.tipo;
       this.getUserSkills(item.getUser.valors);
@@ -56,12 +55,11 @@ export class CompanyProfilePage implements OnInit {
   /** Get ID Skills from User */
   getUserSkills(uValues){
     uValues.forEach(el => {
-      //console.log(el);
       this.qSkillName(el);
     });
   }
 
-  /** Get SkillNames */
+  /** Get Skill Names **/
   qSkillName(skillId: string) {
     this.userSkills = [];
     this.skillsIco = [];
@@ -81,8 +79,8 @@ export class CompanyProfilePage implements OnInit {
     });
   }
 
+  /** Get Sector Names **/
   qGetSectorName(sectorId) {
-    //let sectorName = '';
     this.sectorService.qGetSector(sectorId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {

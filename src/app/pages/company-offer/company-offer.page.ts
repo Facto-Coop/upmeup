@@ -20,8 +20,6 @@ export class CompanyOfferPage implements OnInit {
   userId = '';
   company = '';
 
-  //postsQuery: QueryRef<{ offers: Offer[] }>;
-
     constructor(
               private router: Router,
               private mController: ModalController,
@@ -41,7 +39,6 @@ export class CompanyOfferPage implements OnInit {
       this.compOfService.qGetAllOffers().valueChanges.pipe(
         map(result => result.data)
       ).subscribe((item) => {
-        //console.log(item);
         this.companyOffers(item.getCompanyOffers);
       });
 

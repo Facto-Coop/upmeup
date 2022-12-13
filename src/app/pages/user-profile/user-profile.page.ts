@@ -40,7 +40,6 @@ export class UserProfilePage implements OnInit {
 
   ngOnInit() {
     this.qGetUser(this.userID);
-    // TODO: Get info from user in DB.
     this.skillsList = JSON.parse(sessionStorage.getItem('uSelectedSkills'));
   }
 
@@ -55,7 +54,6 @@ export class UserProfilePage implements OnInit {
       if(!item) {
         console.log('Ops, sembla que no hi han dades que mostrar....');
       } else {
-        // console.log(item.getUser);
         this.userInfo = item.getUser;
       }
       this.getUserSkills(item.getUser.valors);
@@ -95,12 +93,11 @@ export class UserProfilePage implements OnInit {
   /** Get ID Competence from User */
   getUserCompets(uCompets){
     uCompets.forEach(el => {
-      //console.log(el);
       this.qGetCompetencies(el);
     });
   }
 
-  //Get Competences data from DB
+  // Get Competences data from DB
   qGetCompetencies(competId) {
     this.userCompets = [];
     this.competService.qGetCompetence(competId).valueChanges.pipe(
@@ -110,11 +107,8 @@ export class UserProfilePage implements OnInit {
     });
   }
 
-  /**
-   * Get sector
-   * */
+  // Get sector
   qGetSectorName(sectorId) {
-    //let sectorName = '';
     this.sectorService.qGetSector(sectorId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {

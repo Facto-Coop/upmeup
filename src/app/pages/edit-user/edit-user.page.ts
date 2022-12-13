@@ -194,7 +194,6 @@ export class EditUserPage implements OnInit {
           this.findCompetence(this.nameNewCompet);
         }
 
-       // setTimeout(() => {
           await this.editUser(
             this.userID,
             this.editUserForm.value.iName,
@@ -209,14 +208,9 @@ export class EditUserPage implements OnInit {
             this.editUserForm.value.iLang,
             this.newUserCompets
           );
-        //  res.present();
-       // }, 2000);
 
-        //setTimeout(() => {
-          this.loadingCtrl.dismiss();
-        //}, 3000);
+        this.loadingCtrl.dismiss();
       });
-      //this.loadingCtrl.dismiss();
     }
   }
 
@@ -225,7 +219,6 @@ export class EditUserPage implements OnInit {
     const existCompets = [];
 
     competencies.forEach(el => {
-      //if(el._id === el.name) {
       if(!el._id) {
         this.createNewCompetence(el.name);
         this.nameNewCompet.push(el);

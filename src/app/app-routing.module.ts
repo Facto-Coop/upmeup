@@ -13,12 +13,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canLoad: [AuthService],
-    canActivate: [AuthService]
-  },
-  {
     path: 'offer-list',
     loadChildren: () => import('./pages/offer-list/offer-list.module').then( m => m.OfferListPageModule),
     canLoad: [AuthService],

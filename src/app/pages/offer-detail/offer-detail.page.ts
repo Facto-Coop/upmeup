@@ -45,21 +45,17 @@ export class OfferDetailPage implements OnInit {
   ngOnInit() {
     this.offerID = this.aRoute.snapshot.params.id;
     this.qGetOffer(this.offerID);
-
-    //Evitar que pueda volver a inscribirse en la misma oferta.
     this.qGetUsersOffers(this.userLoggedID, this.offerID);
   }
 
   /**
    * Query to get Offer details
-   *
    * @param ofId
    */
   qGetOffer(ofId: string) {
     this.cOfferService.qGetOffer(ofId).valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      //console.log(item);
       if(!item) {
         console.log('Ops, sembla que no hi han dades que mostrar....');
       } else {
@@ -70,9 +66,7 @@ export class OfferDetailPage implements OnInit {
     });
   }
 
-  /**
-   * Mutation to update the number of enrolled people to an offer.
-   */
+  // Mutation to update the number of enrolled people to an offer.
   mOfferUpdate(offerId, enrollVal) {
     const total = enrollVal + 1;
     const updated = { enrolled: total };
@@ -82,13 +76,11 @@ export class OfferDetailPage implements OnInit {
       console.log('Updating offer...', result);
     });
 
-    // Pass Mutation with values for create new UsersOffers
+    // Create new UsersOffers
     this.cUsersOffers(this.userLoggedID, offerId);
   }
 
-  /**
-   * Mutation to create new register in collection UsersOffers.
-   */
+  // Mutation to create new register in collection UsersOffers.
   cUsersOffers(userId, offerId){
     const created = { user_id: userId, offer_id: offerId };
 
@@ -102,10 +94,7 @@ export class OfferDetailPage implements OnInit {
    * Action of button "Inscribir".
    */
   addEnrroled(ofID, enrollValue) {
-    // Get UserId
     this.enrolledValue = enrollValue;
-
-    // Pass Mutation with values for update
     this.mOfferUpdate(ofID, enrollValue);
 
     // Message Alert!
@@ -121,7 +110,6 @@ export class OfferDetailPage implements OnInit {
     this.usOffServ.qGetUsersOffers().valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      //console.log(item);
       const index = item.getUsersOffers.findIndex(
         object => object.user_id === userID &&
                   object.offer_id === ofID
@@ -191,9 +179,7 @@ export class OfferDetailPage implements OnInit {
     });
   }
 
-  /**
-   * Alert to confirm an action
-   *  */
+  // Alert to confirm an action
   async enrolled() {
     const toast = await this.toastCtrl.create({
       color: 'dark',

@@ -3,7 +3,6 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
@@ -42,12 +41,10 @@ export class OfferListPage implements OnInit {
               ) { }
 
   ngOnInit() {
-    //console.log('Logged User Skills: ', this.userLogged);
     this.userArrayData(this.userLogged);
     this.qGetOffers();
 
     setTimeout(() => {
-      //console.log(this.userOwnerOffer);
       this.compareLists(this.uLoggedValues, this.userOwnerOffer);
     }, 1000);
   }
@@ -67,11 +64,9 @@ export class OfferListPage implements OnInit {
     this.compOfService.qGetAllOffers().valueChanges.pipe(
       map(result => result.data)
     ).subscribe((item) => {
-      //console.log(item);
       this.allOffers = item.getCompanyOffers;
       this.allOffers.forEach((el) => {
         this.allOffersList.push({ data: el, match: 0 });
-         //console.log('user: ', el.userId);
          this.qGetUser(el.userId);
       });
     });
@@ -88,7 +83,6 @@ export class OfferListPage implements OnInit {
         object => object.userID === item.getUser._id
       );
 
-      // If it's not in the list (yet) and has values/skills, then push.
       if (index === -1 && item.getUser.valors.length > 0) {
         this.userOwnerOffer.push({
           userID: item.getUser._id,
@@ -113,25 +107,19 @@ export class OfferListPage implements OnInit {
   compareLists(uLogged, uOwnerOffer) {
     uLogged.forEach(item => {
       const userValue = item;
-      //console.log('uLogged item: ', item);
-      //console.log(this.userOwnerOffer);
 
       uOwnerOffer.forEach((el) => {
         const ownerValue = el.values;
         if (ownerValue.includes(userValue)) {
           el.match = el.match + 1;
-          //console.log('coincide');
         }
       });
     });
-    //console.log('result: ', this.userOwnerOffer);
 
-    //console.log(sortedCompany);
     const result = this.addMatch(this.allOffersList, this.userOwnerOffer);
 
     // Order by match value:
     this.sortOffersList = result.sort((a, b) => (a.match > b.match) ? -1 : 1);
-    //console.log('Sort Offers: ', this.sortOffersList);
   }
 
   /**
@@ -162,13 +150,13 @@ export class OfferListPage implements OnInit {
     }, 500);
   }
 
+  // Go to offer detail
   goOfferDetail(offer) {
     const id = offer._id;
-    //console.log(offer);
-    // this.router.navigate(['/offer-detail']);
-    this.router.navigate(['/offer-detail', id]); // Passing with ID.
+    this.router.navigate(['/offer-detail', id]); 
   }
 
+  // Go to candidatures
   toCandidatures() {
     this.router.navigate(['/candidatures']);
   }

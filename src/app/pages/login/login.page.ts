@@ -1,15 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ApolloQueryResult } from 'apollo-client';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { AppComponent } from 'src/app/app.component';
-import { MenuController, Platform } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 
 @Component({

@@ -45,6 +45,7 @@ export class CreateOfferPage implements OnInit {
     this.validation();
   }
 
+  // Initialized form
   validation() {
     this.createForm = this.fBuilder.group({
       iTitle: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
@@ -60,6 +61,7 @@ export class CreateOfferPage implements OnInit {
     });
   }
 
+  // Get competencies
   qGetCompetencies() {
     this.competService.qGetCompetencies().valueChanges.pipe(
       map(result => {
@@ -78,6 +80,7 @@ export class CreateOfferPage implements OnInit {
     this.cDate = new Date().toISOString();
   }
 
+  // Submit form
   onSubmit() {
     this.isSubmitted = true;
     if (!this.createForm.valid) {
@@ -114,7 +117,7 @@ export class CreateOfferPage implements OnInit {
     }
   }
 
-  //Created new competence if not exist yet
+  // Created new competence if not exist yet
   insertedTags(competencies) {
     const existCompets = [];
 
@@ -130,14 +133,14 @@ export class CreateOfferPage implements OnInit {
     this.offerCompets.push(existCompets);
   }
 
-  //Call to create new competencies service:
+  // Call to create new competencies service:
   createNewCompetence(iName: any) {
     this.competService.mCreateCompetence(iName).subscribe(() => {
       console.log('New Competence created!');
     });
   }
 
-  //Find id of new competencies:
+  // Find id of new competencies:
   findCompetence(names) {
     names.forEach(el => {
       const index = this.competList.findIndex(
@@ -190,41 +193,5 @@ export class CreateOfferPage implements OnInit {
   dismissModal() {
     this.mdlController.dismiss();
   }
-
-  /*cancelCreation(){
-    this.createForm.reset();
-    // Alert to confirm:
-    this.alertToConfirm();
-  }*/
-
-  /**
-   * Alert to confirm action
-   */
-  /*async alertToConfirm() {
-    const alert = await this.alrtController.create({
-      header: 'Cancelar oferta',
-      message: 'Seguro que quieres cancelar la creación de oferta?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          id: 'cancel-button',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Okay',
-          id: 'confirm-button',
-          handler: () => {
-            console.log('Confirm Okay');
-            this.dismissEditModal();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }*/
 
 }

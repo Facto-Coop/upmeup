@@ -5,7 +5,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { map } from 'rxjs';
 import { Offer } from 'src/app/models/offer';
 import { CompanyOffersService } from 'src/app/services/company-offers.service';
@@ -39,7 +39,6 @@ export class EditOfferPage implements OnInit {
   constructor(
       public fBuilder: FormBuilder,
       private mdlController: ModalController,
-      private alrtController: AlertController,
       private compOfService: CompanyOffersService,
       private competService: CompetenceService,
       public loadingCtrl: LoadingController
@@ -59,13 +58,12 @@ export class EditOfferPage implements OnInit {
         this.competList = result.data.getCompetencies;
       })
     ).subscribe((item) => {
-      //console.log(this.competList);
       this.getUserCompets(this.offerCompetIDs);
     });
   }
 
-   /** Get ID Competence from User */
-   getUserCompets(uCompets){
+  /** Get ID Competence from User */
+  getUserCompets(uCompets){
     uCompets.forEach(el => {
       //console.log(el);
       this.qGetCompetence(el);
@@ -81,9 +79,7 @@ export class EditOfferPage implements OnInit {
     });
   }
 
-  /**
-   * Initialized form
-   */
+  // Initialized form
    initForm(){
     this.editForm = this.fBuilder.group({
       iTitle: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
@@ -99,10 +95,7 @@ export class EditOfferPage implements OnInit {
     });
   }
 
-  /**
-   * Set values form 'father' component.
-   * @param infoOffer
-   */
+  // Set values form component.
   setValues(infoOffer) {
     this.offerID = infoOffer._id;
     this.editForm.get('iTitle').setValue(infoOffer.title);
@@ -117,10 +110,7 @@ export class EditOfferPage implements OnInit {
     this.editForm.get('iRequirements').setValue(infoOffer.requirements);
   }
 
-  /**
-   * Submit Form
-   * @returns 
-   */
+  // Submit Form
   onSubmit() {
     this.isSubmitted = true;
     if (!this.editForm.valid) {
@@ -154,12 +144,11 @@ export class EditOfferPage implements OnInit {
     }
   }
 
-  //Created new competence if not exist yet
+  // Created new competence if not exist yet
   insertedTags(competencies) {
     const existCompets = [];
 
     competencies.forEach(el => {
-      //if(el._id === el.name) {
       if(!el._id) {
         this.createNewCompetence(el.name);
         this.nameNewCompet.push(el);
@@ -171,14 +160,14 @@ export class EditOfferPage implements OnInit {
     this.newOfferCompetsList.push(existCompets);
   }
 
-  //Call to create new competence service:
+  // Call to create new competence service:
   createNewCompetence(iName: any) {
     this.competService.mCreateCompetence(iName).subscribe(() => {
       console.log('New Competence created!');
     });
   }
 
-  //Find id of new competencies:
+  // Find id of new competencies:
   findCompetence(names) {
     names.forEach(el => {
       const index = this.competList.findIndex(
@@ -226,41 +215,5 @@ export class EditOfferPage implements OnInit {
   dismissModal() {
     this.mdlController.dismiss();
   }
-
-  /*cancelEdition(){
-    //this.editForm.reset();
-    // Alert to confirm:
-    this.alertToConfirm();
-  }*/
-
-  /**
-   * Alert to confirm action
-   */
-   /*async alertToConfirm() {
-    const alert = await this.alrtController.create({
-      header: 'Cancelar edición',
-      message: 'Seguro que quieres cancelar la edición de la oferta?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          id: 'cancel-button',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Okay',
-          id: 'confirm-button',
-          handler: () => {
-            console.log('Confirm Okay');
-            this.dismissEditModal();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }*/
 
 }
